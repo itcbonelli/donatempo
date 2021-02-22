@@ -1,0 +1,14 @@
+{
+    "name": "itcbonelli/attivatempo",
+    "description": "L'app che viene a casa tua",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Federico Flecchia",
+            "email": "federico.flecchia@itcbonelli.edu.it"
+        }
+    ],
+    "require": {
+        "twbs/bootstrap": "^4.6"
+    }
+}
