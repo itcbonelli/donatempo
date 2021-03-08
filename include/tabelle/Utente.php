@@ -66,6 +66,7 @@ class Utente
      */
     public function salva()
     {
+        global $dbconn;
     }
 
     /**
@@ -75,25 +76,43 @@ class Utente
      */
     public function carica($id_utente)
     {
+        global $dbconn;
     }
 
     /**
-     * Determina se esistono utente e password ed imposta le opportune variabili di sessione
+     * Determina se esistono utente e password ed imposta 
+     * le opportune variabili di sessione
      * @param string $username nome utente
      * @param string $password password
      * @return bool esito dell'accesso
      */
     public static function login($username, $password) {
+        global $dbconn;
+
+        $username = addslashes($username);
+        $password = hash('sha256', $password);
+
+        $query = "SELECT * FROM utenti WHERE username='$username' AND password='$password'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if($esegui==true && $riga=$comando->fetch(PDO::FETCH_ASSOC)) {
+            $_SESSION['id_utente'] = $riga['id_utente'];
+            $_SESSION['username'] = $riga['username'];
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
     /**
      * Ottiene il record dell'utente attualmente connesso al sito.
      * Se l'utente non ha eseguito l'accesso restituisce null
-     * @return Utente
+     * @return Utente dati dell'utente collegato
      */
     public static function getMioUtente() {
-
+        global $dbconn;
     }
 
 }

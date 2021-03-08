@@ -40,6 +40,8 @@ class Messaggio {
      */
     public function salva()
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**
@@ -48,6 +50,8 @@ class Messaggio {
      */
     public function convalida()
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**
@@ -56,6 +60,8 @@ class Messaggio {
      */
     public function elimina()
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**
@@ -64,6 +70,8 @@ class Messaggio {
      */
     public function carica($id)
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**
@@ -71,6 +79,7 @@ class Messaggio {
      * @return Messaggio[] array dei messaggi
      */
     public static function getConversazionePerRichiesta($id_richiesta) {
-
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 }

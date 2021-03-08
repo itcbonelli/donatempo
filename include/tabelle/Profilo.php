@@ -78,6 +78,8 @@ class Profilo
      */
     public function esiste($id_utente)
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**
@@ -86,6 +88,8 @@ class Profilo
      */
     public function salva()
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**
@@ -94,6 +98,8 @@ class Profilo
      */
     public function elimina()
     {
+        global $dbconn;
+        throw new Exception("Non ancora implementato");
     }
 
     /**

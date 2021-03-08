@@ -27,6 +27,7 @@ class Provincia
      */
     public function carica($sigla)
     {
+        global $dbconn;
     }
 
     /**
