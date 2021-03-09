@@ -42,6 +42,8 @@ class PartecipazioneAssociazione
     {
     }
 
+    
+
     /**
      * Ottiene le partecipazioni ad associazioni degli utenti assegnati ad una data associazione
      * @param int $id_utente identificativo utente

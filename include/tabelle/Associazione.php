@@ -86,5 +86,25 @@ class Associazione
         
     }
 
+    /**
+     * Elimina l'associazione tra servizio e associazione
+     * @param int $id_servizio codice del servizio da dissociare dall'associazione corrente
+     * @return boolean esito dell'operazione
+     */
+    public function dissociaServizio($id_servizio) {
+
+    }
+
+    /**
+     * Crea l'associazione tra servizio e associazione
+     * @param int $id_servizio codice del servizio da associare all'associazione corrente
+     * @return boolean esito dell'operazione
+     */
+    public function associaServizio($id_servizio) {
+
+    }
+
+    
+
     
 }

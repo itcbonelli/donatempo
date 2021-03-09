@@ -79,6 +79,9 @@ class Profilo
     public function esiste($id_utente)
     {
         global $dbconn;
+
+        
+
         throw new Exception("Non ancora implementato");
     }
 

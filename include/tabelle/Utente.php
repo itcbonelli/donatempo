@@ -133,4 +133,11 @@ class Utente
     {
         global $dbconn;
     }
+
+    /**
+     * 
+     */
+    public function convalida() {
+
+    }
 }
