@@ -66,6 +66,28 @@ class Associazione
      */
     public function convalida()
     {
+        $errori = [];
+        $avvertenze = [];
+
+        if (empty($this->id_associazione)) {
+            $errori[] = "Inserire identificativo associazione";
+        }
+        if (empty($this->ragsoc)) {
+            $errori[] = "Inserire ragione sociale";
+        }
+        if (strlen($this->codfis) != 11) {
+            $errori[] = "Codice fiscale non valido. La lunghezza deve essere di 11 cifre";
+        }
+         if (empty($this->url_logo)) {
+            $errori[] = "Ricordati di inserire il logo";
+        } 
+        if (empty($this->descrizione)) {
+            $errori[] = "Ricordati di mettere una descrizione";
+        }
+
+        return $errori;
+        return $avvertenze;
+        // avvertenze non vieta di continuare la registrazione ma ricorda che ci sono dei campi vuoti
     }
 
     /**
@@ -92,7 +114,15 @@ class Associazione
      * @return boolean esito dell'operazione
      */
     public function dissociaServizio($id_servizio) {
+        global $dbconn;
+		
+        $id_associazione=$this->id_associazione;
 
+	    $query="DELETE FROM associazione_offre_servizio
+		    WHERE id_associazione=$id_associazione AND id_servizio=$id_servizio";
+	    $comando = $dbconn->prepare($query);
+	    $esegui = $comando->execute();
+	    return $esegui == true && $comando->rowCount() == 1;
     }
 
     /**
