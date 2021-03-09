@@ -86,7 +86,8 @@ class Utente
      * @param string $password password
      * @return bool esito dell'accesso
      */
-    public static function login($username, $password) {
+    public static function login($username, $password)
+    {
         global $dbconn;
 
         $username = addslashes($username);
@@ -96,14 +97,31 @@ class Utente
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
 
-        if($esegui==true && $riga=$comando->fetch(PDO::FETCH_ASSOC)) {
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['id_utente'] = $riga['id_utente'];
             $_SESSION['username'] = $riga['username'];
             return true;
         } else {
             return false;
         }
+    }
 
+    /**
+     * Controlla se esiste l'ID Utente specificato
+     * @param int $id_utente
+     * @return bool vero o falso
+     */
+    public static function esisteId($id_utente)
+    {
+    }
+
+    /**
+     * Controlla se esiste lo username specificato
+     * @param int $username
+     * @return bool vero o falso
+     */
+    public static function esisteUsername($username)
+    {
     }
 
     /**
@@ -111,8 +129,8 @@ class Utente
      * Se l'utente non ha eseguito l'accesso restituisce null
      * @return Utente dati dell'utente collegato
      */
-    public static function getMioUtente() {
+    public static function getMioUtente()
+    {
         global $dbconn;
     }
-
 }
