@@ -66,7 +66,38 @@ class Utente
      */
     public function salva()
     {
+        $errori = $this->convalida();
+        //se sono presenti errori di convalida
+        if (count($errori) > 0) {
+            //esco dalla funzione
+            return false;
+        }
+
         global $dbconn;
+        $id_utente = $this->id_utente;
+        $username = addslashes($this->username);
+        $password = addslashes($this->password);
+        $data_creazione = $this->data_creazione;
+        $ultimo_accesso = $this->ultimo_accesso;
+        $email = addslashes($this->email);
+        $attivo = $this->attivo;
+        $eliminato = $this->eliminato;
+        $data_eliminazione = $this->data_eliminazione;
+        $telefono = addslashes($this->telefono);
+        $volontario = $this->volontario;
+
+        $query = "REPLACE INTO utenti(id_utente, username, password, data_creazione, ultimo_accesso, email, attivo, eliminato, data_eliminazione, telefono
+		volontario)
+		VALUES ('$id_utente', '$username', '$password', '$data_creazione', '$ultimo_accesso', '$email', '$attivo', '$eliminato', '$data_eliminazione', '$telefono', '$volontario')";
+
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        //rowCount()==1 ci dice il numero di righe che sono state coinvolte nell'operazione
+        if ($esegui == true && $comando->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -77,6 +108,26 @@ class Utente
     public function carica($id_utente)
     {
         global $dbconn;
+		$query = "SELECT * FROM utenti WHERE id_utente='$id_utente";
+		$comando = $dbconn->prepare($query);
+		$esegui=$comando->execute();
+		if($esegui==true && $riga=$comando->fetch(PDO::FETCH_ASSOC)) {
+			$this->id_utente=$riga['id_utente'];
+			$this->username=$riga['username'];
+			$this->password=$riga['password'];
+            $this->data_creazione=$riga['data_creazione'];
+            $this->ultimo_accesso=$riga['ultimo_accesso'];
+            $this->email=$riga['email'];
+			$this->attivo=$riga['attivo'];
+			$this->eliminato=$riga['eliminato'];
+			$this->data_eliminazione=$riga['data_eliminazione'];
+			$this->telefono=$riga['telefono'];
+			$this->volontario=$riga['volontario'];
+
+			return true;
+		} else {
+			return false;
+		}
     }
 
     /**
@@ -113,6 +164,12 @@ class Utente
      */
     public static function esisteId($id_utente)
     {
+        global $dbconn;
+        $query = "SELECT id_utente FROM utenti WHERE id_utente='{$id_utente}'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        return ($esegui == true && $comando->fetch(PDO::FETCH_ASSOC) == true);
     }
 
     /**
@@ -137,7 +194,26 @@ class Utente
     /**
      * 
      */
-    public function convalida() {
+    public function convalida()
+    {
+        $errori = [];
 
+        if (empty($this->id_utente)) {
+            $errori[] = "Inserire identificativo utente";
+        }
+        if (empty($this->username)) {
+            $errori[] = "Inserire l'username";
+        }
+        if (strlen($this->password)) {
+            $errori[] = "Inserire la password";
+        }
+        if (empty($this->email)) {
+            $errori[] = "Inserire l'email";
+        }
+        if (empty($this->telefono)) {
+            $errori[] = "Inserire il telefono";
+        }
+
+        return $errori;
     }
 }
