@@ -1,7 +1,7 @@
 <?php
 
 class Settore {
-    public $id_settore;
+    public $id_settore=null;
     public $nome;
 
     /**
@@ -24,10 +24,20 @@ class Settore {
         $id_settore = $this->id_settore;
         $nome = addslashes($this->nome);
 
-        $query = "REPLACE INTO settori(id_settore, nome)
-        VALUES ($id_settore, '$nome')";
-        $comando = $dbconn->prepare($query);
-        $esegui = $comando->execute();
+        if(empty($id_settore)) {
+            //qua faccio la insert
+            $query = "INSERT INTO settori(id_settore, nome)
+            VALUES ($id_settore, '$nome')";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+
+            $this->id_settore = $dbconn->lastInsertId();
+        } else {
+            //qua faccio la update
+            $query = "UPDATE settori SET nome='$nome' WHERE id_settore=$id_settore";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+        }
         
         if ($esegui == true && $comando->rowCount() == 1) {
             return true;

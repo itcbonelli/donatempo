@@ -38,10 +38,38 @@ class Associazione
 
     /**
      * Salva le modifiche apportate al record
+     * @author Ricci Federica
      * @return bool esito dell'operazione
      */
     public function salva()
     {
+        $convalida = $this->convalida();
+        
+        if ($convalida==false) {
+            //esco dalla funzione
+            return false;
+        }
+
+        global $dbconn;
+
+        $id_associazione = $this->id_associazione;
+        $ragsoc = addslashes($this->ragsoc);
+        $codfis = addslashes($this->codfis);
+        $url_logo = addslashes($this->url_logo);
+        $descrizione = addslashes($this->descrizione);
+        $id_settore = $this->id_settore;
+
+        $query = "REPLACE INTO associazioni(id_associazione,ragsoc,codfis,url_logo,descrizione,id_settore)
+        VALUES ($id_associazione,' $ragsoc',' $codfis',' $url_logo','$descrizione',$id_settore)";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        if ($esegui == true && $comando->rowCount() == 1) {
+            Notifica::accoda("Associazione salvata correttamente", Notifica::TIPO_SUCCESSO);
+            return true;
+        } else {
+            Notifica::accoda("Si è verificato un errore durante il salvataggio", Notifica::TIPO_ERRORE);
+            return false;
+        }
     }
 
     /**
@@ -62,32 +90,34 @@ class Associazione
 
     /**
      * Convalida i dati dell'associazione per il salvataggio
-     * @return string[] array di messaggi di errore della convalida. Se vuoto significa che la convalida è andata a buon fine.
+     * @return boolean esito della convalida
      */
     public function convalida()
     {
-        $errori = [];
-        $avvertenze = [];
+        $dati_validi = true;
+
 
         if (empty($this->id_associazione)) {
-            $errori[] = "Inserire identificativo associazione";
+            Notifica::accoda("Inserire identificativo associazione", Notifica::TIPO_ERRORE);
+            $dati_validi = false;
         }
         if (empty($this->ragsoc)) {
-            $errori[] = "Inserire ragione sociale";
+            Notifica::accoda("Inserire ragione sociale", Notifica::TIPO_ERRORE);
+            $dati_validi = false;
         }
         if (strlen($this->codfis) != 11) {
-            $errori[] = "Codice fiscale non valido. La lunghezza deve essere di 11 cifre";
+            Notifica::accoda("Codice fiscale non valido. La lunghezza deve essere di 11 cifre", Notifica::TIPO_ERRORE);
+            $dati_validi = false;
         }
-         if (empty($this->url_logo)) {
-            $errori[] = "Ricordati di inserire il logo";
-        } 
+        if (empty($this->url_logo)) {
+            Notifica::accoda("Ricordati di inserire il logo", Notifica::TIPO_AVVERTENZA);
+        }
         if (empty($this->descrizione)) {
-            $errori[] = "Ricordati di mettere una descrizione";
+            Notifica::accoda("Ricordati di mettere una descrizione", Notifica::TIPO_ERRORE);
+            $dati_validi = false;
         }
 
-        return $errori;
-        return $avvertenze;
-        // avvertenze non vieta di continuare la registrazione ma ricorda che ci sono dei campi vuoti
+        return $dati_validi;
     }
 
     /**
@@ -95,8 +125,8 @@ class Associazione
      * @param int $id_settore identificativo del settore da associare
      * @return bool esito dell'operazione
      */
-    public function associaSettore($id_settore) {
-
+    public function associaSettore($id_settore)
+    {
     }
 
     /**
@@ -104,8 +134,8 @@ class Associazione
      * @param int $id_settore identificativo settore
      * @return bool esito dell'operazione
      */
-    public function dissociaSettore($id_settore) {
-        
+    public function dissociaSettore($id_settore)
+    {
     }
 
     /**
@@ -113,16 +143,17 @@ class Associazione
      * @param int $id_servizio codice del servizio da dissociare dall'associazione corrente
      * @return boolean esito dell'operazione
      */
-    public function dissociaServizio($id_servizio) {
+    public function dissociaServizio($id_servizio)
+    {
         global $dbconn;
-		
-        $id_associazione=$this->id_associazione;
 
-	    $query="DELETE FROM associazione_offre_servizio
+        $id_associazione = $this->id_associazione;
+
+        $query = "DELETE FROM associazione_offre_servizio
 		    WHERE id_associazione=$id_associazione AND id_servizio=$id_servizio";
-	    $comando = $dbconn->prepare($query);
-	    $esegui = $comando->execute();
-	    return $esegui == true && $comando->rowCount() == 1;
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        return $esegui == true && $comando->rowCount() == 1;
     }
 
     /**
@@ -130,11 +161,7 @@ class Associazione
      * @param int $id_servizio codice del servizio da associare all'associazione corrente
      * @return boolean esito dell'operazione
      */
-    public function associaServizio($id_servizio) {
-
+    public function associaServizio($id_servizio)
+    {
     }
-
-    
-
-    
 }

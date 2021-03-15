@@ -3,7 +3,8 @@
 /**
  * Record Messaggio
  */
-class Messaggio {
+class Messaggio
+{
     /**
      * Identificativo messaggio
      */
@@ -34,7 +35,7 @@ class Messaggio {
      */
     public $id_richiesta;
 
-        /**
+    /**
      * Salva le modifiche apportate al record
      * @return bool esito dell'operazione
      */
@@ -78,7 +79,8 @@ class Messaggio {
      * Ottiene l'elenco dei messaggi che riguardano una richiesta specifica
      * @return Messaggio[] array dei messaggi
      */
-    public static function getConversazionePerRichiesta($id_richiesta) {
+    public static function getConversazionePerRichiesta($id_richiesta)
+    {
         global $dbconn;
         throw new Exception("Non ancora implementato");
     }

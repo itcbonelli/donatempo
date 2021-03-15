@@ -188,7 +188,12 @@ class Utente
      */
     public static function getMioUtente()
     {
-        global $dbconn;
+        if (!isset($_SESSION['id_utente'])) {
+            return null;
+        }
+        $utente = new Utente();
+        $utente->carica($_SESSION['id_utente']);
+        return $utente;
     }
 
     /**

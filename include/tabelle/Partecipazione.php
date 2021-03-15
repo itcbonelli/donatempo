@@ -41,6 +41,7 @@ class PartecipazioneAssociazione
 
     /**
      * Ottiene le partecipazioni ad associazioni di un dato utente
+     * @author Ramonda Samuele
      * @param int $id_utente identificativo utente
      * @return PartecipazioneAssociazione[] array di record Partecipazione
      */
@@ -48,10 +49,10 @@ class PartecipazioneAssociazione
     {
         global $dbconn;
 
-        $partecipazioneAssociazione=[];
+        $partecipazioneAssociazione = [];
 
-        $query="SELECT * FROM utente_partecipa_associazione";
-        if($id_utente != null){
+        $query = "SELECT * FROM utente_partecipa_associazione";
+        if ($id_utente != null) {
             $query .= " WHERE utenti_id_utente= $id_utente";
         }
         $query .= " ORDER BY associazioni_id_associazione";
@@ -71,15 +72,51 @@ class PartecipazioneAssociazione
         return $partecipazioneAssociazione;
     }
 
-    
+
 
     /**
      * Ottiene le partecipazioni ad associazioni degli utenti assegnati ad una data associazione
+     * @author Pagliasso Alessia
      * @param int $id_utente identificativo utente
      * @return PartecipazioneAssociazione[] array di record partecipazione
      */
     public static function getPartecipantiAssociazione($id_associazione)
     {
+        global $dbconn;
+
+        $partecipazioneAssociazione = [];
+
+        $query = "SELECT utenti_id_utente FROM utente_partecipa_associazione WHERE associazioni_id_associazione=$id_associazione";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true) {
+            while ($riga = $comando->fetch()) {
+                $part = new PartecipazioneAssociazione();
+                $part->idAssociazione = $riga['id_associazione'];
+                $part->id_partecipazione = $riga['id_utente'];
+                $partecipazioneAssociazione[] = $riga;
+            }
+            return $partecipazioneAssociazione;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * Ottiene l'oggetto associazione legato all'ID associazione di questa partecipazione
+     * @return Associazione oggetto associazione
+     */
+    public function getAssociazione() {
+        //N.B: qua non serve fare query
+    }
+
+    /**
+     * Ottiene l'oggetto utente legato alla partecipazione corrente
+     * @return Utente
+     */
+    public function getUtente() {
+
     }
 
     /**
