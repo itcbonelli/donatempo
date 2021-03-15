@@ -38,14 +38,14 @@ class Associazione
 
     /**
      * Salva le modifiche apportate al record
-     * @author Ricci Federica
+     * @author Federica Ricci
      * @return bool esito dell'operazione
      */
     public function salva()
     {
         $convalida = $this->convalida();
-        
-        if ($convalida==false) {
+
+        if ($convalida == false) {
             //esco dalla funzione
             return false;
         }
@@ -59,10 +59,23 @@ class Associazione
         $descrizione = addslashes($this->descrizione);
         $id_settore = $this->id_settore;
 
-        $query = "REPLACE INTO associazioni(id_associazione,ragsoc,codfis,url_logo,descrizione,id_settore)
-        VALUES ($id_associazione,' $ragsoc',' $codfis',' $url_logo','$descrizione',$id_settore)";
-        $comando = $dbconn->prepare($query);
-        $esegui = $comando->execute();
+        if (empty($this->id_associazione)) {
+            $query = "INSERT INTO associazioni(ragsoc,codfis,url_logo,descrizione,id_settore)
+        VALUES ('$ragsoc',' $codfis',' $url_logo','$descrizione',$id_settore)";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+        } else {
+            $query = "UPDATE associazioni SET 
+            ragsoc='$ragsoc',
+            codfis='$codfis'
+            url_logo='$url_logo',
+            descrizione='$descrizione',
+            url_logo=$id_settore
+            WHERE id_associazione=$id_associazione";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+        }
+
         if ($esegui == true && $comando->rowCount() == 1) {
             Notifica::accoda("Associazione salvata correttamente", Notifica::TIPO_SUCCESSO);
             return true;

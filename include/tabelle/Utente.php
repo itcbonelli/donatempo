@@ -61,6 +61,11 @@ class Utente
     public bool $volontario;
 
     /**
+     * Codice di recupero della mail
+     */
+    public string $codice_recupero;
+
+    /**
      * Salva il record nel database
      * @return bool esito dell'operazione
      */

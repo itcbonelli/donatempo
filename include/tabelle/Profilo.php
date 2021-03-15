@@ -107,11 +107,27 @@ class Profilo
 
     /**
      * Convalida i dati del record
+     * @return bool esito operazione
      */
     public function convalida()
     {
-        $errori=[];
+        $ris=true;
+        //codice di convalida
+        return $ris;
+    }
 
-        return $errori;
+    /**
+     * Carica il profilo utente
+     * @return bool esito operazione
+     */
+    public function carica($id_profilo) {
+
+    }
+
+    /**
+     * @return Utente oggetto utente associato al profilo
+     */
+    public function getUtente() {
+
     }
 }
