@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.4.17-MariaDB - mariadb.org binary distribution
+-- Versione server:              10.4.18-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            11.2.0.6213
 -- --------------------------------------------------------
@@ -18,6 +18,7 @@ CREATE DATABASE IF NOT EXISTS `donatempo` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `donatempo`;
 
 -- Dump della struttura di tabella donatempo.allocazione_volontario
+DROP TABLE IF EXISTS `allocazione_volontario`;
 CREATE TABLE IF NOT EXISTS `allocazione_volontario` (
   `id_allocazione` int(11) NOT NULL AUTO_INCREMENT,
   `id_richiesta` int(11) NOT NULL,
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `allocazione_volontario` (
 /*!40000 ALTER TABLE `allocazione_volontario` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.associazione_offre_servizio
+DROP TABLE IF EXISTS `associazione_offre_servizio`;
 CREATE TABLE IF NOT EXISTS `associazione_offre_servizio` (
   `id_associazione` int(11) NOT NULL,
   `id_servizio` int(11) NOT NULL,
@@ -50,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `associazione_offre_servizio` (
 /*!40000 ALTER TABLE `associazione_offre_servizio` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.associazioni
+DROP TABLE IF EXISTS `associazioni`;
 CREATE TABLE IF NOT EXISTS `associazioni` (
   `id_associazione` int(11) NOT NULL AUTO_INCREMENT,
   `ragsoc` varchar(45) NOT NULL,
@@ -64,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `associazioni` (
 /*!40000 ALTER TABLE `associazioni` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.comuni
+DROP TABLE IF EXISTS `comuni`;
 CREATE TABLE IF NOT EXISTS `comuni` (
   `id_comune` char(4) NOT NULL,
   `denominazione` varchar(100) NOT NULL,
@@ -74,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `comuni` (
   CONSTRAINT `fk_comuni_province1` FOREIGN KEY (`provincia`) REFERENCES `province` (`sigla`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella donatempo.comuni: ~7.903 rows (circa)
+-- Dump dei dati della tabella donatempo.comuni: ~8.192 rows (circa)
 /*!40000 ALTER TABLE `comuni` DISABLE KEYS */;
 INSERT INTO `comuni` (`id_comune`, `denominazione`, `provincia`, `id_area`) VALUES
 	('A001', 'Abano Terme', 'PD', NULL),
@@ -7982,6 +7986,7 @@ INSERT INTO `comuni` (`id_comune`, `denominazione`, `provincia`, `id_area`) VALU
 /*!40000 ALTER TABLE `comuni` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.disponibilita
+DROP TABLE IF EXISTS `disponibilita`;
 CREATE TABLE IF NOT EXISTS `disponibilita` (
   `id_disponibilita` int(11) NOT NULL AUTO_INCREMENT,
   `id_partecipazione` int(11) NOT NULL,
@@ -7998,6 +8003,7 @@ CREATE TABLE IF NOT EXISTS `disponibilita` (
 /*!40000 ALTER TABLE `disponibilita` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.disponibilita_include_servizi
+DROP TABLE IF EXISTS `disponibilita_include_servizi`;
 CREATE TABLE IF NOT EXISTS `disponibilita_include_servizi` (
   `id_disponibilita` int(11) NOT NULL,
   `id_servizio` int(11) NOT NULL,
@@ -8012,6 +8018,7 @@ CREATE TABLE IF NOT EXISTS `disponibilita_include_servizi` (
 /*!40000 ALTER TABLE `disponibilita_include_servizi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.messaggi
+DROP TABLE IF EXISTS `messaggi`;
 CREATE TABLE IF NOT EXISTS `messaggi` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `contenuto` text NOT NULL,
@@ -8033,6 +8040,7 @@ CREATE TABLE IF NOT EXISTS `messaggi` (
 /*!40000 ALTER TABLE `messaggi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.profili
+DROP TABLE IF EXISTS `profili`;
 CREATE TABLE IF NOT EXISTS `profili` (
   `id_utente` int(11) NOT NULL,
   `cognome` varchar(45) DEFAULT NULL,
@@ -8058,6 +8066,7 @@ CREATE TABLE IF NOT EXISTS `profili` (
 /*!40000 ALTER TABLE `profili` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.province
+DROP TABLE IF EXISTS `province`;
 CREATE TABLE IF NOT EXISTS `province` (
   `sigla` char(2) NOT NULL,
   `denominazione` varchar(45) NOT NULL,
@@ -8178,6 +8187,7 @@ INSERT INTO `province` (`sigla`, `denominazione`, `regione`) VALUES
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.richieste
+DROP TABLE IF EXISTS `richieste`;
 CREATE TABLE IF NOT EXISTS `richieste` (
   `id_richiesta` int(11) NOT NULL AUTO_INCREMENT,
   `richiedente` int(11) NOT NULL,
@@ -8203,12 +8213,14 @@ CREATE TABLE IF NOT EXISTS `richieste` (
 /*!40000 ALTER TABLE `richieste` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.servizi
+DROP TABLE IF EXISTS `servizi`;
 CREATE TABLE IF NOT EXISTS `servizi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `descrizione` text DEFAULT NULL,
   `id_tipo` int(11) DEFAULT NULL,
   `durata` int(11) DEFAULT NULL COMMENT 'Durata in minuti della prestazione (a fini di stima)',
+  `attivo` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `fk_servizi_tipi_servizio1` (`id_tipo`),
   CONSTRAINT `fk_servizi_tipi_servizio1` FOREIGN KEY (`id_tipo`) REFERENCES `tipi_servizio` (`id_tipo`) ON UPDATE CASCADE
@@ -8216,14 +8228,15 @@ CREATE TABLE IF NOT EXISTS `servizi` (
 
 -- Dump dei dati della tabella donatempo.servizi: ~4 rows (circa)
 /*!40000 ALTER TABLE `servizi` DISABLE KEYS */;
-INSERT INTO `servizi` (`id`, `nome`, `descrizione`, `id_tipo`, `durata`) VALUES
-	(2, 'Spesa a domicilio', NULL, NULL, NULL),
-	(3, 'Lettura giornale', NULL, NULL, NULL),
-	(4, 'Commissioni varie', NULL, NULL, NULL),
-	(5, 'Prenotazioni esami e/o farmaci', NULL, NULL, NULL);
+INSERT INTO `servizi` (`id`, `nome`, `descrizione`, `id_tipo`, `durata`, `attivo`) VALUES
+	(2, 'Spesa a domicilio', NULL, NULL, NULL, 1),
+	(3, 'Lettura giornale', NULL, NULL, NULL, 1),
+	(4, 'Commissioni varie', NULL, NULL, NULL, 1),
+	(5, 'Prenotazioni esami e/o farmaci', NULL, NULL, NULL, 1);
 /*!40000 ALTER TABLE `servizi` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.settori
+DROP TABLE IF EXISTS `settori`;
 CREATE TABLE IF NOT EXISTS `settori` (
   `id_settore` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
@@ -8235,6 +8248,7 @@ CREATE TABLE IF NOT EXISTS `settori` (
 /*!40000 ALTER TABLE `settori` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.settori_has_associazioni
+DROP TABLE IF EXISTS `settori_has_associazioni`;
 CREATE TABLE IF NOT EXISTS `settori_has_associazioni` (
   `settori_id_settore` int(11) NOT NULL,
   `associazioni_id_associazione` int(11) NOT NULL,
@@ -8249,6 +8263,7 @@ CREATE TABLE IF NOT EXISTS `settori_has_associazioni` (
 /*!40000 ALTER TABLE `settori_has_associazioni` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.stato_richiesta
+DROP TABLE IF EXISTS `stato_richiesta`;
 CREATE TABLE IF NOT EXISTS `stato_richiesta` (
   `codice` varchar(20) NOT NULL,
   `descrizione` varchar(45) NOT NULL,
@@ -8260,6 +8275,7 @@ CREATE TABLE IF NOT EXISTS `stato_richiesta` (
 /*!40000 ALTER TABLE `stato_richiesta` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.tipi_servizio
+DROP TABLE IF EXISTS `tipi_servizio`;
 CREATE TABLE IF NOT EXISTS `tipi_servizio` (
   `id_tipo` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
@@ -8271,6 +8287,7 @@ CREATE TABLE IF NOT EXISTS `tipi_servizio` (
 /*!40000 ALTER TABLE `tipi_servizio` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.utente_partecipa_associazione
+DROP TABLE IF EXISTS `utente_partecipa_associazione`;
 CREATE TABLE IF NOT EXISTS `utente_partecipa_associazione` (
   `id_partecipazione` int(11) NOT NULL AUTO_INCREMENT,
   `utenti_id_utente` int(11) NOT NULL,
@@ -8288,6 +8305,7 @@ CREATE TABLE IF NOT EXISTS `utente_partecipa_associazione` (
 /*!40000 ALTER TABLE `utente_partecipa_associazione` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.utenti
+DROP TABLE IF EXISTS `utenti`;
 CREATE TABLE IF NOT EXISTS `utenti` (
   `id_utente` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
@@ -8301,14 +8319,18 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `telefono` varchar(45) DEFAULT NULL,
   `volontario` tinyint(1) NOT NULL DEFAULT 0,
   `verificato` int(1) DEFAULT 0 COMMENT 'Indica che l''utente è stato verificato da un''associazione di volontariato.',
+  `codice_recupero` varchar(20) DEFAULT NULL COMMENT 'Codice per il recupero dell''account',
   PRIMARY KEY (`id_utente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- Dump dei dati della tabella donatempo.utenti: ~0 rows (circa)
 /*!40000 ALTER TABLE `utenti` DISABLE KEYS */;
+INSERT INTO `utenti` (`id_utente`, `username`, `password`, `data_creazione`, `ultimo_accesso`, `email`, `attivo`, `eliminato`, `data_eliminazione`, `telefono`, `volontario`, `verificato`, `codice_recupero`) VALUES
+	(1, 'federico.flecchia', '04b71e198a514d33593ee379d8c7f3fc74603c0ef87ba60fe6856aeae9f9b800', '2021-03-15 21:50:52', NULL, 'federico.flecchia@itcbonelli.edu.it', 1, 0, NULL, NULL, 0, 1, NULL);
 /*!40000 ALTER TABLE `utenti` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.zone
+DROP TABLE IF EXISTS `zone`;
 CREATE TABLE IF NOT EXISTS `zone` (
   `id_zona` int(11) NOT NULL AUTO_INCREMENT,
   `denominazione` varchar(50) NOT NULL,
@@ -8320,6 +8342,7 @@ CREATE TABLE IF NOT EXISTS `zone` (
 /*!40000 ALTER TABLE `zone` ENABLE KEYS */;
 
 -- Dump della struttura di tabella donatempo.zone_has_comuni
+DROP TABLE IF EXISTS `zone_has_comuni`;
 CREATE TABLE IF NOT EXISTS `zone_has_comuni` (
   `zone_id_zona` int(11) NOT NULL,
   `comuni_id_comune` char(4) NOT NULL,
