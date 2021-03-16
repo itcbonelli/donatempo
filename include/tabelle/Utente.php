@@ -226,4 +226,26 @@ class Utente
 
         return $errori;
     }
+
+
+    /**
+     * Letti in input nome utente o e-mail di un utente, genera un nuovo codice alfanumerico di recupero password
+     * e glielo invia per posta elettronica.
+     * @param string $usernameOEmail nome utente o e-mail
+     * @return bool esito operazione invio
+     */
+    public static function inviaMailRecuperoPassword($usernameOEmail) {
+        $casuale = uniqid("", true);
+    }
+
+    /**
+     * Reimposta la password del record utente corrente.
+     * Modifica la proprietà password con l'hash calcolato della nuova password
+     * @param string $nuovaPassword
+     * @return bool esito operazione.
+     */
+    public function reimpostaPassword($nuovaPassword) {
+
+    }
+
 }
