@@ -159,6 +159,7 @@ class Comune
      */
     public static function getElencoComuni($prov = null)
     {
+        
         $comuni = [];
         //popolare l'array
         global $dbconn;
@@ -169,6 +170,8 @@ class Comune
             $query .= " WHERE provincia = '$prov' ";
         }
         $query .= " ORDER BY denominazione ";
+
+        
 
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();

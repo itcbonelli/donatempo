@@ -1,6 +1,7 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -180,5 +181,30 @@ class Associazione
      */
     public function associaServizio($id_servizio)
     {
+    }
+
+    /**
+     * Ottiene l'elenco di tutte le associazioni
+     * @return Associazione[]
+     */
+    public static function elencoAssociazioni()
+    {
+        global $dbconn;
+        $dataset = [];
+        $comando = $dbconn->prepare("SELECT * FROM associazioni ORDER BY ragsoc");
+        $esegui = $comando->execute();
+        if ($esegui) {
+            while ($riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $assoc = new Associazione();
+                $assoc->id_associazione = $riga['id_associazione'];
+                $assoc->ragsoc = $riga['ragsoc'];
+                $assoc->codfis = $riga['codfis'];
+                $assoc->url_logo = $riga['url_logo'];
+                $assoc->descrizione = $riga['descrizione'];
+                $dataset[] = $assoc;
+            }
+        }
+
+        return $dataset;
     }
 }
