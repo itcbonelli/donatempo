@@ -6,9 +6,30 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit4c84b1d689bbe8ce6ea2f16533caeb4e
 {
+    public static $prefixLengthsPsr4 = array (
+        'i' => 
+        array (
+            'itcbonelli\\donatempo\\' => 21,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'itcbonelli\\donatempo\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
+    );
+
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4c84b1d689bbe8ce6ea2f16533caeb4e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4c84b1d689bbe8ce6ea2f16533caeb4e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit4c84b1d689bbe8ce6ea2f16533caeb4e::$classMap;
 
         }, null, ClassLoader::class);
     }

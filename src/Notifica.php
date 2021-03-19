@@ -1,5 +1,7 @@
 <?php
 
+namespace itcbonelli\donatempo;
+
 /**
  * Permette di mostrare un messaggio di notifica all'utente
  * @author Federico Flecchia

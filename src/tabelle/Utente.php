@@ -1,5 +1,9 @@
 <?php
 
+namespace itcbonelli\donatempo\tabelle;
+use itcbonelli\donatempo\Notifica;
+use \PDO, \DateTime, \Exception;
+
 /**
  * Record utente
  */
@@ -23,12 +27,12 @@ class Utente
     /**
      * Data e ora di creazione dell'utente
      */
-    public DateTime $data_creazione;
+    public \DateTime $data_creazione;
 
     /**
      * Data e ora dell'ultimo accesso
      */
-    public DateTime $ultimo_accesso;
+    public \DateTime $ultimo_accesso;
 
     /**
      * Indirizzo e-mail
@@ -58,7 +62,12 @@ class Utente
     /**
      * Volontario sì/no
      */
-    public bool $volontario;
+    public bool $volontario = false;
+
+    /**
+     * Amministratore sì/no
+     */
+    public bool $amministratore;
 
     /**
      * Codice di recupero della mail
@@ -85,15 +94,16 @@ class Utente
         $data_creazione = $this->data_creazione;
         $ultimo_accesso = $this->ultimo_accesso;
         $email = addslashes($this->email);
-        $attivo = $this->attivo;
+        $attivo = intval($this->attivo);
         $eliminato = $this->eliminato;
         $data_eliminazione = $this->data_eliminazione;
         $telefono = addslashes($this->telefono);
-        $volontario = $this->volontario;
+        $volontario = intval($this->volontario);
+        $amministratore = intval($this->amministratore);
 
         $query = "REPLACE INTO utenti(id_utente, username, password, data_creazione, ultimo_accesso, email, attivo, eliminato, data_eliminazione, telefono
-		volontario)
-		VALUES ('$id_utente', '$username', '$password', '$data_creazione', '$ultimo_accesso', '$email', '$attivo', '$eliminato', '$data_eliminazione', '$telefono', '$volontario')";
+		volontario, amministratore)
+		VALUES ('$id_utente', '$username', '$password', '$data_creazione', '$ultimo_accesso', '$email', '$attivo', '$eliminato', '$data_eliminazione', '$telefono', '$volontario', $amministratore)";
 
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
@@ -128,6 +138,7 @@ class Utente
 			$this->data_eliminazione=$riga['data_eliminazione'];
 			$this->telefono=$riga['telefono'];
 			$this->volontario=$riga['volontario'];
+			$this->amministratore=$riga['amministratore'];
 
 			return true;
 		} else {
@@ -248,4 +259,18 @@ class Utente
 
     }
 
+
+    /**
+     * Ottiene il profilo dell'utente
+     * @author Federico Flecchia
+     * @return Profilo
+     */
+    public function getProfilo() {
+        if($this->id==null) {
+            return null;
+        }
+        $pro=new Profilo();
+        $pro->carica($this->id_utente);
+        return $pro;
+    }
 }

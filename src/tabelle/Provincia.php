@@ -1,5 +1,9 @@
 <?php
 
+namespace itcbonelli\donatempo\tabelle;
+use itcbonelli\donatempo\Notifica;
+use \PDO, \DateTime, \Exception;
+
 /**
  * Tabella provincia
  */

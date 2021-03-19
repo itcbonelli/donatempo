@@ -1,5 +1,9 @@
 <?php
 
+namespace itcbonelli\donatempo\tabelle;
+use itcbonelli\donatempo\Notifica;
+use \PDO, \DateTime, \Exception;
+
 /**
  * Record comune
  */
@@ -119,13 +123,6 @@ class Comune
         $esegui = $comando->execute();
 
         return ($esegui == true && $comando->fetch(PDO::FETCH_ASSOC) == true);
-        /*
-        if($esegui==true) {
-            $riga=$comando->fetch();
-            return($riga==true);
-        } else {
-            return false;
-        }*/
     }
 
     /**

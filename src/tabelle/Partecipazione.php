@@ -1,5 +1,9 @@
 <?php
 
+namespace itcbonelli\donatempo\tabelle;
+use itcbonelli\donatempo\Notifica;
+use \PDO, \DateTime, \Exception;
+
 /**
  * Record di associazione tra utente e associazione di volontariato
  */
@@ -38,6 +42,32 @@ class PartecipazioneAssociazione
      * @var string
      */
     public $ruolo;
+
+
+    /**
+     * Carica il record della partecipazione
+     * @author Beatrice Meinero
+     * @param int $id identificativo partecipazione
+     * @return bool esito del caricamento
+     */
+    public function carica($id)
+    {
+        global $dbconn;
+        $query = "SELECT * FROM utente_partecipa_associazione WHERE id_partecipazione=$id";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+            $this->id_partecipazione = $riga['id_partecipazione'];
+            $this->idUtente = $riga['idUtente'];
+            $this->idAssociazione = $riga['idAssociazione'];
+            $this->ruolo = $riga['ruolo'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * Ottiene le partecipazioni ad associazioni di un dato utente
@@ -107,7 +137,8 @@ class PartecipazioneAssociazione
      * Ottiene l'oggetto associazione legato all'ID associazione di questa partecipazione
      * @return Associazione oggetto associazione
      */
-    public function getAssociazione() {
+    public function getAssociazione()
+    {
         //N.B: qua non serve fare query
     }
 
@@ -115,8 +146,8 @@ class PartecipazioneAssociazione
      * Ottiene l'oggetto utente legato alla partecipazione corrente
      * @return Utente
      */
-    public function getUtente() {
-
+    public function getUtente()
+    {
     }
 
     /**

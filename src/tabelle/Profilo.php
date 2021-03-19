@@ -1,5 +1,9 @@
 <?php
 
+namespace itcbonelli\donatempo\tabelle;
+use itcbonelli\donatempo\Notifica;
+use \PDO, \DateTime;
+
 /**
  * Rappresenta il profilo associato ad un utente
  */
@@ -80,9 +84,9 @@ class Profilo
     {
         global $dbconn;
 
-        
 
-        throw new Exception("Non ancora implementato");
+
+        throw new \Exception("Non ancora implementato");
     }
 
     /**
@@ -92,7 +96,7 @@ class Profilo
     public function salva()
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+        throw new \Exception("Non ancora implementato");
     }
 
     /**
@@ -102,7 +106,7 @@ class Profilo
     public function elimina()
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+        throw new \Exception("Non ancora implementato");
     }
 
     /**
@@ -111,23 +115,50 @@ class Profilo
      */
     public function convalida()
     {
-        $ris=true;
+        $ris = true;
         //codice di convalida
         return $ris;
     }
 
     /**
      * Carica il profilo utente
+     * @author Beatrice Meinero
      * @return bool esito operazione
      */
-    public function carica($id_profilo) {
+    public function carica($id_profilo)
+    {
+        global $dbconn;
 
+        $query = "SELECT * FROM profili WHERE id_utente=$id_profilo";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+
+            $this->id_utente = $riga['id_utente'];
+            $this->cognome = $riga['cognome'];
+            $this->nome = $riga['nome'];
+            $this->telefono1 = $riga['telefono1'];
+            $this->telefono2 = $riga['telefono2'];
+            $this->cod_fis = $riga['cod_fis'];
+            $this->indirizzo = $riga['indirizzo'];
+            $this->cap = $riga['cap'];
+            $this->id_comune = $riga['id_comune'];
+            $this->id_quartiere = $riga['id_quartiere'];
+            $this->fotografia = $riga['fotografia'];
+            $this->latitudine = $riga['latitudine'];
+            $this->longitudine = $riga['longitudine'];
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * @return Utente oggetto utente associato al profilo
      */
-    public function getUtente() {
-
+    public function getUtente()
+    {
     }
 }

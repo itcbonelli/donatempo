@@ -14,6 +14,7 @@
     * **connessione.php** file di connessione al database
     * **funzioni.php** funzioni richiamabili nelle varie pagine.
 * 📂 **uploads** ospiterà i file caricati dagli utenti durante l'esercizio del sistema
+* 📂 **src** Contiene il codice sorgente delle classi caricate attraverso il sistema di autoloading
 * 📂 **vendor** contiene librerie di terze parti installate tramite il package manager composer.
 * **accesso.php** pagina di login
 * **composer.json** è il file di configurazione di composer
