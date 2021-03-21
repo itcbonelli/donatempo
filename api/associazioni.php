@@ -9,3 +9,15 @@ function elencoAssociazioni()
     echo json_encode($dataset);
     exit;
 }
+
+function salvaAssociazione() {
+    //TODO: implementare politica di sicurezza
+}
+
+function creaAssociazione() {
+    //TODO: implementare politica di sicurezza
+}
+
+function eliminaAssociazione() {
+    //TODO: implementare politica di sicurezza
+}

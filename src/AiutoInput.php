@@ -38,7 +38,7 @@ class AiutoInput
         return $valore;
     }
 
-    public static function leggiStringa(string $nome, string $default = '', string $ordine = 'GPC')
+    public static function leggiStringa(string $nome, ?string $default = '', string $ordine = 'GPC')
     {
         return strval(self::leggi($nome, $default, $ordine));
     }

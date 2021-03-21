@@ -1,6 +1,8 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
+use AiutoConvalida;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -94,8 +96,8 @@ class Utente
         $data_creazione = $this->data_creazione;
         $ultimo_accesso = $this->ultimo_accesso;
         $email = addslashes($this->email);
-        $attivo = intval($this->attivo);
-        $eliminato = $this->eliminato;
+        $attivo = intval($this->attivo); // il campo boolean in mysql è rappresentato come un intero 1 o 0
+        $eliminato = intval($this->eliminato); // il campo boolean in mysql è rappresentato come un intero 1 o 0
         $data_eliminazione = $this->data_eliminazione;
         $telefono = addslashes($this->telefono);
         $volontario = intval($this->volontario);
@@ -123,27 +125,27 @@ class Utente
     public function carica($id_utente)
     {
         global $dbconn;
-		$query = "SELECT * FROM utenti WHERE id_utente='$id_utente";
-		$comando = $dbconn->prepare($query);
-		$esegui=$comando->execute();
-		if($esegui==true && $riga=$comando->fetch(PDO::FETCH_ASSOC)) {
-			$this->id_utente=$riga['id_utente'];
-			$this->username=$riga['username'];
-			$this->password=$riga['password'];
-            $this->data_creazione=$riga['data_creazione'];
-            $this->ultimo_accesso=$riga['ultimo_accesso'];
-            $this->email=$riga['email'];
-			$this->attivo=$riga['attivo'];
-			$this->eliminato=$riga['eliminato'];
-			$this->data_eliminazione=$riga['data_eliminazione'];
-			$this->telefono=$riga['telefono'];
-			$this->volontario=$riga['volontario'];
-			$this->amministratore=$riga['amministratore'];
+        $query = "SELECT * FROM utenti WHERE id_utente='$id_utente";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+            $this->id_utente = $riga['id_utente'];
+            $this->username = $riga['username'];
+            $this->password = $riga['password'];
+            $this->data_creazione = $riga['data_creazione'];
+            $this->ultimo_accesso = $riga['ultimo_accesso'];
+            $this->email = $riga['email'];
+            $this->attivo = $riga['attivo'];
+            $this->eliminato = $riga['eliminato'];
+            $this->data_eliminazione = $riga['data_eliminazione'];
+            $this->telefono = $riga['telefono'];
+            $this->volontario = $riga['volontario'];
+            $this->amministratore = $riga['amministratore'];
 
-			return true;
-		} else {
-			return false;
-		}
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -175,6 +177,7 @@ class Utente
 
     /**
      * Controlla se esiste l'ID Utente specificato
+     * @author Gaia Barale
      * @param int $id_utente
      * @return bool vero o falso
      */
@@ -213,29 +216,22 @@ class Utente
     }
 
     /**
-     * 
+     * Convalida il record per il salvataggio
      */
-    public function convalida()
+    public function convalida(): bool
     {
-        $errori = [];
+        $valido = true;
 
         if (empty($this->id_utente)) {
-            $errori[] = "Inserire identificativo utente";
-        }
-        if (empty($this->username)) {
-            $errori[] = "Inserire l'username";
-        }
-        if (strlen($this->password)) {
-            $errori[] = "Inserire la password";
-        }
-        if (empty($this->email)) {
-            $errori[] = "Inserire l'email";
-        }
-        if (empty($this->telefono)) {
-            $errori[] = "Inserire il telefono";
+            Notifica::accoda("Inserire identificativo utente", Notifica::TIPO_ERRORE);
+            $valido = false;
         }
 
-        return $errori;
+        $valido = $valido && AiutoConvalida::LunghezzaTesto($this->username, "La lunghezza del nome utente deve essere compresa tra 1 e 45 caratteri", 1, 45);
+        $valido = $valido && AiutoConvalida::LunghezzaTesto($this->email, "La lunghezza dell'indirizzo e-mail deve essere compresa tra 1 e 100 caratteri", 1, 100);
+        $valido = $valido && AiutoConvalida::LunghezzaTesto($this->email, "La lunghezza del numero di telefono deve essere compresa tra 1 e 45 caratteri", 1, 45);
+
+        return $valido;
     }
 
 
@@ -245,7 +241,8 @@ class Utente
      * @param string $usernameOEmail nome utente o e-mail
      * @return bool esito operazione invio
      */
-    public static function inviaMailRecuperoPassword($usernameOEmail) {
+    public static function inviaMailRecuperoPassword($usernameOEmail)
+    {
         $casuale = uniqid("", true);
     }
 
@@ -255,8 +252,8 @@ class Utente
      * @param string $nuovaPassword
      * @return bool esito operazione.
      */
-    public function reimpostaPassword($nuovaPassword) {
-
+    public function reimpostaPassword($nuovaPassword)
+    {
     }
 
 
@@ -265,11 +262,12 @@ class Utente
      * @author Federico Flecchia
      * @return Profilo
      */
-    public function getProfilo() {
-        if($this->id==null) {
+    public function getProfilo()
+    {
+        if ($this->id == null) {
             return null;
         }
-        $pro=new Profilo();
+        $pro = new Profilo();
         $pro->carica($this->id_utente);
         return $pro;
     }

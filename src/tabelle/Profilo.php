@@ -1,6 +1,7 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime;
 
@@ -111,12 +112,47 @@ class Profilo
 
     /**
      * Convalida i dati del record
+     * @author Giorgio Coraglia
      * @return bool esito operazione
      */
     public function convalida()
     {
         $ris = true;
-        //codice di convalida
+
+        if (empty($this->id_utente)) {
+            Notifica::accoda("Inserire identificativo utente", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
+        if (empty($this->cognome)) {
+            Notifica::accoda("Inserire cognome", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
+        if (strlen($this->nome)) {
+            Notifica::accoda("inserire nome", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
+
+        if (empty($this->telefono)) {
+            Notifica::accoda("Inserire telefono", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
+        /*
+        if (empty($this->cod_fis)) {
+            Notifica::accoda("Inserire codice fiscale", Notifica::TIPO_ERRORE);
+        }
+        */
+        if (strlen($this->indirizzo)) {
+            Notifica::accoda("inserire indirizzo", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
+        if (empty($this->cap)) {
+            Notifica::accoda("Inserire il cap", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
+        if (empty($this->id_comune)) {
+            Notifica::accoda("Inserire identificativo comune", Notifica::TIPO_ERRORE);
+            $ris = false;
+        }
         return $ris;
     }
 

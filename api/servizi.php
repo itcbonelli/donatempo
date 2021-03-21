@@ -1,9 +1,10 @@
 <?php
 
+use itcbonelli\donatempo\tabelle\Servizio;
+
 function elencoServizi() {
-    $dataset=[];
-    //TODO: scrivere codice che esegue la query e popola l'array DataSet
+    $dataset=Servizio::elencoServizi();
     header("Content-type: application/json", true);
-    echo json_encode($dataset);
+    echo json_encode($dataset, JSON_PRETTY_PRINT);
     exit;
 }

@@ -92,10 +92,27 @@ class Associazione
 
     /**
      * Carica i dati del record dal database
+     * @author Matteo Llozhi
+     * @param int $id_associazione
      * @return bool esito dell'operazione
      */
-    public function carica($id_associazione)
+    public function carica(int $id_associazione)
     {
+        global $dbconn;
+        //id_associazione è un campo numerico, non ci vogliono gli apici
+        $query = "select * from associazioni where id_associazione=$id_associazione";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+            $this->id_associazione = $riga['id_associazione'];
+            $this->ragsoc = $riga['ragsoc'];
+            $this->codfis = $riga['codfis'];
+            $this->url_logo = $riga['url_logo'];
+            $this->descrizione = $riga['descrizione'];
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -176,11 +193,24 @@ class Associazione
 
     /**
      * Crea l'associazione tra servizio e associazione
+     * @author Matteo Filippi
      * @param int $id_servizio codice del servizio da associare all'associazione corrente
      * @return boolean esito dell'operazione
      */
     public function associaServizio($id_servizio)
     {
+        global $dbconn;
+        $id_associazione = $this->id_associazione;
+        //$controllo=esisteAssociazioneServizio($id_associazione, $id_servizio);
+        //if ($controllo==false) {
+        $query = "REPLACE INTO associazione_offre_servizio (id_associazione, id_servizio) 
+            VALUES ($id_associazione, $id_servizio);";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        return $esegui == true && $comando->rowCount() == 1;
+        //} else {
+        //return false;
+        //}
     }
 
     /**
@@ -206,5 +236,40 @@ class Associazione
         }
 
         return $dataset;
+    }
+
+
+    /**
+     * Determina se l'utente connesso può apportare una modifica al record
+     * @return bool restituisce vero se l'utente è autorizzato alla modifica, falso in caso contrario
+     */
+    public function puoModificare(): bool
+    {
+        //caso 1: l'utente è un amministratore del portale
+        //gli amministratori possono fare tutto
+        $utente = Utente::getMioUtente();
+        if ($utente->amministratore == true) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * Determina se l'utente connesso può eliminare il record
+     * @return bool restituisce vero se l'utente è autorizzato all'eliminazione del record, falso in caso contrario
+     */
+    public function puoEliminare(): bool
+    {
+        //caso 1: l'utente è un amministratore del portale
+        //gli amministratori possono fare tutto
+        $utente = Utente::getMioUtente();
+        if ($utente->amministratore == true) {
+            return true;
+        }
+
+        
+
+        throw new Exception("Non implementato");
     }
 }

@@ -1,4 +1,4 @@
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !index.php
-RewriteRule .* index.php?url=$0 [QSA,L]
+RewriteRule .* index.php/$0 [QSA,L]

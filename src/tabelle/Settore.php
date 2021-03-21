@@ -54,10 +54,16 @@ class Settore
 
     /**
      * Elimina il record
+     * @author Giulia Chesta
      * @return boolean esito operazione
      */
     public function elimina()
     {
+        global $dbconn;
+        $query = "DELETE FROM settore WHERE id_settore='{$this->id_settore}'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        return $esegui == true && $comando->rowCount() == 1;
     }
 
     /**

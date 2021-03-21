@@ -6,17 +6,20 @@ use itcbonelli\donatempo\tabelle\Provincia;
 
 function elencoComuni()
 {
-    $dataset = Comune::getElencoComuni('cn');
+    $provincia = AiutoInput::leggiStringa('provincia', null);
+    $dataset = Comune::getElencoComuni($provincia);
+    header('Cache-Control: max-age=86400');
     header("Content-type: application/json", true);
-    echo json_encode($dataset);
+    echo json_encode($dataset, JSON_PRETTY_PRINT);
     exit;
 }
 
 function elencoProvince()
 {
     $dataset = Provincia::caricaTutte();
+    header('Cache-Control: max-age=86400');
     header("Content-type: application/json", true);
-    echo json_encode($dataset);
+    echo json_encode($dataset, JSON_PRETTY_PRINT);
     exit;
 }
 
@@ -25,7 +28,7 @@ function elencoRegioni()
     $dataset = [];
     //TODO: scrivere codice che esegue la query e popola l'array DataSet
     header("Content-type: application/json", true);
-    echo json_encode($dataset);
+    echo json_encode($dataset, JSON_PRETTY_PRINT);
     exit;
 }
 
@@ -34,7 +37,7 @@ function elencoAree()
     $dataset = [];
     //TODO: scrivere codice che esegue la query e popola l'array DataSet
     header("Content-type: application/json", true);
-    echo json_encode($dataset);
+    echo json_encode($dataset, JSON_PRETTY_PRINT);
     exit;
 }
 
@@ -42,5 +45,4 @@ function localizza()
 {
     $lat = AiutoInput::leggiFloat('lat');
     $long = AiutoInput::leggiFloat('long');
-    
 }

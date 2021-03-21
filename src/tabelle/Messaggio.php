@@ -10,12 +10,12 @@ use \PDO, \DateTime, \Exception;
 class Messaggio
 {
     /**
-     * Identificativo messaggio
+     * Identificativo messaggi
      */
     public $id;
 
     /**
-     * Testo del messaggio
+     * Testo del messaggi
      */
     public $contenuto;
 
@@ -30,7 +30,7 @@ class Messaggio
     public $id_destinatario;
 
     /**
-     * Data di invio del messaggio
+     * Data di invio del messaggi
      */
     public $data_invio;
 
@@ -81,11 +81,34 @@ class Messaggio
 
     /**
      * Ottiene l'elenco dei messaggi che riguardano una richiesta specifica
+     * @author Carola Cometto
+     * @param int $id_richiesta identificativo richiesta
      * @return Messaggio[] array dei messaggi
      */
-    public static function getConversazionePerRichiesta($id_richiesta)
+    public static function getConversazionePerRichiesta(int $id_richiesta)
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+
+        $messaggi= [];
+
+        //il controllo eseguito non è necessario perché ID richiesta
+        //è obbligatorio.
+
+        $query = "SELECT * FROM messaggi WHERE id_richiesta=$id_richiesta";
+
+        
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true) {
+            while ($riga = $comando->fetch()) {
+                $mess = new Messaggio();
+                $mess->id_richiesta = $riga['id_richiesta'];
+                $mess->id_destinatario = $riga['id_destinatario'];
+                $mess->contenuto = $riga['contenuto'];
+                $messaggi[] = $mess;
+            }
+        }
+        return $messaggi;
     }
 }

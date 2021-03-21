@@ -1,4 +1,7 @@
 <?php
+
+use itcbonelli\donatempo\AiutoInput;
+
 require_once __DIR__ . '/../include/main.php';
 
 /*
@@ -12,17 +15,16 @@ if (isset($_SERVER['PATH_INFO'])) {
     $pathinfo = $_SERVER['PATH_INFO'];
     $segmenti = explode('/', $pathinfo);
     //rimuovo il primo elemento dell'array (il quale è vuoto)
-    array_shift($segmenti);
-    if (is_array($segmenti) && count($segmenti >= 2)) {
-        $controller = $segmenti[0];
-        $task = $segmenti[1];
+    if (count($segmenti) >= 2) {
+        $controller = $segmenti[1];
+        $task = $segmenti[2];
     }
 } else {
-    $controller = filter_input(INPUT_GET, 'controller', FILTER_SANITIZE_STRING);
-    $task = filter_input(INPUT_GET, 'task', FILTER_SANITIZE_STRING);
+    $controller = AiutoInput::leggiStringa('controller', '');
+    $task = AiutoInput::leggiStringa('task', 'index');
 }
 
-if (file_exists("$controller.php")) {
+if (!empty($controller) && file_exists("$controller.php")) {
     require_once __DIR__ . "/$controller.php";
     if (function_exists($task)) {
         $task();

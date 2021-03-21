@@ -38,10 +38,31 @@ class Disponibilita {
 
     /**
      * Convalida i dati inseriti
+     * @author Giorgio Coraglia
      * @return bool esito convalida
      */
     public function convalida() {
+        $errori = [];
 
+        if (empty($this->id_disponibilita)) {
+            $errori[] = "Inserire identificativo disponibilita";
+        }
+        if (empty($this->id_partecipazione)) {
+            $errori[] = "Inserire identificativo partecipazione";
+        }
+        if (strlen($this->data_disp)) {
+            $errori[] = "inserire la data di disponibilita";
+        }
+        $errori = [];
+
+        if (empty($this->ora_inizio)) {
+            $errori[] = "inserire l'ora di inizio";
+        }
+        if (empty($this->ora_fine)) {
+            $errori[] = "Inserire ora fine";
+        }
+
+        return $errori;
     }
 
     /**
@@ -52,10 +73,15 @@ class Disponibilita {
     }
 
     /**
+     * @author Gaia Barale
      * @return bool esito eliminazione
      */
     public function elimina() {
-
+        global $dbconn;
+        $query = "DELETE FROM disponibilita WHERE id_disponibilita='{$this->id_disponibilita}'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        return $esegui == true && $comando->rowCount() == 1;
     }
 
     /**

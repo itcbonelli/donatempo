@@ -1,5 +1,9 @@
 # DONATEMPO
 
+Progetto realizzato dagli alunni della classe V A SIA e dai docenti di informatica proff. Flecchia Federico e Console Laura in collaborazione con il capitolato La Granda del gruppo BNI e con l'associazione Casa Do Menor.
+
+Donatempo è un'app che permette di mettere in contatto le associazioni di volontariato e i loro volontari con persone bisognose. Questo progetto fornisce la base di dati, il backoffice di gestione e le api per l'accesso ai dati come servizi web.
+
 ## Struttura del progetto
 
 * 📂 **api** contiene le chiamate web a supporto della realizzazione dell'app
@@ -26,4 +30,9 @@
 
 ## Installazione
 
+### Requisiti di sistema
+Donatempo richiede PHP 7.4 o versione superiore in quanto fa uso degli attributi di classe fortemente tipizzati.
+E' inoltre consigliabile attivare l'estensione opcache al fine di ottenere un significativo miglioramento delle prestazioni.
+
+### Procedura
 Per installare il portale, eseguire lo script sql collocato nella cartella **sql** per ripristinare il database. Modificare quindi le costanti presenti nel file **include/config.php** in base ai parametri di connessione.
