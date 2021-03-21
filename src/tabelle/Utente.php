@@ -2,7 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
-use AiutoConvalida;
+use itcbonelli\donatempo\AiutoConvalida;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -79,6 +79,7 @@ class Utente
 
     /**
      * Salva il record nel database
+     * @author Francesco Miglietti
      * @return bool esito dell'operazione
      */
     public function salva()
@@ -120,6 +121,7 @@ class Utente
 
     /**
      * Carica i dati del record
+     * @author Francesco Miglietti
      * @param int $id_utente identificativo utente
      * @return bool esito operazione
      */
@@ -196,12 +198,27 @@ class Utente
 
     /**
      * Controlla se esiste lo username specificato
+     * @author Carola Nerattini
      * @param int $username
      * @return bool vero o falso
      */
     public static function esisteUsername($username)
     {
+        global $dbconn;
+        $username = addslashes($username);
+        $query = "SELECT * FROM utenti WHERE username='$username'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true) {
+            $riga = $comando->fetch();
+            return ($riga == true);
+        } else {
+            return false;
+        }
     }
+
+    
 
     /**
      * Ottiene il record dell'utente attualmente connesso al sito.

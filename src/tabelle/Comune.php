@@ -192,33 +192,3 @@ class Comune
         return $comuni;
     }
 }
-
-/*
-$comuni_cn = Comune::getElencoComuni("CN");
-for ($i = 0; $i < count($comuni_cn); $i++) {
-    $comune = $comuni_cn[$i];
-    echo $comune->denominazione;
-}
-
-echo json_encode($comuni_cn);
-
-foreach ($comuni_cn as $comune) {
-    echo $comune->denominazione;
-    echo $comune->latitudine;
-    echo $comune->id_area;
-}
-
-//esempi
-$cuneo = new Comune();
-$torino = new Comune();
-$cuneo->carica("D205");
-$torino->carica("L219");
-echo $cuneo->denominazione; //fa uscire la scritta "Cuneo"
-echo $torino->denominazione; // Torino
-
-$nuovocomune = new Comune();
-$nuovocomune->id_comune = 'X123';
-$nuovocomune->denominazione = 'Roccagialla';
-$nuovocomune->provincia = 'BO';
-$nuovocomune->salva();
-*/
