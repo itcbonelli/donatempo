@@ -1,24 +1,33 @@
-<!doctype html>
-<html lang="it">
+<?php 
+//carico il file principale
+require_once __DIR__ . '/include/main.php';
 
-<head>
-  <title>Dona tempo</title>
-  <?php require('include/template/head.php'); ?>
-</head>
+?>
+<?php ob_start(); ?>
 
-<body>
-  <?php require('include/template/navigazione.php'); ?>
-  <div class="jumbotron">
-    <h1 class="display-3">Dona tempo</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    <hr class="my-2">
-    <p>More info</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
-    </p>
-  </div>
+    <div class="jumbotron">
+      <h1 class="display-3">DONATEMPO</h1>
+      <p class="lead">L'app che ti aiuta a trovare chi può darti una mano</p>
+      <hr class="my-2">
+      <p>More info</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
+      </p>
+    </div>
 
-  <?php require('include/template/footer.php'); ?>
-</body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Registrazione</h1>
 
-</html>
+                <form action="">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+<?php $contenuto = ob_get_clean(); ?>
+
+<?php
+require_once __DIR__ . '/template/index.php';
+?>
