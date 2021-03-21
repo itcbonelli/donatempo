@@ -5,6 +5,7 @@ namespace itcbonelli\donatempo\tabelle;
 use AiutoConvalida;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Record utente
@@ -148,6 +149,8 @@ class Utente
         }
     }
 
+
+
     /**
      * Determina se esistono utente e password ed imposta 
      * le opportune variabili di sessione
@@ -244,7 +247,26 @@ class Utente
     public static function inviaMailRecuperoPassword($usernameOEmail)
     {
         $casuale = uniqid("", true);
+
+
+
+        //INVIO DEL MESSAGGIO DI RECUPERO
+        $mailer = new PHPMailer(true);
+        //imposto indirizzo utente
+        $mailer->addAddress('');
+        $mailer->Subject = "[DONATEMPO] Recupero password";
+        $mailer->ContentType = PHPMailer::CONTENT_TYPE_TEXT_HTML;
+        //TODO: impostare il corpo del messaggio
+        $mailer->Body = ""; //corpo del messaggio
+        $invia = $mailer->send();
+        if ($invia) {
+            Notifica::accoda("Controlla la tua casella di posta. Ti abbiamo inviato le istruzioni per recuperare la password del tuo account", Notifica::TIPO_SUCCESSO);
+        } else {
+            Notifica::accoda("Errore nell'invio del messaggio", Notifica::TIPO_ERRORE);
+        }
     }
+
+
 
     /**
      * Reimposta la password del record utente corrente.

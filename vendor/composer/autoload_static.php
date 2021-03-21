@@ -11,12 +11,20 @@ class ComposerStaticInit4c84b1d689bbe8ce6ea2f16533caeb4e
         array (
             'itcbonelli\\donatempo\\' => 21,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'itcbonelli\\donatempo\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 

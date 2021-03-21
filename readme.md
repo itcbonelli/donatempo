@@ -32,7 +32,13 @@ Donatempo è un'app che permette di mettere in contatto le associazioni di volon
 
 ### Requisiti di sistema
 Donatempo richiede PHP 7.4 o versione superiore in quanto fa uso degli attributi di classe fortemente tipizzati.
-E' inoltre consigliabile attivare l'estensione opcache al fine di ottenere un significativo miglioramento delle prestazioni.
+E' inoltre consigliabile attivare l'estensione *opcache* al fine di ottenere un significativo miglioramento delle prestazioni.
 
 ### Procedura
 Per installare il portale, eseguire lo script sql collocato nella cartella **sql** per ripristinare il database. Modificare quindi le costanti presenti nel file **include/config.php** in base ai parametri di connessione.
+
+## Librerie di terze parti
+
+Il progetto, nato in un contesto scolastico, ambisce a ridurre al minimo il ricorso a librerie di terze parti. Si indicano di seguito quelle utilizzate.
+
+* **PHPMailer**: fornisce classi per l'invio di messaggi di posta elettronica. Rispetto alla semplice funzione mail() di PHP permette l'utilizzo di server SMTP personalizzati e di gestire più facilmente le intestazioni del messaggio.
