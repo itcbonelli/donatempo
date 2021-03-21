@@ -18,10 +18,13 @@ class Notifica
      * Aggiunge una notifica alla coda
      * @param string $testo testo da mostrare all'utente
      * @param string $tipo tipo di notifica
+     * @return Notifica la notifica accodata, per eventuali ulteriori notifiche
      */
     public static function accoda($testo, $tipo = self::TIPO_INFORMAZIONE)
     {
-        self::$notifiche[] = new Notifica($testo, $tipo);
+        $notifica=new Notifica($testo, $tipo);
+        self::$notifiche[] = $notifica;
+        return $notifica;
     }
 
     /**

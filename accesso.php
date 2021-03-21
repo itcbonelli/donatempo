@@ -1,2 +1,3 @@
 <?php
-//questa sarà la pagina di accesso al portale
+require_once __DIR__ . '/template/index.php';
+?>

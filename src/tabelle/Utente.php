@@ -249,7 +249,7 @@ class Utente
 
         $valido = $valido && AiutoConvalida::LunghezzaTesto($this->username, "La lunghezza del nome utente deve essere compresa tra 1 e 45 caratteri", 1, 45);
         $valido = $valido && AiutoConvalida::LunghezzaTesto($this->email, "La lunghezza dell'indirizzo e-mail deve essere compresa tra 1 e 100 caratteri", 1, 100);
-        $valido = $valido && AiutoConvalida::LunghezzaTesto($this->email, "La lunghezza del numero di telefono deve essere compresa tra 1 e 45 caratteri", 1, 45);
+        $valido = $valido && AiutoConvalida::LunghezzaTesto($this->telefono, "La lunghezza del numero di telefono deve essere compresa tra 1 e 45 caratteri", 1, 45);
 
         return $valido;
     }
