@@ -268,8 +268,9 @@ class Associazione
             return true;
         }
 
+        //L'associazione può essere eliminata solo da chi l'ha creata
         
 
-        throw new Exception("Non implementato");
+        return false;
     }
 }

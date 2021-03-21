@@ -1,5 +1,6 @@
 <?php
 
+namespace itcbonelli\donatempo;
 use itcbonelli\donatempo\Notifica;
 
 /**
@@ -48,6 +49,16 @@ class AiutoConvalida
      */
     public static function Email($indirizzo, $messaggio="Indirizzo e-mail non valido") {
         if (!filter_var($indirizzo, FILTER_VALIDATE_EMAIL)) {
+            Notifica::accoda($messaggio, Notifica::TIPO_ERRORE);
+        }
+    }
+
+    /**
+     * Determina se il testo fornito in input è un URL valido
+     * @return bool True se valido, false in caso contrario
+     */
+    public static function Url($indirizzo, $messaggio="URL non valido") {
+        if (!filter_var($indirizzo, FILTER_VALIDATE_URL)) {
             Notifica::accoda($messaggio, Notifica::TIPO_ERRORE);
         }
     }
