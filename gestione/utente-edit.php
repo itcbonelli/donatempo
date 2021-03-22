@@ -6,7 +6,7 @@ ob_start();
 ?>
 
 <form action="" method="post">
-    <h1>Creazione utente</h1>
+    <h1>Modifica utente</h1>
 
     <p>
         <button type="button" class="btn btn-primary" name="azione" value="conferma">Conferma</button>
@@ -38,5 +38,5 @@ ob_start();
 <?php
 //la funzione ob_get_clean recupera l'output catturato e lo restituisce a una variabile.
 $contenuto = ob_get_clean();
-require(__DIR__ . '/../template/pagina.php');
+require(__DIR__ . '/template/pagina.php');
 ?>

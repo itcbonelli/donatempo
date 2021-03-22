@@ -26,7 +26,7 @@ if (!defined('PERCORSO_BASE')) {
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{Utente}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId" style="right:0; left:auto;">
                         <a class="dropdown-item" href="#">Il mio profilo</a>
-                        <a class="dropdown-item" href="#">Esci</a>
+                        <a class="dropdown-item" href="logout.php">Esci</a>
                     </div>
                 </li>
             </ul>
@@ -36,12 +36,13 @@ if (!defined('PERCORSO_BASE')) {
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4">             
+            <div class="col-lg-3 col-md-4">             
 
-                <ul class="nav flex-column menu-navigazione">
+                <ul class="nav nav-pills flex-column menu-navigazione">
 
                     <?php
                     function voce_menu($nome, $id, $icona, $href='#') {
+                        global $link_attivo;
                         $active='';
                         if(isset($link_attivo) && $link_attivo==$id) {
                             $active=' active ';
@@ -53,18 +54,22 @@ if (!defined('PERCORSO_BASE')) {
                         echo $codice;
                     }
 
-                    voce_menu('Cruscotto', 'dashboard', 'fa fa-dashboard', '#');
-                    voce_menu('Utenti e profili', 'utenti', 'fa fa-user', '#');
-                    voce_menu('Associazioni e volontari', 'associazioni', 'fa fa-building', '#');
-                    voce_menu('Servizi', 'servizi', 'fa fa-handshake-o', '#');
-                    voce_menu('Stati avanzamento richiesta', 'stati_richiesta', 'fa fa-percent', '#');
-                    voce_menu('Comuni, province e zone', 'zone', 'fa fa-map-marker', '#');
+                    voce_menu('Cruscotto', 'dashboard', 'fa fa-dashboard', 'index.php');
+                    voce_menu('Utenti', 'utenti', 'fa fa-user', 'utenti.php');
+                    voce_menu('Profili', 'profili', 'fa fa-user', 'profili.php');
+                    voce_menu('Associazioni', 'associazioni', 'fa fa-building', 'associazioni.php');
+                    voce_menu('Esercenti', 'esercenti', 'fa fa-briefcase', 'esercenti.php');
+                    voce_menu('Servizi', 'servizi', 'fa fa-handshake-o', 'servizi.php');
+                    voce_menu('Stati avanzamento richiesta', 'stati-avanzamento', 'fa fa-percent', 'stati-avanzamento.php');
+                    voce_menu('Comuni', 'comuni', 'fa fa-map-marker', 'comuni.php');
+                    voce_menu('Province', 'province', 'fa fa-map-marker', 'province.php');
+                    voce_menu('Zone', 'zone', 'fa fa-map-marker', 'zone.php');
                     ?>
                    
                 </ul>
 
             </div>
-            <div class="col-8">
+            <div class="col-lg-9 col-md-8">
                 <?php echo isset($contenuto) ? $contenuto : ''; ?>
             </div>
         </div>

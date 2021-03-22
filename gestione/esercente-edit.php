@@ -1,6 +1,6 @@
 <?php
-$titolo_pagina = "Elimina associazione";
-$link_attivo = 'associazioni';
+$titolo_pagina = "Modifica esercente";
+$link_attivo = 'esercenti';
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>

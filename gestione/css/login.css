@@ -1,0 +1,30 @@
+body {
+    background-image:url(giving.jpg);
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.box-login {
+    width: 400px;
+    height: 300px;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -150px;
+    border-radius: 12px;
+    background-color: white;
+    background-color: rgba(255,255,255,0.8);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+}
+
+.credits {
+    position: fixed;
+    bottom:0;
+    right: 0;
+    font-size: 11px;
+    color:white;
+    text-shadow: 2px 2px 4px black;
+}
