@@ -8,9 +8,11 @@ function elencoComuni()
 {
     $provincia = AiutoInput::leggiStringa('provincia', null);
     $dataset = Comune::getElencoComuni($provincia);
+    //intestazioni della risposta
     header('Cache-Control: max-age=86400');
     header("Content-type: application/json", true);
-    echo json_encode($dataset, JSON_PRETTY_PRINT);
+    //Corpo della risposta
+    echo json_encode($dataset);
     exit;
 }
 

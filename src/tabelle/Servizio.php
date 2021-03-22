@@ -127,7 +127,7 @@ class Servizio
         if ($esegui == true) {
             while ($riga = $comando->fetch()) {
                 $servizio = new Servizio();
-                $servizio->id = $riga['id'];
+                $servizio->id_servizio = $riga['id'];
                 $servizio->nome = $riga['nome'];
                 $servizio->descrizione = $riga['descrizione'];
                 $servizio->id_tipo = $riga['id_tipo'];
