@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `comuni` (
   CONSTRAINT `fk_comuni_province1` FOREIGN KEY (`provincia`) REFERENCES `province` (`sigla`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Anagrafica comuni italiani';
 
--- Dump dei dati della tabella donatempo.comuni: ~7.902 rows (circa)
+-- Dump dei dati della tabella donatempo.comuni: ~8.192 rows (circa)
 /*!40000 ALTER TABLE `comuni` DISABLE KEYS */;
 INSERT INTO `comuni` (`id_comune`, `denominazione`, `provincia`, `id_area`, `longitudine`, `latitudine`) VALUES
 	('A001', 'Abano Terme', 'PD', NULL, NULL, NULL),
@@ -8056,7 +8056,9 @@ CREATE TABLE IF NOT EXISTS `esercenti` (
   `descrizione` text DEFAULT NULL COMMENT 'Descrizione pubblica dell''esercizio',
   `logo_url` text DEFAULT NULL COMMENT 'URL logo esercente',
   `attivo` tinyint(1) NOT NULL DEFAULT 1 COMMENT 'Attivo sì/no',
-  PRIMARY KEY (`id_esercente`)
+  PRIMARY KEY (`id_esercente`),
+  KEY `FK_esercente_comune` (`cod_comune`),
+  CONSTRAINT `FK_esercente_comune` FOREIGN KEY (`cod_comune`) REFERENCES `comuni` (`id_comune`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Anagrafica esercenti';
 
 -- Dump dei dati della tabella donatempo.esercenti: ~0 rows (circa)
@@ -8375,7 +8377,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   PRIMARY KEY (`id_utente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Dump dei dati della tabella donatempo.utenti: ~1 rows (circa)
+-- Dump dei dati della tabella donatempo.utenti: ~0 rows (circa)
 /*!40000 ALTER TABLE `utenti` DISABLE KEYS */;
 INSERT INTO `utenti` (`id_utente`, `username`, `password`, `data_creazione`, `ultimo_accesso`, `email`, `attivo`, `eliminato`, `data_eliminazione`, `telefono`, `volontario`, `amministratore`, `verificato`, `codice_recupero`) VALUES
 	(1, 'federico.flecchia', '04b71e198a514d33593ee379d8c7f3fc74603c0ef87ba60fe6856aeae9f9b800', '2021-03-15 21:50:52', NULL, 'federico.flecchia@itcbonelli.edu.it', 1, 0, NULL, NULL, 0, 0, 1, NULL);
