@@ -1,6 +1,14 @@
 <?php
+
+use itcbonelli\donatempo\tabelle\Utente;
+
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Logout";
 $link_attivo = 'logout';
+
+Utente::Logout();
+header('Location:login.php');
+
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>

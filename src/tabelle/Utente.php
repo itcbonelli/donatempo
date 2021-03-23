@@ -176,8 +176,17 @@ class Utente
             $_SESSION['username'] = $riga['username'];
             return true;
         } else {
+            Notifica::accoda("Dati di accesso non validi", Notifica::TIPO_ERRORE);
             return false;
         }
+    }
+
+    /**
+     * Disconnette l'utente dal sito
+     */
+    public static function Logout()
+    {
+        session_destroy();
     }
 
     /**
@@ -218,7 +227,7 @@ class Utente
         }
     }
 
-    
+
 
     /**
      * Ottiene il record dell'utente attualmente connesso al sito.

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Modifica provincia";
 $link_attivo = 'provincia-edit';
 ob_start();

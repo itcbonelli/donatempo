@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Modifica servizio";
 $link_attivo = 'servizio-edit';
 ob_start();

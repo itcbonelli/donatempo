@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Elimina servizio";
 $link_attivo = 'servizio-delete';
 ob_start();

@@ -1,3 +1,25 @@
+<?php
+
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
+use itcbonelli\donatempo\tabelle\Utente;
+
+require __DIR__ . '/../include/main.php';
+
+if ($_POST) {
+    $ut = AiutoInput::leggiStringa('username', '', 'P');
+    $pwd = AiutoInput::leggiStringa('password', '', 'P');
+
+    if (!empty($ut) && !empty($pwd)) {
+        $login = Utente::login($ut, $pwd);
+        if ($login) {
+            header('location:index.php');
+        } else {
+
+        }
+    }
+}
+?>
 <!doctype html>
 <html lang="it">
 
@@ -15,6 +37,7 @@
 <body>
 
     <div class="box-login">
+        <?php Notifica::mostra_notifiche(); ?>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Nome utente</label>

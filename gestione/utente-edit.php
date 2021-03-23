@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Gestione utenti";
 $link_attivo = 'utenti';
 ob_start();

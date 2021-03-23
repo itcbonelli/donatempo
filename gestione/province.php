@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Elenco province";
 $link_attivo = 'province';
 ob_start();

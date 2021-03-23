@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Modifica zona";
 $link_attivo = 'zone';
 ob_start();

@@ -33,7 +33,7 @@ class Notifica
     public static function mostra_notifiche()
     {
         foreach (self::$notifiche as $messaggio) {
-            printf("<div class='alert alert-%s>%s</div>", htmlentities($messaggio->tipo), htmlentities($messaggio->testo));
+            printf("<div class='alert alert-%s'>%s</div>", htmlentities($messaggio->tipo), htmlentities($messaggio->testo));
         }
 
         //ripulisco la coda di notifiche
@@ -43,7 +43,7 @@ class Notifica
     /**
      * Identifica la tipologia del messaggio come di errore (rettangolo rosso)
      */
-    public const TIPO_ERRORE = 'error';
+    public const TIPO_ERRORE = 'danger';
 
     /**
      * Identifica la tipologia del messaggio come di avvertenza (rettangolo giallo)
