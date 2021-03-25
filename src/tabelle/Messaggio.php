@@ -1,6 +1,7 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -41,12 +42,55 @@ class Messaggio
 
     /**
      * Salva le modifiche apportate al record
+     * @author Andrea Lops
      * @return bool esito dell'operazione
      */
     public function salva()
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+
+        //se sono presenti errori di convalida
+        if ($this->convalida() == false) {
+            //esco dalla funzione
+            return false;
+        }
+
+        $id = $this->id;
+        $contenuto = addslashes($this->contenuto);
+        $id_mittente = $this->id_mittente;
+        $id_destinatario = $this->id_destinatario;
+        $data_invio = addslashes($this->data_invio);
+        $id_richiesta = $this->id_richiesta;
+
+        if (empty($this->id)) {
+            $query = "INSERT INTO messaggi(id, contenuto, id_mittente, id_destinatario, data_invio, id_richiesta)
+            VALUES ('$id', '$contenuto', '$id_mittente', $id_destinatario, $data_invio, $id_richiesta)";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+
+            if ($esegui == true && $comando->rowCount() == 1) {
+                $this->id = $dbconn->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            $query = "UPDATE messaggi SET
+                contenuto='$contenuto',
+                id_mittente=$id_mittente,
+                id_destinatario=$id_destinatario,
+                data_invio='$data_invio',
+                id_richiesta = $id_richiesta
+            WHERE id = $id";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+
+            if ($esegui == true && $comando->rowCount() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     /**
@@ -61,22 +105,64 @@ class Messaggio
 
     /**
      * Elimina il record
+     * @author Giulia Chesta
      * @return bool esito dell'operazione
      */
     public function elimina()
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+        $query = "DELETE FROM messaggio WHERE id_messaggio='{$this->id_messaggio}'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        return $esegui == true && $comando->rowCount() == 1;
     }
 
     /**
      * Carica i dati del record dal database
+     * @author Francesco Miglietti
      * @return bool esito dell'operazione
      */
     public function carica($id)
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+
+        $query = "SELECT * FROM messaggi WHERE id='$id";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+            $this->id = $riga['id'];
+            $this->contenuto = $riga['contenuto'];
+            $this->id_mittente = $riga['id_mittente'];
+            $this->id_destinatario = $riga['id_destinatario'];
+            $this->data_invio = $riga['data_invio'];
+            $this->id_richiesta = $riga['id_richiesta'];
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Ottiene l'utente associato al mittente
+     * @return Utente
+     */
+    public function getMittente(): Utente
+    {
+        $ut = new Utente();
+        $ut->carica($this->id_mittente);
+        return $ut;
+    }
+
+    /**
+     * Ottiene l'utente associato al destinatario
+     * @return Utente
+     */
+    public function getDestinatario(): Utente
+    {
+        $ut = new Utente();
+        $ut->carica($this->id_destinatario);
+        return $ut;
     }
 
     /**
@@ -89,14 +175,14 @@ class Messaggio
     {
         global $dbconn;
 
-        $messaggi= [];
+        $messaggi = [];
 
         //il controllo eseguito non è necessario perché ID richiesta
         //è obbligatorio.
 
         $query = "SELECT * FROM messaggi WHERE id_richiesta=$id_richiesta";
 
-        
+
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
 

@@ -1,13 +1,15 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
 /**
  * Record disponibilità volontario
  */
-class Disponibilita {
+class Disponibilita
+{
     /**
      * Identificativo disponibilità
      */
@@ -41,7 +43,8 @@ class Disponibilita {
      * @author Giorgio Coraglia
      * @return bool esito convalida
      */
-    public function convalida() {
+    public function convalida()
+    {
         $errori = [];
 
         if (empty($this->id_disponibilita)) {
@@ -68,15 +71,16 @@ class Disponibilita {
     /**
      * @return bool esito salvataggio
      */
-    public function salva() {
-
+    public function salva()
+    {
     }
 
     /**
      * @author Gaia Barale
      * @return bool esito eliminazione
      */
-    public function elimina() {
+    public function elimina()
+    {
         global $dbconn;
         $query = "DELETE FROM disponibilita WHERE id_disponibilita='{$this->id_disponibilita}'";
         $comando = $dbconn->prepare($query);
@@ -85,34 +89,51 @@ class Disponibilita {
     }
 
     /**
-     * 
+     * @author Carola Nerattini
      */
-    public function carica($id_disponibilita) {
+    public function carica($id_disponibilita)
+    {
+        global $dbconn;
 
+        $query = "SELECT * FROM disponibilita WHERE id_disponibilita=$id_disponibilita";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+            $this->id_disponibilita = $riga['id_disponibilita'];
+            $this->id_partecipazione = $riga['id_partecipazione'];
+            $this->data_disp = $riga['data_disp'];
+            $this->ora_inizio = $riga['ora_inizio'];
+            $this->ora_fine = $riga['ora_fine'];
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * 
      * @return PartecipazioneAssociazione
      */
-    public function getPartecipazione() {
-
+    public function getPartecipazione()
+    {
     }
 
     /**
      * Ottiene i dati del volontario
      * @return Profilo
      */
-    public function getVolontario() {
-
+    public function getVolontario()
+    {
     }
 
     /**
      * Ottiene il record utente del volontario
      * @return Utente
      */
-    public function getUtente() {
-
+    public function getUtente()
+    {
     }
 
     /**
@@ -120,7 +141,8 @@ class Disponibilita {
      * @author Llozhi Matteo
      * @return bool esito operazione
      */
-    public function associaServizio($id_servizio) {
+    public function associaServizio($id_servizio)
+    {
         //tabella disponibilita_include_servizi
     }
 
@@ -129,10 +151,8 @@ class Disponibilita {
      * @author Llozhi Matteo
      * @return bool esito operazione
      */
-    public function dissociaServizio($id_servizio) {
+    public function dissociaServizio($id_servizio)
+    {
         //tabella disponibilita_include_servizi
     }
-
-
-
 }

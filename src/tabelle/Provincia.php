@@ -1,6 +1,7 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -32,6 +33,18 @@ class Provincia
     public function carica($sigla)
     {
         global $dbconn;
+        $query = "SELECT * FROM province WHERE sigla = '$sigla'";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+
+            $this->sigla = $riga['sigla'];
+            $this->denominazione = $riga['denominazione'];
+            $this->regione = $riga['regione'];
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -44,13 +57,29 @@ class Provincia
         $province = [];
         //eseguire la query.
 
-        //Per ogni riga restituita creare un'istanza di provincia
-        $prov = new Provincia();
-        //impostare i dati
-        //...
-        
+        global $dbconn;
+        $query = "SELECT * FROM province";
+        if ($regione != null) {
+            $regione = addslashes($regione);
+            if (!empty($regione)) {
+                $query .= " WHERE regione = '$regione' ";
+            }
+        }
+        $query .= " ORDER BY denominazione";
 
-        $province[] = $prov;
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        if ($esegui == true) {
+            while ($riga = $comando->fetch()) {
+                $prov = new Provincia();
+                $prov->sigla = $riga['sigla'];
+                $prov->denominazione = $riga['denominazione'];
+                $prov->regione = $riga['regione'];
+                $province[] = $prov;
+            }
+        }
+
         return $province;
     }
 
@@ -60,10 +89,16 @@ class Provincia
      */
     public function convalida()
     {
-        $errori = [];
-        if (strlen($this->sigla) != 2) {
-            $errori[] = "Il campo sigla deve essere di due caratteri";
+        $valido = true;
+        if (empty($this->denominazione) == true) {
+            Notifica::accoda("Inserire la denominazione di provincia", Notifica::TIPO_ERRORE);
+            $valido = false;
         }
+        if (strlen($this->sigla) != 2) {
+            Notifica::accoda("Il campo sigla deve essere di due caratteri", Notifica::TIPO_ERRORE);
+            $valido = false;
+        }
+        return $valido;
     }
 
     /**
@@ -72,6 +107,29 @@ class Provincia
      */
     public function salva()
     {
+        //se sono presenti errori di convalida
+        
+        if (!$this->convalida()) {
+            //esco dalla funzione
+            return false;
+        }
+
+        global $dbconn;
+        $sigla = addslashes($this->sigla);
+        $denominazione = addslashes($this->denominazione);
+        $regione = addslashes($this->regione);
+
+
+        $query = "REPLACE INTO province(sigla, denominazione, regione)
+		VALUES ('$sigla', '$denominazione', '$regione')";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        
+        if ($esegui == true && $comando->rowCount()>0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

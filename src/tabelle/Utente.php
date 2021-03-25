@@ -270,25 +270,44 @@ class Utente
      * @param string $usernameOEmail nome utente o e-mail
      * @return bool esito operazione invio
      */
-    public static function inviaMailRecuperoPassword($usernameOEmail)
+    public function inviaMailRecuperoPassword($usernameOEmail)
     {
+        global $dbconn;
+        if (empty($this->id_utente)) {
+            Notifica::accoda("Codice utente non specificato", Notifica::TIPO_ERRORE);
+            return false;
+        }
+
         $casuale = uniqid("", true);
+        $this->codice_recupero = $casuale;
+        $esegui = $this->salva();
 
+        if ($esegui == true) {
+            $email = $this->email;
+            //INVIO DEL MESSAGGIO DI RECUPERO
+            $mailer = new PHPMailer(true);
+            //imposto indirizzo utente
+            $mailer->addAddress($email, $this->username);
+            $mailer->Subject = "[DONATEMPO] Recupero password";
+            $mailer->ContentType = PHPMailer::CONTENT_TYPE_TEXT_HTML;
+            /** @todo predisporre link recupero account */
+            $link = "#";
 
+            $strbody = "Ciao, {$this->username}<br />"
+                . "Ricevi questa mail perché hai richiesto di reimpostare la password del tuo account su DonaTempo.<br />"
+                . "Per impostare una nuova password: <br />"
+                . "<a href='{$link}' style='font-size: 24px'>FAI CLIC QUI</a><br />";
 
-        //INVIO DEL MESSAGGIO DI RECUPERO
-        $mailer = new PHPMailer(true);
-        //imposto indirizzo utente
-        $mailer->addAddress('');
-        $mailer->Subject = "[DONATEMPO] Recupero password";
-        $mailer->ContentType = PHPMailer::CONTENT_TYPE_TEXT_HTML;
-        //TODO: impostare il corpo del messaggio
-        $mailer->Body = ""; //corpo del messaggio
-        $invia = $mailer->send();
-        if ($invia) {
-            Notifica::accoda("Controlla la tua casella di posta. Ti abbiamo inviato le istruzioni per recuperare la password del tuo account", Notifica::TIPO_SUCCESSO);
+            $mailer->Body = $strbody; //corpo del messaggio
+            $invia = $mailer->send();
+            if ($invia) {
+                Notifica::accoda("Controlla la tua casella di posta. Ti abbiamo inviato le istruzioni per recuperare la password del tuo account", Notifica::TIPO_SUCCESSO);
+            } else {
+                Notifica::accoda("Errore nell'invio del messaggio", Notifica::TIPO_ERRORE);
+            }
         } else {
-            Notifica::accoda("Errore nell'invio del messaggio", Notifica::TIPO_ERRORE);
+            Notifica::accoda("Ci sono stati problemi con la generazione del codice di recupero", Notifica::TIPO_ERRORE);
+            return false;
         }
     }
 
