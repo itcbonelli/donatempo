@@ -3,6 +3,8 @@
 namespace itcbonelli\donatempo\tabelle;
 
 use Exception;
+use itcbonelli\donatempo\AiutoConvalida;
+use itcbonelli\donatempo\Notifica;
 
 class Esercente
 {
@@ -15,7 +17,7 @@ class Esercente
     public ?string $cap;
     public ?string $descrizione;
     public ?string $logo_url;
-    public ?bool $attivo = true;
+    public bool $attivo = true;
 
     public function carica($id_esercente): bool
     {
@@ -32,7 +34,18 @@ class Esercente
         throw new Exception("Non implementato");
     }
 
-    public function convalida(): bool {
-        throw new Exception("Non implementato");
+    /**
+     * @author Lucia Tosello
+     */
+    public function convalida(): bool
+    {
+        $ris=true;
+    
+        if (AiutoConvalida::LunghezzaTesto($this->nome, "Il nome dell'esercizio deve essere di lunghezza compresa tra 1 e 50", 1, 50)) {
+            Notifica::accoda("Inserire nome", Notifica::TIPO_ERRORE);
+            $ris=false;
+        }
+
+        return $ris;
     }
 }

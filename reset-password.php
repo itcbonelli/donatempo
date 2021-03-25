@@ -4,7 +4,7 @@ require_once __DIR__ . '/include/main.php';
 <?php ob_start(); ?>
 
 <div class="container">
-    <h1>Accesso</h1>
+    <h1>Imposta una nuova password</h1>
 
     <form action="" method="post">
         
