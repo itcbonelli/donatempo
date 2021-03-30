@@ -99,7 +99,7 @@ class Disponibilita
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
 
-        if ( $esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+        if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
             $this->id_disponibilita = $riga['id_disponibilita'];
             $this->id_partecipazione = $riga['id_partecipazione'];
             $this->data_disp = $riga['data_disp'];
