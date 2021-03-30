@@ -14,14 +14,28 @@ if (isset($_GET['sigla'])) {
     $provincia->carica($sigla);
 }
 
-if($_POST) {
-    $provincia->sigla = $_POST['sigla'];
-    $provincia->denominazione = $_POST['denominazione'];
-    $provincia->regione = $_POST['regione'];
-    if($provincia->salva()) {
-        Notifica::accoda("Provincia salvata correttamente", Notifica::TIPO_SUCCESSO);
-    } else {
-        Notifica::accoda("Errore durante il salvataggio", Notifica::TIPO_ERRORE);
+if ($_POST) {
+    $azione = $_POST['azione'];
+
+    if ($azione == 'salva') {
+
+        $provincia->sigla = $_POST['sigla'];
+        $provincia->denominazione = $_POST['denominazione'];
+        $provincia->regione = $_POST['regione'];
+        if ($provincia->salva()) {
+            Notifica::accoda("Provincia salvata correttamente", Notifica::TIPO_SUCCESSO);
+        } else {
+            Notifica::accoda("Errore durante il salvataggio", Notifica::TIPO_ERRORE);
+        }
+    } else if($azione=='elimina') {
+        $eli=$provincia->elimina();
+        if($eli) {
+            Notifica::accoda("Provincia eliminata correttamente", Notifica::TIPO_SUCCESSO);
+        } else {
+            Notifica::accoda("Errore durante l'eliminazione", Notifica::TIPO_ERRORE);
+        }
+        
+        header("location: province.php");
     }
 }
 
@@ -48,7 +62,8 @@ ob_start();
         <input type="text" name="regione" id="regione" maxlength="50" value="<?php echo $provincia->regione; ?>" class="form-control" />
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Salva</button>
+        <button type="submit" name="azione" value="salva" class="btn btn-primary">Salva</button>
+        <button type="submit" name="azione" value="elimina" class="btn btn-danger" onclick="return confirm('Confermare eliminazione della provincia selezionata?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Elimina</button>
     </div>
 </form>
 <?php

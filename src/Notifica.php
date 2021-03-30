@@ -24,6 +24,7 @@ class Notifica
     {
         $notifica=new Notifica($testo, $tipo);
         self::$notifiche[] = $notifica;
+        $_SESSION['notifiche'] = serialize(self::$notifiche);
         return $notifica;
     }
 
@@ -32,6 +33,13 @@ class Notifica
      */
     public static function mostra_notifiche()
     {
+        //se avevo delle precedenti notifiche "in canna", le prelevo e le elimino
+        if(isset($_SESSION['notifiche'])) {
+            $notifiche_precedenti=unserialize($_SESSION['notifiche']);
+            array_merge(self::$notifiche, $notifiche_precedenti);
+            unset($_SESSION['notifiche']);
+        }
+
         foreach (self::$notifiche as $messaggio) {
             printf("<div class='alert alert-%s'>%s</div>", htmlentities($messaggio->tipo), htmlentities($messaggio->testo));
         }

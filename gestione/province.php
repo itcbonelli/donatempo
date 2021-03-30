@@ -1,5 +1,6 @@
 <?php
 
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Provincia;
 
 require_once __DIR__ . '/../include/main.php';
@@ -12,6 +13,12 @@ ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 <h1>Elenco province</h1>
+
+<?php Notifica::mostra_notifiche(); ?>
+
+<p>
+    <a href="provincia-edit.php" class="btn btn-success"> <i class="fa fa-plus" aria-hidden="true"></i> Crea una provincia</a>
+</p>
 
 <table id="tabella_province" class="table table-bordered table-striped table-hover">
     <thead>

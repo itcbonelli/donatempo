@@ -138,6 +138,11 @@ class Provincia
      */
     public function elimina()
     {
+        global $dbconn;
+		$query = "DELETE FROM province WHERE sigla='{$this->sigla}'";
+		$comando = $dbconn->prepare($query);
+		$esegui = $comando->execute();
+		return $esegui==true && $comando->rowCount() == 1;
     }
 
     /**
