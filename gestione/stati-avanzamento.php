@@ -4,13 +4,13 @@ use itcbonelli\donatempo\tabelle\StatoAvanzamento;
 
 $titolo_pagina = "Stati di avanzamento richiesta";
 $link_attivo = 'stati-avanzamento';
-$stati = StatoAvanzamento::elencoStatiAvanzamento();
+$stati = StatoAvanzamento::ElencoStatiAvanzamento();
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 <h1>Elenco stati di avanzamento</h1>
 
-<table class="table table-bordered table-striped table-hover table-sm ">
+<table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>Codice</th>

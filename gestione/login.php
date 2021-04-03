@@ -37,7 +37,7 @@ if ($_POST) {
 <body>
 
     <div class="box-login">
-        <?php Notifica::mostra_notifiche(); ?>
+        <?php Notifica::MostraNotifiche(); ?>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Nome utente</label>

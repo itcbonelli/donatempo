@@ -1,8 +1,9 @@
 var classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente =
 [
-    [ "carica", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#af788ec01f1ae9ba4a3ea0c021bd0c34b", null ],
+    [ "carica", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a9c53ac18bfbdf2aac6ad012af1cec7a9", null ],
     [ "convalida", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a94f3eb9df600be955d56d322d1ea780b", null ],
     [ "elimina", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#adf7a5acaeb1ded69457d0dcf90a4993e", null ],
+    [ "riempiCampi", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a7e294534ef973bdd74b1b8143a1c4b1d", null ],
     [ "salva", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#ae47361fe0be4b8bd0f1a2f152ae37173", null ],
     [ "$attivo", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a4e8f3342b8580500096f72f1a1fe53fb", null ],
     [ "$cap", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#ac2ff48b59916aa978b27ef80a208cc7a", null ],

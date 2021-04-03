@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['url_152',['Url',['../classitcbonelli_1_1donatempo_1_1_aiuto_convalida.html#ad79535b9c24e41ba4fd5a23c02480128',1,'itcbonelli::donatempo::AiutoConvalida']]],
-  ['utente_153',['Utente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html',1,'itcbonelli::donatempo::tabelle']]],
-  ['utente_2ephp_154',['Utente.php',['../_utente_8php.html',1,'']]]
+  ['tipo_5favvertenza_191',['TIPO_AVVERTENZA',['../classitcbonelli_1_1donatempo_1_1_notifica.html#ad93ed8c124a19a68b9d66cc5566c421e',1,'itcbonelli::donatempo::Notifica']]],
+  ['tipo_5ferrore_192',['TIPO_ERRORE',['../classitcbonelli_1_1donatempo_1_1_notifica.html#a5d0391b2f59b22dbcc207328ab62319b',1,'itcbonelli::donatempo::Notifica']]],
+  ['tipo_5finformazione_193',['TIPO_INFORMAZIONE',['../classitcbonelli_1_1donatempo_1_1_notifica.html#a6654a7adb8c7e638d3e2734719f12224',1,'itcbonelli::donatempo::Notifica']]],
+  ['tipo_5fsuccesso_194',['TIPO_SUCCESSO',['../classitcbonelli_1_1donatempo_1_1_notifica.html#a3fd467fb541b79de7d51aa04810cfc51',1,'itcbonelli::donatempo::Notifica']]]
 ];

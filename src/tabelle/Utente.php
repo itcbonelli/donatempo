@@ -3,6 +3,7 @@
 namespace itcbonelli\donatempo\tabelle;
 
 use itcbonelli\donatempo\AiutoConvalida;
+use itcbonelli\donatempo\filtri\FiltroUtenti;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -15,32 +16,32 @@ class Utente
     /**
      * Identificativo
      */
-    public int $id_utente;
+    public ?int $id_utente = null;
 
     /**
      * Nome utente
      */
-    public $username;
+    public string $username = "";
 
     /**
-     * Password
+     * Password da impostare (in chiaro)
      */
-    public string $password;
+    public string $password = "";
 
     /**
      * Data e ora di creazione dell'utente
      */
-    public \DateTime $data_creazione;
+    public ?DateTime $data_creazione = null;
 
     /**
      * Data e ora dell'ultimo accesso
      */
-    public \DateTime $ultimo_accesso;
+    public ?DateTime $ultimo_accesso = null;
 
     /**
      * Indirizzo e-mail
      */
-    public string $email;
+    public string $email = "";
 
     /**
      * Attivo sì/no
@@ -55,12 +56,12 @@ class Utente
     /**
      * Data di eliminazione del profilo
      */
-    public int $data_eliminazione;
+    public ?DateTime $data_eliminazione = null;
 
     /**
      * Numero di telefono
      */
-    public string $telefono;
+    public string $telefono = "";
 
     /**
      * Volontario sì/no
@@ -70,12 +71,12 @@ class Utente
     /**
      * Amministratore sì/no
      */
-    public bool $amministratore;
+    public bool $amministratore = false;
 
     /**
      * Codice di recupero della mail
      */
-    public string $codice_recupero;
+    public string $codice_recupero = "";
 
     /**
      * Salva il record nel database
@@ -84,17 +85,14 @@ class Utente
      */
     public function salva()
     {
-        $errori = $this->convalida();
-        //se sono presenti errori di convalida
-        if (count($errori) > 0) {
-            //esco dalla funzione
+        if (!$this->convalida()) {
             return false;
         }
 
         global $dbconn;
         $id_utente = $this->id_utente;
         $username = addslashes($this->username);
-        $password = addslashes($this->password);
+        $password = $this->password;
         $data_creazione = $this->data_creazione;
         $ultimo_accesso = $this->ultimo_accesso;
         $email = addslashes($this->email);
@@ -105,17 +103,28 @@ class Utente
         $volontario = intval($this->volontario);
         $amministratore = intval($this->amministratore);
 
-        $query = "REPLACE INTO utenti(id_utente, username, password, data_creazione, ultimo_accesso, email, attivo, eliminato, data_eliminazione, telefono
-		volontario, amministratore)
-		VALUES ('$id_utente', '$username', '$password', '$data_creazione', '$ultimo_accesso', '$email', '$attivo', '$eliminato', '$data_eliminazione', '$telefono', '$volontario', $amministratore)";
-
-        $comando = $dbconn->prepare($query);
-        $esegui = $comando->execute();
-        //rowCount()==1 ci dice il numero di righe che sono state coinvolte nell'operazione
-        if ($esegui == true && $comando->rowCount() == 1) {
-            return true;
+        if (empty($this->id_utente)) {
+            $query = "INSERT INTO utenti(username, `password`, data_creazione, email, attivo, telefono, volontario, amministratore)
+            VALUES ('$username', '$password', '$data_creazione', '$email', $attivo, '$telefono', '$volontario', $amministratore)";
+            $comando = $dbconn->prepare($query);
+            $esegui = $comando->execute();
+            //rowCount()==1 ci dice il numero di righe che sono state coinvolte nell'operazione
+            if ($esegui == true && $comando->rowCount() == 1) {
+                $this->id_utente = $dbconn->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            $query = "UPDATE utenti SET 
+                username='$username',
+                `password`='$password',
+                email='$email',
+                attivo=$attivo,
+                telefono='$telefono',
+                volontario=$volontario,
+                amministratore=$amministratore
+            WHERE id_utente=$id_utente";
         }
     }
 
@@ -128,23 +137,11 @@ class Utente
     public function carica($id_utente)
     {
         global $dbconn;
-        $query = "SELECT * FROM utenti WHERE id_utente='$id_utente";
+        $query = "SELECT * FROM utenti WHERE id_utente=$id_utente";
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
         if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
-            $this->id_utente = $riga['id_utente'];
-            $this->username = $riga['username'];
-            $this->password = $riga['password'];
-            $this->data_creazione = $riga['data_creazione'];
-            $this->ultimo_accesso = $riga['ultimo_accesso'];
-            $this->email = $riga['email'];
-            $this->attivo = $riga['attivo'];
-            $this->eliminato = $riga['eliminato'];
-            $this->data_eliminazione = $riga['data_eliminazione'];
-            $this->telefono = $riga['telefono'];
-            $this->volontario = $riga['volontario'];
-            $this->amministratore = $riga['amministratore'];
-
+            $this->riempiCampi($riga);
             return true;
         } else {
             return false;
@@ -184,9 +181,10 @@ class Utente
     /**
      * Disconnette l'utente dal sito
      */
-    public static function Logout()
+    public static function Logout(): bool
     {
         session_destroy();
+        return true;
     }
 
     /**
@@ -195,7 +193,7 @@ class Utente
      * @param int $id_utente
      * @return bool vero o falso
      */
-    public static function esisteId($id_utente)
+    public static function esisteId($id_utente): bool
     {
         global $dbconn;
         $query = "SELECT id_utente FROM utenti WHERE id_utente='{$id_utente}'";
@@ -211,7 +209,7 @@ class Utente
      * @param int $username
      * @return bool vero o falso
      */
-    public static function esisteUsername($username)
+    public static function esisteUsername($username): bool
     {
         global $dbconn;
         $username = addslashes($username);
@@ -251,10 +249,10 @@ class Utente
     {
         $valido = true;
 
-        if (empty($this->id_utente)) {
+        /*if (empty($this->id_utente)) {
             Notifica::accoda("Inserire identificativo utente", Notifica::TIPO_ERRORE);
             $valido = false;
-        }
+        }*/
 
         $valido = $valido && AiutoConvalida::LunghezzaTesto($this->username, "La lunghezza del nome utente deve essere compresa tra 1 e 45 caratteri", 1, 45);
         $valido = $valido && AiutoConvalida::LunghezzaTesto($this->email, "La lunghezza dell'indirizzo e-mail deve essere compresa tra 1 e 100 caratteri", 1, 100);
@@ -337,5 +335,80 @@ class Utente
         $pro = new Profilo();
         $pro->carica($this->id_utente);
         return $pro;
+    }
+
+    /**
+     * Restituisce l'elenco degli utenti
+     * @param FiltroUtenti $filtro parametri per filtrare i risultati
+     * @return Utente[]
+     */
+    public static function ElencoUtenti(FiltroUtenti $filtro)
+    {
+
+        global $dbconn;
+        $dataset = [];
+
+        $query = " SELECT * FROM utenti WHERE 1=1";
+
+        if (!empty($filtro->cerca)) {
+            $query .= " AND (username like '%{$filtro->cerca}%' OR  email LIKE '%{$filtro->cerca}%')";
+        }
+        if ($filtro->attivi != null) {
+            $query .= " AND attivo= " . $filtro->attivi ? 1 : 0;
+        }
+
+        $query .= " ORDER BY `{$filtro->orderby}` ";
+        $query .= " LIMIT {$filtro->offset}, {$filtro->limite} ";
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+        if ($esegui) {
+            //print($query);
+            while ($riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $utente = new Utente();
+                $utente->riempiCampi($riga);
+                $dataset[] = $utente;
+            }
+        }
+
+        return $dataset;
+    }
+
+    /**
+     * Carica i dati da un array
+     * @param Array $record record proveniente dal database
+     */
+    public function riempiCampi(array $record)
+    {
+        $this->id_utente = intval($record['id_utente']);
+        $this->username = strval($record['username']);
+        $this->password = strval($record['password']);
+        $this->data_creazione = new DateTime($record['data_creazione']);
+        $this->ultimo_accesso = new DateTime($record['ultimo_accesso']);
+        $this->email = strval($record['email']);
+        $this->attivo = boolval($record['attivo']);
+        $this->eliminato = boolval($record['eliminato']);
+        $this->data_eliminazione = new DateTime($record['data_eliminazione']);
+        $this->telefono = strval($record['telefono']);
+        $this->volontario = boolval($record['volontario']);
+        $this->amministratore = boolval($record['amministratore']);
+    }
+
+    /**
+     * Conta i record presenti nel database
+     */
+    public static function ContaUtenti(FiltroUtenti $filtro)
+    {
+        global $dbconn;
+        $query = "SELECT COUNT(*) FROM utenti WHERE 1=1 ";
+        if (!empty($filtro->cerca)) {
+            $query .= " AND (username like '%{$filtro->cerca}%' OR  email LIKE '%{$filtro->cerca}%')";
+        }
+        if ($filtro->attivi != null) {
+            $query .= " AND attivo= " . $filtro->attivi ? 1 : 0;
+        }
+        $comando = $dbconn->prepare($query);
+        $esegui = $comando->execute();
+
+        return intval($comando->fetchColumn());
     }
 }

@@ -31,7 +31,7 @@ class Notifica
     /**
      * Mostra le notifiche accodate all'utente e ripulisce la coda
      */
-    public static function mostra_notifiche()
+    public static function MostraNotifiche()
     {
         //se avevo delle precedenti notifiche "in canna", le prelevo e le elimino
         if(isset($_SESSION['notifiche'])) {

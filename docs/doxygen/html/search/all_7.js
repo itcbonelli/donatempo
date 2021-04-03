@@ -1,7 +1,23 @@
 var searchData=
 [
-  ['donatempo_111',['donatempo',['../namespaceitcbonelli_1_1donatempo.html',1,'itcbonelli']]],
-  ['invia_112',['invia',['../class_messaggio_mail.html#a3d45df9d4f4b290c46f468c2fa3d6f4d',1,'MessaggioMail']]],
-  ['inviamailrecuperopassword_113',['inviaMailRecuperoPassword',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a03c0def8049aca6858c0b9efdc039c1a',1,'itcbonelli::donatempo::tabelle::Utente']]],
-  ['tabelle_114',['tabelle',['../namespaceitcbonelli_1_1donatempo_1_1tabelle.html',1,'itcbonelli::donatempo']]]
+  ['getassociazione_126',['getAssociazione',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a1f926c9d120942bcd6fffd7205fa5c20',1,'itcbonelli::donatempo::tabelle::PartecipazioneAssociazione']]],
+  ['getcomuni_127',['getComuni',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#ad9c98ce228e6c5a8b504f6b6f7a36eca',1,'itcbonelli::donatempo::tabelle::Zona']]],
+  ['getconversazioneperrichiesta_128',['getConversazionePerRichiesta',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a6a93a836b749b5514cb146855a7a666c',1,'itcbonelli::donatempo::tabelle::Messaggio']]],
+  ['getdestinatario_129',['getDestinatario',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a948414ced8a3798eb921af1d7e926415',1,'itcbonelli::donatempo::tabelle::Messaggio']]],
+  ['getelencocomuni_130',['getElencoComuni',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#af0dd0575af5589bc7a165e26a996fd49',1,'itcbonelli::donatempo::tabelle::Comune']]],
+  ['getelencosettori_131',['getElencoSettori',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_settore.html#a94fdb59309206c1297436ee3059613bb',1,'itcbonelli::donatempo::tabelle::Settore']]],
+  ['getmioutente_132',['getMioUtente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#ad73e689a969d2e8a5ea57e498fc6d746',1,'itcbonelli::donatempo::tabelle::Utente']]],
+  ['getmittente_133',['getMittente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a58dee39be895b9bccfc1b75a74cf1abb',1,'itcbonelli::donatempo::tabelle::Messaggio']]],
+  ['getnumeropagine_134',['getNumeroPagine',['../classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_base.html#a7ced2d7cb3d59bd7bb4d5de869b3ef18',1,'itcbonelli::donatempo::filtri::FiltroBase']]],
+  ['getpaginacorrente_135',['getPaginaCorrente',['../classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_base.html#ad56cb9adddc74b8dff29e2ecb6532271',1,'itcbonelli::donatempo::filtri::FiltroBase']]],
+  ['getpartecipantiassociazione_136',['getPartecipantiAssociazione',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#aa3ba3ff047b8f4dae5c70e09082b4db2',1,'itcbonelli::donatempo::tabelle::PartecipazioneAssociazione']]],
+  ['getpartecipazione_137',['getPartecipazione',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html#a87b663765e306e46a3f06fe3397dfea7',1,'itcbonelli\donatempo\tabelle\AllocazioneVolontario\getPartecipazione()'],['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a87b663765e306e46a3f06fe3397dfea7',1,'itcbonelli\donatempo\tabelle\Disponibilita\getPartecipazione()']]],
+  ['getpartecipazioniutente_138',['getPartecipazioniUtente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#abb7c717e5ae39ccd9fcb131823a30f98',1,'itcbonelli::donatempo::tabelle::PartecipazioneAssociazione']]],
+  ['getprofilo_139',['getProfilo',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a2ed7da0a4d5abb80fa7291dc4c3c93cb',1,'itcbonelli::donatempo::tabelle::Utente']]],
+  ['getrichiedente_140',['getRichiedente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#abac1ff538e54bb890424264ed23573ed',1,'itcbonelli::donatempo::tabelle::Richiesta']]],
+  ['getrichiesta_141',['getRichiesta',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html#a8697779a07070de8fdbae762d0ae92b9',1,'itcbonelli::donatempo::tabelle::AllocazioneVolontario']]],
+  ['getservizio_142',['getServizio',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a218ec340bdf31db3e235e9c3d3374cf8',1,'itcbonelli::donatempo::tabelle::Richiesta']]],
+  ['getstatoavanzamento_143',['getStatoAvanzamento',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a030d368b7f34e1952ced856ee481ccbc',1,'itcbonelli::donatempo::tabelle::Richiesta']]],
+  ['getutente_144',['getUtente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#aacb4498b2021680e8fdc60540b9343e6',1,'itcbonelli\donatempo\tabelle\Disponibilita\getUtente()'],['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#aacb4498b2021680e8fdc60540b9343e6',1,'itcbonelli\donatempo\tabelle\PartecipazioneAssociazione\getUtente()'],['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#aacb4498b2021680e8fdc60540b9343e6',1,'itcbonelli\donatempo\tabelle\Profilo\getUtente()']]],
+  ['getvolontario_145',['getVolontario',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#ae5dc66ec572371da2634d5db65d9edc9',1,'itcbonelli::donatempo::tabelle::Disponibilita']]]
 ];

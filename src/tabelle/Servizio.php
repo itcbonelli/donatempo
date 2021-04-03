@@ -82,10 +82,34 @@ class Servizio
 
     /**
      * Esegue la convalida dei dati
+     * @author Oberto Azzurra
      * @return bool esito operazione
      */
     public function convalida()
     {
+        $dati_validi = true;
+
+        if (empty($this->id)) {
+            Notifica::accoda("Inserire l'id del servizio", Notifica::TIPO_ERRORE);
+            $dati_validi = false;
+        }
+        if (strlen($this->nome)) {
+            Notifica::accoda("Inserire il nome", Notifica::TIPO_ERRORE);
+            $dati_validi = false;
+        }
+        /*if (strlen($this->descrizione)) {
+            Notifica::accoda("Impostare una descrizione", Notifica::TIPO_ERRORE);
+        }
+        if (empty($this->id_tipo)) {
+            Notifica::accoda("Inserire il tipo di servizio", Notifica::TIPO_AVVERTENZA);
+            $dati_validi = false;
+        }
+        if (empty($this->durata)) {
+            Notifica::accoda("Ricordati di mettere la durata", Notifica::TIPO_ERRORE);
+        }
+        */
+
+        return $dati_validi;
     }
 
     /**

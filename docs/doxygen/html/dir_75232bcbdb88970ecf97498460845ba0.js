@@ -1,5 +1,8 @@
 var dir_75232bcbdb88970ecf97498460845ba0 =
 [
+    [ "AllocazioneVolontario.php", "_allocazione_volontario_8php.html", [
+      [ "AllocazioneVolontario", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario" ]
+    ] ],
     [ "Associazione.php", "_associazione_8php.html", [
       [ "Associazione", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione" ]
     ] ],
@@ -33,7 +36,13 @@ var dir_75232bcbdb88970ecf97498460845ba0 =
     [ "Settore.php", "_settore_8php.html", [
       [ "Settore", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_settore.html", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_settore" ]
     ] ],
+    [ "StatoAvanzamento.php", "_stato_avanzamento_8php.html", [
+      [ "StatoAvanzamento", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_stato_avanzamento.html", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_stato_avanzamento" ]
+    ] ],
     [ "Utente.php", "_utente_8php.html", [
       [ "Utente", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente" ]
+    ] ],
+    [ "Zona.php", "_zona_8php.html", [
+      [ "Zona", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona" ]
     ] ]
 ];

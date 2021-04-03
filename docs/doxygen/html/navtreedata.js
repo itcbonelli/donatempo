@@ -26,14 +26,16 @@ var NAVTREE =
 [
   [ "DONATEMPO", "index.html", [
     [ "Lista degli elementi deprecati", "deprecated.html", null ],
+    [ "Elenco delle cose da fare", "todo.html", null ],
     [ "Namespace", "namespaces.html", [
       [ "Lista dei namespace", "namespaces.html", "namespaces_dup" ]
     ] ],
     [ "Strutture dati", "annotated.html", [
       [ "Strutture dati", "annotated.html", "annotated_dup" ],
       [ "Indice delle strutture dati", "classes.html", null ],
+      [ "Gerarchia delle classi", "hierarchy.html", "hierarchy" ],
       [ "Campi dei dati", "functions.html", [
-        [ "Tutto", "functions.html", null ],
+        [ "Tutto", "functions.html", "functions_dup" ],
         [ "Funzioni", "functions_func.html", null ],
         [ "Variabili", "functions_vars.html", null ]
       ] ]
@@ -46,7 +48,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-""
+"_aiuto_convalida_8php.html",
+"dir_facbde025159646384e8cb31658646ec.html"
 ];
 
 var SYNCONMSG = 'cliccare per disabilitare la sincronizzazione del pannello';

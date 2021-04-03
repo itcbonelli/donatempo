@@ -117,6 +117,7 @@ class Associazione
 
     /**
      * Elimina il record
+     * @author Oberto Azzurra
      * @return bool esito dell'operazione
      */
     public function elimina()
@@ -125,6 +126,7 @@ class Associazione
 
     /**
      * Convalida i dati dell'associazione per il salvataggio
+     * @author Olla Simone
      * @return boolean esito della convalida
      */
     public function convalida()

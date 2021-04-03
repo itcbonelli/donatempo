@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5643e25d530f9830dc382fa66504c5e77ccef7ae',
+    'reference' => '4f70d44c337f0cad161cb1764825704b4f8b25d1',
     'name' => 'itcbonelli/attivatempo',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5643e25d530f9830dc382fa66504c5e77ccef7ae',
+      'reference' => '4f70d44c337f0cad161cb1764825704b4f8b25d1',
     ),
     'phpmailer/phpmailer' => 
     array (

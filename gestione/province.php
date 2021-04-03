@@ -14,13 +14,13 @@ ob_start();
 ?>
 <h1>Elenco province</h1>
 
-<?php Notifica::mostra_notifiche(); ?>
+<?php Notifica::MostraNotifiche(); ?>
 
 <p>
     <a href="provincia-edit.php" class="btn btn-success"> <i class="fa fa-plus" aria-hidden="true"></i> Crea una provincia</a>
 </p>
 
-<table id="tabella_province" class="table table-bordered table-striped table-hover">
+<table id="tabella_province" class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
             <th>sigla</th>

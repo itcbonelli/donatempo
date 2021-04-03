@@ -24,7 +24,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo donatempo-48px.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo donatempo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">DONATEMPO
    &#160;<span id="projectnumber">2021.03</span>
@@ -102,6 +102,10 @@ Membri pubblici</h2></td></tr>
 <tr class="separator:adf7a5acaeb1ded69457d0dcf90a4993e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d741f829f5576c308449f644318b1bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a0d741f829f5576c308449f644318b1bf">carica</a> ($id)</td></tr>
 <tr class="separator:a0d741f829f5576c308449f644318b1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58dee39be895b9bccfc1b75a74cf1abb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a58dee39be895b9bccfc1b75a74cf1abb">getMittente</a> ()</td></tr>
+<tr class="separator:a58dee39be895b9bccfc1b75a74cf1abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a948414ced8a3798eb921af1d7e926415"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a948414ced8a3798eb921af1d7e926415">getDestinatario</a> ()</td></tr>
+<tr class="separator:a948414ced8a3798eb921af1d7e926415"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Membri pubblici statici</h2></td></tr>
@@ -141,7 +145,8 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Carica i dati del record dal database </p><dl class="section return"><dt>Restituisce</dt><dd>bool esito dell'operazione </dd></dl>
+<p>Carica i dati del record dal database </p><dl class="section author"><dt>Autore</dt><dd>Francesco Miglietti </dd></dl>
+<dl class="section return"><dt>Restituisce</dt><dd>bool esito dell'operazione </dd></dl>
 
 </div>
 </div>
@@ -177,7 +182,8 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Elimina il record </p><dl class="section return"><dt>Restituisce</dt><dd>bool esito dell'operazione </dd></dl>
+<p>Elimina il record </p><dl class="section author"><dt>Autore</dt><dd>Giulia Chesta </dd></dl>
+<dl class="section return"><dt>Restituisce</dt><dd>bool esito dell'operazione </dd></dl>
 
 </div>
 </div>
@@ -215,6 +221,42 @@ Campi</h2></td></tr>
 
 </div>
 </div>
+<a id="a948414ced8a3798eb921af1d7e926415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a948414ced8a3798eb921af1d7e926415">&#9670;&nbsp;</a></span>getDestinatario()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getDestinatario </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ottiene l'utente associato al destinatario </p><dl class="section return"><dt>Restituisce</dt><dd><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html">Utente</a> </dd></dl>
+
+</div>
+</div>
+<a id="a58dee39be895b9bccfc1b75a74cf1abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58dee39be895b9bccfc1b75a74cf1abb">&#9670;&nbsp;</a></span>getMittente()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getMittente </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ottiene l'utente associato al mittente </p><dl class="section return"><dt>Restituisce</dt><dd><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html">Utente</a> </dd></dl>
+
+</div>
+</div>
 <a id="ae47361fe0be4b8bd0f1a2f152ae37173"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae47361fe0be4b8bd0f1a2f152ae37173">&#9670;&nbsp;</a></span>salva()</h2>
 
@@ -229,7 +271,8 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Salva le modifiche apportate al record </p><dl class="section return"><dt>Restituisce</dt><dd>bool esito dell'operazione </dd></dl>
+<p>Salva le modifiche apportate al record </p><dl class="section author"><dt>Autore</dt><dd>Andrea Lops </dd></dl>
+<dl class="section return"><dt>Restituisce</dt><dd>bool esito dell'operazione </dd></dl>
 
 </div>
 </div>
@@ -325,7 +368,7 @@ Campi</h2></td></tr>
 </div>
 </div>
 <hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
-<li>src/tabelle/<a class="el" href="_messaggio_8php.html">Messaggio.php</a></li>
+<li>E:/xampp/htdocs/scuola/as2020-21/5A_SIA/donatempo/src/tabelle/<a class="el" href="_messaggio_8php.html">Messaggio.php</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

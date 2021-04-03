@@ -1,5 +1,25 @@
 <?php
+
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
+use itcbonelli\donatempo\tabelle\Utente;
+
 require_once __DIR__ . '/include/main.php';
+
+if ($_POST) {
+    $username = AiutoInput::leggiStringa('username');
+    $password = AiutoInput::leggiStringa('password');
+
+    if (!empty($username) && !empty($password)) {
+        $login = Utente::login($username, $password);
+        if ($login) {
+            header('location:area-riservata.php');
+        }
+    }
+}
+
+
+
 ?>
 <?php ob_start(); ?>
 
@@ -17,9 +37,9 @@ require_once __DIR__ . '/include/main.php';
         </div>
         <button type="submit" class="btn btn-primary">Accedi</button>
     </form>
-
-    <ul>
-        <li><a href="recupero-password.php">Hai dimenticato i dati di accesso?</a></li>
+    <ul class="nav flex-column">
+        <li class="nav-item"><a href="recupero-password.php" class="nav-link">Hai dimenticato i dati di accesso?</a></li>
+        <li class="nav-item"><a href="registrazione.php" class="nav-link">Non hai ancora un account?</a></li>
     </ul>
 </div>
 

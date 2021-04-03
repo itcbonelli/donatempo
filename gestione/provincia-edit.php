@@ -47,7 +47,7 @@ ob_start();
 <form action="" method="post">
     <h1>Inserimento/modifica provincia</h1>
 
-    <?php Notifica::mostra_notifiche(); ?>
+    <?php Notifica::MostraNotifiche(); ?>
 
     <div class="form-group">
         <label for="sigla">Sigla provincia</label>

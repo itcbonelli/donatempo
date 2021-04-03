@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mostra_5fnotifiche_226',['mostra_notifiche',['../classitcbonelli_1_1donatempo_1_1_notifica.html#a13cb6cfda74ae03ef5197b4f671eb313',1,'itcbonelli::donatempo::Notifica']]]
+  ['mostranotifiche_301',['MostraNotifiche',['../classitcbonelli_1_1donatempo_1_1_notifica.html#ab1e7820b901eaa2b01a361081797ef14',1,'itcbonelli::donatempo::Notifica']]]
 ];

@@ -23,7 +23,7 @@ class StatoAvanzamento {
     /**
      * @return StatoAvanzamento[]
      */
-    public static function elencoStatiAvanzamento() {
+    public static function ElencoStatiAvanzamento() {
         global $dbconn;
         $dataset=[];
         $query="SELECT * FROM stato_richiesta ORDER BY ordine_vis";
@@ -39,5 +39,13 @@ class StatoAvanzamento {
             }
         }
         return $dataset;
+    }
+
+    public function carica() {
+
+    }
+
+    public function salva() {
+        
     }
 }

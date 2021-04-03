@@ -14,6 +14,8 @@ ob_start();
         <button type="button" class="btn btn-outline-danger" name="azione" value="annulla">Annulla</button>
     </p>
 
+    <fieldset>
+
     <div class="form-group">
       <label for="username">Nome utente</label>
       <input type="text" class="form-control" name="username" id="username" required />
@@ -29,6 +31,7 @@ ob_start();
       <input type="email" class="form-control" name="email" id="email" required />
     </div>
 
+    </fieldset>
 
     <p>
         <button type="button" class="btn btn-primary" name="azione" value="conferma">Conferma</button>

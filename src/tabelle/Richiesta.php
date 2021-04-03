@@ -1,6 +1,7 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -70,6 +71,62 @@ class Richiesta
      * @var int
      */
     public $cod_stato;
+
+    public function carica($id_richiesta)
+    {
+    }
+
+    public function salva()
+    {
+    }
+
+    public function elimina()
+    {
+    }
+
+    public function convalida(): bool
+    {
+        $valido=true;
+
+        return $valido;
+    }
+
+    /**
+     * @return Richiesta[]
+     */
+    public static function ElencoRichieste(): array {
+        $dataset=[];
+        
+        return $dataset;
+    }
+
+    /**
+     * Ottiene i dati del richiedente
+     * @return Utente
+     */
+    public function getRichiedente(): Utente {
+        $richiedente=new Utente();
+        $richiedente->carica($this->richiedente);
+        return $richiedente;
+    }
+
+    /**
+     * Ottiene i dati sul servizio richiesto
+     */
+    public function getServizio(): Servizio {
+        $serv=new Servizio();
+        $serv->carica($this->id_servizio);
+        return $serv;
+    }
+
+    /**
+     * 
+     */
+    public function getStatoAvanzamento() {
+        $s=new StatoAvanzamento();
+        $s->carica($this->cod_stato);
+        return $s;
+    }
 
     /**
      * Costruttore
