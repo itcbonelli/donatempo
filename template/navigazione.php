@@ -20,6 +20,9 @@ $utente = Utente::getMioUtente();
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/ricerca-servizi.php">Servizi</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/gestione/index.php">Gestione</a>
+            </li>
 
         </ul>
         <ul class="navbar-nav ml-auto">

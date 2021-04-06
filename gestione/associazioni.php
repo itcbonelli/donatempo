@@ -1,10 +1,13 @@
 <?php
+require __DIR__ . '/../include/main.php';
 $titolo_pagina = "Elenco associazioni";
 $link_attivo = 'associazioni';
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 <h1>Elenco associazioni</h1>
+
+<p><a href="associazione-edit.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi associazione</a></p>
 
 <table id="tab_associaz" class="table table-bordered table-striped table-hover">
     <thead>

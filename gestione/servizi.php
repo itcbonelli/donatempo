@@ -13,6 +13,8 @@ ob_start();
 ?>
 <h1>Elenco servizi</h1>
 
+<p><a href="servizio-edit.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi servizio</a></p>
+
 <table class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
