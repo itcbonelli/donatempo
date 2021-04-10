@@ -171,8 +171,6 @@ class Comune
         }
         $query .= " ORDER BY denominazione ";
 
-        
-
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
 

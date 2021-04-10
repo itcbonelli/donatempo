@@ -1,9 +1,14 @@
 <?php
-require __DIR__ . '/../include/main.php';
+
+use itcbonelli\donatempo\tabelle\Associazione;
+
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Elenco associazioni";
 $link_attivo = 'associazioni';
+
+$associazioni = Associazione::elencoAssociazioni();
+
 ob_start();
-//la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 <h1>Elenco associazioni</h1>
 
@@ -19,12 +24,14 @@ ob_start();
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td></td>
-            <td>RSSFNC82H16L219B</td>
-            <td></td>
-        </tr>
+        <?php foreach ($associazioni as $associazione) : ?>
+            <tr>
+                <td><?= $associazione->id_associazione; ?></td>
+                <td><?= $associazione->ragsoc; ?></td>
+                <td><?= $associazione->codfis; ?></td>
+                <td><?= $associazione->url_logo; ?></td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
 <?php

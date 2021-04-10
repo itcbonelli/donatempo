@@ -6,7 +6,7 @@ use itcbonelli\donatempo\tabelle\Provincia;
 
 function elencoComuni()
 {
-    $provincia = AiutoInput::leggiStringa('provincia', null);
+    $provincia = AiutoInput::leggiStringa('provincia', '');
     $dataset = Comune::getElencoComuni($provincia);
     //intestazioni della risposta
     header('Cache-Control: max-age=86400');
@@ -27,10 +27,11 @@ function elencoProvince()
 
 function elencoRegioni()
 {
-    $dataset = [];
+    $dataset = Provincia::ElencoRegioni();
     //TODO: scrivere codice che esegue la query e popola l'array DataSet
     header("Content-type: application/json", true);
-    echo json_encode($dataset, JSON_PRETTY_PRINT);
+    
+    echo json_encode(array_column($dataset, 'regione'), JSON_PRETTY_PRINT);
     exit;
 }
 

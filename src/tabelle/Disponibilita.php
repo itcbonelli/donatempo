@@ -118,6 +118,7 @@ class Disponibilita
      */
     public function getPartecipazione()
     {
+        
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace itcbonelli\donatempo\tabelle;
 
 use itcbonelli\donatempo\AiutoConvalida;
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\filtri\FiltroUtenti;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
@@ -160,6 +161,7 @@ class Utente
     public static function login($username, $password)
     {
         global $dbconn;
+        $adb = new AiutoDB($dbconn);
 
         $username = addslashes($username);
         $password = hash('sha256', $password);
@@ -171,6 +173,10 @@ class Utente
         if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['id_utente'] = $riga['id_utente'];
             $_SESSION['username'] = $riga['username'];
+
+            //aggiorno la data ultimo accesso
+            $adb->eseguiComando("UPDATE utenti SET ultimo_accesso=current_timestamp WHERE id_utente=:id_utente", ['id_utente' => $riga['id_utente']]);
+
             return true;
         } else {
             Notifica::accoda("Dati di accesso non validi", Notifica::TIPO_ERRORE);

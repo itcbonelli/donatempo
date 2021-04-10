@@ -40,7 +40,7 @@ class AiutoDB
      * Esegue una query SQL e restituisce il suo dataset
      * @param string $query Query SQL da eseguire
      * @param array $parametri Parametri da utilizzare nella query
-     * @return array dataset restituito dalla query
+     * @return array dataset restituito dalla query sotto forma di array associativo
      */
     public function eseguiQuery(string $query, array $parametri = [])
     {
@@ -89,9 +89,6 @@ class AiutoDB
 
         $campi = "";
         $valori = "";
-
-        $sql = "INSERT INTO `$tabella` ($campi) VALUES ($valori)";
-
         foreach ($record as $c => $v) {
             if (strlen($c) > 0) {
                 $campi .= ", ";
@@ -130,6 +127,8 @@ class AiutoDB
             }
         }
 
+        $sql = "INSERT INTO `$tabella` ($campi) VALUES ($valori)";
+        
         $this->eseguiComando($sql);
 
         if (!empty($cp)) {

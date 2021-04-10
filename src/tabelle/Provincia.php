@@ -2,6 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -143,6 +144,12 @@ class Provincia
 		$comando = $dbconn->prepare($query);
 		$esegui = $comando->execute();
 		return $esegui==true && $comando->rowCount() == 1;
+    }
+
+    public static function ElencoRegioni() {
+        global $dbconn;
+        $adb=new AiutoDB($dbconn);
+        return $adb->eseguiQuery("SELECT DISTINCT regione FROM province ORDER BY regione");
     }
 
     /**

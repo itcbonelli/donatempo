@@ -1,52 +1,64 @@
 <?php
 //carico il file principale
+
+use itcbonelli\donatempo\tabelle\Associazione;
+
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
+
+$associazioni = Associazione::elencoAssociazioni();
 ?>
 <?php ob_start(); ?>
 
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1><i class="fa fa-clock-o" aria-hidden="true"></i> Le mie disponibilità di tempo</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Le mie disponibilità di tempo</h1>
+                
 
-            <form action="" method="get">
 
-            </form>
-
-            <form action="" method="post">
-
-            </form>
-
-            <form action="" method="post">
-                <fieldset class="group-box">
-                    <legend>Aggiungi disponibilità</legend>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="associazione">Associazione</label>
-                            <select name="associazione" class="form-control" id="associazione">
-                                <option value="" selected disabled>Selezionare</option>
-                            </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="" method="post">
+                    <fieldset class="group-box">
+                        <legend>Aggiungi disponibilità</legend>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="associazione">Associazione</label>
+                                <select name="associazione" class="form-control" id="associazione" style="min-width: 320px;">
+                                    <option value="" selected disabled>Selezionare</option>
+                                    <?php foreach ($associazioni as $assoc) : ?>
+                                        <option value="<?= $assoc->id_associazione; ?>"><?= $assoc->ragsoc; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group col" style="min-width: 200px;">
+                                <label for="data_disp">Data</label>
+                                <input type="date" name="data_disp" id="data_disp" class="form-control" />
+                            </div>
+                            <div class="form-group col" style="min-width: 200px;">
+                                <label for="ora_inizio">Ora inizio</label>
+                                <input type="time" name="ora_inizio" id="ora_inizio" class="form-control" />
+                            </div>
+                            <div class="form-group col" style="min-width: 200px;">
+                                <label for="ora_fine">Ora fine</label>
+                                <input type="time" name="ora_fine" id="ora_fine" class="form-control" />
+                            </div>
+                            <div class="form-group col" style="align-self:flex-end">
+                                <button type="submit" class="btn btn-primary">conferma</button>
+                            </div>
                         </div>
-                        <div class="form-group col">
-                            <label for="data_disp">Data</label>
-                            <input type="date" name="data_disp" id="data_disp" class="form-control" />
-                        </div>
-                        <div class="form-group col">
-                            <label for="ora_inizio">Ora inizio</label>
-                            <input type="time" name="ora_inizio" id="ora_inizio" class="form-control" />
-                        </div>
-                        <div class="form-group col">
-                            <label for="ora_fine">Ora fine</label>
-                            <input type="time" name="ora_fine" id="ora_fine" class="form-control" />
-                        </div>
-                        <div class="form-group col" style="align-self:flex-end">
-                            <button type="submit" class="btn btn-primary">conferma</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </div>
