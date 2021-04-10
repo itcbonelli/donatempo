@@ -86,7 +86,7 @@ class Richiesta
 
     public function convalida(): bool
     {
-        $valido=true;
+        $valido = true;
 
         return $valido;
     }
@@ -94,9 +94,10 @@ class Richiesta
     /**
      * @return Richiesta[]
      */
-    public static function ElencoRichieste(): array {
-        $dataset=[];
-        
+    public static function ElencoRichieste(): array
+    {
+        $dataset = [];
+
         return $dataset;
     }
 
@@ -104,8 +105,9 @@ class Richiesta
      * Ottiene i dati del richiedente
      * @return Utente
      */
-    public function getRichiedente(): Utente {
-        $richiedente=new Utente();
+    public function getRichiedente(): Utente
+    {
+        $richiedente = new Utente();
         $richiedente->carica($this->richiedente);
         return $richiedente;
     }
@@ -113,8 +115,9 @@ class Richiesta
     /**
      * Ottiene i dati sul servizio richiesto
      */
-    public function getServizio(): Servizio {
-        $serv=new Servizio();
+    public function getServizio(): Servizio
+    {
+        $serv = new Servizio();
         $serv->carica($this->id_servizio);
         return $serv;
     }
@@ -122,8 +125,9 @@ class Richiesta
     /**
      * 
      */
-    public function getStatoAvanzamento() {
-        $s=new StatoAvanzamento();
+    public function getStatoAvanzamento()
+    {
+        $s = new StatoAvanzamento();
         $s->carica($this->cod_stato);
         return $s;
     }

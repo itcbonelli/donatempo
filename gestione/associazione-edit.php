@@ -2,7 +2,7 @@
 
 use itcbonelli\donatempo\tabelle\Associazione;
 
-require __DIR__ . '/../include/main.php';
+require_once __DIR__ . '/../include/main.php';
 
 $titolo_pagina = "Modifica associazione";
 $link_attivo = 'associazioni';

@@ -1,4 +1,7 @@
 <?php
+
+use itcbonelli\donatempo\tabelle\Utente;
+
 if (!defined('PERCORSO_BASE')) {
     define('PERCORSO_BASE', '.');
 }
@@ -46,10 +49,13 @@ if (!defined('PERCORSO_BASE')) {
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{Utente}</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId" style="right:0; left:auto;">
-                        <a class="dropdown-item" href="#">Il mio profilo</a>
-                        <a class="dropdown-item" href="logout.php">Esci</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <?= Utente::getMioUtente()->username; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropDown">
+                        <a class="dropdown-item" href="../index.php"><i class="fa fa-home" aria-hidden="true"></i> Torna al sito</a>
+                        <a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-times" aria-hidden="true"></i> Esci</a>
                     </div>
                 </li>
             </ul>

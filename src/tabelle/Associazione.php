@@ -2,6 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -122,6 +123,10 @@ class Associazione
      */
     public function elimina()
     {
+        global $dbconn;
+        $db = new AiutoDB($dbconn);
+        $ris = $db->eseguiComando("DELETE FROM associazioni WHERE id_associazione={$this->id_associazione}");
+        return boolval($ris);
     }
 
     /**
@@ -132,7 +137,6 @@ class Associazione
     public function convalida()
     {
         $dati_validi = true;
-
 
         if (empty($this->id_associazione)) {
             Notifica::accoda("Inserire identificativo associazione", Notifica::TIPO_ERRORE);
@@ -253,7 +257,7 @@ class Associazione
         if ($utente->amministratore == true) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -271,7 +275,7 @@ class Associazione
         }
 
         //L'associazione può essere eliminata solo da chi l'ha creata
-        
+
 
         return false;
     }

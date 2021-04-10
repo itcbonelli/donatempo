@@ -196,5 +196,8 @@ class Profilo
      */
     public function getUtente()
     {
+        $utente = new Utente();
+        $utente->carica($this->id_utente);
+        return $utente;
     }
 }

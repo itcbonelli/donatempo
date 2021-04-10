@@ -1,25 +1,55 @@
 .social-icons a {
-    display:inline-block;
-    margin-left: 8px;
-    margin-right: 8px;
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .group-box {
-    border: 1px solid silver;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 24px;
+  border: 1px solid silver;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 24px;
 }
 
 .group-box legend {
-    border: 1px solid silver;
-    padding: 4px 16px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 4px;
-    width: auto;
+  border: 1px solid silver;
+  padding: 4px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  width: auto;
 }
 
 .navbar {
-    background-color: #94d4d9;
+  background-color: #94d4d9;
+}
+
+.traguardi .col {
+  background: #d6f9ff;
+  background: -moz-linear-gradient(45deg, #d6f9ff 0%, #9ee8fa 100%);
+  background: -webkit-linear-gradient(45deg, #d6f9ff 0%, #9ee8fa 100%);
+  background: linear-gradient(45deg, #d6f9ff 0%, #9ee8fa 100%);
+}
+
+.traguardi .col.richieste-soddisfatte {
+  background: #d2ff52;
+  background: -moz-linear-gradient(45deg, #d2ff52 0%, #91e842 100%);
+  background: -webkit-linear-gradient(45deg, #d2ff52 0%, #91e842 100%);
+  background: linear-gradient(45deg, #d2ff52 0%, #91e842 100%);
+}
+
+.traguardi .col.persone-servite {
+  background: #febbbb;
+  background: -moz-linear-gradient(-45deg, #febbbb 0%, #fe9090 45%, #ff5c5c 100%);
+  background: -webkit-linear-gradient(-45deg, #febbbb 0%, #fe9090 45%, #ff5c5c 100%);
+  background: linear-gradient(135deg, #febbbb 0%, #fe9090 45%, #ff5c5c 100%);
+}
+
+.traguardi .col h1 {
+  font-size: 64px;
+}
+
+.section {
+  padding-top: 32px;
+  padding-bottom: 32px;
 }

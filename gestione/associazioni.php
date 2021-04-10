@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../include/main.php';
+require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Elenco associazioni";
 $link_attivo = 'associazioni';
 ob_start();
