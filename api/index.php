@@ -11,6 +11,7 @@ esempio: se richiamo come url index.php/foo/bar, la variabile conterrà /foo/bar
 */
 
 
+
 if (isset($_SERVER['PATH_INFO'])) {
     $pathinfo = $_SERVER['PATH_INFO'];
     $segmenti = explode('/', $pathinfo);

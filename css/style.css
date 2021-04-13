@@ -53,3 +53,33 @@
   padding-top: 32px;
   padding-bottom: 32px;
 }
+
+
+.foto-profilo {
+  height: 128px;
+  width: 128px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color:white;
+  display:block;
+  position:relative;
+  background-size: contain;
+}
+
+.foto-profilo-overlay {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  opacity: 0;
+  line-height: 128px;
+  text-align: center;
+  font-size: 48px;
+  background-color: rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.foto-profilo-overlay:hover {
+  opacity: 1;
+}

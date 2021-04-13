@@ -35,10 +35,12 @@ $utente = Utente::getMioUtente();
                     <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownId">
 
                         <?php if ($utente->volontario) : ?>
+                            <span class="dropdown-item disabled">Area volontario</span>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/riconoscimenti.php"><i class="fa fa-trophy" aria-hidden="true"></i> Riconoscimenti</a>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mio-profilo.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-richieste.php"><i class="fa fa-ticket" aria-hidden="true"></i> Richieste</a>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-disponibilita.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Mie disponibilità</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-associazioni.php"><i class="fa fa-building-o" aria-hidden="true"></i> Mie associazioni</a>
                         <?php else : ?>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/rimborsi.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mio-profilo.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>

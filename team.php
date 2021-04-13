@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+<?php
+require_once __DIR__ . '/include/main.php';
+ob_start(); ?>
 
 <div class="container">
   <div class="row">
