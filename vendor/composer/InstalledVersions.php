@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '6f8c3d99cfa44acf2c08d981f344b0b0e69b7e50',
+    'reference' => '9134e40b42f17bc8af5f70b97fb68392bf96ec60',
     'name' => 'itcbonelli/attivatempo',
   ),
   'versions' => 
@@ -50,7 +50,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '6f8c3d99cfa44acf2c08d981f344b0b0e69b7e50',
+      'reference' => '9134e40b42f17bc8af5f70b97fb68392bf96ec60',
     ),
     'nikic/fast-route' => 
     array (

@@ -10,7 +10,7 @@ esempio: se richiamo come url index.php/foo/bar, la variabile conterrà /foo/bar
 
 */
 
-
+$app= AppFactory::create();
 
 if (isset($_SERVER['PATH_INFO'])) {
     $pathinfo = $_SERVER['PATH_INFO'];
