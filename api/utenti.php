@@ -4,16 +4,13 @@ use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\tabelle\Utente;
 
 
-
-
 /**
  * Verifica l'accesso dell'utente al sistema
  * 
- * Dati in input
- * [POST] username
- * [POST] password
- * 
- * Risultato
+ * Dati in input \
+ * [POST] username \
+ * [POST] password \
+ * Risultato \
  * [
  *      result => true se l'utente è stato correttamente autenticato ed è attivo
  * ]

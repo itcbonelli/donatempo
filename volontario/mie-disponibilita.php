@@ -1,12 +1,20 @@
 <?php
 //carico il file principale
 
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\calendario\Calendario;
 use itcbonelli\donatempo\tabelle\Associazione;
 
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
 
 $associazioni = Associazione::elencoAssociazioni();
+$mese = AiutoInput::leggiIntero('mese', intval(date('m')));
+$anno = AiutoInput::leggiIntero('anno', intval(date('Y')));
+$cal=new Calendario();
+
+
+
 ?>
 <?php ob_start(); ?>
 
@@ -15,12 +23,13 @@ $associazioni = Associazione::elencoAssociazioni();
         <div class="row">
             <div class="col-12">
                 <h1><i class="fa fa-clock-o" aria-hidden="true"></i> Le mie disponibilità di tempo</h1>
-
-                
-
-
             </div>
         </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <?php $cal->render(); ?>
     </div>
 </div>
 <div class="section">

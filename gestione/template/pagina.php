@@ -5,6 +5,11 @@ use itcbonelli\donatempo\tabelle\Utente;
 if (!defined('PERCORSO_BASE')) {
     define('PERCORSO_BASE', '.');
 }
+
+$mio_utente=Utente::getMioUtente();
+if(is_null($mio_utente)) {
+    header('location:login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">

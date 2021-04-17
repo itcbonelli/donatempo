@@ -17,7 +17,7 @@ define('PERCORSO_BASE', '..');
                 </fieldset>
 
                 <div class="row">
-                    <div class="col-3 text-center">
+                    <div class="col text-center" style="min-width: 256px; max-width: 256px">
                         <div class="form-group">
                             <div class="foto-profilo shadow">
                                 <div class="foto-profilo-overlay" title="Fai clic qui per caricare una nuova foto profilo" onclick="document.getElementById('upload_foto').click();">
@@ -28,15 +28,15 @@ define('PERCORSO_BASE', '..');
                         </div>
                         <button type="submit" name="azione" value="rimuovi_foto" class="btn-sm btn btn-outline-danger">Rimuovi foto</button>
                     </div>
-                    <div class="col-9">
+                    <div class="col">
                         <div class="row">
-                            <div class="col">
+                            <div class="col" style="min-width: 256px">
                                 <div class="form-group">
                                     <label for="nome">Nome</label>
                                     <input type="text" class="form-control" name="nome" id="nome" placeholder="">
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col" style="min-width: 256px">
                                 <div class="form-group">
                                     <label for="cognome">Cognome</label>
                                     <input type="text" class="form-control" name="cognome" id="cognome" placeholder="">
@@ -45,7 +45,7 @@ define('PERCORSO_BASE', '..');
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col" style="min-width: 256px">
                                 <div class="form-group">
                                     <label for="provincia">Provincia</label>
                                     <select name="provincia" id="provincia" class="form-control">
@@ -53,7 +53,7 @@ define('PERCORSO_BASE', '..');
                                     </select>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col" style="min-width: 256px">
                                 <div class="form-group">
                                     <label for="comune">Comune</label>
                                     <select name="comune" id="comune" class="form-control">
@@ -70,19 +70,19 @@ define('PERCORSO_BASE', '..');
                     <legend><i class="fa fa-key" aria-hidden="true"></i> Modifica password</legend>
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="min-width: 256px">
                             <div class="form-group">
                                 <label for="oldpwd">Password attuale</label>
                                 <input type="password" name="oldpwd" id="oldpwd" class="form-control" required />
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col" style="min-width: 256px">
                             <div class="form-group">
                                 <label for="pwd1">Password</label>
                                 <input type="password" name="pwd1" id="pwd1" class="form-control" required />
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col" style="min-width: 256px">
                             <div class="form-group">
                                 <label for="pwd2">Conferma password</label>
                                 <input type="password" name="pwd2" id="pwd2" class="form-control" required />

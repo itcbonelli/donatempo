@@ -36,3 +36,7 @@ function creaAssociazione() {
 function eliminaAssociazione() {
     //TODO: implementare politica di sicurezza
 }
+
+function index() {
+    elencoAssociazioni();
+}

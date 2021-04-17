@@ -33,3 +33,13 @@ define('DB_NAME', 'donatempo');
  * Charset utilizzato dalla connessione
  */
 define('DB_CHARSET', 'utf8');
+
+/**
+ * Lingua e cultura dell'applicazione
+ */
+define('LOCALE', 'it-IT');
+
+/**
+ * Fuso orario adottato
+ */
+define('TIMEZONE', 'Europe/Rome');

@@ -54,32 +54,66 @@
   padding-bottom: 32px;
 }
 
-
 .foto-profilo {
   height: 128px;
   width: 128px;
   padding: 8px;
   border-radius: 4px;
-  background-color:white;
-  display:block;
-  position:relative;
+  background-color: white;
+  display: inline-block;
+  position: relative;
   background-size: contain;
 }
 
 .foto-profilo-overlay {
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
   line-height: 128px;
   text-align: center;
   font-size: 48px;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
 .foto-profilo-overlay:hover {
   opacity: 1;
+}
+
+.appy-icon {
+  width: 80px;
+  height: 80px;
+  font-size: 48px;
+  text-align: center;
+  border-radius: 16px;
+  display: inline-block;
+  line-height: 80px;
+  color: dimgray;
+  background: #eeeeee;
+  background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+  margin-bottom: 8px;
+}
+
+.appy-link {
+  text-decoration: none;
+  color:inherit;
+  display: block;
+  max-height: 256px;
+}
+.appy-link:hover {
+  text-decoration: none;
+  color:inherit;
+}
+
+.appy-link .label {
+  font-weight: bold;
+} 
+
+.appy-link .caption {
+  font-size: 12px;
 }

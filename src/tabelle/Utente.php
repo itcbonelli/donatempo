@@ -105,6 +105,7 @@ class Utente
         $amministratore = intval($this->amministratore);
 
         if (empty($this->id_utente)) {
+            $password = hash('sha256', $password);
             $query = "INSERT INTO utenti(username, `password`, data_creazione, email, attivo, telefono, volontario, amministratore)
             VALUES ('$username', '$password', '$data_creazione', '$email', $attivo, '$telefono', '$volontario', $amministratore)";
             $comando = $dbconn->prepare($query);
@@ -236,7 +237,7 @@ class Utente
     /**
      * Ottiene il record dell'utente attualmente connesso al sito.
      * Se l'utente non ha eseguito l'accesso restituisce null
-     * @return Utente dati dell'utente collegato
+     * @return Utente dati dell'utente collegato oppure null se è un ospite
      */
     public static function getMioUtente()
     {

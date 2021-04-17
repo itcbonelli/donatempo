@@ -90,6 +90,18 @@ class AiutoDB
         $campi = "";
         $valori = "";
         foreach ($record as $c => $v) {
+
+            //se incontro un valore null ignoro la colonna.
+            //Se la colonna consente valori nulli, 
+            //l'inserimento andrà ugualmente a buon fine.
+            //In caso contrario sarà sollevata un'eccezione.
+            if (is_null($v)) {
+                continue;
+            }
+
+            // verifico la lunghezza dell'elenco dei campi.
+            //se maggiore di zero aggiungo una virgola per separare
+            //il campo e il valore da quelli precedenti.
             if (strlen($c) > 0) {
                 $campi .= ", ";
                 $valori .= ", ";
@@ -97,16 +109,23 @@ class AiutoDB
 
             $campi .= "`{$c}`";
 
+            //ora osservo il tipo di dato della variabile $v.
+            //la funzione gettype di php restituisce una stringa con il tipo.
             $tipoval = gettype($v);
             switch ($tipoval) {
                 case 'string':
+                    //per i campi di tipo string devo preoccuparmi solo di eseguire l'escape 
+                    //e di circondare il campo con gli apici singoli.
+                    //tuttavia, potrei voler richiamare una funzione SQL o una sottoquery.
+                    //Prevedo allora che se viene anteposto il prefisso raw:, la stringa viene elaborata
+                    //così com'è. Prestare attenzione alle implicazioni che ciò potrà avere sulla sicurezza.
                     if (str_starts_with($v, 'raw:')) {
                         $v = str_replace('raw:', '', $v);
                         $valori .= $v;
                     } else {
                         $v = addslashes($v);
                         $v = str_replace("`", "\\`", $v);
-                        $valori .= "`{$v}`";
+                        $valori .= "'{$v}'";
                     }
                     break;
                 case 'integer':
@@ -114,9 +133,13 @@ class AiutoDB
                     $valori .= $v;
                     break;
                 case 'boolean':
+                    //i campi booleani corrispondono al tipo TINYINT, dove 1=TRUE e 0=FALSE.
+                    //con la funzione intval eseguo la conversione in numero.
                     $valori .= intval($v);
                     break;
                 case 'object':
+                    //L'unico caso di dati di tipo object ammessi (per ora) sono le date e orari.
+                    //Eseguo la conversione in stringa secondo il formato ammesso dal DB.
                     if ($v instanceof DateTime) {
                         $valori .= "'" . $v->format('Y-m-d H:i:s') . "'";
                     }
@@ -128,7 +151,7 @@ class AiutoDB
         }
 
         $sql = "INSERT INTO `$tabella` ($campi) VALUES ($valori)";
-        
+
         $this->eseguiComando($sql);
 
         if (!empty($cp)) {
@@ -161,6 +184,12 @@ class AiutoDB
             $query .= "\n`{$c}`=";
             $tipoval = gettype($v);
             switch ($tipoval) {
+                case 'NULL':
+                    /* 
+                    Nella insert era sufficiente saltare i campi null.
+                    Nella update il null potrebbe invece rappresentare un valore da impostare.
+                    */
+                    $v = 'null';
                 case 'string':
                     if (str_starts_with($v, 'raw:')) {
                         $v = str_replace('raw:', '', $v);
@@ -168,7 +197,7 @@ class AiutoDB
                     } else {
                         $v = addslashes($v);
                         $v = str_replace("`", "\\`", $v);
-                        $query .= "`{$v}`";
+                        $query .= "'{$v}'";
                     }
                     break;
                 case 'integer':

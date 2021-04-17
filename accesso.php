@@ -26,6 +26,8 @@ if ($_POST) {
 <div class="container">
     <h1>Accesso</h1>
 
+    <?php Notifica::MostraNotifiche(); ?>
+
     <form action="" method="post">
         <div class="form-group">
             <label for="username">Nome utente o e-mail</label>
