@@ -14,14 +14,12 @@ define('PERCORSO_BASE', '..');
             <div class="col-12">
                 <h1>Le mie associazioni</h1>
 
-                <div class="border p-2 bg-light my-2">
+                <div class="border p-2 py-4 bg-light my-2">
                     <p class="lead text-center text-muted mb-0">
-                        <i class="fa fa-ticket fa-3x" aria-hidden="true"></i><br />
+                        <i class="fa fa-building fa-3x" aria-hidden="true"></i><br />
                         Non appartieni ancora ad un'associazione
                     </p>
                 </div>
-
-
             </div>
         </div>
     </div>

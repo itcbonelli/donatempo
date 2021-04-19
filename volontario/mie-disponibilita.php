@@ -13,8 +13,6 @@ $mese = AiutoInput::leggiIntero('mese', intval(date('m')));
 $anno = AiutoInput::leggiIntero('anno', intval(date('Y')));
 $cal=new Calendario();
 
-
-
 ?>
 <?php ob_start(); ?>
 
@@ -29,7 +27,7 @@ $cal=new Calendario();
 </div>
 <div class="section">
     <div class="container">
-        <?php $cal->render(); ?>
+        <?php $cal->calendario(); ?>
     </div>
 </div>
 <div class="section">

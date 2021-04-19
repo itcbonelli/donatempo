@@ -9,46 +9,83 @@ $servizi = Servizio::elencoServizi(true);
 
 ?>
 <?php ob_start(); ?>
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <h3>Ricerca servizi</h3>
 
-                <form action="">
-
-                    <fieldset class="group-box">
-                        <legend>Cosa?</legend>
-                        <div class="form-group">
-                            <label for="id_servizio">Scegli un servizio</label>
-                            <select name="id_servizio" id="id_servizio" class="form-control">
-                                <option value="" selected disabled>Selezionare...</option>
-                                <?php foreach ($servizi as $servizio) : ?>
-                                    <option value="<?= $servizio->id_servizio ?>"><?= htmlentities($servizio->nome); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="group-box">
-                        <legend>Quando?</legend>
-                        <div class="form-group">
-                            <label for="data_inizio">Data inizio</label>
-                            <input type="date" name="data_inizio" id="data_inizio" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <div class="form-label">Orario</div>
-                            <input type="time" name="orario" class="form-control" />
-                        </div>
-                    </fieldset>
-                </form>
+<form action="ricerca-servizi-step2.php" method="GET">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>1. Seleziona un servizio</h1>
+                </div>
             </div>
-            <div class="col-9">
-
+            <div class="row">
+                <?php foreach ($servizi as $serv) : ?>
+                    <div class="col">
+                        <label for="id_servizio_<?php echo $serv->id_servizio; ?>" class="d-block">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>
+                                        <input type="radio" name="id_servizio" id="id_servizio_<?php echo $serv->id_servizio; ?>" value="<?php echo $serv->id_servizio; ?>" required />
+                                        <?php echo $serv->nome; ?>
+                                    </h5>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
-</div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>2. Scegli un arco temporale</h1>
+                </div>
+            </div>
+            <div class="row py-2 pb-4">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="setDateRiferimento('oggi');">Oggi</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">Domani</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">In settimana</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="data_iniziale">Data iniziale</label>
+                        <input type="date" class="form-control" name="data_iniziale" id="data_iniziale" aria-describedby="dataInizialeHelp" placeholder="">
+                        <small id="dataInizialeHelp" class="form-text text-muted">Inserisci la prima data utile</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="data_finale">Data finale</label>
+                        <input type="date" class="form-control" name="data_finale" id="data_finale" aria-describedby="dataInizialeHelp" placeholder="">
+                        <small id="dataInizialeHelp" class="form-text text-muted">Inserisci l'ultima data utile</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-lg">Vedi disponibilità</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var cal_data_inizio = document.getElementById('data_iniziale');
+    var cal_data_fine = document.getElementById('data_finale');
+
+    function setDateRiferimento(quando) {
+        if (quando == 'oggi') {
+            cal_data_inizio.valueAsDate = new Date(Date.now());
+            cal_data_fine.valueAsDate = new Date(Date.now());
+        }
+    }
+</script>
+
 <?php $contenuto = ob_get_clean(); ?>
 
 <?php

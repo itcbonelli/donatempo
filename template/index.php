@@ -60,7 +60,7 @@ if (!defined('PERCORSO_BASE')) {
             </p>
             <p class="text-center">Copyright &copy; <?php echo date('Y') ?>. Tutti i diritti riservati.<br />
                 <span style="font-size: 11px;">
-                    Applicazione realizzata dai ragazzi della classe 5^A SIA dell'ITC F.A. Bonelli
+                    Applicazione realizzata dai ragazzi della classe 5^A SIA dell'ITC F.A. Bonelli. <a href="credits.php">Credits</a>
                 </span>
             </p>
 
