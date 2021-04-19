@@ -69,10 +69,12 @@ class Disponibilita
     }
 
     /**
+     * Salva il record della disponibilità
      * @return bool esito salvataggio
      */
     public function salva()
     {
+        
     }
 
     /**
@@ -118,7 +120,9 @@ class Disponibilita
      */
     public function getPartecipazione()
     {
-        
+        $part = new PartecipazioneAssociazione();
+        $part->carica($this->id_partecipazione);
+        return $part;
     }
 
     /**
@@ -127,6 +131,9 @@ class Disponibilita
      */
     public function getVolontario()
     {
+        $part=$this->getPartecipazione();
+        $profilo=new Profilo();
+        $profilo->carica($part->idUtente);
     }
 
     /**

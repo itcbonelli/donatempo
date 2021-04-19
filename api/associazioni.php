@@ -27,6 +27,7 @@ function getAssociazione() {
 
 function salvaAssociazione() {
     //TODO: implementare politica di sicurezza
+    
 }
 
 function creaAssociazione() {

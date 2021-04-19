@@ -157,7 +157,7 @@ class Utente
      * le opportune variabili di sessione
      * @param string $username nome utente
      * @param string $password password
-     * @return bool esito dell'accesso
+     * @return Utente oggetto utente a cui corrispondono le credenziali o null se non esiste
      */
     public static function login($username, $password)
     {
@@ -175,13 +175,16 @@ class Utente
             $_SESSION['id_utente'] = $riga['id_utente'];
             $_SESSION['username'] = $riga['username'];
 
+            $utente=new Utente();
+            $utente->carica($riga['id_utente']);
+
             //aggiorno la data ultimo accesso
             $adb->eseguiComando("UPDATE utenti SET ultimo_accesso=current_timestamp WHERE id_utente=:id_utente", ['id_utente' => $riga['id_utente']]);
 
-            return true;
+            return $utente;
         } else {
             Notifica::accoda("Dati di accesso non validi", Notifica::TIPO_ERRORE);
-            return false;
+            return null;
         }
     }
 

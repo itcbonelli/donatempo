@@ -1,5 +1,8 @@
 <?php
+
 namespace itcbonelli\donatempo\tabelle;
+
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -13,7 +16,7 @@ class Servizio
      * Identificativo servizio
      * @var int
      */
-    public $id_servizio;
+    public $id_servizio = -1;
 
     /**
      * Nome servizio
@@ -51,6 +54,23 @@ class Servizio
      */
     public function salva()
     {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $record = [];
+
+        if ($this->id_servizio == -1) {
+            $ins = $adb->inserisci('servizi', $record, 'id_servizio');
+            if ($ins > 0) {
+                $this->id_servizio = $record['id_servizio'];
+                return true;
+            } else {
+                Notifica::accoda("Si è verificato un errore in fase di inserimento del record", Notifica::TIPO_ERRORE);
+                return false;
+            }
+        } else {
+            $agg = $adb->aggiorna('servizi', $record, "id=servizio={$this->id_servizio}");
+            return ($agg > 0);
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime;
 
@@ -81,13 +82,11 @@ class Profilo
      * Determina se esiste un record per l'ID specificato
      * @return bool esiste sì/no
      */
-    public function esiste($id_utente)
+    public static function esiste($id_utente)
     {
         global $dbconn;
-
-
-
-        throw new \Exception("Non ancora implementato");
+        $dba = new AiutoDB($dbconn);
+        return intval($dba->eseguiScalare("SELECT count(id_utente) FROM profili WHERE id_utente={$id_utente}"));
     }
 
     /**
@@ -97,7 +96,28 @@ class Profilo
     public function salva()
     {
         global $dbconn;
-        throw new \Exception("Non ancora implementato");
+        $dba = new AiutoDB($dbconn);
+        $record = [
+            'id_utente' => intval($this->id_utente),
+            'cognome' => $this->cognome,
+            'nome' => $this->nome,
+            'telefono1' => $this->telefono1,
+            'telefono2' => $this->telefono2,
+            'cod_fis' => $this->cod_fis,
+            'indirizzo' => $this->indirizzo,
+            'cap' => $this->cap,
+            'id_comune' => $this->id_comune,
+            'id_quartiere' => $this->id_quartiere,
+            'fotografia' => $this->fotografia,
+            'longitudine' => $this->longitudine,
+            'latitudine' => $this->latitudine
+        ];
+
+        if (self::esiste($this->id_utente)) {
+            return boolval($dba->aggiorna('profili', $record, "id_utente={$this->id_utente}"));
+        } else {
+            return boolval($dba->inserisci('profili', $record));
+        }
     }
 
     /**
@@ -107,7 +127,9 @@ class Profilo
     public function elimina()
     {
         global $dbconn;
-        throw new \Exception("Non ancora implementato");
+        $dba = new AiutoDB($dbconn);
+        $esegui = $dba->eseguiQuery("DELETE FROM profili WHERE id_utente={$this->id_utente}");
+        return intval($esegui);
     }
 
     /**
@@ -190,6 +212,8 @@ class Profilo
             return false;
         }
     }
+
+    
 
     /**
      * @return Utente oggetto utente associato al profilo

@@ -1,6 +1,8 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -16,6 +18,9 @@ class Settore
      */
     public static function esiste($id_settore)
     {
+        global $dbconn;
+        $dba = new AiutoDB($dbconn);
+        return $dba->eseguiScalare("SELECT COUNT(id_settore) FROM settori WHERE id_settore=:id", ['id' => $id_settore]) > 0;
     }
 
     /**
@@ -75,7 +80,7 @@ class Settore
     {
     }
 
-    
+
     /**
      * Restituisce l'elenco di tutti i settori
      * @author Beatrice Meinero
@@ -84,15 +89,15 @@ class Settore
     public static function getElencoSettori()
     {
         global $dbconn;
-        $dataset=[];
+        $dataset = [];
 
         $query = "SELECT * FROM settori ORDER BY nome";
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
 
         if ($esegui == true) {
-            while($riga=$comando->fetch(PDO::FETCH_ASSOC)) {
-                $settore=new Settore();
+            while ($riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $settore = new Settore();
                 $settore->id_settore = $riga['id_settore'];
                 $settore->nome = $riga['nome'];
                 $dataset[] = $settore;

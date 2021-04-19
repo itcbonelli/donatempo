@@ -4,12 +4,13 @@ namespace itcbonelli\donatempo\tabelle;
 
 use Exception;
 use itcbonelli\donatempo\AiutoConvalida;
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use PDO;
 
 class Esercente
 {
-    public ?int $id_esercente;
+    public ?int $id_esercente = -1;
     public ?string $nome;
     public ?string $ragsoc;
     public ?string $piva;
@@ -42,7 +43,29 @@ class Esercente
 
     public function salva(): bool
     {
-        throw new Exception("Non implementato");
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $record = [
+            'nome' => $this->nome,
+            'ragsoc' => $this->ragsoc,
+            'piva' => $this->piva,
+            'indirizzo' => $this->indirizzo,
+            'cap' => $this->cap,
+            'cod_comune' => $this->cod_comune,
+            'attivo' => $this->attivo
+        ];
+
+        if ($this->id_esercente == -1) {
+            $ins = $adb->inserisci('esercenti', $record, 'id_esercente');
+            if ($ins) {
+                $this->id_esercente = $record['id_esercente'];
+                return true;
+            }
+        } else {
+            $agg = $adb->aggiorna('esercenti', $record, 'id_esercente=' . $this->id_esercente);
+            if ($agg) return true;
+        }
+        return false;
     }
 
     /**

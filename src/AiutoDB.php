@@ -27,6 +27,7 @@ class AiutoDB
      */
     public function eseguiComando(string $comando, array $parametri = []): ?int
     {
+        //echo $comando;
         $comando = $this->dbconn->prepare($comando);
         $esegui = $comando->execute($parametri);
         if ($esegui) {
@@ -173,14 +174,14 @@ class AiutoDB
      * @return int numero di righe aggiornate
      * @throws RuntimeException se vengono passati in $record dati il cui tipo non rientra tra quelli ammessi
      */
-    public function aggiorna(string $tabella, array $record, string $where)
+    public function aggiorna(string $tabella, array $record, string $where, bool $skip_nulls = false)
     {
         $query = "UPDATE `{$tabella}` SET ";
         $i = 0;
         foreach ($record as $c => $v) {
-            if ($i > 0) {
-                $query .= ", ";
-            }
+            if ($skip_nulls && is_null($v)) continue;
+            if ($i > 0) $query .= ", ";
+
             $query .= "\n`{$c}`=";
             $tipoval = gettype($v);
             switch ($tipoval) {
@@ -189,7 +190,8 @@ class AiutoDB
                     Nella insert era sufficiente saltare i campi null.
                     Nella update il null potrebbe invece rappresentare un valore da impostare.
                     */
-                    $v = 'null';
+                    $query .= 'null';
+                    break;
                 case 'string':
                     if (str_starts_with($v, 'raw:')) {
                         $v = str_replace('raw:', '', $v);
@@ -216,8 +218,10 @@ class AiutoDB
                     throw new RuntimeException("Tipo {$tipoval} non ammesso");
                     break;
             }
+            $i++;
         }
         $query .= "\nWHERE $where";
+
         return $this->eseguiComando($query);
     }
 }

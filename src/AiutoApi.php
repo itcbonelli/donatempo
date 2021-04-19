@@ -3,6 +3,7 @@
 namespace itcbonelli\donatempo;
 
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\tabelle\Utente;
 
 /**
  * Fornisce funzioni di supporto per le API
@@ -12,9 +13,31 @@ class AiutoApi
 
     const STATO_HTTP_OK = 200;
     const STATO_HTTP_CREATO = 201;
+    const STATO_HTTP_MODIFICATO = 202;
+    const STATO_HTTP_RICHIESTA_ERRATA = 400;
+    const STATO_HTTP_NON_AUTORIZZATO = 403;
+    const STATO_HTTP_NON_TROVATO = 404;
     const STATO_HTTP_ERRORE_SERVER = 500;
 
-    
+
+    /**
+     * Autentica l'utente nel sistema attraverso le apposite intestazioni HTTP.
+     * 
+     * @return Utente
+     */
+    public function autentica()
+    {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Accesso negato';
+            exit;
+        } else {
+            $username = $_SERVER['HTTP_AUTH_USER'];
+            $password = $_SERVER['HTTP_AUTH_PW'];
+        }
+    }
+
 
     /**
      * Controllo di sicurezza

@@ -5,6 +5,7 @@ namespace itcbonelli\donatempo\tabelle;
 use DateTime;
 use DateTimeZone;
 use itcbonelli\donatempo\AiutoDB;
+use itcbonelli\donatempo\Notifica;
 
 /**
  * Chiave api per l'accesso al web service
@@ -20,11 +21,18 @@ class ApiKey
     public DateTime $data_rinnovo;
     public bool $attivo = true;
 
-
-    public function __construct()
+    /**
+     * Crea una nuova istanza di ApiKey
+     * @param $ak eventuale chiave API da caricare
+     */
+    public function __construct($ak = "")
     {
-        $this->apikey = uniqid("", true);
-        $this->data_creazione = new DateTime('now', new DateTimeZone('Europe/Rome'));
+        if (empty($ak)) {
+            $this->apikey = uniqid("", true);
+            $this->data_creazione = new DateTime('now', new DateTimeZone('Europe/Rome'));
+        } else {
+            $this->carica($ak);
+        }
     }
 
     /**
@@ -71,9 +79,52 @@ class ApiKey
         return !is_null($this->data_scadenza) && ($this->data_scadenza->getTimestamp() > time());
     }
 
-    public function carica()
+    /**
+     * Carica un record dal database
+     * @param string $apikey chiave api da caricare
+     */
+    public function carica(string $apikey)
     {
         global $dbconn;
         $adb = new AiutoDB($dbconn);
+        $record = $adb->eseguiQuery("SELECT * FROM apikey WHERE apikey=:ak", ['ak' => $apikey]);
+        if ($record) {
+            $this->apikey_old = $record['apikey'];
+            $this->apikey = $record['apikey'];
+            $this->descrizione = $record['descrizione'];
+            $this->data_creazione = DateTime::createFromFormat('Y-m-d h:i:s', $record['data_creazione'], new DateTimeZone(TIMEZONE));
+            $this->data_rinnovo = DateTime::createFromFormat('Y-m-d h:i:s', $record['data_rinnovo'], new DateTimeZone(TIMEZONE));
+            $this->data_scadenza = DateTime::createFromFormat('Y-m-d h:i:s', $record['data_scadenza'], new DateTimeZone(TIMEZONE));
+            $this->attivo = boolval($record['attivo']);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determina se una chiave API esiste, è attiva e non è scaduta
+     * @param $apikey chiave api da controllare
+     */
+    public static function controlla(string $apikey)
+    {
+        $ak = new ApiKey();
+        $carica = $ak->carica($apikey);
+        if (!$carica) {
+            Notifica::accoda("Chiave API $apikey inesistente", Notifica::TIPO_ERRORE);
+            return false;
+        }
+
+        if ($ak->attivo == false) {
+            Notifica::accoda("Chiave API $apikey non attiva", Notifica::TIPO_ERRORE);
+            return false;
+        }
+
+        if ($ak->scaduta()) {
+            Notifica::accoda("Chiave API $apikey scaduta", Notifica::TIPO_ERRORE);
+            return false;
+        }
+
+        return true;
     }
 }
