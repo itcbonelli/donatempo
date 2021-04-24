@@ -1,5 +1,5 @@
 <?php
-$titolo_pagina = "Modifica comune";
+$titolo_pagina = "Modifica comune - Gestione Donatempo";
 $link_attivo = 'comune-edit';
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser

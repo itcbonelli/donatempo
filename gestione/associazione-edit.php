@@ -1,28 +1,52 @@
 <?php
 
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
 
 require_once __DIR__ . '/../include/main.php';
 
-$titolo_pagina = "Modifica associazione";
+$titolo_pagina = "Modifica associazione - Gestione Donatempo";
 $link_attivo = 'associazioni';
 ob_start();
 
+$id_associazione = AiutoInput::leggiIntero('id', -1, 'G');
+$azione = AiutoInput::leggiStringa("azione", "", "P");
+
 $associazione = new Associazione();
+if ($id_associazione > 0) {
+    $associazione->carica($id_associazione);
+}
+
+switch ($azione) {
+    case 'salva':
+        $associazione->ragsoc = AiutoInput::leggiStringa('ragsoc');
+        $associazione->codfis = AiutoInput::leggiStringa('codfis');
+        $associazione->descrizione = AiutoInput::leggiStringa('descrizione');
+        if ($associazione->convalida()) {
+            $associazione->salva();
+        }
+        break;
+    case 'elimina':
+        $associazione->elimina();
+        break;
+}
 
 ?>
 <h1>Modifica associazione</h1>
+
+<?php Notifica::MostraNotifiche(); ?>
 
 <form action="" method="post">
 
 
     <div class="form-group">
         <label for="ragsoc">Ragione sociale</label>
-        <input type="text" name="ragsoc" id="ragsoc" class="form-control" />
+        <input type="text" name="ragsoc" id="ragsoc" class="form-control" value="<?= htmlentities($associazione->ragsoc); ?>" />
     </div>
     <div class="form-group">
         <label for="codfis">Codice fiscale</label>
-        <input type="text" name="codfis" id="codfis" min="1" maxlength="11" class="form-control" />
+        <input type="text" name="codfis" id="codfis" min="1" maxlength="11" class="form-control" value="<?= htmlentities($associazione->codfis); ?>" />
     </div>
 
     <p>
@@ -41,7 +65,12 @@ $associazione = new Associazione();
 
     <div class="form-group">
         <label for="descrizione">Descrizione</label>
-        <input type="text" name="descrizione" id="descrizione" class="form-control" />
+        <input type="text" name="descrizione" id="descrizione" class="form-control" value="<?= htmlentities($associazione->descrizione); ?>" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
+        <button type="submit" class="btn btn-outline-danger" name="azione" value="elimina">Elimina</button>
     </div>
 
 </form>

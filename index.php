@@ -10,7 +10,7 @@ require_once __DIR__ . '/include/main.php';
     <h1 class="display-3">DONATEMPO</h1>
     <p class="lead">Aiutiamo le associazioni di volontariato e i loro partecipanti ad organizzare il loro tempo e ad incontrare chi ha bisogno di una mano. Scopri che cosa possiamo fare per te.</p>
     <p class="lead">
-      <a class="btn btn-success btn-lg" href="registrazione.php" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Registrati ora</a>
+      <a class="btn btn-warning btn-lg" href="ricerca-servizi.php" role="button"><i class="fa fa-question-circle" aria-hidden="true"></i> Chiedi aiuto</a>
       <a class="btn btn-info btn-lg" href="volontario/diventa-volontario.php" role="button"><i class="fa fa-hand-peace-o" aria-hidden="true"></i> Diventa volontario</a>
     </p>
   </div>

@@ -4,7 +4,7 @@ use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Provincia;
 
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Elenco province";
+$titolo_pagina = "Elenco province - Gestione Donatempo";
 $link_attivo = 'province';
 
 $province = Provincia::caricaTutte();

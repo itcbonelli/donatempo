@@ -3,7 +3,7 @@
 use itcbonelli\donatempo\tabelle\Zona;
 
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Gestione zone";
+$titolo_pagina = "Gestione zone - Gestione Donatempo";
 $link_attivo = 'zone';
 
 $zone = Zona::ElencoZone();

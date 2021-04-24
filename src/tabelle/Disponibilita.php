@@ -2,6 +2,8 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use itcbonelli\donatempo\AiutoDB;
+use itcbonelli\donatempo\filtri\FiltroDisponibilita;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -13,7 +15,7 @@ class Disponibilita
     /**
      * Identificativo disponibilità
      */
-    public $id_disponibilita;
+    public $id_disponibilita = -1;
 
     /**
      * Identificativo partecipazione tra volontario e associazione
@@ -74,7 +76,22 @@ class Disponibilita
      */
     public function salva()
     {
-        
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $record = [
+            'id_partecipazione' => $this->partecipazione,
+            'data_disp' => $this->data_disp->format('Y-m-d'),
+            'ora_inizio' => $this->ora_inizio->format('h:i:s'),
+            'ora_fine' => $this->ora_fine->format('h:i:s'),
+        ];
+
+        if ($this->id_disponibilita = -1) {
+            if ($adb->inserisci('disponibilita', $record, 'id_disponibilita')) {
+                $this->id_disponibilita = $record['id_disponibilita'];
+                return true;
+            } else {
+            }
+        }
     }
 
     /**
@@ -131,8 +148,8 @@ class Disponibilita
      */
     public function getVolontario()
     {
-        $part=$this->getPartecipazione();
-        $profilo=new Profilo();
+        $part = $this->getPartecipazione();
+        $profilo = new Profilo();
         $profilo->carica($part->idUtente);
     }
 
@@ -142,6 +159,10 @@ class Disponibilita
      */
     public function getUtente()
     {
+        $part = $this->getPartecipazione();
+        $ut = new Utente();
+        $ut->carica($part->id_utente);
+        return $ut;
     }
 
     /**
@@ -151,7 +172,13 @@ class Disponibilita
      */
     public function associaServizio($id_servizio)
     {
-        //tabella disponibilita_include_servizi
+        global $dbconn;
+        $dba = new AiutoDB($dbconn);
+        $rec = [
+            'id_disponibilita' => $this->id_disponibilita,
+            'id_servizio' => intval($id_servizio)
+        ];
+        return boolval($dba->inserisci('disponibilita_include_servizi', $rec));
     }
 
     /**
@@ -161,6 +188,33 @@ class Disponibilita
      */
     public function dissociaServizio($id_servizio)
     {
-        //tabella disponibilita_include_servizi
+        global $dbconn;
+        $dba = new AiutoDB($dbconn);
+        $esegui = $dba->eseguiComando("DELETE FROM disponibilita_include_servizi WHERE id_disponibilita=:idd AND id_servizio=:ids", [
+            'idd' => $this->id_disponibilita,
+            'ids' => intval($id_servizio)
+        ]);
+        return boolval($esegui);
+    }
+
+    /**
+     * 
+     */
+    public static function ricercaDisponibilita(FiltroDisponibilita $filtri)
+    {
+        global $dbconn;
+        $dba = new AiutoDB($dbconn);
+
+        $query = "SELECT * FROM disponibilita WHERE 1=1 ";
+        if (!empty($filtri->data_inizio)) {
+            $query .= " AND data_disp >= '" . $filtri->data_inizio->format('Y-m-d') . "'";
+        }
+        if (!empty($filtri->data_inizio)) {
+            $query .= " AND data_disp <= '" . $filtri->data_fine->format('Y-m-d') . "'";
+        }
+        if (!empty($filtri->cod_comune)) {
+        }
+
+        $dataset = $dba->eseguiQuery($query);
     }
 }

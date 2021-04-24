@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../include/main.php';
 use itcbonelli\donatempo\tabelle\StatoAvanzamento;
 
-$titolo_pagina = "Stati di avanzamento richiesta";
+$titolo_pagina = "Stati di avanzamento richiesta - Gestione Donatempo";
 $link_attivo = 'stati-avanzamento';
 $stati = StatoAvanzamento::ElencoStatiAvanzamento();
 ob_start();

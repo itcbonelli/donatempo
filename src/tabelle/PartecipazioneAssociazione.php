@@ -1,6 +1,8 @@
 <?php
 
 namespace itcbonelli\donatempo\tabelle;
+
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -23,19 +25,19 @@ class PartecipazioneAssociazione
      * Identificativo record partecipazione
      * @var int
      */
-    public $id_partecipazione;
+    public $id_partecipazione = -1;
 
     /**
      * Identificativo utente partecipante
      * @var int
      */
-    public $idUtente;
+    public $id_utente;
 
     /**
      * Identificativo associazione
      * @var int
      */
-    public $idAssociazione;
+    public $id_associazione;
 
     /**
      * Ruolo ricoperto nell'associazione
@@ -59,8 +61,8 @@ class PartecipazioneAssociazione
 
         if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
             $this->id_partecipazione = $riga['id_partecipazione'];
-            $this->idUtente = $riga['idUtente'];
-            $this->idAssociazione = $riga['idAssociazione'];
+            $this->id_utente = $riga['id_utente'];
+            $this->id_associazione = $riga['id_associazione'];
             $this->ruolo = $riga['ruolo'];
             return true;
         } else {
@@ -93,8 +95,8 @@ class PartecipazioneAssociazione
         if ($esegui == true) {
             while ($riga = $comando->fetch()) {
                 $partecipa = new PartecipazioneAssociazione();
-                $partecipa->idUtente = $riga['utenti_id_utente'];
-                $partecipa->idAssociazione = $riga['associazioni_id_associazione'];
+                $partecipa->id_utente = $riga['utenti_id_utente'];
+                $partecipa->id_associazione = $riga['associazioni_id_associazione'];
                 $partecipa->ruolo = $riga['ruolo'];
                 $partecipazioneAssociazione[] = $partecipa;
             }
@@ -123,7 +125,7 @@ class PartecipazioneAssociazione
         if ($esegui == true) {
             while ($riga = $comando->fetch()) {
                 $part = new PartecipazioneAssociazione();
-                $part->idAssociazione = $riga['id_associazione'];
+                $part->id_associazione = $riga['id_associazione'];
                 $part->id_partecipazione = $riga['id_utente'];
                 $partecipazioneAssociazione[] = $riga;
             }
@@ -139,7 +141,9 @@ class PartecipazioneAssociazione
      */
     public function getAssociazione()
     {
-        //N.B: qua non serve fare query
+        $assoc = new Associazione();
+        $assoc->carica($this->id_associazione);
+        return $assoc;
     }
 
     /**
@@ -149,11 +153,17 @@ class PartecipazioneAssociazione
      */
     public function getUtente()
     {
+        /*
+        NO!
         if (!isset($_SESSION['id_utente'])) {
             return null;
         }
         $utente = new Utente();
         $utente->carica($_SESSION['id_utente']);
+        return $utente; 
+        */
+        $utente = new Utente();
+        $utente->carica($this->id_utente);
         return $utente;
     }
 
@@ -164,7 +174,25 @@ class PartecipazioneAssociazione
     public function salva()
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
+        $adb = new AiutoDB($dbconn);
+        $record = [
+            'id_utente' => $this->id_utente,
+            'id_associazione' => $this->id_associazione,
+            'ruolo' => $this->ruolo
+        ];
+
+        if ($this->id_partecipazione == -1) {
+            if ($adb->inserisci('utente_partecipa_associazione', $record, 'id_partecipazione')) {
+                $this->id_partecipazione = $record['id_partecipazione'];
+                return true;
+            }
+        } else {
+            if ($adb->aggiorna('utente_partecipa_associazione', $record, "id_partecipazione={$this->id_partecipazione}")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -123,10 +123,14 @@ class Associazione
      */
     public function elimina()
     {
-        global $dbconn;
-        $db = new AiutoDB($dbconn);
-        $ris = $db->eseguiComando("DELETE FROM associazioni WHERE id_associazione={$this->id_associazione}");
-        return boolval($ris);
+        try {
+            global $dbconn;
+            $db = new AiutoDB($dbconn);
+            $ris = $db->eseguiComando("DELETE FROM associazioni WHERE id_associazione={$this->id_associazione}");
+            return boolval($ris);
+        } catch (Exception $e) {
+            Notifica::accoda($e->getMessage(), Notifica::TIPO_ERRORE);
+        }
     }
 
     /**

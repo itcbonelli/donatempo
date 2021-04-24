@@ -95,6 +95,10 @@ class Esercente
         return $ris;
     }
 
+
+    /**
+     * @return Esercente[]
+     */
     public static function ElencoEsercenti()
     {
         global $dbconn;
@@ -106,6 +110,7 @@ class Esercente
             while ($riga = $comando->fetch(PDO::FETCH_ASSOC)) {
                 $esercente = new Esercente();
                 $esercente->riempiCampi($riga);
+                $dataset[]=$esercente;
             }
         }
 

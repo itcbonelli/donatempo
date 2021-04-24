@@ -26,3 +26,7 @@ ul.menu-navigazione li .fa {
     font-size: 24px;
     text-align: center;
 } */
+
+.mw-320 {
+    min-width: 320px;
+}

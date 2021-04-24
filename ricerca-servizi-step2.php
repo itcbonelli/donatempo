@@ -28,17 +28,7 @@ $servizi = Servizio::elencoServizi(true);
     </div>
 </div>
 
-<script>
-    var cal_data_inizio = document.getElementById('data_iniziale');
-    var cal_data_fine = document.getElementById('data_finale');
 
-    function setDateRiferimento(quando) {
-        if (quando == 'oggi') {
-            cal_data_inizio.valueAsDate = new Date(Date.now());
-            cal_data_fine.valueAsDate = new Date(Date.now());
-        }
-    }
-</script>
 
 <?php $contenuto = ob_get_clean(); ?>
 

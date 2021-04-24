@@ -3,7 +3,7 @@
 use itcbonelli\donatempo\tabelle\Associazione;
 
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Elenco associazioni";
+$titolo_pagina = "Elenco associazioni - Gestione Donatempo";
 $link_attivo = 'associazioni';
 
 $associazioni = Associazione::elencoAssociazioni();
@@ -14,7 +14,7 @@ ob_start();
 
 <p><a href="associazione-edit.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi associazione</a></p>
 
-<table id="tab_associaz" class="table table-bordered table-striped table-hover">
+<table id="tab_associaz" class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
             <th>Identificativo</th>
@@ -27,7 +27,7 @@ ob_start();
         <?php foreach ($associazioni as $associazione) : ?>
             <tr>
                 <td><?= $associazione->id_associazione; ?></td>
-                <td><?= $associazione->ragsoc; ?></td>
+                <td><a href="associazione-edit.php?id=<?= $associazione->id_associazione; ?>"><?= $associazione->ragsoc; ?></a></td>
                 <td><?= $associazione->codfis; ?></td>
                 <td><?= $associazione->url_logo; ?></td>
             </tr>

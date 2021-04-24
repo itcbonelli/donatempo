@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Modifica zona";
+$titolo_pagina = "Modifica zona - Gestione Donatempo";
 $link_attivo = 'zone';
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser

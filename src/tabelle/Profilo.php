@@ -78,6 +78,7 @@ class Profilo
      */
     public $longitudine;
 
+
     /**
      * Determina se esiste un record per l'ID specificato
      * @return bool esiste sì/no
@@ -107,10 +108,10 @@ class Profilo
             'indirizzo' => $this->indirizzo,
             'cap' => $this->cap,
             'id_comune' => $this->id_comune,
-            'id_quartiere' => $this->id_quartiere,
+            'id_quartiere' => intval($this->id_quartiere),
             'fotografia' => $this->fotografia,
-            'longitudine' => $this->longitudine,
-            'latitudine' => $this->latitudine
+            'longitudine' => floatval($this->longitudine),
+            'latitudine' => floatval($this->latitudine)
         ];
 
         if (self::esiste($this->id_utente)) {
@@ -213,7 +214,36 @@ class Profilo
         }
     }
 
-    
+    /**
+     * Carica l'elenco dei profili
+     * @return Profilo[]
+     */
+    public static function elencoProfili($cerca = "", $citta = "")
+    {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $parametri = [];
+        $dataset=[];
+        $query = "SELECT * FROM profili WHERE 1=1 ";
+        if (!empty($cerca)) {
+        }
+        if (!empty($citta)) {
+            $query .= " AND comune=:citta ";
+            $parametri['citta'] = $citta;
+        }
+
+        $risultato = $adb->eseguiQuery($query, $parametri);
+        foreach ($risultato as $record) {
+            $pro = new Profilo();
+            foreach ($record as $k => $v) {
+                $pro->$k = $v;
+            }
+            $dataset[]=$pro;
+        }
+        return $dataset;
+    }
+
+
 
     /**
      * @return Utente oggetto utente associato al profilo

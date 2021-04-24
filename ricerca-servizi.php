@@ -15,7 +15,7 @@ $servizi = Servizio::elencoServizi(true);
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>1. Seleziona un servizio</h1>
+                    <h1>1. Cosa possiamo fare per te?</h1>
                 </div>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@ $servizi = Servizio::elencoServizi(true);
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1>2. Scegli un arco temporale</h1>
+                    <h1>2. Quando ti serve?</h1>
                 </div>
             </div>
             <div class="row py-2 pb-4">

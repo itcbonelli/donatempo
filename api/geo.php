@@ -1,50 +1,40 @@
 <?php
 
 use itcbonelli\donatempo\AiutoApi;
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\tabelle\Comune;
 use itcbonelli\donatempo\tabelle\Profilo;
 use itcbonelli\donatempo\tabelle\Provincia;
 use itcbonelli\donatempo\tabelle\Utente;
+use itcbonelli\donatempo\tabelle\Zona;
 
 function elencoComuni()
 {
     $provincia = AiutoInput::leggiStringa('provincia', '');
     $dataset = Comune::getElencoComuni($provincia);
-    //intestazioni della risposta
-    header('Cache-Control: max-age=86400');
-    header("Content-type: application/json", true);
-    //Corpo della risposta
-    echo json_encode($dataset);
+    AiutoApi::inviaJSON($dataset, AiutoApi::STATO_HTTP_OK);
     exit;
 }
 
 function elencoProvince()
 {
     $dataset = Provincia::caricaTutte();
-    header('Cache-Control: max-age=86400');
-    header("Content-type: application/json", true);
-    echo json_encode($dataset, JSON_PRETTY_PRINT);
+    AiutoApi::inviaJSON($dataset, AiutoApi::STATO_HTTP_OK);
     exit;
 }
 
 function elencoRegioni()
 {
     $dataset = Provincia::ElencoRegioni();
-    //TODO: scrivere codice che esegue la query e popola l'array DataSet
-    header("Content-type: application/json", true);
-
-    echo json_encode(array_column($dataset, 'regione'), JSON_PRETTY_PRINT);
+    AiutoApi::inviaJSON($dataset, AiutoApi::STATO_HTTP_OK);
     exit;
 }
 
 function elencoAree()
 {
-    $dataset = [];
-    //TODO: scrivere codice che esegue la query e popola l'array DataSet
-    header("Content-type: application/json", true);
-    echo json_encode($dataset, JSON_PRETTY_PRINT);
-    exit;
+    $dataset = Zona::ElencoZone();
+    AiutoApi::inviaJSON($dataset, AiutoApi::STATO_HTTP_OK);
 }
 
 function localizza()
@@ -52,9 +42,8 @@ function localizza()
     $lat = AiutoInput::leggiFloat('lat', null, 'P');
     $long = AiutoInput::leggiFloat('long', null, 'P');
 
-    $username = AiutoInput::leggiStringa('username', 'P');
-    $password = AiutoInput::leggiStringa('password', 'P');
-    $utente = Utente::login($username, $password);
+    
+    $utente = AiutoApi::autentica();
     if ($utente == false) {
         AiutoApi::inviaJSON([
             'risultato' => false,

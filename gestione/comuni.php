@@ -4,7 +4,7 @@ use itcbonelli\donatempo\tabelle\Comune;
 
 require_once __DIR__ . '/../include/main.php';
 
-$titolo_pagina = "Elenco comuni";
+$titolo_pagina = "Elenco comuni - Gestione Donatempo";
 $link_attivo = 'comuni';
 
 $comuni = Comune::getElencoComuni();

@@ -4,10 +4,10 @@ use itcbonelli\donatempo\tabelle\Esercente;
 
 require_once __DIR__ . '/../include/main.php';
 
-$titolo_pagina = "Esercenti";
+$titolo_pagina = "Esercenti - Gestione Donatempo";
 $link_attivo = 'esercenti';
 
-$esercenti=Esercente::ElencoEsercenti();
+$esercenti = Esercente::ElencoEsercenti();
 
 ob_start();
 ?>
@@ -17,7 +17,7 @@ ob_start();
     <a href="esercente-edit.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi esercente</a>
 </p>
 
-<table id="tabella_esercenti" class="table table-bordered table-striped table-hover" ;>
+<table id="tabella_esercenti" class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
             <th>esercente</th>
@@ -30,18 +30,21 @@ ob_start();
             <th>attivo</th>
         </tr>
     <tbody>
-        <tr>
 
-            <td>1</td>
-            <td>tizio</td>
-            <td>caio</td>
-            <td>00281783340</td>
-            <td>D205</td>
-            <td>corso nizza</td>
-            <td>12100</td>
-            <td>attivo</td>
+        <?php foreach ($esercenti as $esercente) : ?>
+            <tr>
 
-        </tr>
+                <td>1</td>
+                <td><?php echo $esercente->ragsoc; if(!empty($esercente->nome)) echo "<br />{$esercente->nome}" ?></td>
+                <td>caio</td>
+                <td>00281783340</td>
+                <td>D205</td>
+                <td>corso nizza</td>
+                <td>12100</td>
+                <td>attivo</td>
+
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
 <?php

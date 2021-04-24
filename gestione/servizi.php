@@ -3,7 +3,7 @@
 use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Servizi";
+$titolo_pagina = "Servizi - Gestione Donatempo";
 $link_attivo = 'servizi';
 
 $servizi=Servizio::elencoServizi();
@@ -18,7 +18,6 @@ ob_start();
 <table class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
-            <th>Identificativo</th>
             <th>Nome</th>
             <th>Tipologia</th>
             <th>Durata (minuti)</th>
@@ -28,8 +27,7 @@ ob_start();
     <tbody>
         <?php foreach($servizi as $servizio) : ?>
         <tr>
-            <td><?php echo $servizio->id_servizio; ?></td>
-            <td><?php echo $servizio->nome; ?></td>
+            <td><a href="servizio-edit.php?id=<?php echo $servizio->id_servizio; ?>"><?php echo $servizio->nome; ?></a></td>
             <td>
                 <?php echo $servizio->tipo; ?>
             </td>

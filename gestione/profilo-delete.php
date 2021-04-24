@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Cruscotto";
-$link_attivo = 'dashboard';
+$titolo_pagina = "Elimina profilo  - Gestione Donatempo";
+$link_attivo = 'profili';
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>

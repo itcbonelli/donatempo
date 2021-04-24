@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Elimina servizio";
+$titolo_pagina = "Elimina servizio - Gestione Donatempo";
 $link_attivo = 'servizio-delete';
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser

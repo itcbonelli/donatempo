@@ -2,6 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use DateTimeZone;
 use itcbonelli\donatempo\AiutoConvalida;
 use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\filtri\FiltroUtenti;
@@ -392,12 +393,12 @@ class Utente
         $this->id_utente = intval($record['id_utente']);
         $this->username = strval($record['username']);
         $this->password = strval($record['password']);
-        $this->data_creazione = new DateTime($record['data_creazione']);
-        $this->ultimo_accesso = new DateTime($record['ultimo_accesso']);
+        $this->data_creazione = new DateTime($record['data_creazione'], new DateTimeZone('Europe/Rome'));
+        $this->ultimo_accesso = new DateTime($record['ultimo_accesso'], new DateTimeZone('Europe/Rome'));
         $this->email = strval($record['email']);
         $this->attivo = boolval($record['attivo']);
         $this->eliminato = boolval($record['eliminato']);
-        $this->data_eliminazione = new DateTime($record['data_eliminazione']);
+        $this->data_eliminazione = new DateTime($record['data_eliminazione'], new DateTimeZone('Europe/Rome'));
         $this->telefono = strval($record['telefono']);
         $this->volontario = boolval($record['volontario']);
         $this->amministratore = boolval($record['amministratore']);

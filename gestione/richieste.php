@@ -4,7 +4,7 @@ use itcbonelli\donatempo\tabelle\Richiesta;
 use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Richieste di aiuto";
+$titolo_pagina = "Richieste di aiuto - Gestione Donatempo";
 $link_attivo = 'richieste';
 
 $richieste = Richiesta::ElencoRichieste();

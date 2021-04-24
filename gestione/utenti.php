@@ -4,7 +4,7 @@ use itcbonelli\donatempo\filtri\FiltroUtenti;
 use itcbonelli\donatempo\tabelle\Utente;
 
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Gestione utenti";
+$titolo_pagina = "Gestione utenti - Gestione Donatempo";
 $link_attivo = 'utenti';
 
 $filtro = new FiltroUtenti();
@@ -38,7 +38,7 @@ ob_start();
             <?php foreach ($utenti as $utente) : ?>
                 <tr>
                     <td class="text-center"><?= $utente->id_utente ?></td>
-                    <td><?= $utente->username ?></td>
+                    <td><a href="utente-edit.php?id=<?= $utente->id_utente ?>"><?= $utente->username ?></a></td>
                     <td><?= $utente->email ?></td>
                     <td><?= $utente->data_creazione->format('d/m/Y') ?></td>
                     <td><?= $utente->ultimo_accesso->format('d/m/Y') ?></td>

@@ -1,9 +1,16 @@
 <?php
+
+use itcbonelli\donatempo\AiutoDB;
+
 require_once __DIR__ . '/../include/main.php';
-$titolo_pagina = "Cruscotto";
+$titolo_pagina = "Cruscotto - Gestione Donatempo";
 $link_attivo = 'dashboard';
+
+$adb = new AiutoDB($dbconn);
+$numUtenti = $adb->eseguiScalare("SELECT COUNT(*) FROM utenti WHERE attivo=1");
+$numVolontari = $adb->eseguiScalare("SELECT COUNT(*) FROM utenti WHERE attivo=1 AND volontario=1");
+
 ob_start();
-//la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 
 <div class="container-fluid">
@@ -19,11 +26,11 @@ ob_start();
                         <tbody>
                             <tr>
                                 <td>Numero utenti</td>
-                                <td>0</td>
+                                <td><?php echo $numUtenti; ?></td>
                             </tr>
                             <tr>
                                 <td>Numero di volontari</td>
-                                <td>0</td>
+                                <td><?php echo $numVolontari; ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><strong>Richieste</strong></td>
