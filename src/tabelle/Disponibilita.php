@@ -3,6 +3,7 @@
 namespace itcbonelli\donatempo\tabelle;
 
 use itcbonelli\donatempo\AiutoDB;
+use itcbonelli\donatempo\filtri\FiltroBase;
 use itcbonelli\donatempo\filtri\FiltroDisponibilita;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
@@ -55,9 +56,7 @@ class Disponibilita
         if (empty($this->id_partecipazione)) {
             $errori[] = "Inserire identificativo partecipazione";
         }
-        if (strlen($this->data_disp)) {
-            $errori[] = "inserire la data di disponibilita";
-        }
+
         $errori = [];
 
         if (empty($this->ora_inizio)) {
@@ -198,23 +197,34 @@ class Disponibilita
     }
 
     /**
-     * 
+     * Ricerca le disponibilità di tempo in base ai filtri impostati
+     * @param FiltroDisponibilita $filtri filtri per la ricerca
+     * @return array record disponibilita che soddisfano la richiesta
      */
     public static function ricercaDisponibilita(FiltroDisponibilita $filtri)
     {
         global $dbconn;
         $dba = new AiutoDB($dbconn);
 
-        $query = "SELECT * FROM disponibilita WHERE 1=1 ";
+        $query = "SELECT disponibilita.*
+        FROM disponibilita
+        JOIN utente_partecipa_associazione as partecipa on partecipa.id_partecipazione = disponibilita.id_partecipazione
+        JOIN profili ON profili.id_utente = partecipa.utenti_id_utente
+        WHERE 1=1
+        
+        AND disponibilita.ora_inizio = '17:00'
+        AND disponibilita.ora_fine = '18:00' ";
         if (!empty($filtri->data_inizio)) {
-            $query .= " AND data_disp >= '" . $filtri->data_inizio->format('Y-m-d') . "'";
+            $query .= " AND disponibilita.data_disp >= '" . $filtri->data_inizio->format('Y-m-d') . "'";
         }
-        if (!empty($filtri->data_inizio)) {
-            $query .= " AND data_disp <= '" . $filtri->data_fine->format('Y-m-d') . "'";
+        if (!empty($filtri->data_fine)) {
+            $query .= " AND disponibilita.data_disp <= '" . $filtri->data_fine->format('Y-m-d') . "'";
         }
         if (!empty($filtri->cod_comune)) {
+            $query .= " AND profili.id_comune = 'D205' ";
         }
 
         $dataset = $dba->eseguiQuery($query);
+        return $dataset;
     }
 }

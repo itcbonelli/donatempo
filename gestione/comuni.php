@@ -27,12 +27,10 @@ ob_start();
         <tbody>
             <?php foreach ($comuni as $comune) : ?>
                 <tr>
-
-                    <td><?= $comune->id_comune ?></td>
+                    <td><a href="comune-edit.php?id=<?= $comune->id_comune ?>"><?= $comune->id_comune ?></a></td>
                     <td><?= $comune->denominazione ?></td>
                     <td><?= $comune->provincia ?></td>
                     <td><?= "{$comune->latitudine}, {$comune->longitudine}" ?></td>
-
                 </tr>
             <?php endforeach; ?>
         </tbody>

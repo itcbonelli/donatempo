@@ -35,7 +35,7 @@ ob_start();
             <tr>
 
                 <td>1</td>
-                <td><?php echo $esercente->ragsoc; if(!empty($esercente->nome)) echo "<br />{$esercente->nome}" ?></td>
+                <td><a href="esercente-edit.php?id=<?php echo $esercente->id_esercente; ?>"><?php echo $esercente->nome; if(!empty($esercente->ragsoc)) echo "<br /><em><small>{$esercente->ragsoc}" ?></small></em></a></td>
                 <td>caio</td>
                 <td>00281783340</td>
                 <td>D205</td>

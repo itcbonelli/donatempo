@@ -71,12 +71,17 @@ class AiutoInput
      * @param string $nome nome della variabile da leggere
      * @param mixed $default valore predefinito
      * @param string $ordine ordine di lettura dei dati.
-     * 
+     * @return DateTime istanza di DateTiem
      */
     public static function leggiData(string $nome, $default = null, string $ordine = 'GPC'): ?DateTime
     {
         $s = self::leggi($nome, $default, $ordine);
-        $d = DateTime::createFromFormat('Y-m-d', $s, new DateTimeZone(TIMEZONE));
+        if (!empty($s) && is_string($s)) {
+            $d = DateTime::createFromFormat('Y-m-d', $s, new DateTimeZone(TIMEZONE));
+        } else {
+            $d = $default;
+        }
+
         return $d;
     }
 

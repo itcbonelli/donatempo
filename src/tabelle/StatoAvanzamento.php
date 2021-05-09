@@ -57,7 +57,7 @@ class StatoAvanzamento
         global $dbconn;
         $adb = new AiutoDB($dbconn);
         $record = $adb->eseguiQuery("SELECT * FROM stati_avanzamento WHERE codice=`$cod`");
-        if (count($cod) > 0) {
+        if ($record) {
             $this->codice = $record[0]['codice'];
             $this->codiceOld = $record[0]['codice'];
             $this->descrizione = $record[0]['descrizione'];

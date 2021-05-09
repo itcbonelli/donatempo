@@ -1,5 +1,6 @@
 <?php
 
+use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\tabelle\Badge;
 
@@ -22,15 +23,8 @@ ob_start();
 <form action="" method="post" autocomplete="off">
     <h1>Modifica badge</h1>
 
-    <div class="form-group">
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" value="<?= htmlentities($badge->nome); ?>" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label for="descrizione">Descrizione</label>
-        <input type="text" name="descrizione" id="descrizione" required value="<?= $badge->descrizione; ?>" class="form-control" />
-    </div>
+    <?php AiutoHTML::campoInput('nome', 'Nome', $badge->nome, ['required' => true]); ?>
+    <?php AiutoHTML::campoInput('descrizione', 'Descrizione', $badge->descrizione); ?>
 
     <div class="form-group">
         <label for="immagine">Immagine</label>
