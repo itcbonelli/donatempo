@@ -1,26 +1,30 @@
 <?php
 //carico il file principale
 
+use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\tabelle\Provincia;
 use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/include/main.php';
 
 $servizi = Servizio::elencoServizi(true);
+$province = Provincia::caricaTutte();
+$provincia = '';
 
 ?>
 <?php ob_start(); ?>
 
 <form action="ricerca-servizi-step2.php" method="GET">
-    <div class="section">
+    <div class="section" id="step1">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>1. Cosa possiamo fare per te?</h1>
+                    <h1><i class="fa fa-question-circle" aria-hidden="true"></i> Cosa possiamo fare per te?</h1>
                 </div>
             </div>
-            <div class="row">
+            <div class="">
                 <?php foreach ($servizi as $serv) : ?>
-                    <div class="col">
+                    <div>
                         <label for="id_servizio_<?php echo $serv->id_servizio; ?>" class="d-block">
                             <div class="card">
                                 <div class="card-header">
@@ -36,11 +40,38 @@ $servizi = Servizio::elencoServizi(true);
             </div>
         </div>
     </div>
-    <div class="section">
+    <div class="section" id="step2">
+        <div class="container">
+
+            <h1><i class="fa fa-map-marker" aria-hidden="true"></i> Dove?</h1>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="provincia">Provincia</label>
+                        <select name="provincia" id="provincia" class="form-control form-control-lg">
+                            <option value="" selected disabled>---</option>
+                            <?php AiutoHTML::options($province, 'sigla', 'denominazione', $provincia); ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="comune">Comune</label>
+                        <select name="comune" id="comune" class="form-control form-control-lg">
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="section" id="step3">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1>2. Quando ti serve?</h1>
+                    <h1><i class="fa fa-calendar-o" aria-hidden="true"></i> Quando?</h1>
                 </div>
             </div>
             <div class="row py-2 pb-4">

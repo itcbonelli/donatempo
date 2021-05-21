@@ -45,6 +45,12 @@ class PartecipazioneAssociazione
      */
     public $ruolo;
 
+    /**
+     * Indica che la partecipazione all'associazione è stata verificata dall'associazione stessa.
+     * @var boolean
+     */
+    public bool $confermato=false;
+
 
     /**
      * Carica il record della partecipazione
@@ -64,6 +70,7 @@ class PartecipazioneAssociazione
             $this->id_utente = $riga['id_utente'];
             $this->id_associazione = $riga['id_associazione'];
             $this->ruolo = $riga['ruolo'];
+            $this->confermato = boolval($riga['confermato']);
             return true;
         } else {
             return false;
@@ -98,6 +105,7 @@ class PartecipazioneAssociazione
                 $partecipa->id_utente = $riga['utenti_id_utente'];
                 $partecipa->id_associazione = $riga['associazioni_id_associazione'];
                 $partecipa->ruolo = $riga['ruolo'];
+                $partecipa->confermato = $riga['confermato'];
                 $partecipazioneAssociazione[] = $partecipa;
             }
         }

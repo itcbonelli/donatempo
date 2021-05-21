@@ -30,9 +30,13 @@ class Calendario
     {
         if ($anno == -1) {
             $this->anno = intval(date('Y'));
+        } else {
+            $this->anno = $anno;
         }
         if ($mese < 1 || $mese > 12) {
             $this->mese = intval(date('m'));
+        } else {
+            $this->mese = $mese;
         }
     }
 

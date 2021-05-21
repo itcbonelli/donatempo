@@ -4,14 +4,17 @@
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\calendario\Calendario;
 use itcbonelli\donatempo\tabelle\Associazione;
+use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
 
-$associazioni = Associazione::elencoAssociazioni();
+$associazioni = Associazione::getMieAssociazioni();
 $mese = AiutoInput::leggiIntero('mese', intval(date('m')));
 $anno = AiutoInput::leggiIntero('anno', intval(date('Y')));
-$cal=new Calendario();
+$cal = new Calendario($mese, $anno);
+
+$servizi = Servizio::elencoServizi(true);
 
 ?>
 <?php ob_start(); ?>
@@ -59,6 +62,31 @@ $cal=new Calendario();
                                 <label for="ora_fine">Ora fine</label>
                                 <input type="time" name="ora_fine" id="ora_fine" class="form-control" />
                             </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="ripeti" class="checkbox"><input type="checkbox" name="ripeti" id="ripeti"> Ripeti settimanalmente fino alla seguente data</label>
+                                    <input type="date" name="data_fine_ripeti" id="data_fine_ripeti" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <p><strong>Servizi offerti:</strong></p>
+                                    <label for="tutti_servizi" class="checkbox"><input type="checkbox" name="tutti_servizi" id="tutti_servizi"> Seleziona tutti</label><br />
+                                    <?php 
+                                    foreach($servizi as $servizio) {
+                                        echo "<label class='checkbox'><input type='checkbox' name='servizi[{$servizio->id_servizio}]' checked /> {$servizio->nome}</label><br />";
+                                    }
+                                    ?>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="form-group col" style="align-self:flex-end">
                                 <button type="submit" class="btn btn-primary">conferma</button>
                             </div>
@@ -69,6 +97,18 @@ $cal=new Calendario();
         </div>
     </div>
 </div>
+<script>
+    (function() {
+        var ripeti = document.getElementById('ripeti');
+        var data_fine_ripeti = document.getElementById('data_fine_ripeti');
+
+        function ripeti_onchange() {
+            data_fine_ripeti.checked = ripeti.checked;
+        }
+
+        ripeti.addEventListener('change', ripeti_onchange);
+    }());
+</script>
 <?php $contenuto = ob_get_clean(); ?>
 
 <?php

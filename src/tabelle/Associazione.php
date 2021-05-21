@@ -248,6 +248,40 @@ class Associazione
         return $dataset;
     }
 
+    /**
+     * Ottiene l'elenco delle sole associazioni a cui appartiene l'utente corrente
+     * @return Associazione[]
+     */
+    public static function getMieAssociazioni($solo_verificate=true) {
+        global $dbconn;
+        $io = Utente::getMioUtente();
+        $dataset = [];
+
+        $sql = "SELECT associazioni.* FROM associazioni 
+        INNER JOIN utente_partecipa_associazione AS partecipa ON partecipa.associazioni_id_associazione=associazioni.id_associazione
+        WHERE partecipa.utenti_id_utente = {$io->id_utente}";
+        if($solo_verificate) {
+            $sql.= " AND confermato=true ";
+        }
+        $sql.="ORDER BY ragsoc";
+
+        $comando = $dbconn->prepare($sql);
+        $esegui = $comando->execute();
+        if ($esegui) {
+            while ($riga = $comando->fetch(PDO::FETCH_ASSOC)) {
+                $assoc = new Associazione();
+                $assoc->id_associazione = $riga['id_associazione'];
+                $assoc->ragsoc = $riga['ragsoc'];
+                $assoc->codfis = $riga['codfis'];
+                $assoc->url_logo = $riga['url_logo'];
+                $assoc->descrizione = $riga['descrizione'];
+                $dataset[] = $assoc;
+            }
+        }
+
+        return $dataset;
+    }
+
 
     /**
      * Determina se l'utente connesso può apportare una modifica al record

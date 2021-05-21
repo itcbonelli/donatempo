@@ -340,7 +340,7 @@ class Utente
      */
     public function getProfilo()
     {
-        if ($this->id == null) {
+        if ($this->id_utente == null) {
             return null;
         }
         $pro = new Profilo();

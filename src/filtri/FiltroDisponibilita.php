@@ -10,6 +10,8 @@ class FiltroDisponibilita extends FiltroBase
     public string $cod_comune = "";
     public ?DateTime $data_inizio = null;
     public ?DateTime $data_fine = null;
+    public ?DateTime $ora_inizio = null;
+    public ?DateTime $ora_fine = null;
     public int $id_volontario = -1;
 
 

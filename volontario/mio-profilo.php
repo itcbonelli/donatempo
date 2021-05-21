@@ -1,6 +1,18 @@
 <?php
 //carico il file principale
+
+use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\tabelle\Comune;
+use itcbonelli\donatempo\tabelle\Provincia;
+use itcbonelli\donatempo\tabelle\Utente;
+
 require_once __DIR__ . '/../include/main.php';
+
+$province = Provincia::caricaTutte();
+$comuni = Comune::getElencoComuni();
+$profilo = Utente::getMioUtente()->getProfilo();
+
 define('PERCORSO_BASE', '..');
 ?>
 <?php ob_start(); ?>
@@ -31,25 +43,26 @@ define('PERCORSO_BASE', '..');
                     <div class="col">
                         <div class="row">
                             <div class="col" style="min-width: 256px">
-                                <div class="form-group">
-                                    <label for="nome">Nome</label>
-                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="">
-                                </div>
+                                <?php AiutoHTML::campoInput('nome', 'Nome', $profilo->nome); ?>
                             </div>
                             <div class="col" style="min-width: 256px">
-                                <div class="form-group">
-                                    <label for="cognome">Cognome</label>
-                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="">
-                                </div>
+                                <?php AiutoHTML::campoInput('cognome', 'Cognome', $profilo->cognome); ?>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col">
+                                <?php AiutoHTML::campoInput('indirizzo', 'Indirizzo', $profilo->indirizzo); ?>
+                            </div>
+                            <div class="col">
+                                <?php AiutoHTML::campoInput('cap', 'Cap', $profilo->indirizzo); ?>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col" style="min-width: 256px">
                                 <div class="form-group">
                                     <label for="provincia">Provincia</label>
                                     <select name="provincia" id="provincia" class="form-control">
-
+                                        <?php AiutoHTML::options($province, 'sigla', 'denominazione'); ?>
                                     </select>
                                 </div>
                             </div>
@@ -57,9 +70,17 @@ define('PERCORSO_BASE', '..');
                                 <div class="form-group">
                                     <label for="comune">Comune</label>
                                     <select name="comune" id="comune" class="form-control">
-
+                                        <?php AiutoHTML::options($comuni, 'id_comune', 'denominazione', $profilo->id_comune); ?>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="min-width: 256px">
+                                <?php AiutoHTML::campoInput('telefono1', 'Telefono 1', $profilo->telefono1); ?>
+                            </div>
+                            <div class="col" style="min-width: 256px">
+                                <?php AiutoHTML::campoInput('telefono2', 'Telefono 2', $profilo->telefono2); ?>
                             </div>
                         </div>
                     </div>
@@ -114,7 +135,7 @@ define('PERCORSO_BASE', '..');
 </div>
 
 <script>
-    var elencoProvince=[];
+    var elencoProvince = [];
 </script>
 
 <?php $contenuto = ob_get_clean(); ?>
