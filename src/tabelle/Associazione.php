@@ -4,6 +4,7 @@ namespace itcbonelli\donatempo\tabelle;
 
 use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\Notifica;
+use Normalizer;
 use \PDO, \DateTime, \Exception;
 
 /**
@@ -11,6 +12,9 @@ use \PDO, \DateTime, \Exception;
  */
 class Associazione
 {
+
+    const DIR_LOGHI = 'uploads/loghi_associazioni';
+
     /**
      * Identificativo associazione
      */
@@ -43,6 +47,11 @@ class Associazione
     public $settori = [];
 
     /**
+     * Indica che l'associazione è attiva
+     */
+    public $attivo = true;
+
+    /**
      * Salva le modifiche apportate al record
      * @author Federica Ricci
      * @return bool esito dell'operazione
@@ -64,6 +73,7 @@ class Associazione
         $url_logo = addslashes($this->url_logo);
         $descrizione = addslashes($this->descrizione);
         $id_settore = $this->id_settore;
+        $attivo = intval($this->attivo);
 
         if (empty($this->id_associazione)) {
             $query = "INSERT INTO associazioni(ragsoc,codfis,url_logo,descrizione,id_settore)
@@ -76,7 +86,8 @@ class Associazione
             codfis='$codfis'
             url_logo='$url_logo',
             descrizione='$descrizione',
-            url_logo=$id_settore
+            url_logo=$id_settore,
+            attivo=$attivo
             WHERE id_associazione=$id_associazione";
             $comando = $dbconn->prepare($query);
             $esegui = $comando->execute();
@@ -110,6 +121,7 @@ class Associazione
             $this->codfis = $riga['codfis'];
             $this->url_logo = $riga['url_logo'];
             $this->descrizione = $riga['descrizione'];
+            $this->attivo = boolval($riga['attivo']);
             return true;
         } else {
             return false;
@@ -252,7 +264,8 @@ class Associazione
      * Ottiene l'elenco delle sole associazioni a cui appartiene l'utente corrente
      * @return Associazione[]
      */
-    public static function getMieAssociazioni($solo_verificate=true) {
+    public static function getMieAssociazioni($solo_verificate = true)
+    {
         global $dbconn;
         $io = Utente::getMioUtente();
         $dataset = [];
@@ -260,10 +273,10 @@ class Associazione
         $sql = "SELECT associazioni.* FROM associazioni 
         INNER JOIN utente_partecipa_associazione AS partecipa ON partecipa.associazioni_id_associazione=associazioni.id_associazione
         WHERE partecipa.utenti_id_utente = {$io->id_utente}";
-        if($solo_verificate) {
-            $sql.= " AND confermato=true ";
+        if ($solo_verificate) {
+            $sql .= " AND confermato=true ";
         }
-        $sql.="ORDER BY ragsoc";
+        $sql .= "ORDER BY ragsoc";
 
         $comando = $dbconn->prepare($sql);
         $esegui = $comando->execute();
@@ -316,5 +329,50 @@ class Associazione
 
 
         return false;
+    }
+
+    /**
+     * Ottiene i settori in cui opera l'associazione
+     * @return Settore[]
+     */
+    public function getSettori()
+    {
+        global $dbconn;
+        $settori = [];
+        $adb = new AiutoDB($dbconn);
+        $ds = $adb->eseguiQuery("SELECT * FROM `settori_has_associazioni` WHERE associazioni_id_associazione = {$this->id_associazione} ");
+        foreach ($ds as $rec) {
+            $sett = new Settore();
+            $sett->carica($rec['settori_id_settore']);
+            $settori[] = $sett;
+        }
+
+        return $settori;
+    }
+
+    /**
+     * Determina se l'associazione ha un logo caricato
+     */
+    function haLogo() {
+        if(empty($this->url_logo)) {
+            return false;
+        }
+
+        if(!file_exists(__DIR__ . "/../../{$this->url_logo}")) {
+            Notifica::accoda('immagine logo inesistente', Notifica::TIPO_AVVERTENZA);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Carica il logo dell'associazione
+     */
+    function caricaLogo($nomeCampo) {
+        $updir=realpath(__DIR__ . '/../../' . self::DIR_LOGHI);
+        if(isset($_FILES[$nomeCampo])) {
+            move_uploaded_file($_FILES[$nomeCampo]['tmp_name'], $updir . "/");
+        }
     }
 }

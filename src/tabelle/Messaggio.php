@@ -2,6 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use DateTimeZone;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -196,5 +197,18 @@ class Messaggio
             }
         }
         return $messaggi;
+    }
+
+    /**
+     * Popola i campi dell'oggetto con i dati presenti in un vettore
+     */
+    public function popolaCampi(array $dati) {
+        $this->id = $dati['id'];
+        $this->data_invio = new DateTime(strtotime($dati['data_invio']), new DateTimeZone(TIMEZONE));
+        $this->id_richiesta = $dati['id_richiesta'];
+        $this->id_destinatario = $dati['id_destinatario'];
+        $this->id_mittente = $dati['id_mittente'];
+        $this->contenuto = $dati['contenuto'];
+        
     }
 }

@@ -2,11 +2,33 @@
 
 namespace itcbonelli\donatempo;
 
+use itcbonelli\donatempo\tabelle\Comune;
+use itcbonelli\donatempo\tabelle\Provincia;
+
 /**
  * Funzioni di supporto per l'output html
  */
 class AiutoHTML
 {
+    /**
+     * Mostra l'elenco dei comuni in un elenco a discesa
+     * @param string $selezionato Codice comune selezionato
+     */
+    public static function optionsComuni(?string $selezionato = "")
+    {
+        $province = Provincia::caricaTutte();
+        foreach ($province as $prov) {
+            printf("<optgroup data-provincia=\"%s\" label=\"%s\">", $prov->sigla, $prov->denominazione);
+            $comuni = Comune::getElencoComuni($prov->sigla);
+            foreach ($comuni as $comune) {
+                $selected = '';
+                $selected = ($comune->id_comune == $selezionato) ? 'selected' : '';
+                printf("<option value='%s' %s data-provincia='%s'>%s</option>", $comune->id_comune, $selected, $comune->provincia, htmlentities($comune->denominazione));
+            }
+            echo "</optgroup>";
+        }
+    }
+
     /**
      * Mostra le opzioni di un elenco a discesa
      * @param array $dataset elementi con cui popolare l'elenco
@@ -14,7 +36,7 @@ class AiutoHTML
      * @param string $valueMember Membro da cui ottenere il valore da memorizzare
      * @param string $selectedValue Valore selezionato
      */
-    public static function options(array $dataset, string $valueMember,  string $displayMember, string $selectedValue = "")
+    public static function options(array $dataset, string $valueMember,  string $displayMember, ?string $selectedValue = "")
     {
         foreach ($dataset as $elemento) {
             $selected = '';
@@ -41,15 +63,21 @@ class AiutoHTML
             'type' => 'text',
             'required' => false,
             'id' => $nome,
-            'minlength' => null,
-            'maxlength' => null,
+            'minlength' => 0,
+            'maxlength' => 524288,
             'readonly' => false,
+            'disabled' => false,
             'helpString' => ''
         ], $opzioni);
 ?>
         <div class="form-group">
-            <label for="<?php echo $opzioni['id']; ?>"><?php echo $etichetta; ?></label>
-            <input type="<?php echo $opzioni['type']; ?>" name="<?php echo $nome; ?>" id="<?php echo $opzioni['id']; ?>" value="<?php echo htmlentities($valore); ?>" <?php if ($opzioni['required']) echo 'required="required"'; ?> <?php if (!empty($opzioni['minlength'])) echo "minlength='{$opzioni['minlength']}'"; ?> <?php if (!empty($opzioni['maxlength'])) echo "minlength='{$opzioni['maxlength']}'"; ?> class="form-control" />
+            <label for="<?= $opzioni['id']; ?>"><?= $etichetta; ?></label>
+            <input type="<?= $opzioni['type']; ?>" name="<?= $nome; ?>" 
+                id="<?= $opzioni['id']; ?>" value="<?= htmlentities($valore); ?>" 
+                <?= ($opzioni['required']) ? ' required ' : ''; ?> <?= ($opzioni['disabled']) ? ' disabled ' : ''; ?> 
+                minlength="<?= $opzioni['minlength']; ?>" 
+                maxlength="<?= $opzioni['maxlength']; ?>" 
+                class="form-control" />
             <?php if (!empty($opzioni['helpString'])) echo "<div class='text-muted'>{$opzioni['helpString']}</div>"; ?>
         </div>
     <?php
@@ -98,7 +126,21 @@ class AiutoHTML
     /**
      * Visualizza un bottone per bootstrap
      */
-    public static function bsButton($nome, $etichetta, $valore, $tipo='primary') {
-        echo "<button class='btn btn-$tipo' name='$nome' value='$valore'>$etichetta</button>";
+    public static function bsButton($nome, $etichetta, $valore, $type = 'submit', $aspetto = 'primary')
+    {
+        echo "<button type='{$type}' class='btn btn-$aspetto' name='$nome' value='$valore'>$etichetta</button>";
+    }
+
+
+    /**
+     * Mostra in maniera visuale un valore booleano
+     */
+    public static function yesNo($valore)
+    {
+        if (boolval($valore)) {
+            echo "<span class='fa fa-check' style='color: forestgreen'></span>";
+        } else {
+            echo "<span class='fa fa-times' style='color: darkred'></span>";
+        }
     }
 }

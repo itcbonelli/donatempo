@@ -114,6 +114,9 @@ class Profilo
             'latitudine' => floatval($this->latitudine)
         ];
 
+        //var_dump($record);
+        //exit();
+
         if (self::esiste($this->id_utente)) {
             return boolval($dba->aggiorna('profili', $record, "id_utente={$this->id_utente}"));
         } else {

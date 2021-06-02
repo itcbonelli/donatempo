@@ -1,5 +1,6 @@
 <?php
 
+use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\tabelle\Associazione;
 
 require_once __DIR__ . '/../include/main.php';
@@ -17,10 +18,11 @@ ob_start();
 <table id="tab_associaz" class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
-            <th>Identificativo</th>
+            <th style="width: 32px;">Id.</th>
             <th>ragione sociale</th>
             <th>Cod. fis.</th>
             <th>Logo</th>
+            <th class="text-center">Attivo</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +32,9 @@ ob_start();
                 <td><a href="associazione-edit.php?id=<?= $associazione->id_associazione; ?>"><?= $associazione->ragsoc; ?></a></td>
                 <td><?= $associazione->codfis; ?></td>
                 <td><?= $associazione->url_logo; ?></td>
+                <td class="text-center">
+                    <?php AiutoHTML::yesNo($associazione->attivo); ?>                   
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>

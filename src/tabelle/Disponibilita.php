@@ -143,12 +143,13 @@ class Disponibilita
 
     /**
      * Ottiene i dati del volontario
-     * @return Profilo
+     * @return Utente
+     * @deprecated richiamare invece getUtente
      */
     public function getVolontario()
     {
         $part = $this->getPartecipazione();
-        $profilo = new Profilo();
+        $profilo = new Utente();
         $profilo->carica($part->idUtente);
     }
 

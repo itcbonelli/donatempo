@@ -118,3 +118,8 @@
   font-size: 12px;
 }
 
+.chosen-container-single .chosen-single {
+  height: 32px;
+  line-height: 32px;
+  display:block;
+}

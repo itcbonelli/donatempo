@@ -126,16 +126,18 @@ class PartecipazioneAssociazione
 
         $partecipazioneAssociazione = [];
 
-        $query = "SELECT utenti_id_utente FROM utente_partecipa_associazione WHERE associazioni_id_associazione=$id_associazione";
+        $query = "SELECT * FROM utente_partecipa_associazione WHERE associazioni_id_associazione=$id_associazione";
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
 
         if ($esegui == true) {
             while ($riga = $comando->fetch()) {
                 $part = new PartecipazioneAssociazione();
-                $part->id_associazione = $riga['id_associazione'];
-                $part->id_partecipazione = $riga['id_utente'];
-                $partecipazioneAssociazione[] = $riga;
+                $part->id_partecipazione = $riga['id_partecipazione'];
+                $part->id_associazione = $riga['associazioni_id_associazione'];
+                $part->id_utente = $riga['utenti_id_utente'];
+                $part->ruolo = $riga['ruolo'];
+                $partecipazioneAssociazione[] = $part;
             }
             return $partecipazioneAssociazione;
         } else {

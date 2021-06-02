@@ -81,6 +81,11 @@ class Utente
     public string $codice_recupero = "";
 
     /**
+     * Profilo dell'utente. Viene caricato dalla funzione getProfilo la prima volta
+     */
+    private ?Profilo $profilo = null;
+
+    /**
      * Salva il record nel database
      * @author Francesco Miglietti
      * @return bool esito dell'operazione
@@ -132,6 +137,30 @@ class Utente
     }
 
     /**
+     * Verifica l'attuale password dell'utente corrente
+     */
+    public function verificaPassword($password)
+    {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $password = hash('sha256', $password);
+        $ris = $adb->eseguiScalare("SELECT count(`password`) FROM utenti WHERE id_utente=:id AND `password`=:pwd", ['id' => $this->id_utente, 'pwd' => $password]);
+        return boolval($ris);
+    }
+
+    /**
+     * Cambia la password dell'utente corrente
+     */
+    public function cambiaPassword($password)
+    {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $password = hash('sha256', $password);
+        $ris = $adb->eseguiComando("UPDATE utenti SET password=:pwd WHERE id_utente=:id", ['pwd' => $password, 'id' => $this->id_utente]);
+        return boolval($ris);
+    }
+
+    /**
      * Carica i dati del record
      * @author Francesco Miglietti
      * @param int $id_utente identificativo utente
@@ -176,7 +205,7 @@ class Utente
             $_SESSION['id_utente'] = $riga['id_utente'];
             $_SESSION['username'] = $riga['username'];
 
-            $utente=new Utente();
+            $utente = new Utente();
             $utente->carica($riga['id_utente']);
 
             //aggiorno la data ultimo accesso
@@ -340,12 +369,18 @@ class Utente
      */
     public function getProfilo()
     {
+        //ottimizzazione:
+        //se ho già caricato il profilo dell'utente non lo devo caricare una seconda volta!
+        if ($this->profilo instanceof Profilo) {
+            return $this->profilo;
+        }
+
         if ($this->id_utente == null) {
             return null;
         }
-        $pro = new Profilo();
-        $pro->carica($this->id_utente);
-        return $pro;
+        $this->profilo = new Profilo();
+        $this->profilo->carica($this->id_utente);
+        return $this->profilo;
     }
 
     /**

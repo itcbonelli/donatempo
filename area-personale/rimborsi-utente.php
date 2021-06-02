@@ -1,17 +1,26 @@
 <?php
 
+use itcbonelli\donatempo\AiutoDB;
+
 require_once __DIR__ . '/../include/main.php';
-define('PERCORSO_BASE', '..');
+define('PERCORSO_BASE', '../');
+
+$query = "SELECT rimborsi_spese.* FROM rimborsi_spese
+INNER JOIN richieste ON richieste.id_richiesta=rimborsi_spese.id_richiesta";
+
+$adb=new AiutoDB($dbconn);
+$rimborsi=$adb->eseguiQuery($query);
+
 
 ?>
 <?php ob_start(); ?>
-
-
 <div class="section">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <h1>Rimborsi spese</h1>
+
+                <p>In questa pagina puoi prendere visione delle spese che i volontari hanno anticipato e che devono essere rimborsate.</p>
 
                 <table class="table table-striped">
                     <thead>
@@ -24,9 +33,10 @@ define('PERCORSO_BASE', '..');
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($rimborsi as $rimborso) : ?>
                         <tr>
-                            <td>12</td>
-                            <td>01/02/2023</td>
+                            <td><?= $rimborso['id_richiesta'] ?></td>
+                            <td><?= $rimborso['data_spesa'] ?></td>
                             <td>Croce Rossa Italiana</td>
                             <td>€ 50,00</td>
                             <td>
@@ -35,6 +45,7 @@ define('PERCORSO_BASE', '..');
                                 <span class="badge badge-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Da rimborsare</span>
                             </td>
                         </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

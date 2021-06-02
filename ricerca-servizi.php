@@ -2,6 +2,7 @@
 //carico il file principale
 
 use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\tabelle\Provincia;
 use itcbonelli\donatempo\tabelle\Servizio;
 
@@ -10,6 +11,8 @@ require_once __DIR__ . '/include/main.php';
 $servizi = Servizio::elencoServizi(true);
 $province = Provincia::caricaTutte();
 $provincia = '';
+
+$comune=AiutoInput::leggiStringa('comune', '', 'G');
 
 ?>
 <?php ob_start(); ?>
@@ -49,7 +52,7 @@ $provincia = '';
                 <div class="col">
                     <div class="form-group">
                         <label for="provincia">Provincia</label>
-                        <select name="provincia" id="provincia" class="form-control form-control-lg">
+                        <select name="provincia" id="provincia" class="form-control form-control-lg" onchange="setProvincia(this, 'comune');">
                             <option value="" selected disabled>---</option>
                             <?php AiutoHTML::options($province, 'sigla', 'denominazione', $provincia); ?>
                         </select>
@@ -59,7 +62,7 @@ $provincia = '';
                     <div class="form-group">
                         <label for="comune">Comune</label>
                         <select name="comune" id="comune" class="form-control form-control-lg">
-
+                            <?php AiutoHTML::optionsComuni($comune); ?>
                         </select>
                     </div>
                 </div>
@@ -105,6 +108,7 @@ $provincia = '';
         </div>
     </div>
 </form>
+<script src="./js/filtro-provincia.js"></script>
 <script>
     var cal_data_inizio = document.getElementById('data_iniziale');
     var cal_data_fine = document.getElementById('data_finale');

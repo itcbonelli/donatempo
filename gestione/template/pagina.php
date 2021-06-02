@@ -91,11 +91,10 @@ if(is_null($mio_utente)) {
 
                     voce_menu('Cruscotto', 'dashboard', 'fa fa-dashboard', 'index.php');
                     voce_menu('Utenti', 'utenti', 'fa fa-user', 'utenti.php');
-                    voce_menu('Profili', 'profili', 'fa fa-user', 'profili.php');
-                    voce_menu('Badge', 'badge', 'fa fa-trophy', 'badge.php');
                     voce_menu('Associazioni', 'associazioni', 'fa fa-building', 'associazioni.php');
-                    voce_menu('Esercenti', 'esercenti', 'fa fa-briefcase', 'esercenti.php');
                     voce_menu('Servizi', 'servizi', 'fa fa-handshake-o', 'servizi.php');
+                    voce_menu('Badge', 'badge', 'fa fa-trophy', 'badge.php');
+                    voce_menu('Esercenti', 'esercenti', 'fa fa-briefcase', 'esercenti.php');
                     voce_menu('Richieste di aiuto', 'richieste', 'fa fa-question-circle', 'richieste.php');
                     voce_menu('Stati avanzamento richiesta', 'stati-avanzamento', 'fa fa-percent', 'stati-avanzamento.php');
                     voce_menu('Comuni', 'comuni', 'fa fa-map-marker', 'comuni.php');
@@ -116,6 +115,7 @@ if(is_null($mio_utente)) {
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/filtro-provincia.js"></script>
 </body>
 
 </html>

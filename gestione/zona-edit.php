@@ -23,7 +23,7 @@ ob_start();
 <form action="" method="post">
     <?php AiutoHTML::campoInput('id_zona', 'Identificativo', $zona->id_zona, ['readonly' => true]); ?>
     <?php AiutoHTML::campoInput('denominazione', 'Denominazione', $zona->denominazione, ['maxlength' => 50]); ?>
-    <?php AiutoHTML::bsButton('azione', 'Salva', 'salva', 'primary'); ?>
+    <?php AiutoHTML::bsButton('azione', 'Salva', 'salva'); ?>
 </form>
 
 <hr />

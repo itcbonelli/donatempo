@@ -3,7 +3,9 @@
 
 use itcbonelli\donatempo\tabelle\Utente;
 
-require_once __DIR__ . '/include/main.php';
+define('PERCORSO_BASE', '..');
+
+require_once __DIR__ . '/../include/main.php';
 
 $utente = Utente::getMioUtente();
 
@@ -27,7 +29,7 @@ $utente = Utente::getMioUtente();
             {
             ?>
                 <div class="col text-center">
-                    <a href="<?= $link ?>" class="appy-link">
+                    <a href="<?= PERCORSO_BASE . '/' . $link ?>" class="appy-link">
                         <div>
                             <div class="appy-icon color-<?= $color ?>">
                                 <i class="fa fa-<?= $icon ?>" aria-hidden="true"></i>
@@ -44,11 +46,15 @@ $utente = Utente::getMioUtente();
             <?php
             }
 
-            appy_icon('Il mio profilo', 'user-circle', 'volontario/mio-profilo.php', 'Modifica i tuoi dati personali e di contatto');
+            appy_icon('Il mio profilo', 'user-circle', 'area-personale/mio-profilo.php', 'Modifica i tuoi dati personali e di contatto');
             if ($utente->volontario) {
-                appy_icon('Traguardi', 'trophy', 'volontario/riconoscimenti.php', 'Visualizza i traguardi raggiunti grazie a Dona Tempo!');
-                appy_icon('Richieste', 'ticket', 'volontario/mie-richieste.php', 'Visualizza le richieste assegnate a te');
-                appy_icon('Disponibilità di tempo', 'calendar-check-o', 'volontario/mie-disponibilita.php', 'Comunica le tue disponibilità di tempo per dare una mano');
+                appy_icon('Traguardi', 'trophy', 'area-personale/riconoscimenti.php', 'Visualizza i traguardi raggiunti grazie a Dona Tempo!');
+                appy_icon('Richieste', 'ticket', 'area-personale/mie-richieste.php', 'Visualizza le richieste assegnate a te');
+                appy_icon('Disponibilità di tempo', 'calendar-check-o', 'area-personale/mie-disponibilita.php', 'Comunica le tue disponibilità di tempo per dare una mano');
+                appy_icon('Rimborsi', 'money', 'area-personale/rimborsi-volontario.php', 'Visualizza e inserisci le spese da rimborsare');
+            } else {
+                appy_icon('Richieste', 'ticket', 'area-personale/mie-richieste.php', 'Visualizza le tue richieste di aiuto');
+                appy_icon('Rimborsi', 'money', 'area-personale/rimborsi-utente.php', 'Visualizza le spese da rimborsare ai volontari');
             }
 
             ?>
@@ -59,5 +65,5 @@ $utente = Utente::getMioUtente();
 <?php $contenuto = ob_get_clean(); ?>
 
 <?php
-require_once __DIR__ . '/template/index.php';
+require_once __DIR__ . '/../template/index.php';
 ?>

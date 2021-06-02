@@ -1,5 +1,7 @@
 <?php
 
+use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\filtri\FiltroUtenti;
 use itcbonelli\donatempo\tabelle\Utente;
 
@@ -8,6 +10,7 @@ $titolo_pagina = "Gestione utenti - Gestione Donatempo";
 $link_attivo = 'utenti';
 
 $filtro = new FiltroUtenti();
+$filtro->orderby=AiutoInput::leggiStringa('orderby', 'data_creazione', 'G');
 $utenti = Utente::ElencoUtenti($filtro);
 
 ob_start();
@@ -16,7 +19,7 @@ ob_start();
 <h1>Gestione utenti</h1>
 
 <p>
-    <a class="btn btn-primary" href="utente-edit.php" role="button"><i class="fa fa-user-plus" aria-hidden="true"></i> Crea utente</a>
+    <a class="btn btn-success" href="utente-edit.php" role="button"><i class="fa fa-user-plus" aria-hidden="true"></i> Crea utente</a>
 </p>
 
 <div class="table-responsive">
@@ -24,15 +27,15 @@ ob_start();
         <thead>
             <tr>
                 <th><abbr title="Identificativo utente">Id</abbr></th>
-                <th>Nome utente</th>
+                <th><a href="?orderby=username">Nome utente</a></th>
                 <th>Email</th>
-                <th>Data creazione</th>
-                <th>Data ultimo accesso</th>
+                <th><a href="?orderby=data_creazione">Data creazione</a></th>
+                <th><a href="?orderby=ultimo_accesso">Data ultimo accesso</a></th>
 
-                <th>attivo</th>
-                <th>eliminato</th>
+                
                 <th>telefono</th>
-                <th>volontario</th>
+                <th><a href="?orderby=attivo">Attivo</a></th>
+                <th><a href="?orderby=volontario">volontario</a></th>
             </tr>
         <tbody>
             <?php foreach ($utenti as $utente) : ?>
@@ -43,15 +46,12 @@ ob_start();
                     <td><?= $utente->data_creazione->format('d/m/Y') ?></td>
                     <td><?= $utente->ultimo_accesso->format('d/m/Y') ?></td>
 
-                    <td class="text-center">
-                        <?= $utente->attivo ? 'Sì' : 'No'; ?>
-                    </td>
-                    <td class="text-center">
-                        <?= $utente->eliminato ? 'Sì' : 'No'; ?>
-                    </td>
                     <td><?= $utente->telefono ?></td>
                     <td class="text-center">
-                        <?= $utente->volontario ?>
+                        <?php AiutoHTML::yesNo($utente->attivo); ?>
+                    </td>
+                    <td class="text-center">
+                        <?php AiutoHTML::yesNo($utente->volontario); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -33,18 +33,19 @@ $utente = Utente::getMioUtente();
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                         <?= $utente->username; ?></a>
                     <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/index.php"><i class="fa fa-home" aria-hidden="true"></i> Area personale</a>
 
                         <?php if ($utente->volontario) : ?>
                             <span class="dropdown-item disabled">Area volontario</span>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/riconoscimenti.php"><i class="fa fa-trophy" aria-hidden="true"></i> Riconoscimenti</a>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mio-profilo.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-richieste.php"><i class="fa fa-ticket" aria-hidden="true"></i> Richieste</a>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-disponibilita.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Mie disponibilità</a>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-associazioni.php"><i class="fa fa-building-o" aria-hidden="true"></i> Mie associazioni</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/riconoscimenti.php"><i class="fa fa-trophy" aria-hidden="true"></i> Riconoscimenti</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/mio-profilo.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/mie-richieste.php"><i class="fa fa-ticket" aria-hidden="true"></i> Richieste</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/mie-disponibilita.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Mie disponibilità</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/mie-associazioni.php"><i class="fa fa-building-o" aria-hidden="true"></i> Mie associazioni</a>
                         <?php else : ?>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/rimborsi.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mio-profilo.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
-                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/volontario/mie-richieste.php"><i class="fa fa-ticket" aria-hidden="true"></i> Richieste</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/rimborsi-utente.php"><i class="fa fa-money" aria-hidden="true"></i> Rimborsi spese</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/mio-profilo.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Profilo</a>
+                            <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/mie-richieste.php"><i class="fa fa-ticket" aria-hidden="true"></i> Richieste</a>
                         <?php endif; ?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-danger" href="<?php echo PERCORSO_BASE ?>/logout.php"><i class="fa fa-times" aria-hidden="true"></i> Disconnetti</a>

@@ -6,18 +6,18 @@ use itcbonelli\donatempo\tabelle\Utente;
 
 require_once __DIR__ . '/include/main.php';
 
-if ($_POST) {
+$azione=AiutoInput::leggiStringa('azione', '', 'P');
+if ($azione=='login') {
     $username = AiutoInput::leggiStringa('username');
     $password = AiutoInput::leggiStringa('password');
 
     if (!empty($username) && !empty($password)) {
         $login = Utente::login($username, $password);
         if ($login) {
-            header('location:area-riservata.php');
+            header('location:area-personale/index.php');
         }
     }
 }
-
 
 ?>
 <?php ob_start(); ?>
@@ -36,7 +36,7 @@ if ($_POST) {
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" id="password" />
         </div>
-        <button type="submit" class="btn btn-primary">Accedi</button>
+        <button type="submit" class="btn btn-primary" name="azione" value="login">Accedi</button>
     </form>
     <ul class="nav flex-column">
         <li class="nav-item"><a href="recupero-password.php" class="nav-link">Hai dimenticato i dati di accesso?</a></li>

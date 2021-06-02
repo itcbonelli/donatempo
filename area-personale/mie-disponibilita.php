@@ -3,6 +3,7 @@
 
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\calendario\Calendario;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
 use itcbonelli\donatempo\tabelle\Servizio;
 
@@ -16,6 +17,12 @@ $cal = new Calendario($mese, $anno);
 
 $servizi = Servizio::elencoServizi(true);
 
+$azione = AiutoInput::leggiStringa('azione', '', 'P');
+
+if($azione=='aggiungi') {
+
+}
+
 ?>
 <?php ob_start(); ?>
 
@@ -24,6 +31,7 @@ $servizi = Servizio::elencoServizi(true);
         <div class="row">
             <div class="col-12">
                 <h1><i class="fa fa-clock-o" aria-hidden="true"></i> Le mie disponibilità di tempo</h1>
+                <?php Notifica::MostraNotifiche(); ?>
             </div>
         </div>
     </div>
@@ -88,7 +96,7 @@ $servizi = Servizio::elencoServizi(true);
                         </div>
                         <div class="row">
                             <div class="form-group col" style="align-self:flex-end">
-                                <button type="submit" class="btn btn-primary">conferma</button>
+                                <button type="submit" class="btn btn-primary" name="azione" value="aggiungi">conferma</button>
                             </div>
                         </div>
                     </fieldset>
