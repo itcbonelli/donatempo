@@ -2,6 +2,7 @@
 //carico il file principale
 
 use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\tabelle\Provincia;
 use itcbonelli\donatempo\tabelle\Servizio;
 
@@ -10,6 +11,8 @@ require_once __DIR__ . '/include/main.php';
 $servizi = Servizio::elencoServizi(true);
 $province = Provincia::caricaTutte();
 $provincia = '';
+
+$comune=AiutoInput::leggiStringa('comune', '', 'G');
 
 ?>
 <?php ob_start(); ?>
@@ -59,7 +62,7 @@ $provincia = '';
                     <div class="form-group">
                         <label for="comune">Comune</label>
                         <select name="comune" id="comune" class="form-control form-control-lg">
-
+                            <?php AiutoHTML::optionsComuni($comune); ?>
                         </select>
                     </div>
                 </div>

@@ -58,6 +58,14 @@ class Servizio
         $adb = new AiutoDB($dbconn);
         $record = [];
 
+        $record['nome'] = $this->nome;
+        if($this->tipo != null) {
+            $record['id_tipo'] = $this->tipo;
+        }
+        $record['durata'] = $this->durata;
+        $record['attivo'] = intval($this->attivo);
+        $record['descrizione'] = $this->descrizione;
+
         if ($this->id_servizio == -1) {
             $ins = $adb->inserisci('servizi', $record, 'id_servizio');
             if ($ins > 0) {

@@ -8,10 +8,24 @@ $titolo_pagina = "Modifica servizio - Gestione Donatempo";
 $link_attivo = 'servizio-edit';
 
 $id_servizio = AiutoInput::leggiIntero('id', -1, 'G');
+$azione = AiutoInput::leggiStringa('azione', '', 'P');
 $servizio = new Servizio();
 if ($id_servizio > 0) {
     $servizio->carica($id_servizio);
 }
+
+if($azione=='salva') {
+    $servizio->nome = AiutoInput::leggiStringa('nome', '', 'P');
+    $servizio->tipo = AiutoInput::leggiIntero('tipologia', null, 'P');
+    $servizio->durata = AiutoInput::leggiIntero('durata', 0, 'P');
+    $servizio->attivo = AiutoInput::leggiBool('attivo', true, 'P');
+    $servizio->descrizione = AiutoInput::leggiStringa('descrizione', '', 'P');
+    $servizio->salva();
+} elseif($azione=='elimina') {
+    $servizio->elimina();
+    header('location: servizi.php');
+}
+
 ob_start();
 ?>
 <h1>Modifica servizio</h1>
@@ -50,11 +64,22 @@ ob_start();
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Salva</button>
+        <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
         <a href="servizi.php" class="btn btn-outline-danger">Annulla</a>
     </div>
 
 </form>
+
+<?php if($id_servizio>0) : ?>
+<form action="" class="border border-danger my-4 p-3">
+    <fieldset>
+        <legend class="text-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Cancellazione</legend>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger" name="azione" value="elimina" onclick="return confirm('Confermare l\'operazione?');">Elimina questo servizio</button>
+        </div>
+    </fieldset>
+</form>
+<?php endif; ?>
 
 
 <?php

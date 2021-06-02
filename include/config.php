@@ -43,3 +43,13 @@ define('LOCALE', 'it-IT');
  * Fuso orario adottato
  */
 define('TIMEZONE', 'Europe/Rome');
+
+/**
+ * Percorso assoluto dei file caricati
+ */
+define('UPLOAD_PATH', realpath(__DIR__ . '/../uploads'));
+
+/**
+ * Percorso relativo dei file caricati
+ */
+define('UPLOAD_PATH_REL', realpath('uploads/'));

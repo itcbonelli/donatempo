@@ -78,6 +78,17 @@ class Settore
      */
     public function carica($id_settore)
     {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+
+        $dati = $adb->eseguiQuery("SELECT * FROM settori WHERE id_settore = :id", ['id' => $id_settore]);
+        if(count($dati)) {
+            $this->id_settore = $dati[0]['id_settore'];
+            $this->nome = $dati[0]['nome'];
+            return true;
+        }
+
+        return false;
     }
 
 

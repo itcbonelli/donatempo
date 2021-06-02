@@ -81,6 +81,11 @@ class Utente
     public string $codice_recupero = "";
 
     /**
+     * Profilo dell'utente. Viene caricato dalla funzione getProfilo la prima volta
+     */
+    private ?Profilo $profilo = null;
+
+    /**
      * Salva il record nel database
      * @author Francesco Miglietti
      * @return bool esito dell'operazione
@@ -340,12 +345,18 @@ class Utente
      */
     public function getProfilo()
     {
+        //ottimizzazione:
+        //se ho già caricato il profilo dell'utente non lo devo caricare una seconda volta!
+        if($this->profilo instanceof Profilo) {
+            return $this->profilo;
+        }
+
         if ($this->id_utente == null) {
             return null;
         }
-        $pro = new Profilo();
-        $pro->carica($this->id_utente);
-        return $pro;
+        $this->profilo = new Profilo();
+        $this->profilo->carica($this->id_utente);
+        return $this->profilo;
     }
 
     /**

@@ -28,10 +28,11 @@ class AiutoDB
     public function eseguiComando(string $comando, array $parametri = []): ?int
     {
         //echo $comando;
-        $comando = $this->dbconn->prepare($comando);
-        $esegui = $comando->execute($parametri);
+        $stmt = $this->dbconn->prepare($comando);
+        //die($comando);
+        $esegui = $stmt->execute($parametri);
         if ($esegui) {
-            return $comando->rowCount();
+            return $stmt->rowCount();
         } else {
             return null;
         }
@@ -103,7 +104,7 @@ class AiutoDB
             // verifico la lunghezza dell'elenco dei campi.
             //se maggiore di zero aggiungo una virgola per separare
             //il campo e il valore da quelli precedenti.
-            if (strlen($c) > 0) {
+            if (strlen($campi) > 0) {
                 $campi .= ", ";
                 $valori .= ", ";
             }
@@ -120,7 +121,7 @@ class AiutoDB
                     //tuttavia, potrei voler richiamare una funzione SQL o una sottoquery.
                     //Prevedo allora che se viene anteposto il prefisso raw:, la stringa viene elaborata
                     //così com'è. Prestare attenzione alle implicazioni che ciò potrà avere sulla sicurezza.
-                    if (str_starts_with($v, 'raw:')) {
+                    if (substr($v, 0, 4) == 'raw:') {
                         $v = str_replace('raw:', '', $v);
                         $valori .= $v;
                     } else {
@@ -193,7 +194,7 @@ class AiutoDB
                     $query .= 'null';
                     break;
                 case 'string':
-                    if (str_starts_with($v, 'raw:')) {
+                    if ( substr($v, 0, 4) == 'raw:') {
                         $v = str_replace('raw:', '', $v);
                         $query .= $v;
                     } else {
@@ -221,6 +222,8 @@ class AiutoDB
             $i++;
         }
         $query .= "\nWHERE $where";
+
+        
 
         return $this->eseguiComando($query);
     }

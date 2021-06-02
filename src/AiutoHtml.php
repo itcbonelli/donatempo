@@ -2,11 +2,33 @@
 
 namespace itcbonelli\donatempo;
 
+use itcbonelli\donatempo\tabelle\Comune;
+use itcbonelli\donatempo\tabelle\Provincia;
+
 /**
  * Funzioni di supporto per l'output html
  */
 class AiutoHTML
 {
+    /**
+     * Mostra l'elenco dei comuni in un elenco a discesa
+     * @param string $selezionato Codice comune selezionato
+     */
+    public static function optionsComuni(string $selezionato = "")
+    {
+        $province = Provincia::caricaTutte();
+        foreach ($province as $prov) {
+            printf("<optgroup data-provincia=\"%s\" label=\"%s\">", $prov->sigla, $prov->denominazione);
+            $comuni = Comune::getElencoComuni($prov->sigla);
+            foreach ($comuni as $comune) {
+                $selected = '';
+                $selected = ($comune->id_comune == $selezionato) ? 'selected' : '';
+                printf("<option value='%s' %s data-provincia='%s'>%s</option>", $comune->id_comune, $selected, $comune->provincia, htmlentities($comune->denominazione));
+            }
+            echo "</optgroup>";
+        }
+    }
+
     /**
      * Mostra le opzioni di un elenco a discesa
      * @param array $dataset elementi con cui popolare l'elenco
@@ -98,7 +120,21 @@ class AiutoHTML
     /**
      * Visualizza un bottone per bootstrap
      */
-    public static function bsButton($nome, $etichetta, $valore, $tipo='primary') {
-        echo "<button class='btn btn-$tipo' name='$nome' value='$valore'>$etichetta</button>";
+    public static function bsButton($nome, $etichetta, $valore, $type = 'submit', $aspetto = 'primary')
+    {
+        echo "<button type='{$type}' class='btn btn-$aspetto' name='$nome' value='$valore'>$etichetta</button>";
+    }
+
+
+    /**
+     * Mostra in maniera visuale un valore booleano
+     */
+    public static function yesNo($valore)
+    {
+        if (boolval($valore)) {
+            echo "<span class='fa fa-check' style='color: forestgreen'></span>";
+        } else {
+            echo "<span class='fa fa-times' style='color: darkred'></span>";
+        }
     }
 }

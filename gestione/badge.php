@@ -11,7 +11,7 @@ ob_start();
 <h1>Gestione badge</h1>
 
 <p>
-    <a href="badge-edit-php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi</a>
+    <a href="badge-edit.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi</a>
 </p>
 
 <table class="table table-bordered table-striped table-sm">
