@@ -24,8 +24,14 @@ class Notifica
     {
         $notifica=new Notifica($testo, $tipo);
         self::$notifiche[] = $notifica;
-        $_SESSION['notifiche'] = serialize(self::$notifiche);
         return $notifica;
+    }
+
+    /**
+     * Salva le notifiche attualmente accodate in una variabile di sessione per mostrarle in caso di redirect verso un'altra pagina
+     */
+    public static function salva() {
+        $_SESSION['notifiche'] = serialize(self::$notifiche);
     }
 
     /**
@@ -36,7 +42,7 @@ class Notifica
         //se avevo delle precedenti notifiche "in canna", le prelevo e le elimino
         if(isset($_SESSION['notifiche'])) {
             $notifiche_precedenti=unserialize($_SESSION['notifiche']);
-            array_merge(self::$notifiche, $notifiche_precedenti);
+            self::$notifiche = array_merge(self::$notifiche, $notifiche_precedenti);
             unset($_SESSION['notifiche']);
         }
 

@@ -38,11 +38,17 @@ ob_start();
 </p>
 
 <form action="" method="post">
-    <?php AiutoHTML::campoInput('nome', 'Partita IVA', $esercente->nome, ['required' => true]); ?>
+    <?php AiutoHTML::campoInput('nome', 'Nome', $esercente->nome, ['required' => true]); ?>
     <?php AiutoHTML::campoInput('ragsoc', 'Ragione sociale', $esercente->ragsoc); ?>
     <?php AiutoHTML::campoInput('piva', 'Partita IVA', $esercente->piva); ?>
     <?php AiutoHTML::campoInput('indirizzo', 'Indirizzo', $esercente->indirizzo); ?>
     <?php AiutoHTML::campoInput('cap', 'Cap', $esercente->cap); ?>
+    <div class="form-group">
+        <label for="cod_comune">Comune</label>
+        <select name="cod_comune" id="cod_comune" class="chzn-select">
+            <?php AiutoHTML::optionsComuni($esercente->cod_comune); ?>
+        </select>
+    </div>
     <?php AiutoHTML::areaTesto('descrizione', 'Descrizione', $esercente->descrizione); ?>
     <?php AiutoHTML::checkbox('attivo', 'Attivo', $esercente->attivo); ?>
     <?php AiutoHtml::bsButton('azione', 'Salva', 'salva'); ?>

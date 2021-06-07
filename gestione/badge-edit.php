@@ -24,10 +24,12 @@ if ($azione == 'salva') {
     $badge->descrizione = AiutoInput::leggiStringa('descrizione', '', 'P');
     $badge->salva();
     Notifica::accoda('Badge salvato correttamente', Notifica::TIPO_SUCCESSO);
+    Notifica::salva();
     header('location:badge.php');
 } elseif ($azione == 'elimina') {
     $badge->elimina();
     Notifica::accoda('Badge eliminato correttamente');
+    Notifica::salva();
     header('location:badge.php');
 }
 

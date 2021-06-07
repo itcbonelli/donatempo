@@ -20,14 +20,14 @@ function login()
     $username = AiutoInput::leggiStringa('username', '', 'P');
     $password = AiutoInput::leggiStringa('password', '', 'P');
 
-    $login=Utente::login($username, $password);
+    $login = Utente::login($username, $password);
 
-    $risposta=[
+    $risposta = [
         'result' => false,
         'username' => '',
     ];
 
-    if($login) {
+    if ($login) {
         $risposta['result'] = true;
         $risposta['username'] = $username;
     } else {
@@ -39,6 +39,6 @@ function login()
 }
 
 
-function registrazione() {
-
+function registrazione()
+{
 }

@@ -93,9 +93,10 @@ if(is_null($mio_utente)) {
                     voce_menu('Utenti', 'utenti', 'fa fa-user', 'utenti.php');
                     voce_menu('Associazioni', 'associazioni', 'fa fa-building', 'associazioni.php');
                     voce_menu('Servizi', 'servizi', 'fa fa-handshake-o', 'servizi.php');
+                    voce_menu('Disponibilità', 'disponibilita', 'fa fa-calendar-o', 'disponibilita.php');
                     voce_menu('Badge', 'badge', 'fa fa-trophy', 'badge.php');
                     voce_menu('Esercenti', 'esercenti', 'fa fa-briefcase', 'esercenti.php');
-                    voce_menu('Richieste di aiuto', 'richieste', 'fa fa-question-circle', 'richieste.php');
+                    voce_menu('Richieste di aiuto', 'richieste', 'fa fa-ticket', 'richieste.php');
                     voce_menu('Stati avanzamento richiesta', 'stati-avanzamento', 'fa fa-percent', 'stati-avanzamento.php');
                     voce_menu('Comuni', 'comuni', 'fa fa-map-marker', 'comuni.php');
                     voce_menu('Province', 'province', 'fa fa-map-marker', 'province.php');

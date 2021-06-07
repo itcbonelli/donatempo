@@ -35,6 +35,12 @@ switch ($azione) {
     case 'elimina':
         $associazione->elimina();
         break;
+    case 'aggiungi_utente':
+        $partecipazione = new PartecipazioneAssociazione();
+        $partecipazione->id_utente = null;
+        $partecipazione->id_associazione = $id_associazione;
+        $partecipazione->salva();
+        break;
 }
 
 ?>
@@ -57,54 +63,59 @@ switch ($azione) {
         </div>
 
         <p>
-
-            <img src="" alt="Logo associazione" />
-        </p>
+            <?php
+            if (!empty($associazione->url_logo)) :
+            ?>
+                <img src="" alt="Logo associazione" />
         <div class="form-group">
             <label for="rimuovi_logo" class="checkbox" title="Se questa casella viene spuntata, verrà rimosso il logo attualmente caricato anche se non è stato inserito un nuovo logo.">
                 <input type="checkbox" name="rimuovi_logo" id="rimuovi_logo" /> Rimuovi logo
             </label>
         </div>
+    <?php endif; ?>
+    </p>
 
-        <div class="form-group">
-            <label for="logo">Logo</label>
-            <input type="file" name="logo" id="logo" class="form-control" />
-        </div>
 
-        <div class="form-group">
-            <label for="descrizione">Descrizione</label>
-            <input type="text" name="descrizione" id="descrizione" class="form-control" value="<?= htmlentities($associazione->descrizione); ?>" />
-        </div>
+    <div class="form-group">
+        <label for="logo">Logo</label>
+        <input type="file" name="logo" id="logo" class="form-control" />
+    </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
-            <button type="submit" class="btn btn-outline-danger" name="azione" value="elimina">Elimina</button>
-        </div>
+    <div class="form-group">
+        <label for="descrizione">Descrizione</label>
+        <input type="text" name="descrizione" id="descrizione" class="form-control" value="<?= htmlentities($associazione->descrizione); ?>" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
+        <button type="submit" class="btn btn-outline-danger" name="azione" value="elimina">Elimina</button>
+    </div>
     </fieldset>
 </form>
 
-<?php if($id_associazione>0) : ?>
-<form action="" method="post">
-    <fieldset>
-        <legend>Utenti partecipanti</legend>
+<?php if ($id_associazione > 0) : ?>
+    <hr />
+    <form action="" method="post">
+        <fieldset>
+            <legend>Utenti partecipanti</legend>
 
-        <table class="table table-bordered table-striped table-hover table-sm">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" readonly disabled /></th>
-                    <th>Nome utente</th>
-                    <th>Cognome</th>
-                    <th>Nome</th>
-                    <th>Ruolo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                    if(count($partecipanti)) :
+            <table class="table table-bordered table-striped table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" readonly disabled /></th>
+                        <th>Nome utente</th>
+                        <th>Cognome</th>
+                        <th>Nome</th>
+                        <th>Ruolo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (count($partecipanti)) :
                         foreach ($partecipanti as $part) :
                             //var_dump($part);
                             $ut = $part->getUtente();
-                            ?>
+                    ?>
                             <tr>
                                 <td><input type="checkbox" name="partecipante[<?= $part->id_partecipazione; ?>]" /></td>
                                 <td><?= $ut->username; ?></td>
@@ -112,20 +123,34 @@ switch ($azione) {
                                 <td><?= $ut->getProfilo()->nome; ?></td>
                                 <td><?= $part->ruolo; ?></td>
                             </tr>
-                            <?php
+                        <?php
                         endforeach;
-                    else:
+                    else :
                         ?>
                         <tr>
                             <td colspan="5" class="text-center">Non sono presenti partecipanti</td>
                         </tr>
-                        <?php
+                    <?php
                     endif;
-                ?>
-            </tbody>
-        </table>
-    </fieldset>
-</form>
+                    ?>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+    <hr />
+    <form action="" method="post">
+        <fieldset>
+            <legend>Aggiungi utente</legend>
+
+            <div class="form-group">
+                <label for="aggiungi_username">Nome utente:</label>
+                <input type="text" name="aggiungi_username" id="aggiungi_username" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="azione" value="aggiungi_utente">Aggiungi</button>
+            </div>
+        </fieldset>
+    </form>
 <?php endif; ?>
 
 <?php

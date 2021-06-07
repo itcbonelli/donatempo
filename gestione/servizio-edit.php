@@ -1,6 +1,7 @@
 <?php
 
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/../include/main.php';
@@ -23,6 +24,8 @@ if($azione=='salva') {
     $servizio->salva();
 } elseif($azione=='elimina') {
     $servizio->elimina();
+    Notifica::accoda("Servizio eliminato correttamente");
+    Notifica::salva();
     header('location: servizi.php');
 }
 
@@ -71,7 +74,7 @@ ob_start();
 </form>
 
 <?php if($id_servizio>0) : ?>
-<form action="" class="border border-danger my-4 p-3">
+<form action="" method="post" class="border border-danger my-4 p-3">
     <fieldset>
         <legend class="text-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Cancellazione</legend>
         <div class="form-group">

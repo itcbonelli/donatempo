@@ -1,13 +1,22 @@
 <?php
 
+use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\filtri\FiltroRichieste;
 use itcbonelli\donatempo\tabelle\Richiesta;
 use itcbonelli\donatempo\tabelle\Servizio;
+use itcbonelli\donatempo\tabelle\StatoAvanzamento;
 
 require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Richieste di aiuto - Gestione Donatempo";
 $link_attivo = 'richieste';
 
-$richieste = Richiesta::ElencoRichieste();
+$filtro = new FiltroRichieste();
+$filtro->statoAvanzamento = AiutoInput::leggiStringa('statoAvanzamento', '', 'G');
+
+$stati = StatoAvanzamento::ElencoStatiAvanzamento();
+$richieste = Richiesta::ElencoRichieste($filtro);
+
 
 ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
@@ -22,7 +31,8 @@ ob_start();
             <div class="col">
                 <label for="filtro_stato_avanzamento">Stato avanzamento</label>
                 <select id="filtro_stato_avanzamento" name="filtro_stato_avanzamento" class="form-control form-control-sm">
-                    <option value="">Tutti gli stati di avanzamento</option>
+                    <option value="" selected>Tutti gli stati di avanzamento</option>
+                    <?php AiutoHTML::options($stati, 'descrizione', 'codice', $stato); ?>
                 </select>
             </div>
             <div class="col">

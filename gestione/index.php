@@ -9,6 +9,7 @@ $link_attivo = 'dashboard';
 $adb = new AiutoDB($dbconn);
 $numUtenti = $adb->eseguiScalare("SELECT COUNT(*) FROM utenti WHERE attivo=1");
 $numVolontari = $adb->eseguiScalare("SELECT COUNT(*) FROM utenti WHERE attivo=1 AND volontario=1");
+$numAssociazioni = $adb->eseguiScalare("SELECT COUNT(*) FROM associazioni WHERE attivo=1");
 
 ob_start();
 ?>
@@ -25,7 +26,10 @@ ob_start();
                     <table class="table table-striped table-sm">
                         <tbody>
                             <tr>
-                                <td>Numero utenti</td>
+                                <td colspan="2"><strong>Utenti</strong></td>
+                            </tr>
+                            <tr>
+                                <td><a href="utenti.php">Numero utenti attivi</a></td>
                                 <td><?php echo $numUtenti; ?></td>
                             </tr>
                             <tr>
@@ -33,10 +37,17 @@ ob_start();
                                 <td><?php echo $numVolontari; ?></td>
                             </tr>
                             <tr>
+                                <td colspan="2"><strong>Associazioni</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Numero di associazioni attive</td>
+                                <td><?php echo $numAssociazioni; ?></td>
+                            </tr>
+                            <tr>
                                 <td colspan="2"><strong>Richieste</strong></td>
                             </tr>
                             <tr>
-                                <td>Totali</td>
+                                <td><a href="richieste.php">Totali</a></td>
                                 <td>0</td>
                             </tr>
                             <tr>

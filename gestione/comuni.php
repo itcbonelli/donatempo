@@ -1,5 +1,7 @@
 <?php
 
+use itcbonelli\donatempo\AiutoDB;
+use itcbonelli\donatempo\Paginazione;
 use itcbonelli\donatempo\tabelle\Comune;
 
 require_once __DIR__ . '/../include/main.php';
@@ -10,7 +12,6 @@ $link_attivo = 'comuni';
 $comuni = Comune::getElencoComuni();
 
 ob_start();
-//la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 <h1>Gestione comuni</h1>
 
@@ -36,6 +37,12 @@ ob_start();
         </tbody>
     </table>
 </div>
+
+<?php
+$conta = (new AiutoDB($dbconn))->eseguiScalare("SELECT count(*) FROM comuni");
+$pp = new Paginazione($conta);
+$pp->mostraPaginazione();
+?>
 
 <?php
 //la funzione ob_get_clean recupera l'output catturato e lo restituisce a una variabile.

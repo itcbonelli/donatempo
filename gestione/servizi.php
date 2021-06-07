@@ -1,5 +1,6 @@
 <?php
 
+use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/../include/main.php';
@@ -21,7 +22,7 @@ ob_start();
             <th>Nome</th>
             <th>Tipologia</th>
             <th>Durata (minuti)</th>
-            <th>Attivo</th>
+            <th class="text-center">Attivo</th>
         </tr>
     </thead>
     <tbody>
@@ -32,8 +33,8 @@ ob_start();
                 <?php echo $servizio->tipo; ?>
             </td>
             <td><?php echo $servizio->durata; ?></td>
-            <td>
-                <?php echo $servizio->attivo ? 'Sì' : 'No'; ?>
+            <td class="text-center">
+                <?php AiutoHTML::yesNo($servizio->attivo); ?>
             </td>
         </tr>
         <?php endforeach; ?>

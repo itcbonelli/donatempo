@@ -5,6 +5,7 @@ namespace itcbonelli\donatempo\tabelle;
 use DateTimeZone;
 use itcbonelli\donatempo\AiutoData;
 use itcbonelli\donatempo\AiutoDB;
+use itcbonelli\donatempo\filtri\FiltroRichieste;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
 
@@ -148,12 +149,24 @@ class Richiesta
     /**
      * @return Richiesta[]
      */
-    public static function ElencoRichieste(): array
+    public static function ElencoRichieste(FiltroRichieste $filtro = null): array
     {
         global $dbconn;
         $dataset = [];
         $adb = new AiutoDB($dbconn);
-        $query = "SELECT * FROM richieste ORDER BY data_inserimento DESC";
+        $query = "SELECT * FROM richieste WHERE 1=1 ";
+        if ($filtro->data_inizio != null) {
+            $query .= sprintf(" AND data_inizio >= '%s' ", $filtro->data_inizio->format('Y-m-d'));
+        }
+        if ($filtro->data_fine != null) {
+            $query .= sprintf(" AND data_fine <= '%s' ", $filtro->data_fine->format('Y-m-d'));
+        }
+
+        if ($filtro->id_servizio) {
+            $query .= " AND id_servizio = " . $filtro->id_servizio;
+        }
+
+        $query .=  "ORDER BY data_inserimento DESC ";
         $dataset = $adb->eseguiQuery($query);
         return $dataset;
     }

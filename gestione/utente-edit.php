@@ -20,8 +20,9 @@ if ($id_utente > 0) {
 
 $azione = AiutoInput::leggiStringa('azione', '', 'P');
 if ($azione == 'salva') {
+  //TODO
 } elseif ($azione == 'annulla') {
-  header('location:badge.php');
+  header('location:utenti.php');
 }
 
 ob_start();

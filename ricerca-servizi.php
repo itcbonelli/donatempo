@@ -3,13 +3,13 @@
 
 use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
-use itcbonelli\donatempo\tabelle\Provincia;
+use itcbonelli\donatempo\tabelle\Comune;
 use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/include/main.php';
 
 $servizi = Servizio::elencoServizi(true);
-$province = Provincia::caricaTutte();
+$comuni=Comune::getElencoComuni();
 $provincia = '';
 
 $comune=AiutoInput::leggiStringa('comune', '', 'G');
@@ -51,18 +51,9 @@ $comune=AiutoInput::leggiStringa('comune', '', 'G');
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="provincia">Provincia</label>
-                        <select name="provincia" id="provincia" class="form-control form-control-lg" onchange="setProvincia(this, 'comune');">
-                            <option value="" selected disabled>---</option>
-                            <?php AiutoHTML::options($province, 'sigla', 'denominazione', $provincia); ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
                         <label for="comune">Comune</label>
-                        <select name="comune" id="comune" class="form-control form-control-lg">
-                            <?php AiutoHTML::optionsComuni($comune); ?>
+                        <select name="comune" id="comune" data-placeholder='Selezionare un comune...' class="form-control form-control-lg chzn-select">
+                            <?php AiutoHTML::options($comuni, 'id_comune', 'denominazione', $comune); ?>
                         </select>
                     </div>
                 </div>

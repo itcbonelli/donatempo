@@ -10,7 +10,7 @@ ob_start();
 ?>
 <h1>Elenco stati di avanzamento</h1>
 
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
             <th>Codice</th>

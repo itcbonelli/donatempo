@@ -1,5 +1,7 @@
 <?php
 
+use itcbonelli\donatempo\AiutoHTML;
+use itcbonelli\donatempo\tabelle\Comune;
 use itcbonelli\donatempo\tabelle\Esercente;
 
 require_once __DIR__ . '/../include/main.php';
@@ -20,9 +22,8 @@ ob_start();
 <table id="tabella_esercenti" class="table table-bordered table-striped table-hover table-sm">
     <thead>
         <tr>
-            <th>esercente</th>
-            <th>nome</th>
-            <th>ragione sociale</th>
+            <th>Id.</th>
+            <th>nome (ragione sociale)</th>
             <th>partita iva</th>
             <th>codice comune</th>
             <th>indirizzo</th>
@@ -34,14 +35,13 @@ ob_start();
         <?php foreach ($esercenti as $esercente) : ?>
             <tr>
 
-                <td>1</td>
+                <td><?= $esercente->id_esercente; ?></td>
                 <td><a href="esercente-edit.php?id=<?php echo $esercente->id_esercente; ?>"><?php echo $esercente->nome; if(!empty($esercente->ragsoc)) echo "<br /><em><small>{$esercente->ragsoc}" ?></small></em></a></td>
-                <td>caio</td>
-                <td>00281783340</td>
-                <td>D205</td>
-                <td>corso nizza</td>
-                <td>12100</td>
-                <td>attivo</td>
+                <td><?= $esercente->piva; ?></td>
+                <td><?= $esercente->cod_comune; ?></td>
+                <td><?= $esercente->indirizzo; ?></td>
+                <td><?= $esercente->cap; ?></td>
+                <td><?= AiutoHTML::yesNo($esercente->attivo); ?></td>
 
             </tr>
         <?php endforeach; ?>

@@ -31,7 +31,7 @@ Donatempo è un'app che permette di mettere in contatto le associazioni di volon
 ## Installazione
 
 ### Requisiti di sistema
-Donatempo richiede PHP 7.4 o versione superiore in quanto fa uso degli attributi di classe fortemente tipizzati.
+Donatempo richiede PHP 7.4 o versione superiore in quanto fa uso degli attributi di classe fortemente tipizzati. La versione del database su cui è stato sviluppato e testato è MariaDB 10.
 E' inoltre consigliabile attivare l'estensione *opcache* al fine di ottenere un significativo miglioramento delle prestazioni.
 
 ### Procedura
@@ -42,3 +42,10 @@ Per installare il portale, eseguire lo script sql collocato nella cartella **sql
 Il progetto, nato in un contesto scolastico, ambisce a ridurre al minimo il ricorso a librerie di terze parti. Si indicano di seguito quelle utilizzate.
 
 * **PHPMailer**: fornisce classi per l'invio di messaggi di posta elettronica. Rispetto alla semplice funzione mail() di PHP permette l'utilizzo di server SMTP personalizzati e di gestire più facilmente le intestazioni del messaggio.
+* **Chosen** Chosen è una libreria JavaScript che permette di trasformare le combo-box (select) attivando la ricerca. Viene utilizzata per la scelta degli oltre 8000 comuni italiani presenti.
+
+## Definizione del database
+
+Il file **[docs/dizionario-dati-donatempo.pdf](docs/dizionario-dati-donatempo.pdf)** contiene la definizione dettagliata di tabelle, campi e indici, comprensiva di commenti.
+
+E' inoltre disponibile il modello e-r all'URL **[docs/modello-er.pdf](docs/modello-er.pdf)**.

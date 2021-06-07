@@ -155,19 +155,22 @@ class Comune
     /**
      * Ottiene l'elenco dei comuni
      * @param string $prov filtro provincia. Se omesso, restituisce tutti i comuni italiani.
+     * @param boolean $tutti include i comuni disattivati
      * @return Comune[] array di comuni
      */
-    public static function getElencoComuni($prov = null)
-    {
-        
+    public static function getElencoComuni($prov = null, $tutti=false)
+    {   
         $comuni = [];
         //popolare l'array
         global $dbconn;
 
-        $query = "SELECT * FROM comuni";
+        $query = "SELECT * FROM comuni WHERE 1=1 ";
+        if($tutti==false) {
+            $query .= " AND attivo=1 ";
+        }
         if ($prov != null) {
             $prov = addslashes($prov);
-            $query .= " WHERE provincia = '$prov' ";
+            $query .= " AND provincia = '$prov' ";
         }
         $query .= " ORDER BY denominazione ";
 

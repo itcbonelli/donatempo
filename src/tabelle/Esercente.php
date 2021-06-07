@@ -11,14 +11,14 @@ use PDO;
 class Esercente
 {
     public ?int $id_esercente = -1;
-    public ?string $nome;
-    public ?string $ragsoc;
-    public ?string $piva;
-    public ?string $cod_comune;
-    public ?string $indirizzo;
-    public ?string $cap;
-    public ?string $descrizione;
-    public ?string $logo_url;
+    public ?string $nome = '';
+    public ?string $ragsoc = '';
+    public ?string $piva = '';
+    public ?string $cod_comune = '';
+    public ?string $indirizzo = '';
+    public ?string $cap = '';
+    public ?string $descrizione = '';
+    public ?string $logo_url = '';
     public bool $attivo = true;
 
     /**

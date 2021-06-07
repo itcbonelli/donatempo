@@ -148,7 +148,7 @@ class Servizio
     public function elimina()
     {
         global $dbconn;
-        $query = "DELETE FROM servizi WHERE id_servizio='{$this->id_servizio}'";
+        $query = "DELETE FROM servizi WHERE id='{$this->id_servizio}'";
         $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
         return $esegui == true && $comando->rowCount() == 1;
