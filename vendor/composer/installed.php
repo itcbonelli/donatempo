@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0f16745c3a3d9c1fd76f1e3e233f78e679c365c7',
+    'reference' => '3267e45e70a0970c74476207873cbe1203fa4b06',
     'name' => 'itcbonelli/attivatempo',
   ),
   'versions' => 
@@ -18,16 +18,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0f16745c3a3d9c1fd76f1e3e233f78e679c365c7',
+      'reference' => '3267e45e70a0970c74476207873cbe1203fa4b06',
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.3.0',
-      'version' => '6.3.0.0',
+      'pretty_version' => 'v6.4.1',
+      'version' => '6.4.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4a08cf4cdd2c38d12ee2b9fa69e5d235f37a6dcb',
+      'reference' => '9256f12d8fb0cd0500f93b19e18c356906cbed3d',
     ),
     'twbs/bootstrap' => 
     array (
