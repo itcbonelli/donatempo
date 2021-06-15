@@ -114,6 +114,11 @@ class Profilo
             'latitudine' => floatval($this->latitudine)
         ];
 
+        //se non ho il comune rimuovo il campo dal record, altrimenti violo il vincolo di integrità referenziale
+        if (empty($record['id_comune'])) {
+            unset($record['id_comune']);
+        }
+
         //var_dump($record);
         //exit();
 
@@ -226,7 +231,7 @@ class Profilo
         global $dbconn;
         $adb = new AiutoDB($dbconn);
         $parametri = [];
-        $dataset=[];
+        $dataset = [];
         $query = "SELECT * FROM profili WHERE 1=1 ";
         if (!empty($cerca)) {
         }
@@ -241,7 +246,7 @@ class Profilo
             foreach ($record as $k => $v) {
                 $pro->$k = $v;
             }
-            $dataset[]=$pro;
+            $dataset[] = $pro;
         }
         return $dataset;
     }

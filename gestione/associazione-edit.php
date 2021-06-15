@@ -4,6 +4,7 @@ use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
 use itcbonelli\donatempo\tabelle\PartecipazioneAssociazione;
+use itcbonelli\donatempo\tabelle\Utente;
 
 require_once __DIR__ . '/../include/main.php';
 
@@ -36,10 +37,19 @@ switch ($azione) {
         $associazione->elimina();
         break;
     case 'aggiungi_utente':
-        $partecipazione = new PartecipazioneAssociazione();
-        $partecipazione->id_utente = null;
-        $partecipazione->id_associazione = $id_associazione;
-        $partecipazione->salva();
+        $username = AiutoInput::leggiStringa('aggiungi_username', '', 'P');
+        $id_utente = Utente::getIdByUsername($username);
+        if (!empty($id_utente)) {
+            $partecipazione = new PartecipazioneAssociazione();
+            $partecipazione->id_utente = $id_utente;
+            $partecipazione->id_associazione = $id_associazione;
+            $partecipazione->salva();
+            Notifica::accoda('Abbinamento utente/associazione eseguito', Notifica::TIPO_SUCCESSO);
+            //devo ricaricare i partecipanti perché sono cambiati
+            $partecipanti = PartecipazioneAssociazione::getPartecipantiAssociazione($id_associazione);
+        } else {
+            Notifica::accoda('Utente non trovato', Notifica::TIPO_ERRORE);
+        }
         break;
 }
 
@@ -146,6 +156,15 @@ switch ($azione) {
                 <label for="aggiungi_username">Nome utente:</label>
                 <input type="text" name="aggiungi_username" id="aggiungi_username" class="form-control" />
             </div>
+
+            <div class="form-group">
+                <label for="ruolo">Ruolo</label>
+                <select name="ruolo" id="ruolo" class="form-control">
+                    <option value="volontario">Volontario</option>
+                    <option value="gestore">Gestore</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="azione" value="aggiungi_utente">Aggiungi</button>
             </div>

@@ -266,6 +266,20 @@ class Utente
     }
 
 
+    /**
+     * Controlla se esiste lo username specificato
+     * @param int $username
+     * @return int ID utente o null se l'utente non esiste
+     */
+    public static function getIdByUsername($username): int
+    {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $username = addslashes($username);
+        $query = "SELECT id_utente FROM utenti WHERE username=:username";
+        return $adb->eseguiScalare($query, ['username' => $username]);
+    }
+
 
     /**
      * Ottiene il record dell'utente attualmente connesso al sito.

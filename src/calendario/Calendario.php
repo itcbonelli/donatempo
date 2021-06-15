@@ -47,7 +47,8 @@ class Calendario
     {
         $appu = [];
         foreach ($this->appuntamenti as $appuntamento) {
-            if ($appuntamento->data) {
+            if ($appuntamento->data == $data) {
+                $appu[] = $appuntamento;
             }
         }
 

@@ -5,6 +5,7 @@ use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\filtri\FiltroDisponibilita;
 use itcbonelli\donatempo\tabelle\Comune;
+use itcbonelli\donatempo\tabelle\Disponibilita;
 use itcbonelli\donatempo\tabelle\Provincia;
 use itcbonelli\donatempo\tabelle\Servizio;
 
@@ -23,20 +24,27 @@ $filtro->provincia = AiutoInput::leggiStringa('provincia', '');
 $citta = AiutoInput::leggiStringa('citta', '', 'G');
 $province = Provincia::caricaTutte();
 $comuni = Comune::getElencoComuni();
+
+$disponiblita = Disponibilita::ricercaDisponibilita($filtro);
 ?>
 <?php ob_start(); ?>
 <div class="section">
     <div class="container">
         <div class="row">
+            <div class="col" style="min-width: 320px;">
+                <?php if (empty($disponiblita)) : ?>
+                    <p class="text-center"><i class="fa fa-frown-o fa-4x" aria-hidden="true"></i></p>
+                    <h4 class="text-center">Al momento non sono presenti disponibilità</h4>
+                    <p class="lead text-center">Prova ad affinare la ricerca utilizzando i filtri</p>
+                <?php else : ?>
+                    <h4>Seleziona una disponibilità</h4>
+                    <form action="">
 
-            <div class="col-9">
-                <h4>Seleziona una disponibilità</h4>
-                <form action="">
-
-                </form>
+                    </form>
+                <?php endif; ?>
             </div>
 
-            <div class="col-3">
+            <div class="col" style="min-width: 320px; max-width: 33%">
                 <form action="" method="get">
                     <fieldset>
                         <legend>La tua ricerca</legend>

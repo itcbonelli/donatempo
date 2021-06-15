@@ -4,13 +4,32 @@ namespace itcbonelli\donatempo\tabelle;
 
 use itcbonelli\donatempo\AiutoDB;
 
+/**
+ * Descrive un riconoscimento che viene attribuito dal sistema al raggiungimento di determinati obiettivi
+ */
 class Badge
 {
 
     public int $id_badge = -1;
+
+    /**
+     * Nome badge
+     */
     public string $nome = "";
+
+    /**
+     * URL immagine badge
+     */
     public string $url_immagine = "";
+
+    /** 
+     * Descrizione badge per l'utente
+     */
     public string $descrizione = "";
+
+    /**
+     * Badge attivo sì/no
+     */
     public bool $attivo = true;
 
     /**

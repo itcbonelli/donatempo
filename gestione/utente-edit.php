@@ -2,6 +2,7 @@
 
 use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Profilo;
 use itcbonelli\donatempo\tabelle\Provincia;
 use itcbonelli\donatempo\tabelle\Utente;
@@ -20,7 +21,25 @@ if ($id_utente > 0) {
 
 $azione = AiutoInput::leggiStringa('azione', '', 'P');
 if ($azione == 'salva') {
-  //TODO
+  if (empty($id_utente)) {
+    $utente->username = AiutoInput::leggiStringa('username', '', 'P');
+  }
+  $utente->email = AiutoInput::leggiStringa('email', '', 'P');
+
+  $utente->salva();
+  $profilo->id_utente = $utente->id_utente;
+  $profilo->cognome = AiutoInput::leggiStringa('cognome', '', 'P');
+  $profilo->nome = AiutoInput::leggiStringa('nome', '', 'P');
+  $profilo->telefono1 = AiutoInput::leggiStringa('telefono1', '', 'P');
+  $profilo->telefono2 = AiutoInput::leggiStringa('telefono2', '', 'P');
+  $profilo->cod_fis = AiutoInput::leggiStringa('cod_fis', '', 'P');
+  $profilo->indirizzo = AiutoInput::leggiStringa('indirizzo', '', 'P');
+  $profilo->cap = AiutoInput::leggiStringa('cap', '', 'P');
+  $profilo->id_comune = AiutoInput::leggiStringa('id_comune', '', 'P');
+  $profilo->salva();
+  Notifica::accoda('Dati salvati correttamente', Notifica::TIPO_SUCCESSO);
+  Notifica::salva();
+  header('location:utenti.php');
 } elseif ($azione == 'annulla') {
   header('location:utenti.php');
 }
@@ -72,7 +91,7 @@ ob_start();
     <legend><i class="fa fa-pencil-square" aria-hidden="true"></i> Profilo</legend>
 
     <div class="row">
-      <div class="col"><?php AiutoHTML::campoInput('nome', 'Nome', $profilo->cognome); ?></div>
+      <div class="col"><?php AiutoHTML::campoInput('nome', 'Nome', $profilo->nome); ?></div>
       <div class="col"><?php AiutoHTML::campoInput('cognome', 'Cognome', $profilo->cognome); ?></div>
     </div>
     <div class="row">
@@ -86,19 +105,10 @@ ob_start();
       <div class="col"><?php AiutoHTML::campoInput('indirizzo', 'Indirizzo', $profilo->indirizzo); ?></div>
     </div>
     <div class="row">
+      
       <div class="col">
-        <?php
-        $province = Provincia::caricaTutte();
-        ?>
-        <label for="provincia">Provincia</label>
-        <select name="provincia" id="provincia" class="form-control" onchange="setProvincia(this, 'cod_comune');">
-          <option value="---"></option>
-          <?php AiutoHTML::options($province, 'sigla', 'denominazione'); ?>
-        </select>
-      </div>
-      <div class="col">
-        <label for="cod_comune">Città</label>
-        <select name="cod_comune" id="cod_comune" class="form-control">
+        <label for="id_comune">Città</label>
+        <select name="id_comune" id="id_comune" class="form-control chzn-select">
           <option value="" selected disabled>---</option>
           <?php
           AiutoHTML::optionsComuni(strval($profilo->id_comune));

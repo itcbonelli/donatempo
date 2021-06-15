@@ -186,8 +186,8 @@ class PartecipazioneAssociazione
         global $dbconn;
         $adb = new AiutoDB($dbconn);
         $record = [
-            'id_utente' => $this->id_utente,
-            'id_associazione' => $this->id_associazione,
+            'utenti_id_utente' => $this->id_utente,
+            'associazioni_id_associazione' => $this->id_associazione,
             'ruolo' => $this->ruolo
         ];
 
