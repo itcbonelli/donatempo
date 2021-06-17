@@ -28,5 +28,41 @@ ul.menu-navigazione li .fa {
 } */
 
 .mw-320 {
-    min-width: 320px;
+  min-width: 320px;
+}
+
+.icona32 {
+  max-width: 32px;
+  max-height: 32px;
+}
+.icona48 {
+  max-width: 48px;
+  max-height: 48px;
+}
+.icona64 {
+  max-width: 64px;
+  max-height: 64px;
+}
+.icona128 {
+  max-width: 128px;
+  max-height: 128px;
+}
+.icona256 {
+  max-width: 256px;
+  max-height: 256px;
+}
+.icona32v {
+  max-height: 32px;
+}
+.icona48v {
+  max-height: 48px;
+}
+.icona64v {
+  max-height: 64px;
+}
+.icona128v {
+  max-height: 128px;
+}
+.icona256v {
+  max-height: 256px;
 }

@@ -25,7 +25,7 @@ ob_start();
     <tbody>
         <?php foreach ($badges as $badge) : ?>
             <tr>
-                <td></td>
+                <td class="text-center"><img src="../uploads/badge/<?= $badge->url_immagine ?>" alt="Immagine badge" class="icona48"></td>
                 <td><a href="badge-edit.php?id=<?= $badge->id_badge; ?>"><?= $badge->nome; ?></a></td>
                 <td><?= $badge->descrizione; ?></td>
             </tr>

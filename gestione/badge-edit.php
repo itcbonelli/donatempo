@@ -54,8 +54,8 @@ ob_start();
     <?php AiutoHTML::campoInput('descrizione', 'Descrizione', $badge->descrizione); ?>
 
     <?php if (strlen($badge->url_immagine) > 0) : ?>
-        <img src="../uploads/badge/<?= $badge->url_immagine ?>" alt="Immagine badge" /><br />
-        <label for="rimuovi_immagine" class="checkbox"><input type="checkbox" name="rimuovi_immagine" id="rimuovi_immagine" value="1" /></label>
+        <img src="../uploads/badge/<?= $badge->url_immagine ?>" alt="Immagine badge" class="icona128" /><br />
+        <label for="rimuovi_immagine" class="checkbox"><input type="checkbox" name="rimuovi_immagine" id="rimuovi_immagine" value="1" /> Rimuovi immagine</label>
     <?php endif; ?>
 
     <div class="form-group">
