@@ -1,6 +1,7 @@
 <?php
 
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\AiutoUpload;
 use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
 use itcbonelli\donatempo\tabelle\PartecipazioneAssociazione;
@@ -29,7 +30,28 @@ switch ($azione) {
         $associazione->ragsoc = AiutoInput::leggiStringa('ragsoc');
         $associazione->codfis = AiutoInput::leggiStringa('codfis');
         $associazione->descrizione = AiutoInput::leggiStringa('descrizione');
+
         if ($associazione->convalida()) {
+            $rimuoviLogo = AiutoInput::leggiBool('rimuovi_logo', false, 'P');
+            if ($rimuoviLogo) {
+                $associazione->url_logo = "";
+            }
+
+            //upload logo associazione
+            if (isset($_FILES['logo'])) {
+                try {
+                    $au = new AiutoUpload();
+                    $au->destinazione .= "/loghi-associazioni/";
+
+                    $percorso = $au->carica('logo', AiutoUpload::sanitize($associazione->ragsoc));
+
+                    if (!empty($percorso)) {
+                        $associazione->url_logo = $percorso;
+                    }
+                } catch (\Throwable $th) {
+                    Notifica::accoda($th->getMessage(), Notifica::TIPO_ERRORE);
+                }
+            }
             $associazione->salva();
         }
         break;
@@ -60,7 +82,7 @@ switch ($azione) {
 
 <?php Notifica::MostraNotifiche(); ?>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <fieldset>
         <legend>Dati dell'associazione</legend>
         <div class="form-group">
@@ -76,10 +98,10 @@ switch ($azione) {
             <?php
             if (!empty($associazione->url_logo)) :
             ?>
-                <img src="" alt="Logo associazione" />
+                <img src="../uploads/loghi-associazioni/<?= $associazione->url_logo; ?>" alt="Logo associazione" />
         <div class="form-group">
             <label for="rimuovi_logo" class="checkbox" title="Se questa casella viene spuntata, verrà rimosso il logo attualmente caricato anche se non è stato inserito un nuovo logo.">
-                <input type="checkbox" name="rimuovi_logo" id="rimuovi_logo" /> Rimuovi logo
+                <input type="checkbox" name="rimuovi_logo" id="rimuovi_logo" value="1" /> Rimuovi logo
             </label>
         </div>
     <?php endif; ?>
@@ -98,7 +120,7 @@ switch ($azione) {
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
-        <button type="submit" class="btn btn-outline-danger" name="azione" value="elimina">Elimina</button>
+        <button type="submit" class="btn btn-outline-danger" name="azione" value="elimina" onclick="return confirm('Confermare l\'eliminazione dell\'associazione?')">Elimina</button>
     </div>
     </fieldset>
 </form>

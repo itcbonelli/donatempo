@@ -72,28 +72,27 @@ class Associazione
         $codfis = addslashes($this->codfis);
         $url_logo = addslashes($this->url_logo);
         $descrizione = addslashes($this->descrizione);
-        $id_settore = $this->id_settore;
         $attivo = intval($this->attivo);
 
         if (empty($this->id_associazione)) {
-            $query = "INSERT INTO associazioni(ragsoc,codfis,url_logo,descrizione,id_settore)
-        VALUES ('$ragsoc',' $codfis',' $url_logo','$descrizione',$id_settore)";
+            $query = "INSERT INTO associazioni(ragsoc,codfis,url_logo,descrizione)
+        VALUES ('$ragsoc', '$codfis', '$url_logo','$descrizione')";
             $comando = $dbconn->prepare($query);
             $esegui = $comando->execute();
         } else {
             $query = "UPDATE associazioni SET 
             ragsoc='$ragsoc',
-            codfis='$codfis'
+            codfis='$codfis',
             url_logo='$url_logo',
             descrizione='$descrizione',
-            url_logo=$id_settore,
+            url_logo='$url_logo',
             attivo=$attivo
             WHERE id_associazione=$id_associazione";
             $comando = $dbconn->prepare($query);
             $esegui = $comando->execute();
         }
 
-        if ($esegui == true && $comando->rowCount() == 1) {
+        if ($esegui == true) {  
             Notifica::accoda("Associazione salvata correttamente", Notifica::TIPO_SUCCESSO);
             return true;
         } else {
@@ -141,7 +140,8 @@ class Associazione
             $ris = $db->eseguiComando("DELETE FROM associazioni WHERE id_associazione={$this->id_associazione}");
             return boolval($ris);
         } catch (Exception $e) {
-            Notifica::accoda($e->getMessage(), Notifica::TIPO_ERRORE);
+            //Notifica::accoda($e->getMessage(), Notifica::TIPO_ERRORE);
+            Notifica::accoda("Impossibile eliminare l'associazione", Notifica::TIPO_ERRORE);
         }
     }
 
@@ -154,25 +154,24 @@ class Associazione
     {
         $dati_validi = true;
 
-        if (empty($this->id_associazione)) {
-            Notifica::accoda("Inserire identificativo associazione", Notifica::TIPO_ERRORE);
-            $dati_validi = false;
-        }
         if (empty($this->ragsoc)) {
             Notifica::accoda("Inserire ragione sociale", Notifica::TIPO_ERRORE);
             $dati_validi = false;
         }
+        /*
         if (strlen($this->codfis) != 11) {
             Notifica::accoda("Codice fiscale non valido. La lunghezza deve essere di 11 cifre", Notifica::TIPO_ERRORE);
             $dati_validi = false;
         }
+        
         if (empty($this->url_logo)) {
             Notifica::accoda("Ricordati di inserire il logo", Notifica::TIPO_AVVERTENZA);
         }
+        
         if (empty($this->descrizione)) {
             Notifica::accoda("Ricordati di mettere una descrizione", Notifica::TIPO_ERRORE);
             $dati_validi = false;
-        }
+        }*/
 
         return $dati_validi;
     }
@@ -353,12 +352,13 @@ class Associazione
     /**
      * Determina se l'associazione ha un logo caricato
      */
-    function haLogo() {
-        if(empty($this->url_logo)) {
+    function haLogo()
+    {
+        if (empty($this->url_logo)) {
             return false;
         }
 
-        if(!file_exists(__DIR__ . "/../../{$this->url_logo}")) {
+        if (!file_exists(__DIR__ . "/../../{$this->url_logo}")) {
             Notifica::accoda('immagine logo inesistente', Notifica::TIPO_AVVERTENZA);
             return false;
         }
@@ -369,9 +369,10 @@ class Associazione
     /**
      * Carica il logo dell'associazione
      */
-    function caricaLogo($nomeCampo) {
-        $updir=realpath(__DIR__ . '/../../' . self::DIR_LOGHI);
-        if(isset($_FILES[$nomeCampo])) {
+    function caricaLogo($nomeCampo)
+    {
+        $updir = realpath(__DIR__ . '/../../' . self::DIR_LOGHI);
+        if (isset($_FILES[$nomeCampo])) {
             move_uploaded_file($_FILES[$nomeCampo]['tmp_name'], $updir . "/");
         }
     }

@@ -1,6 +1,9 @@
 <?php
 
+namespace itcbonelli\donatempo;
+
 use itcbonelli\donatempo\Notifica;
+use RuntimeException;
 
 /**
  * Fornisce funzioni di supporto per l'upload e la manipolazione di file
@@ -58,23 +61,31 @@ class AiutoUpload
     /**
      * Carica un file
      * @param string $nome nome del campo file
+     * @param string $fname nome da assegnare al file caricato
+     * @return string percorso relativo del file caricato
      */
-    public function carica($nome)
+    public function carica($nome, $fname = "")
     {
         //estraggo l'estensione del file
         $estensione = strtolower(pathinfo($_FILES[$nome]['name'], PATHINFO_EXTENSION));
         //estraggo il nome del file senza estensione
         $nomefile = strtolower(pathinfo($_FILES[$nome]['name'], PATHINFO_FILENAME));
-        //se viene richiesto di generare un nome casuale
-        if ($this->generaNomeCasuale) {
-            //genero una stringa alfanumerica random
-            $nomefile = uniqid('', true);
+
+        //se non è stato fornito un nome da attribuire al file
+        if (strlen($fname)==0) {
+            //se viene richiesto di generare un nome casuale
+            if ($this->generaNomeCasuale) {
+                //genero una stringa alfanumerica random
+                $nomefile = uniqid('', true);
+            } else {
+                //altrimenti, ripulisco il nome originale del file da caratteri indesiderati
+                $nomefile = self::sanitize($nomefile, true, false);
+            }
         } else {
-            //altrimenti, ripulisco il nome del file
-            $nomefile = self::sanitize($nomefile, true, false);
+            $nomefile = $fname;
         }
 
-        $target_file = realpath(sprintf("%s/%s.%s", $this->destinazione, $nomefile, $estensione));
+        $target_file = sprintf("%s/%s.%s", $this->destinazione, $nomefile, $estensione);
 
         if (file_exists($target_file)) {
             if ($this->azioneSuStessoNome == self::AZIONE_BLOCCA) {
@@ -82,14 +93,14 @@ class AiutoUpload
             } elseif ($this->azioneSuStessoNome == self::AZIONE_RINOMINA) {
                 $conta = 1;
                 while (file_exists($target_file)) {
-                    $target_file = realpath(sprintf("%s/%s_%d.%s", $this->destinazione, $nomefile, $conta, $estensione));
+                    $target_file = (sprintf("%s/%s_%d.%s", $this->destinazione, $nomefile, $conta, $estensione));
                     $conta++;
                 }
             }
         }
 
         // Controllo dimensione file
-        if ($_FILES[$nome]["size"] > $this->maxDimensioneFile) {
+        if ($this->maxDimensioneFile > 0 && $_FILES[$nome]["size"] > $this->maxDimensioneFile) {
             throw new RuntimeException("La dimensione del file caricato eccede il massimo consentito");
         }
 
@@ -98,6 +109,7 @@ class AiutoUpload
         }
 
         move_uploaded_file($_FILES[$nome]["tmp_name"], $target_file);
+        return $nomefile . '.' . $estensione;
     }
 
     /**
@@ -108,11 +120,13 @@ class AiutoUpload
      */
     public static function sanitize($string, $force_lowercase = true, $strip_alphanum = false)
     {
+        //caratteri da rimuovere
         $strip = array(
-            "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+            "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "=", "+", "[", "{", "]",
             "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
             "â€”", "â€“", ",", "<", ".", ">", "/", "?"
         );
+        
         $clean = trim(str_replace($strip, "", strip_tags($string)));
         $clean = preg_replace('/\s+/', "-", $clean);
         $clean = ($strip_alphanum) ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean;
