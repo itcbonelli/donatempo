@@ -1,6 +1,7 @@
 <?php
 //carico il file principale
 
+use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\tabelle\Associazione;
 use itcbonelli\donatempo\tabelle\PartecipazioneAssociazione;
 use itcbonelli\donatempo\tabelle\Utente;
@@ -9,7 +10,20 @@ require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
 
 $io = Utente::getMioUtente();
+
+
+$azione = AiutoInput::leggiStringa('azione', '', 'P');
+
+if ($azione == 'partecipa_associazione') {
+    $part = new PartecipazioneAssociazione();
+    $part->id_associazione = AiutoInput::leggiIntero('id_associazione', -1, 'P');
+    $part->id_utente = $io->id_utente;
+    $part->confermato = false;
+    $part->salva();
+}
+
 $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_utente);
+
 ?>
 <?php ob_start(); ?>
 
@@ -19,24 +33,31 @@ $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_ut
             <div class="col-12">
                 <h1>Le mie associazioni</h1>
 
+
+
                 <?php if (count($partecipazioni)) : ?>
-                    <?php foreach($partecipazioni as $part) : 
-                        $associazione = $part->getAssociazione();
+                    <div class="card-deck">
+                        <?php foreach ($partecipazioni as $part) :
+                            $associazione = $part->getAssociazione();
                         ?>
-                        <div class="card">
-                            <img class="card-img-top" src="holder.js/100x180/" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title"><?php echo $associazione->ragsoc; ?></h4>
-                                <p class="card-text">
-                                    <?php if($part->confermato) :  ?>
-                                        <span class="badge badge-success">Confermato</span>
-                                    <?php else: ?>
-                                        <span class="badge badge-warning">In attesa di conferma</span>
-                                    <?php endif; ?>
-                                </p>
+                            <div class="card" style="max-width: 320px">
+                                <div class="segnaposto-immagine" style="text-align:center; height: 256px; line-height: 256px;">
+                                    <img class="card-img-top" src="../uploads/loghi-associazioni/<?= $associazione->url_logo ?>" alt="<?= $associazione->ragsoc ?>"
+                                    style="max-height: 256px" />
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title"><?php echo $associazione->ragsoc; ?></h4>
+                                    <p class="card-text">
+                                        <?php if ($part->confermato) :  ?>
+                                            <span class="badge badge-success">Confermato</span>
+                                        <?php else : ?>
+                                            <span class="badge badge-warning">In attesa di conferma</span>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 <?php else : ?>
                     <div class="border p-2 py-4 bg-light my-2">
                         <p class="lead text-center text-muted mb-0">

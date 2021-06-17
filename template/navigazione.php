@@ -22,6 +22,10 @@ $utente = Utente::getMioUtente();
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/associazioni.php"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Associazioni</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/gestione/index.php" target="_blank"><i class="fa fa-wrench" aria-hidden="true"></i> Gestione</a>
             </li>
 

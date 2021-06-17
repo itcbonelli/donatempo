@@ -21,15 +21,15 @@ $associazioni = Associazione::elencoAssociazioni();
                     $settori = $associazione->getSettori();
 
                 ?>
-                    <div class="card" style="max-width: 320px;">
-                        <img class="card-img-top" src="holder.js/100x180/" alt="">
+                    <div class="card" style="min-width: 256px; max-width: 320px;">
+                        <img class="card-img-top" src="uploads/loghi-associazioni/<?= $associazione->url_logo ?>" alt="">
                         <div class="card-body">
                             <h4 class="card-title"><?php echo $associazione->ragsoc; ?></h4>
                             <p class="card-text">
                                 <?php foreach ($settori as $settore) {
                                     echo "<span class='badge badge-light border'>{$settore->nome}</span>";
                                 } ?></p>
-                            <p><a href="associazione.php?id=" class="btn btn-outline-primary">Vedi dettagli</a></p>
+                            <p><a href="associazione.php?id=<?= $associazione->id_associazione ?>" class="btn btn-outline-primary">Vedi dettagli</a></p>
                         </div>
 
                     </div>

@@ -2,6 +2,7 @@
 
 use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\AiutoUpload;
 use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Badge;
 
@@ -22,6 +23,14 @@ $azione = AiutoInput::leggiStringa('azione', '', 'P');
 if ($azione == 'salva') {
     $badge->nome = AiutoInput::leggiStringa('nome', '', 'P');
     $badge->descrizione = AiutoInput::leggiStringa('descrizione', '', 'P');
+
+    if (isset($_FILES['immagine'])) {
+        $au = new AiutoUpload();
+        $au->destinazione .= "/badge/";
+        $au->generaNomeCasuale = true;
+        $badge->url_immagine = $au->carica('immagine');
+    }
+
     $badge->salva();
     Notifica::accoda('Badge salvato correttamente', Notifica::TIPO_SUCCESSO);
     Notifica::salva();
@@ -36,13 +45,18 @@ if ($azione == 'salva') {
 ob_start();
 ?>
 
-<form action="" method="post" autocomplete="off">
+<form action="" method="post" autocomplete="off" enctype="multipart/form-data">
     <h1>Modifica badge</h1>
 
     <p><a href="badge.php">&larr; Torna all'elenco dei badge</a></p>
 
     <?php AiutoHTML::campoInput('nome', 'Nome', $badge->nome, ['required' => true]); ?>
     <?php AiutoHTML::campoInput('descrizione', 'Descrizione', $badge->descrizione); ?>
+
+    <?php if (strlen($badge->url_immagine) > 0) : ?>
+        <img src="../uploads/badge/<?= $badge->url_immagine ?>" alt="Immagine badge" /><br />
+        <label for="rimuovi_immagine" class="checkbox"><input type="checkbox" name="rimuovi_immagine" id="rimuovi_immagine" value="1" /></label>
+    <?php endif; ?>
 
     <div class="form-group">
         <label for="immagine">Immagine</label>
