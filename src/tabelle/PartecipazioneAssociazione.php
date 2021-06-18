@@ -49,7 +49,7 @@ class PartecipazioneAssociazione
      * Indica che la partecipazione all'associazione è stata verificata dall'associazione stessa.
      * @var boolean
      */
-    public bool $confermato=false;
+    public bool $confermato = false;
 
 
     /**
@@ -102,6 +102,7 @@ class PartecipazioneAssociazione
         if ($esegui == true) {
             while ($riga = $comando->fetch()) {
                 $partecipa = new PartecipazioneAssociazione();
+                $partecipa->id_partecipazione = $riga['id_partecipazione'];
                 $partecipa->id_utente = $riga['utenti_id_utente'];
                 $partecipa->id_associazione = $riga['associazioni_id_associazione'];
                 $partecipa->ruolo = $riga['ruolo'];
@@ -203,6 +204,19 @@ class PartecipazioneAssociazione
         }
 
         return false;
+    }
+
+    /**
+     * Controlla se esiste una partecipazione per l'utente
+     * @return bool
+     */
+    public static function controlla($id_utente, $id_associazione)
+    {
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $query = "SELECT count(*) FROM utente_partecipa_associazione WHERE utenti_id_utente=:u AND associazioni_id_associazione=:a";
+        $risultato = $adb->eseguiScalare($query, ['u' => $id_utente, 'a' => $id_associazione]);
+        return boolval($risultato);
     }
 
     /**

@@ -51,7 +51,7 @@ $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_ut
                                         <?php if ($part->confermato) :  ?>
                                             <span class="badge badge-success">Confermato</span>
                                         <?php else : ?>
-                                            <span class="badge badge-warning">In attesa di conferma</span>
+                                            <span class="badge badge-warning">In attesa di conferma</span> <a href="?rimuovi=<?= $part->id_partecipazione; ?>" class="btn btn-sm btn-outline-danger">Rimuovi</a>
                                         <?php endif; ?>
                                     </p>
                                 </div>

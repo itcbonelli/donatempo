@@ -25,9 +25,7 @@ $utente = Utente::getMioUtente();
                 <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/associazioni.php"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Associazioni</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/gestione/index.php" target="_blank"><i class="fa fa-wrench" aria-hidden="true"></i> Gestione</a>
-            </li>
+            
 
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -38,7 +36,10 @@ $utente = Utente::getMioUtente();
                         <?= $utente->username; ?></a>
                     <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/index.php"><i class="fa fa-home" aria-hidden="true"></i> Area personale</a>
-
+                        
+                        <?php if($utente->amministratore) : ?>
+                            <a class="dropdown-item text-danger" href="<?php echo PERCORSO_BASE ?>/gestione/index.php" target="_blank"><i class="fa fa-wrench" aria-hidden="true"></i> Gestione</a>
+                        <?php endif; ?>
                         <?php if ($utente->volontario) : ?>
                             <span class="dropdown-item disabled">Area volontario</span>
                             <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/riconoscimenti.php"><i class="fa fa-trophy" aria-hidden="true"></i> Riconoscimenti</a>
