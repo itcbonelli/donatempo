@@ -1,7 +1,9 @@
 <?php
 //carico il file principale
 
+use itcbonelli\donatempo\AiutoData;
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\calendario\Appuntamento;
 use itcbonelli\donatempo\calendario\Calendario;
 use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
@@ -46,7 +48,19 @@ if($azione=='aggiungi') {
 </div>
 <div class="section">
     <div class="container">
-        <?php $cal->calendario(); ?>
+        <?php 
+        $elencoDisp = Disponibilita::getDisponibilitaUtente($io->id_utente, $anno, $mese);
+        //var_dump($elencoDisp);
+        foreach($elencoDisp as $dsp) {
+            $appu = new Appuntamento();
+            $appu->descrizione = strval($dsp['associazione']);
+            $appu->data = DateTime::createFromFormat('Y-m-d', $dsp['data_disp']);
+            $appu->ora_inizio = DateTime::createFromFormat('H:i:s', $dsp['ora_inizio']);
+            $appu->ora_fine = DateTime::createFromFormat('H:i:s', $dsp['ora_fine']);
+            $cal->appuntamenti[] = $appu;
+        }
+        $cal->calendario(); 
+        ?>
     </div>
 </div>
 <div class="section">

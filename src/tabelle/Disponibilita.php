@@ -131,6 +131,22 @@ class Disponibilita
     }
 
     /**
+     * Ottiene le disponibilità di tempo un determinato utente
+     */
+    public static function getDisponibilitaUtente(int $id_utente, int $anno, int $mese) {
+        global $dbconn;
+        $adb=new AiutoDB($dbconn);
+        $dati = $adb->eseguiQuery("SELECT disponibilita.*, ass.ragsoc AS associazione
+        FROM disponibilita 
+        JOIN utente_partecipa_associazione part ON part.id_partecipazione = disponibilita.id_partecipazione
+        JOIN associazioni ass ON ass.id_associazione = part.associazioni_id_associazione
+        WHERE year(data_disp)=$anno AND month(data_disp)=$mese
+        AND part.utenti_id_utente=$id_utente");
+        return $dati;
+    }
+
+
+    /**
      * 
      * @return PartecipazioneAssociazione
      */

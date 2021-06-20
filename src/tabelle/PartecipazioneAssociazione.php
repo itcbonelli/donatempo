@@ -67,8 +67,8 @@ class PartecipazioneAssociazione
 
         if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
             $this->id_partecipazione = $riga['id_partecipazione'];
-            $this->id_utente = $riga['id_utente'];
-            $this->id_associazione = $riga['id_associazione'];
+            $this->id_utente = $riga['utenti_id_utente'];
+            $this->id_associazione = $riga['associazioni_id_associazione'];
             $this->ruolo = $riga['ruolo'];
             $this->confermato = boolval($riga['confermato']);
             return true;

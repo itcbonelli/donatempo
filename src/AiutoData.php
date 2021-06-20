@@ -34,6 +34,8 @@ class AiutoData
         return new DateTime(date('Y-m-d H:i:s', $valore), new DateTimeZone(TIMEZONE));
     }
 
+
+
     /**
      * Crea un oggetto data a partire da un valore temporale
      * @param int $valore timestamp da convertire
@@ -49,14 +51,13 @@ class AiutoData
     public static function formatta(mixed $valore, $includiOrario = true)
     {
         $formato = $includiOrario ? self::FORMATOVIS1 : self::FORMATOVIS2;
-        if(gettype($valore)=='object' && $valore instanceof DateTime) {
+        if (gettype($valore) == 'object' && $valore instanceof DateTime) {
             return date_format($valore, $formato);
-        } elseif(gettype($valore) == 'int') {
+        } elseif (gettype($valore) == 'int') {
             $timestamp = $valore;
             return date_format(new DateTime($timestamp, new DateTimeZone(TIMEZONE)), $formato);
         } else {
             throw new Exception('Tipo di valore temporale non valido');
         }
-        
     }
 }

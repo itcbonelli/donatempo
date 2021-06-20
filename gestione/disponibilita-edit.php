@@ -2,8 +2,8 @@
 
 use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Disponibilita;
-use itcbonelli\donatempo\tabelle\Esercente;
 
 require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Modifica disponibilità di tempo - Gestione Donatempo";
@@ -23,7 +23,14 @@ $azione = AiutoInput::leggiStringa('azione', '', 'P');
 if ($azione == 'salva') {
     
 } elseif($azione=='elimina') {
-
+    if($disponibilita->elimina()) {
+        Notifica::accoda('Disponibilità eliminata correttamente', Notifica::TIPO_SUCCESSO);
+        Notifica::salva();
+        header('location: disponibilita.php');
+    } else {
+        Notifica::accoda('Si è verificato un errore con l\'eliminazione della disponibilità', Notifica::TIPO_ERRORE);
+    }
+    
 }
 
 ob_start();
@@ -44,8 +51,15 @@ ob_start();
     
     <div class="form-group">
         <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
-        <button type="submit" class="btn btn-danger" name="azione" value="elimina" onclick="return confirm('Eliminare questa disponibilità di tempo?');">Elimina</button>
+        
     </div>
+</form>
+
+<form action="" method="post">
+    <fieldset>
+        <legend>Elimina disponibilità</legend>
+        <button type="submit" class="btn btn-danger" name="azione" value="elimina" onclick="return confirm('Eliminare questa disponibilità di tempo?');">Elimina</button>
+    </fieldset>
 </form>
 <?php
 

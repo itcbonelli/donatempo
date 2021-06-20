@@ -5,6 +5,8 @@ use itcbonelli\donatempo\tabelle\Associazione;
 
 require_once __DIR__ . '/include/main.php';
 
+$voce_attiva='associazioni';
+
 $associazioni = Associazione::elencoAssociazioni();
 
 ?>

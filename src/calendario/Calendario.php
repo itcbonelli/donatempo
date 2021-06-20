@@ -24,7 +24,7 @@ class Calendario
      * Elenco degli appuntamenti previsti
      * @var Appuntamento[]
      */
-    public array $appuntamenti;
+    public array $appuntamenti = [];
 
     public function __construct(int $mese = 0, int $anno = -1)
     {
@@ -41,7 +41,8 @@ class Calendario
     }
 
     /**
-     * Mostra a video gli appuntamenti in una particolare data
+     * Ottiene gli appuntamenti in una particolare data
+     * @return Appuntamento[]
      */
     public function getAppuntamentiPerData(DateTime $data)
     {
@@ -157,7 +158,7 @@ class Calendario
             }
         }
 
-        echo "<table class='calendario table table-bordered'>
+        echo "<table class='calendario table table-bordered' style='table-layout:fixed'>
         <thead>
             <tr class='bg-danger text-light'> 
                 <th class='text-center'><a href='?mese=$DOWNmese&anno=$DOWNanno' class='text-light'><span class='fa fa-arrow-left'></span></a></th>  
@@ -184,7 +185,16 @@ class Calendario
             $giornoAttuale = self::giornoData($i, $mese, $anno);
 
             $giorno = $giorno + 1;
-            echo "<td> $giorno </td>";
+
+            $appuntamenti = $this->getAppuntamentiPerData(DateTime::createFromFormat('Y-m-d', "$anno-$mese-$giorno"));
+
+            echo "<td>";
+            echo "<span class='badge badge-light'>$giorno</span><br />";
+            foreach($appuntamenti as $appu) {
+                
+                printf("%s - %s - %s", $appu->descrizione, $appu->ora_inizio->format('H:i'), $appu->ora_fine->format('H:i'));
+            }
+            echo "</td>";
 
             if ($giornoAttuale == 0) {
                 echo "</tr> <tr>";

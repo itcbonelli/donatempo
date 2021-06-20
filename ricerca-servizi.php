@@ -8,6 +8,8 @@ use itcbonelli\donatempo\tabelle\Servizio;
 
 require_once __DIR__ . '/include/main.php';
 
+$voce_attiva='servizi';
+
 $servizi = Servizio::elencoServizi(true);
 $comuni = Comune::getElencoComuni();
 $provincia = '';

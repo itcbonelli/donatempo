@@ -3,6 +3,10 @@
 use itcbonelli\donatempo\tabelle\Utente;
 
 $utente = Utente::getMioUtente();
+
+if(!isset($voce_attiva)) {
+    $voce_attiva = 'home';
+}
 ?>
 <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
     <a class="navbar-brand" href="<?php echo PERCORSO_BASE ?>/index.php">
@@ -14,18 +18,19 @@ $utente = Utente::getMioUtente();
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/index.php"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
+            
+            <li class="nav-item <?= $voce_attiva == 'home' ? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/index.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?= $voce_attiva == 'servizi' ? 'active' : ''; ?>" >
                 <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/ricerca-servizi.php"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Servizi</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item <?= $voce_attiva == 'associazioni' ? 'active' : ''; ?>">
                 <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/associazioni.php"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Associazioni</a>
             </li>
 
-            
+
 
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -36,8 +41,8 @@ $utente = Utente::getMioUtente();
                         <?= $utente->username; ?></a>
                     <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="<?php echo PERCORSO_BASE ?>/area-personale/index.php"><i class="fa fa-home" aria-hidden="true"></i> Area personale</a>
-                        
-                        <?php if($utente->amministratore) : ?>
+
+                        <?php if ($utente->amministratore) : ?>
                             <a class="dropdown-item text-danger" href="<?php echo PERCORSO_BASE ?>/gestione/index.php" target="_blank"><i class="fa fa-wrench" aria-hidden="true"></i> Gestione</a>
                         <?php endif; ?>
                         <?php if ($utente->volontario) : ?>

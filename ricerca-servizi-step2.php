@@ -26,6 +26,8 @@ $province = Provincia::caricaTutte();
 $comuni = Comune::getElencoComuni();
 
 $disponiblita = Disponibilita::ricercaDisponibilita($filtro);
+
+$voce_attiva='servizi';
 ?>
 <?php ob_start(); ?>
 <div class="section">

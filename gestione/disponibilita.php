@@ -34,6 +34,7 @@ ob_start();
 <table class="table table-bordered table-striped table-sm">
     <thead>
         <tr>
+            <th>Mod.</th>
             <th>Utente</th>
             <th>Data</th>
             <th>Ora inizio</th>
@@ -44,6 +45,7 @@ ob_start();
     <tbody>
         <?php foreach ($disponibilita as $disp) : ?>
             <tr>
+                <td><a href="disponibilita-edit.php?id=<?= $disp['id_disponibilita']; ?>"><i class="fa fa-search-plus" aria-hidden="true"></i> <span class="sr-only">Dettaglio</span></a></td>
                 <td><?= $disp['username']; ?></td>
                 <td><?= $disp['data_disp']; ?></td>
                 <td><?= $disp['ora_inizio']; ?></td>
