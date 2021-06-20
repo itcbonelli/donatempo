@@ -40,7 +40,7 @@ switch ($azione) {
             }
 
             //upload logo associazione
-            if (isset($_FILES['logo'])) {
+            if (is_uploaded_file($_FILES['logo']['tmp_name'])) {
                 try {
                     $au = new AiutoUpload();
                     $au->destinazione .= "/loghi-associazioni/";
@@ -130,7 +130,7 @@ switch ($azione) {
 
             <div class="form-group">
                 <label for="descrizione">Descrizione</label>
-                <input type="text" name="descrizione" id="descrizione" class="form-control" value="<?= htmlentities($associazione->descrizione); ?>" />
+                <textarea name="descrizione" id="descrizione" class="form-control"><?= (htmlentities($associazione->descrizione)); ?></textarea>
             </div>
 
             <div class="form-group">

@@ -9,10 +9,10 @@ use itcbonelli\donatempo\tabelle\Servizio;
 require_once __DIR__ . '/include/main.php';
 
 $servizi = Servizio::elencoServizi(true);
-$comuni=Comune::getElencoComuni();
+$comuni = Comune::getElencoComuni();
 $provincia = '';
 
-$comune=AiutoInput::leggiStringa('comune', '', 'G');
+$comune = AiutoInput::leggiStringa('comune', '', 'G');
 
 ?>
 <?php ob_start(); ?>
@@ -25,17 +25,15 @@ $comune=AiutoInput::leggiStringa('comune', '', 'G');
                     <h1><i class="fa fa-question-circle" aria-hidden="true"></i> Cosa possiamo fare per te?</h1>
                 </div>
             </div>
-            <div class="">
+            <div class="d-flex align-items-stretch flex-wrap">
                 <?php foreach ($servizi as $serv) : ?>
-                    <div>
+                    <div class="d-flex-item  flex-fill mx-2">
                         <label for="id_servizio_<?php echo $serv->id_servizio; ?>" class="d-block">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>
-                                        <input type="radio" name="id_servizio" id="id_servizio_<?php echo $serv->id_servizio; ?>" value="<?php echo $serv->id_servizio; ?>" required />
-                                        <?php echo $serv->nome; ?>
-                                    </h5>
-                                </div>
+                            <div class="btn btn-light btn-block btn-lg">
+                                <h5>
+                                    <input type="radio" name="id_servizio" id="id_servizio_<?php echo $serv->id_servizio; ?>" value="<?php echo $serv->id_servizio; ?>" required />
+                                    <?php echo $serv->nome; ?>
+                                </h5>
                             </div>
                         </label>
                     </div>

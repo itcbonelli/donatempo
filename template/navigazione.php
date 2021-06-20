@@ -4,7 +4,7 @@ use itcbonelli\donatempo\tabelle\Utente;
 
 $utente = Utente::getMioUtente();
 ?>
-<nav class="navbar navbar-expand-sm navbar-light sticky-top">
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top">
     <a class="navbar-brand" href="<?php echo PERCORSO_BASE ?>/index.php">
         <img src="<?php echo PERCORSO_BASE; ?>/img/logo-donatempo-48px.png" alt="Donatempo" style="height: 24px; vertical-align:middle;" />
         DONATEMPO

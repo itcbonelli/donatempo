@@ -11,8 +11,13 @@ require_once __DIR__ . '/../include/main.php';
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Diventa volontario</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, consectetur corporis, illum eos rerum vel obcaecati quas minus nam amet alias vero consequatur voluptate magni sapiente aliquid eius necessitatibus assumenda?</p>
+            <h1>Dona il tuo tempo a chi ha bisogno di una mano</h1>
+            <p>Iniziare a collaborare con DONATEMPO è semplicissimo:</p>
+            <ol>
+                <li>Se non l'hai ancora fatto, <a href="../registrazione.php"><strong>registrati ora</strong></a></li>
+                <li>Accedi alla pagina <a href="mie-associazioni.php"><strong>le mie associazioni</strong></a> per richiedere l'iscrizione ad un'associazione come volontario</li>
+                <li>Sarai ricontattato dall'associazione per perfezionare la tua iscrizione e, una volta approvata, potrai iniziare a ricevere ed esaudire richieste di aiuto</li>
+            </ol>
         </div>
     </div>
 </div>

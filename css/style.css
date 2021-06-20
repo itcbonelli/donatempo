@@ -21,7 +21,7 @@
 }
 
 .navbar {
-  background-color: #94d4d9;
+  background-color: #2A3485;
 }
 
 .traguardi .col {
@@ -62,7 +62,9 @@
   background-color: white;
   display: inline-block;
   position: relative;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .foto-profilo-overlay {
@@ -76,6 +78,7 @@
   text-align: center;
   font-size: 48px;
   background-color: rgba(0, 0, 0, 0.3);
+  color:white;
   cursor: pointer;
 }
 

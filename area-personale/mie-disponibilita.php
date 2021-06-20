@@ -5,11 +5,16 @@ use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\calendario\Calendario;
 use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
+use itcbonelli\donatempo\tabelle\Disponibilita;
+use itcbonelli\donatempo\tabelle\PartecipazioneAssociazione;
 use itcbonelli\donatempo\tabelle\Servizio;
+use itcbonelli\donatempo\tabelle\Utente;
 
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
 
+$io=Utente::getMioUtente();
+$partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_utente);
 $associazioni = Associazione::getMieAssociazioni();
 $mese = AiutoInput::leggiIntero('mese', intval(date('m')));
 $anno = AiutoInput::leggiIntero('anno', intval(date('Y')));
@@ -20,7 +25,10 @@ $servizi = Servizio::elencoServizi(true);
 $azione = AiutoInput::leggiStringa('azione', '', 'P');
 
 if($azione=='aggiungi') {
-
+    $disp=new Disponibilita();
+    
+    $disp->id_partecipazione = AiutoInput::leggiIntero('id_partecipazione', -1, 'P');
+    
 }
 
 ?>
@@ -51,9 +59,11 @@ if($azione=='aggiungi') {
                         <div class="row">
                             <div class="form-group col">
                                 <label for="associazione">Associazione</label>
-                                <select name="associazione" class="form-control" id="associazione" style="min-width: 320px;">
+                                <select name="id_partecipazione" class="form-control" id="id_partecipazione" style="min-width: 320px;">
                                     <option value="" selected disabled>Selezionare</option>
-                                    <?php foreach ($associazioni as $assoc) : ?>
+                                    <?php foreach ($partecipazioni as $partecipazione) : 
+                                        $assoc = $partecipazione->getAssociazione();
+                                        ?>
                                         <option value="<?= $assoc->id_associazione; ?>"><?= $assoc->ragsoc; ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -72,14 +82,7 @@ if($azione=='aggiungi') {
                             </div>
 
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="ripeti" class="checkbox"><input type="checkbox" name="ripeti" id="ripeti"> Ripeti settimanalmente fino alla seguente data</label>
-                                    <input type="date" name="data_fine_ripeti" id="data_fine_ripeti" class="form-control" disabled />
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -105,18 +108,7 @@ if($azione=='aggiungi') {
         </div>
     </div>
 </div>
-<script>
-    (function() {
-        var ripeti = document.getElementById('ripeti');
-        var data_fine_ripeti = document.getElementById('data_fine_ripeti');
 
-        function ripeti_onchange() {
-            data_fine_ripeti.checked = ripeti.checked;
-        }
-
-        ripeti.addEventListener('change', ripeti_onchange);
-    }());
-</script>
 <?php $contenuto = ob_get_clean(); ?>
 
 <?php

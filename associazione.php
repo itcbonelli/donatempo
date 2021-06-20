@@ -16,7 +16,7 @@ $associazione->carica($id);
 ?>
 <?php ob_start(); ?>
 
-<div class="container">
+<div class="container my-4">
     <div class="row">
 
         <div class="col-4">

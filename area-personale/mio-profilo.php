@@ -3,6 +3,7 @@
 
 use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\AiutoUpload;
 use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Comune;
 use itcbonelli\donatempo\tabelle\Utente;
@@ -26,6 +27,13 @@ if ($azione == 'salva') {
     $profilo->id_comune = AiutoInput::leggiStringa('id_comune', '', 'P');
     $profilo->indirizzo = AiutoInput::leggiStringa('indirizzo', '', 'P');
     $profilo->cap = AiutoInput::leggiStringa('cap', '', 'P');
+
+    if(is_uploaded_file($_FILES['upload_foto']['tmp_name'])) {
+        $au=new AiutoUpload();
+        $au->destinazione .= "/foto-profilo/";
+        $profilo->fotografia = $au->carica('upload_foto', 'fp_' . $profilo->id_utente);
+    }
+
     if ($profilo->salva()) {
         Notifica::accoda('Modifiche al profilo salvate con successo', Notifica::TIPO_SUCCESSO);
     }
@@ -35,7 +43,7 @@ if ($azione == 'salva') {
     $pwd2 = AiutoInput::leggiStringa('pwd2', '', 'P');
     if (!empty($pwd1) && $pwd1 == $pwd2) {
         if ($utente->verificaPassword($oldpwd)) {
-            if($utente->cambiaPassword($pwd1)) {
+            if ($utente->cambiaPassword($pwd1)) {
                 Notifica::accoda('La password è stata modificata con successo', Notifica::TIPO_SUCCESSO);
             }
         } else {
@@ -43,6 +51,13 @@ if ($azione == 'salva') {
         }
     } else {
         Notifica::accoda('Le password inserite non coincidono', Notifica::TIPO_ERRORE);
+    }
+} elseif ($azione == 'disattivaAccount') {
+    $password = AiutoInput::leggiStringa('password', '', 'P');
+    if (strlen($password) > 0) {
+
+    } else {
+        Notifica::accoda('La password non può essere vuota', Notifica::TIPO_ERRORE);
     }
 }
 
@@ -64,7 +79,8 @@ if ($azione == 'salva') {
                     <div class="col text-center" style="min-width: 256px; max-width: 256px">
                         <div class="form-group">
                             <label for="upload_foto" class="text-center">Fotografia</label><br />
-                            <div class="foto-profilo shadow">
+                            <?php $fpp = "../uploads/foto-profilo/{$profilo->fotografia}" ?>
+                            <div class="foto-profilo shadow" style="background-image:url(<?= $fpp ?>)">
                                 <div class="foto-profilo-overlay" title="Fai clic qui per caricare una nuova foto profilo" onclick="document.getElementById('upload_foto').click();">
                                     <i class="fa fa-camera" aria-hidden="true"></i>
                                 </div>
@@ -165,10 +181,10 @@ if ($azione == 'salva') {
 
                     <div class="form-group">
                         <label for="password">Inserisci la tua password</label>
-                        <input type="password" name="password" id="password" class="form-control" required />
+                        <input type="password" name="password" id="disattiva_password" class="form-control" required />
                     </div>
 
-                    <button type="submit" class="btn btn-danger">Disattiva il mio account</button>
+                    <button type="submit" class="btn btn-danger" name="azione" value="disattivaAccount">Disattiva il mio account</button>
 
                 </fieldset>
             </form>

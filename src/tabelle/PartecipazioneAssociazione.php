@@ -78,6 +78,8 @@ class PartecipazioneAssociazione
     }
 
 
+
+
     /**
      * Ottiene le partecipazioni ad associazioni di un dato utente
      * @author Ramonda Samuele
@@ -205,6 +207,7 @@ class PartecipazioneAssociazione
 
         return false;
     }
+
 
     /**
      * Controlla se esiste una partecipazione per l'utente
