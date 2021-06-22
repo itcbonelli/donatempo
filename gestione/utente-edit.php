@@ -79,7 +79,7 @@ ob_start();
     <div class="form-group">
       <label for="attivo" class="checkbox"><input type="checkbox" name="attivo" id="attivo" <?= $utente->attivo ? 'checked' : '' ?>> Attivo</label>
     </div>
-
+ 
     <div class="form-group">
       <label for="volontario" class="checkbox"><input type="checkbox" name="volontario" id="volontario" <?= $utente->volontario ? 'checked' : '' ?>> L'utente è un volontario</label>
     </div>
