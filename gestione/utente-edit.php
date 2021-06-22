@@ -25,6 +25,9 @@ if ($azione == 'salva') {
     $utente->username = AiutoInput::leggiStringa('username', '', 'P');
   }
   $utente->email = AiutoInput::leggiStringa('email', '', 'P');
+  $utente->attivo = AiutoInput::leggiBool('attivo', false, 'P');
+  $utente->volontario = AiutoInput::leggiBool('volontario', false, 'P');
+  $utente->amministratore = AiutoInput::leggiBool('amministratore', false, 'P');
 
   $utente->salva();
   $profilo->id_utente = $utente->id_utente;
@@ -75,6 +78,14 @@ ob_start();
 
     <div class="form-group">
       <label for="attivo" class="checkbox"><input type="checkbox" name="attivo" id="attivo" <?= $utente->attivo ? 'checked' : '' ?>> Attivo</label>
+    </div>
+
+    <div class="form-group">
+      <label for="attivo" class="checkbox"><input type="checkbox" name="volontario" id="volontario" <?= $utente->volontario ? 'checked' : '' ?>> L'utente è un volontario</label>
+    </div>
+
+    <div class="form-group">
+      <label for="attivo" class="checkbox text-danger font-weight-bold"><input type="checkbox" name="amministratore" id="amministratore" <?= $utente->amministratore ? 'checked' : '' ?>> L'utente è un amministratore</label>
     </div>
 
     <?php if ($utente->id_utente > 0) : ?>
