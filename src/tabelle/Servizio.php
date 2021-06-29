@@ -59,7 +59,7 @@ class Servizio
         $record = [];
 
         $record['nome'] = $this->nome;
-        if($this->tipo != null) {
+        if ($this->tipo != null) {
             $record['id_tipo'] = $this->tipo;
         }
         $record['durata'] = $this->durata;
@@ -189,5 +189,20 @@ class Servizio
             }
         }
         return $dataset;
+    }
+
+
+    /**
+     * Popola i campi dell'oggetto con dati provenienti da un array
+     * @param array $dati array con i dati
+     */
+    public function popolaCampi($dati)
+    {
+        $this->id = $dati['id'];
+        $this->nome = $dati['nome'];
+        $this->descrizione = $dati['descrizione'];
+        $this->durata = $dati['durata'];
+        $this->attivo = boolval($dati['attivo']);
+        $this->tipo = intval($dati['id_tipo']);
     }
 }

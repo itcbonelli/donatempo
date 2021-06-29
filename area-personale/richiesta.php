@@ -1,12 +1,30 @@
 <?php
 
+use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
+use itcbonelli\donatempo\tabelle\Messaggio;
 use itcbonelli\donatempo\tabelle\Richiesta;
+use itcbonelli\donatempo\tabelle\Utente;
 
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
 
+$io = Utente::getMioUtente();
 $richiesta = new Richiesta();
-$richiesta->cod_stato='aperto';
+$richiesta->cod_stato = 'aperto';
+$id_richiesta = AiutoInput::leggiIntero('id', -1, 'G');
+
+$azione = AiutoInput::leggiStringa('azione', '', 'P');
+
+if ($azione == 'invia_messaggio') {
+    $mess = new Messaggio();
+    $mess->id_richiesta = $richiesta->id_richiesta;
+    $mess->id_mittente = $io->id_utente;
+    $mess->id_destinatario = $richiesta->richiedente;
+    $mess->contenuto = AiutoInput::leggiStringa('messaggio', '', 'P');
+    $mess->data_invio = new DateTime('now', new DateTimeZone(TIMEZONE));
+    $mess->salva();
+}
 ?>
 <?php ob_start(); ?>
 
@@ -14,6 +32,9 @@ $richiesta->cod_stato='aperto';
 <div class="container">
     <div class="row">
         <div class="col-12">
+
+            <?php Notifica::MostraNotifiche(); ?>
+
             <h1>Dettaglio richiesta</h1>
 
             <dl>
@@ -37,23 +58,23 @@ $richiesta->cod_stato='aperto';
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum a cumque incidunt deserunt eligendi corporis. Quidem illum eaque quo tenetur! Unde eum fugit voluptatem delectus odit dicta ducimus architecto minima.</p>
                 <p class="text-muted text-right mb-0"><cite>Tizio</cite>, data</p>
             </blockquote>
-            <?php if($richiesta->cod_stato=='aperto') : ?>
-            <hr />
+            <?php if ($richiesta->cod_stato == 'aperto') : ?>
+                <hr />
 
-            <form action="" method="post">
-                <fieldset>
-                    <legend>Rispondi</legend>
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Rispondi</legend>
 
-                    <label for="messaggio" class="sr-only"></label>
-                    <div class="input-group">
-                        <textarea name="messaggio" id="messaggio" class="form-control" style="background-color:lightgoldenrodyellow"></textarea>
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i><br /><small>Invia</small></button>
+                        <label for="messaggio" class="sr-only"></label>
+                        <div class="input-group">
+                            <textarea name="messaggio" id="messaggio" class="form-control" style="background-color:lightgoldenrodyellow"></textarea>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary" name="azione" value="invia_messaggio"><i class="fa fa-paper-plane" aria-hidden="true"></i><br /><small>Invia</small></button>
+                            </div>
                         </div>
-                    </div>
 
-                </fieldset>
-            </form>
+                    </fieldset>
+                </form>
             <?php endif; ?>
         </div>
     </div>

@@ -192,4 +192,14 @@ class Comune
 
         return $comuni;
     }
+
+    public function getProvincia() {
+        return self::getProvinciaComune($this->provincia);
+    }
+
+    public static function getProvinciaComune($cod) {
+        $prov = new Provincia();
+        $prov->carica($cod);
+        return $prov;
+    }
 }

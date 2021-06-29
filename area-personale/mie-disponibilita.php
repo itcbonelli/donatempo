@@ -15,7 +15,7 @@ use itcbonelli\donatempo\tabelle\Utente;
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
 
-$io=Utente::getMioUtente();
+$io = Utente::getMioUtente();
 $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_utente);
 $associazioni = Associazione::getMieAssociazioni();
 $mese = AiutoInput::leggiIntero('mese', intval(date('m')));
@@ -26,11 +26,10 @@ $servizi = Servizio::elencoServizi(true);
 
 $azione = AiutoInput::leggiStringa('azione', '', 'P');
 
-if($azione=='aggiungi') {
-    $disp=new Disponibilita();
-    
+if ($azione == 'aggiungi') {
+    $disp = new Disponibilita();
+
     $disp->id_partecipazione = AiutoInput::leggiIntero('id_partecipazione', -1, 'P');
-    
 }
 
 ?>
@@ -48,18 +47,19 @@ if($azione=='aggiungi') {
 </div>
 <div class="section">
     <div class="container">
-        <?php 
+        <?php
         $elencoDisp = Disponibilita::getDisponibilitaUtente($io->id_utente, $anno, $mese);
         //var_dump($elencoDisp);
-        foreach($elencoDisp as $dsp) {
+        foreach ($elencoDisp as $dsp) {
             $appu = new Appuntamento();
             $appu->descrizione = strval($dsp['associazione']);
             $appu->data = DateTime::createFromFormat('Y-m-d', $dsp['data_disp']);
             $appu->ora_inizio = DateTime::createFromFormat('H:i:s', $dsp['ora_inizio']);
             $appu->ora_fine = DateTime::createFromFormat('H:i:s', $dsp['ora_fine']);
+            $appu->link = "disponibilita-edit.php?id={$dsp['id_disponibilita']}";
             $cal->appuntamenti[] = $appu;
         }
-        $cal->calendario(); 
+        $cal->calendario();
         ?>
     </div>
 </div>
@@ -75,9 +75,13 @@ if($azione=='aggiungi') {
                                 <label for="associazione">Associazione</label>
                                 <select name="id_partecipazione" class="form-control" id="id_partecipazione" style="min-width: 320px;">
                                     <option value="" selected disabled>Selezionare</option>
-                                    <?php foreach ($partecipazioni as $partecipazione) : 
+                                    <?php foreach ($partecipazioni as $partecipazione) :
+                                    //se la partecipazione non è confermata salto all'iterazione successiva
+                                        if ($partecipazione->confermato == false) {
+                                            continue;
+                                        }
                                         $assoc = $partecipazione->getAssociazione();
-                                        ?>
+                                    ?>
                                         <option value="<?= $assoc->id_associazione; ?>"><?= $assoc->ragsoc; ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -96,14 +100,14 @@ if($azione=='aggiungi') {
                             </div>
 
                         </div>
-                        
+
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <p><strong>Servizi offerti:</strong></p>
                                     <label for="tutti_servizi" class="checkbox"><input type="checkbox" name="tutti_servizi" id="tutti_servizi"> Seleziona tutti</label><br />
-                                    <?php 
-                                    foreach($servizi as $servizio) {
+                                    <?php
+                                    foreach ($servizi as $servizio) {
                                         echo "<label class='checkbox'><input type='checkbox' name='servizi[{$servizio->id_servizio}]' checked /> {$servizio->nome}</label><br />";
                                     }
                                     ?>

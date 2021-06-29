@@ -2,6 +2,7 @@
 //carico il file principale
 
 use itcbonelli\donatempo\AiutoInput;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Associazione;
 use itcbonelli\donatempo\tabelle\PartecipazioneAssociazione;
 use itcbonelli\donatempo\tabelle\Utente;
@@ -20,7 +21,15 @@ if ($azione == 'partecipa_associazione') {
     $part->id_utente = $io->id_utente;
     $part->confermato = false;
     $part->salva();
+} elseif ($azione == 'rimuovi') {
+    $rimuovi_partecipazione = AiutoInput::leggiIntero('rimuovi_partecipazione', -1, 'P');
+    $part = new PartecipazioneAssociazione();
+    $part->carica($rimuovi_partecipazione);
+    $part->elimina();
+    Notifica::accoda('Partecipazione all\'associazione eliminata', Notifica::TIPO_SUCCESSO);
 }
+
+
 
 $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_utente);
 
@@ -31,9 +40,11 @@ $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_ut
     <div class="container">
         <div class="row">
             <div class="col-12">
+                <?php Notifica::MostraNotifiche(); ?>
+
                 <h1>Le mie associazioni</h1>
 
-
+                <p class="lead">In questa pagina vedi le associazioni in cui presti servizio come volontario.</p>
 
                 <?php if (count($partecipazioni)) : ?>
                     <div class="card-deck">
@@ -41,9 +52,10 @@ $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_ut
                             $associazione = $part->getAssociazione();
                         ?>
                             <div class="card" style="max-width: 320px">
-                                <div class="segnaposto-immagine" style="text-align:center; height: 256px; line-height: 256px;">
-                                    <img class="card-img-top" src="../uploads/loghi-associazioni/<?= $associazione->url_logo ?>" alt="<?= $associazione->ragsoc ?>"
-                                    style="max-height: 256px" />
+                                <div class="card-header bg-white">
+                                    <div class="segnaposto-immagine" style="text-align:center; height: 256px; line-height: 256px;">
+                                        <img class="card-img-top" src="../uploads/loghi-associazioni/<?= $associazione->url_logo ?>" alt="<?= $associazione->ragsoc ?>" style="max-height: 256px" />
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title"><?php echo $associazione->ragsoc; ?></h4>
@@ -51,9 +63,14 @@ $partecipazioni = PartecipazioneAssociazione::getPartecipazioniUtente($io->id_ut
                                         <?php if ($part->confermato) :  ?>
                                             <span class="badge badge-success">Confermato</span>
                                         <?php else : ?>
-                                            <span class="badge badge-warning">In attesa di conferma</span> <a href="?rimuovi=<?= $part->id_partecipazione; ?>" class="btn btn-sm btn-outline-danger">Rimuovi</a>
-                                        <?php endif; ?>
-                                    </p>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="rimuovi_partecipazione" value="<?= $part->id_partecipazione; ?>">
+                                        <span class="badge badge-warning">In attesa di conferma</span>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" name="azione" value="rimuovi">Rimuovi</button>
+                                    </form>
+
+                                <?php endif; ?>
+                                </p>
                                 </div>
                             </div>
                         <?php endforeach; ?>

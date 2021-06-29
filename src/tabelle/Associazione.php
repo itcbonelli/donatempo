@@ -92,7 +92,7 @@ class Associazione
             $esegui = $comando->execute();
         }
 
-        if ($esegui == true) {  
+        if ($esegui == true) {
             Notifica::accoda("Associazione salvata correttamente", Notifica::TIPO_SUCCESSO);
             return true;
         } else {
@@ -121,6 +121,9 @@ class Associazione
             $this->url_logo = $riga['url_logo'];
             $this->descrizione = $riga['descrizione'];
             $this->attivo = boolval($riga['attivo']);
+
+            $this->settori = $this->getSettori();
+            $this->servizi = $this->getServizi();
             return true;
         } else {
             return false;
@@ -236,13 +239,17 @@ class Associazione
 
     /**
      * Ottiene l'elenco di tutte le associazioni
+     * @param bool $tutte richiede anche le associazioni non attive
      * @return Associazione[]
      */
-    public static function elencoAssociazioni()
+    public static function elencoAssociazioni($tutte=false)
     {
         global $dbconn;
         $dataset = [];
-        $comando = $dbconn->prepare("SELECT * FROM associazioni ORDER BY ragsoc");
+        $query = "SELECT * FROM associazioni ";
+        if(!$tutte) $query.=" WHERE attivo=1 ";
+        $query .= "ORDER BY ragsoc ASC";
+        $comando = $dbconn->prepare($query);
         $esegui = $comando->execute();
         if ($esegui) {
             while ($riga = $comando->fetch(PDO::FETCH_ASSOC)) {
@@ -252,6 +259,7 @@ class Associazione
                 $assoc->codfis = $riga['codfis'];
                 $assoc->url_logo = $riga['url_logo'];
                 $assoc->descrizione = $riga['descrizione'];
+                $assoc->attivo = $riga['attivo'];
                 $dataset[] = $assoc;
             }
         }
@@ -367,13 +375,25 @@ class Associazione
     }
 
     /**
-     * Carica il logo dell'associazione
+     * Ottiene l'elenco dei servizi offerti dall'associazione
+     * @return Servizio[]
      */
-    function caricaLogo($nomeCampo)
+    public function getServizi()
     {
-        $updir = realpath(__DIR__ . '/../../' . self::DIR_LOGHI);
-        if (isset($_FILES[$nomeCampo])) {
-            move_uploaded_file($_FILES[$nomeCampo]['tmp_name'], $updir . "/");
+        global $dbconn;
+        $adb = new AiutoDB($dbconn);
+        $dataset = [];
+        $query = "SELECT servizi.* 
+        FROM servizi 
+        JOIN associazione_offre_servizio ao ON ao.id_servizio = servizi.id
+        WHERE ao.id_associazione = :ida";
+        $dati = $adb->eseguiQuery($query, ['ida' => $this->id_associazione]);
+        foreach ($dati as $riga) {
+            $serv = new Servizio();
+            $serv->popolaCampi($riga);
+            $dataset[] = $serv;
         }
+
+        return $dataset;
     }
 }

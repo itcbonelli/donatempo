@@ -3,6 +3,7 @@
 use itcbonelli\donatempo\AiutoHTML;
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\filtri\FiltroUtenti;
+use itcbonelli\donatempo\Notifica;
 use itcbonelli\donatempo\tabelle\Utente;
 
 require_once __DIR__ . '/../include/main.php';
@@ -17,6 +18,8 @@ ob_start();
 //la funzione ob_start cattura l'output anziché mandarlo al browser
 ?>
 <h1>Gestione utenti</h1>
+
+<?php Notifica::MostraNotifiche(); ?>
 
 <p>
     <a class="btn btn-success" href="utente-edit.php" role="button"><i class="fa fa-user-plus" aria-hidden="true"></i> Crea utente</a>

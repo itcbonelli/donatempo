@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../include/main.php';
-define('PERCORSO_BASE', '../');
+define('PERCORSO_BASE', '..');
 
 ?>
 <?php ob_start(); ?>

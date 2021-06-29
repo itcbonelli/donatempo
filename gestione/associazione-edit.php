@@ -25,13 +25,15 @@ $partecipanti = [];
 if ($id_associazione > 0) {
     $associazione->carica($id_associazione);
     $partecipanti = PartecipazioneAssociazione::getPartecipantiAssociazione($id_associazione);
+    $servizi = $associazione->getServizi();
 }
 
 switch ($azione) {
     case 'salva':
-        $associazione->ragsoc = AiutoInput::leggiStringa('ragsoc');
-        $associazione->codfis = AiutoInput::leggiStringa('codfis');
-        $associazione->descrizione = AiutoInput::leggiStringa('descrizione');
+        $associazione->ragsoc = AiutoInput::leggiStringa('ragsoc', '', 'P');
+        $associazione->codfis = AiutoInput::leggiStringa('codfis', '', 'P');
+        $associazione->descrizione = AiutoInput::leggiStringa('descrizione', '', 'P');
+        $associazione->attivo = AiutoInput::leggiBool('attivo', false, 'P');
 
         if ($associazione->convalida()) {
             $rimuoviLogo = AiutoInput::leggiBool('rimuovi_logo', false, 'P');
@@ -59,6 +61,9 @@ switch ($azione) {
         break;
     case 'elimina':
         $associazione->elimina();
+        Notifica::accoda('Associazione eliminata correttamente', Notifica::TIPO_SUCCESSO);
+        Notifica::salva();
+        header("location:associazioni.php");
         break;
     case 'aggiungi_utente':
         $username = AiutoInput::leggiStringa('aggiungi_username', '', 'P');
@@ -133,57 +138,71 @@ switch ($azione) {
                 <textarea name="descrizione" id="descrizione" class="form-control"><?= (htmlentities($associazione->descrizione)); ?></textarea>
             </div>
 
+            <?php AiutoHTML::checkbox('attivo', 'Attiva', $associazione->attivo); ?>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="azione" value="salva">Salva</button>
                 <button type="submit" class="btn btn-outline-danger" name="azione" value="elimina" onclick="return confirm('Confermare l\'eliminazione dell\'associazione?')">Elimina</button>
             </div>
+
+            
             </fieldset>
         </form>
     </div>
     <div class="tab-pane fade" id="tabVolontari" role="tabpanel" aria-labelledby="profile-tab">
         <?php if ($id_associazione > 0) : ?>
-            <form action="" method="post">
-                <fieldset>
-                    <legend>Utenti partecipanti</legend>
 
-                    <table class="table table-bordered table-striped table-hover table-sm">
-                        <thead>
+            <table class="table table-bordered table-striped table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>Nome utente</th>
+                        <th>Cognome</th>
+                        <th>Nome</th>
+                        <th>Ruolo</th>
+                        <th>Stato</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (count($partecipanti)) :
+                        foreach ($partecipanti as $part) :
+                            //var_dump($part);
+                            $ut = $part->getUtente();
+                    ?>
                             <tr>
-                                <th><input type="checkbox" readonly disabled /></th>
-                                <th>Nome utente</th>
-                                <th>Cognome</th>
-                                <th>Nome</th>
-                                <th>Ruolo</th>
+                                <td><?= $ut->username; ?></td>
+                                <td><?= $ut->getProfilo()->cognome; ?></td>
+                                <td><?= $ut->getProfilo()->nome; ?></td>
+                                <td><?= $part->ruolo; ?></td>
+                                <td>
+                                    <?php if ($part->confermato) : ?>
+                                        <span class="badge badge-success">Confermato</span>
+                                    <?php else : ?>
+                                        <span class="badge badge-warning">Da confermare</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="id_partecipazione" />
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Elimina partecipazione" name="azione" value="elimina_volontario"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <button type="submit" class="btn btn-success btn-sm" title="Conferma partecipazione" name="azione" value="conferma_volontario"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                    </form>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (count($partecipanti)) :
-                                foreach ($partecipanti as $part) :
-                                    //var_dump($part);
-                                    $ut = $part->getUtente();
-                            ?>
-                                    <tr>
-                                        <td><input type="checkbox" name="partecipante[<?= $part->id_partecipazione; ?>]" /></td>
-                                        <td><?= $ut->username; ?></td>
-                                        <td><?= $ut->getProfilo()->cognome; ?></td>
-                                        <td><?= $ut->getProfilo()->nome; ?></td>
-                                        <td><?= $part->ruolo; ?></td>
-                                    </tr>
-                                <?php
-                                endforeach;
-                            else :
-                                ?>
-                                <tr>
-                                    <td colspan="5" class="text-center">Non sono presenti partecipanti</td>
-                                </tr>
-                            <?php
-                            endif;
-                            ?>
-                        </tbody>
-                    </table>
-                </fieldset>
-            </form>
+                        <?php
+                        endforeach;
+                    else :
+                        ?>
+                        <tr>
+                            <td colspan="5" class="text-center">Non sono presenti partecipanti</td>
+                        </tr>
+                    <?php
+                    endif;
+                    ?>
+                </tbody>
+            </table>
+
             <hr />
             <form action="" method="post">
                 <fieldset>
@@ -213,6 +232,29 @@ switch ($azione) {
     </div>
     <div class="tab-pane fade" id="tabServizi" role="tabpanel" aria-labelledby="contact-tab">
         <?php if ($id_associazione > 0) : ?>
+            
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Servizio</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($servizi as $servizio) : ?>
+                    <tr>
+                        <td>
+                            <?= $servizio->nome; ?>
+                        </td>
+                        <td>
+                            <form action="" method="POST">
+                            
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
             <hr />
             <form action="" method="post">
                 <fieldset>

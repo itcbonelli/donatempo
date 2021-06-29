@@ -14,32 +14,32 @@ class Messaggio
     /**
      * Identificativo messaggi
      */
-    public $id;
+    public int $id = -1;
 
     /**
      * Testo del messaggi
      */
-    public $contenuto;
+    public string $contenuto;
 
     /**
      * ID mittente
      */
-    public $id_mittente;
+    public int $id_mittente;
 
     /**
      * ID destinatario
      */
-    public $id_destinatario;
+    public int $id_destinatario;
 
     /**
      * Data di invio del messaggi
      */
-    public $data_invio;
+    public DateTime $data_invio;
 
     /**
      * Identificativo
      */
-    public $id_richiesta;
+    public int $id_richiesta;
 
     /**
      * Salva le modifiche apportate al record
@@ -60,12 +60,13 @@ class Messaggio
         $contenuto = addslashes($this->contenuto);
         $id_mittente = $this->id_mittente;
         $id_destinatario = $this->id_destinatario;
-        $data_invio = addslashes($this->data_invio);
+        $data_invio = $this->data_invio->format('Y-m-d H:i:s');
         $id_richiesta = $this->id_richiesta;
 
-        if (empty($this->id)) {
+        if ($this->id==-1) {
             $query = "INSERT INTO messaggi(id, contenuto, id_mittente, id_destinatario, data_invio, id_richiesta)
-            VALUES ('$id', '$contenuto', '$id_mittente', $id_destinatario, $data_invio, $id_richiesta)";
+            VALUES ('$id', '$contenuto', $id_mittente, $id_destinatario, '$data_invio', $id_richiesta)";
+            die($query);
             $comando = $dbconn->prepare($query);
             $esegui = $comando->execute();
 
@@ -96,12 +97,15 @@ class Messaggio
 
     /**
      * Convalida i dati per il salvataggio
-     * @return string[] array di messaggi di errore della convalida. Se vuoto significa che la convalida è andata a buon fine.
+     * @return bool esito convalida
      */
     public function convalida()
     {
-        global $dbconn;
-        throw new Exception("Non ancora implementato");
+        $esito=true;
+        if(empty($contenuto)) {
+            Notifica::accoda('Impostare il contenuto del messaggio', Notifica::TIPO_ERRORE);
+        }
+        return $esito;
     }
 
     /**

@@ -13,7 +13,9 @@ class FiltroDisponibilita extends FiltroBase
     public ?DateTime $ora_inizio = null;
     public ?DateTime $ora_fine = null;
     public int $id_volontario = -1;
-    public string $provincia='';
+    public string $provincia = '';
+    public ?int $id_servizio = null;
+    public ?int $id_associazione = null;
 
 
     /**

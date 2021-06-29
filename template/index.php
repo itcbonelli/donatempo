@@ -45,9 +45,11 @@ if (!defined('PERCORSO_BASE')) {
 </head>
 
 <body>
-    <?php require __DIR__ . '/navigazione.php'; ?>
+    <header class="donatempo-header">
+        <?php require __DIR__ . '/navigazione.php'; ?>
+    </header>
 
-    <?php if(isset($contenuto)) echo $contenuto; ?>
+    <?php if (isset($contenuto)) echo $contenuto; ?>
 
     <footer>
         <div class="container">

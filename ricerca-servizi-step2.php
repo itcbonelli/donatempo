@@ -19,7 +19,8 @@ $filtro->data_inizio = AiutoInput::leggiData('data_iniziale', new DateTime(), 'G
 $filtro->data_fine = AiutoInput::leggiData('data_finale', new DateTime(), 'G');
 $filtro->ora_inizio = AiutoInput::leggiData('ora_inizio', new DateTime(), 'G');
 $filtro->ora_fine = AiutoInput::leggiData('ora_fine', new DateTime(), 'G');
-$filtro->provincia = AiutoInput::leggiStringa('provincia', '');
+$filtro->provincia = AiutoInput::leggiStringa('provincia', '', 'G');
+$filtro->cod_comune = AiutoInput::leggiStringa('comune', '', 'G');
 
 $citta = AiutoInput::leggiStringa('citta', '', 'G');
 $province = Provincia::caricaTutte();
@@ -56,20 +57,30 @@ $voce_attiva='servizi';
                                 <?php AiutoHTML::options($servizi, 'id_servizio', 'nome', $id_servizio); ?>
                             </select>
                         </div>
-                        <?php AiutoHTML::campoInput('data_iniziale', "Data inizio", $filtro->data_inizio->format('Y-m-d'), ['type' => 'date']); ?>
-                        <?php AiutoHTML::campoInput('data_finale', "Data fine", $filtro->data_fine->format('Y-m-d'), ['type' => 'date']); ?>
+                        <?php AiutoHTML::campoInput('data_iniziale', "Data", $filtro->data_inizio->format('Y-m-d'), ['type' => 'date']); ?>
 
+                        <div class="form-group">
+                            <label for="fascia_oraria">Fascia oraria</label>
+                            <select name="fascia_oraria" id="fascia_oraria" class="form-control form-control-sm">
+                                <option value="">Qualsiasi</option>
+                                <option value="mattina">Mattina</option>
+                                <option value="pomeriggio">Pomeriggio</option>
+                            </select>
+                        </div>
+
+                        <?php /*
                         <div class="form-group">
                             <label for="ora_inizio">Orario</label>
                             <div class="input-group">
                                 <input type="time" name="ora_inizio" id="ora_inizio" class="form-control" />
-                                <span class="input-group-text input-group-append input-group-prepend">&dash;</span>
-                                <input type="time" name="ora_fine" id="ora_fine" class="form-control" />
+                                <!--<span class="input-group-text input-group-append input-group-prepend">&dash;</span>
+                                <input type="time" name="ora_fine" id="ora_fine" class="form-control" />-->
                             </div>
                         </div>
+                        */ ?>
 
                         <div class="form-group">
-                            <label for="provincia">Provncia</label>
+                            <label for="provincia">Provincia</label>
                             <select name="provincia" id="provincia" class="form-control form-control-sm">
                                 <option value="" selected disabled></option>
                                 <?php AiutoHTML::options($province, 'sigla', 'denominazione', $filtro->provincia); ?>

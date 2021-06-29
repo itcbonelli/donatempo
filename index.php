@@ -7,7 +7,7 @@ require_once __DIR__ . '/include/main.php';
 
 <div class="jumbotron bg-light">
   <div class="container">
-    <h1 class="display-3 font-weight-bold">DONATEMPO</h1>
+    <h1 style="font-size: 8vw">DONATEMPO</h1>
     <p class="lead">Aiutiamo le associazioni di volontariato e i loro partecipanti ad organizzare il loro tempo e ad incontrare chi ha bisogno di una mano. Scopri che cosa possiamo fare per te.</p>
     <p class="lead">
       <a class="btn btn-warning btn-lg" href="ricerca-servizi.php" role="button"><i class="fa fa-question-circle" aria-hidden="true"></i> Chiedi aiuto</a>

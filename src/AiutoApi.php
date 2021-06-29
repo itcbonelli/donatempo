@@ -7,7 +7,7 @@ use itcbonelli\donatempo\tabelle\ApiKey;
 use itcbonelli\donatempo\tabelle\Utente;
 
 /**
- * Fornisce funzioni di supporto per le API
+ * Fornisce metodi di supporto per le API
  */
 class AiutoApi
 {
@@ -37,9 +37,11 @@ class AiutoApi
      * Se la richiesta viene aperta nel browser sarà mostrata una maschera di log-in 
      * e la sessione sarà mantenuta fino alla chiusura dell'applicazione.
      * 
+     * @param bool $vincolante se impostato a true (default) la chiamata viene bloccata in caso di accesso non valido
+     * 
      * @return Utente
      */
-    public static function autentica()
+    public static function autentica($vincolante = true)
     {
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
             header('WWW-Authenticate: Basic realm="Donatempo API"');
@@ -53,14 +55,16 @@ class AiutoApi
             $username = $_SERVER['PHP_AUTH_USER'];
             $password = $_SERVER['PHP_AUTH_PW'];
             $utente = Utente::login($username, $password);
+
             return $utente;
         }
     }
 
 
-    public static function controllaChiave() {
-        $chiave=AiutoInput::leggiStringa('apikey', '', 'GPC');
-        if(ApiKey::controlla($chiave)) {
+    public static function controllaChiave()
+    {
+        $chiave = AiutoInput::leggiStringa('apikey', '', 'GPC');
+        if (ApiKey::controlla($chiave)) {
             return true;
         } else {
             self::inviaJSON(['risultato' => false, 'errore' => ''], 400);

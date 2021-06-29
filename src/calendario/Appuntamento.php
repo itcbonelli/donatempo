@@ -19,15 +19,24 @@ class Appuntamento
     /**
      * Ora di inizio
      */
-    public DateTime $ora_inizio;
+    public ?DateTime $ora_inizio = null;
 
     /**
      * Ora di fine
      */
-    public DateTime $ora_fine;
+    public ?DateTime $ora_fine = null;
 
     /**
      * Descrizione dell'appuntamento
      */
-    public string $descrizione;
+    public string $descrizione = "";
+
+    /**
+     * Link alla pagina di dettaglio dell'appuntamento
+     */
+    public string $link = "";
+
+    public function __construct() {
+        $this->data = new DateTime();
+    }
 }

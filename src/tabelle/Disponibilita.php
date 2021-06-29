@@ -3,7 +3,6 @@
 namespace itcbonelli\donatempo\tabelle;
 
 use itcbonelli\donatempo\AiutoDB;
-use itcbonelli\donatempo\filtri\FiltroBase;
 use itcbonelli\donatempo\filtri\FiltroDisponibilita;
 use itcbonelli\donatempo\Notifica;
 use \PDO, \DateTime, \Exception;
@@ -132,6 +131,10 @@ class Disponibilita
 
     /**
      * Ottiene le disponibilità di tempo un determinato utente
+     * @param int $id_utente identificativo utente
+     * @param int $anno anno in cui ricercare
+     * @param int $mese mese in cui ricercare
+     * @return array Oggetti di tipo disponibilità
      */
     public static function getDisponibilitaUtente(int $id_utente, int $anno, int $mese) {
         global $dbconn;

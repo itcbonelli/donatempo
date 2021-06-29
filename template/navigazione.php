@@ -8,7 +8,7 @@ if(!isset($voce_attiva)) {
     $voce_attiva = 'home';
 }
 ?>
-<nav class="navbar navbar-expand-sm navbar-dark sticky-top">
+<nav class="navbar navbar-expand-sm">
     <a class="navbar-brand" href="<?php echo PERCORSO_BASE ?>/index.php">
         <img src="<?php echo PERCORSO_BASE; ?>/img/logo-donatempo-48px.png" alt="Donatempo" style="height: 24px; vertical-align:middle;" />
         DONATEMPO
@@ -17,21 +17,17 @@ if(!isset($voce_attiva)) {
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto">
-            
+        <ul class="navbar-nav ml-auto font-weight-bold text-uppercase">
             <li class="nav-item <?= $voce_attiva == 'home' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/index.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/index.php">Home</a>
             </li>
             <li class="nav-item <?= $voce_attiva == 'servizi' ? 'active' : ''; ?>" >
-                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/ricerca-servizi.php"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Servizi</a>
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/ricerca-servizi.php">Servizi</a>
             </li>
 
             <li class="nav-item <?= $voce_attiva == 'associazioni' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/associazioni.php"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Associazioni</a>
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/associazioni.php">Associazioni</a>
             </li>
-
-
-
         </ul>
         <ul class="navbar-nav ml-auto">
             <?php if ($utente instanceof Utente) : ?>

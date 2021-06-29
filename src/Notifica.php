@@ -29,6 +29,7 @@ class Notifica
 
     /**
      * Salva le notifiche attualmente accodate in una variabile di sessione per mostrarle in caso di redirect verso un'altra pagina
+     * Questa funzione deve essere richiamata prima di passare ad un'altra pagina web.
      */
     public static function salva() {
         $_SESSION['notifiche'] = serialize(self::$notifiche);

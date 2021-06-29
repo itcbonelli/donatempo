@@ -1,7 +1,15 @@
 <?php
 //carico il file principale
+
+use itcbonelli\donatempo\tabelle\Richiesta;
+use itcbonelli\donatempo\tabelle\Utente;
+
 require_once __DIR__ . '/../include/main.php';
 define('PERCORSO_BASE', '..');
+
+$io = Utente::getMioUtente();
+$richieste = Richiesta::ElencoRichieste();
+
 ?>
 <?php ob_start(); ?>
 
@@ -23,7 +31,9 @@ define('PERCORSO_BASE', '..');
                     <tr>
                         <th>Data e orario</th>
                         <th>Associazione</th>
+                        <?php if($io->volontario): ?>
                         <th>Richiedente</th>
+                        <?php endif; ?>
                         <th>Stato</th>
                         <th>Operazioni</th>
                     </tr>
@@ -32,7 +42,9 @@ define('PERCORSO_BASE', '..');
                     <tr>
                         <td></td>
                         <td></td>
+                        <?php if($io->volontario): ?>
                         <td></td>
+                        <?php endif; ?>
                         <td></td>
                         <td></td>
                     </tr>

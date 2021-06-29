@@ -155,14 +155,14 @@ class Richiesta
         $dataset = [];
         $adb = new AiutoDB($dbconn);
         $query = "SELECT * FROM richieste WHERE 1=1 ";
-        if ($filtro->data_inizio != null) {
+        if ($filtro && $filtro->data_inizio != null) {
             $query .= sprintf(" AND data_inizio >= '%s' ", $filtro->data_inizio->format('Y-m-d'));
         }
-        if ($filtro->data_fine != null) {
+        if ($filtro && $filtro->data_fine != null) {
             $query .= sprintf(" AND data_fine <= '%s' ", $filtro->data_fine->format('Y-m-d'));
         }
 
-        if ($filtro->id_servizio) {
+        if ($filtro && $filtro->id_servizio) {
             $query .= " AND id_servizio = " . $filtro->id_servizio;
         }
 

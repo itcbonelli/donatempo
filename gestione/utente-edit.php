@@ -29,6 +29,17 @@ if ($azione == 'salva') {
   $utente->volontario = AiutoInput::leggiBool('volontario', false, 'P');
   $utente->amministratore = AiutoInput::leggiBool('amministratore', false, 'P');
 
+  $pwd1=AiutoInput::leggiStringa('password');
+  $pwd2=AiutoInput::leggiStringa('password2');
+
+  if(strlen($pwd1)>0) {
+    if($pwd1==$pwd2) {
+      $utente->password = $pwd1;
+    } else {
+      Notifica::accoda("Le due password inserite non coincidono", Notifica::TIPO_ERRORE);
+    }
+  }
+
   $utente->salva();
   $profilo->id_utente = $utente->id_utente;
   $profilo->cognome = AiutoInput::leggiStringa('cognome', '', 'P');
@@ -50,7 +61,7 @@ if ($azione == 'salva') {
 ob_start();
 ?>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
   <h1>Modifica utente</h1>
 
   <p><a href="utenti.php">&larr; Torna all'elenco degli utenti</a></p>
@@ -64,10 +75,10 @@ ob_start();
 
     <div class="row">
       <div class="col">
-        <?php AiutoHTML::campoInput('password', 'Password', '', ['type' => 'password']); ?>
+        <?php AiutoHTML::campoInput('password', 'Password', $utente->password, ['type' => 'password']); ?>
       </div>
       <div class="col">
-        <?php AiutoHTML::campoInput('password2', 'Conferma password', '', ['type' => 'password']); ?>
+        <?php AiutoHTML::campoInput('password2', 'Conferma password', $utente->password, ['type' => 'password']); ?>
       </div>
     </div>
 

@@ -161,9 +161,9 @@ class Calendario
         echo "<table class='calendario table table-bordered' style='table-layout:fixed'>
         <thead>
             <tr class='bg-danger text-light'> 
-                <th class='text-center'><a href='?mese=$DOWNmese&anno=$DOWNanno' class='text-light'><span class='fa fa-arrow-left'></span></a></th>  
-                <th class='text-center' colspan=\"5\">$nomeMese $anno</th>  
-                <th class='text-center'><a href='?mese=$UPmese&anno=$UPanno' class='text-light'><span class='fa fa-arrow-right'></span></a></th>
+                <th class='text-center'><a href='?mese=$DOWNmese&anno=$DOWNanno' class='btn btn-light' title='Vai al mese precedente'><span class='fa fa-arrow-left'></span></a></th>  
+                <th class='text-center' colspan=\"5\" style='vertical-align:middle; font-size: 24px'>$nomeMese $anno</th>  
+                <th class='text-center'><a href='?mese=$UPmese&anno=$UPanno' class='btn btn-light' title='Vai al mese successivo'><span class='fa fa-arrow-right'></span></a></th>
             </tr>
             <tr class='text-center'><th>Lun</th><th>Mar</th><th>Mer</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th></tr>
         </thead>
@@ -191,8 +191,13 @@ class Calendario
             echo "<td>";
             echo "<span class='badge badge-light'>$giorno</span><br />";
             foreach($appuntamenti as $appu) {
-                
-                printf("%s - %s - %s", $appu->descrizione, $appu->ora_inizio->format('H:i'), $appu->ora_fine->format('H:i'));
+                if(strlen($appu->link)>0) {
+                    echo "<a href=\"$appu->link\">";
+                }
+                printf("<span class='badge badge-primary'>%s - %s-%s</span>", $appu->descrizione, $appu->ora_inizio->format('H:i'), $appu->ora_fine->format('H:i'));
+                if(strlen($appu->link)>0) {
+                    echo "</a>";
+                }
             }
             echo "</td>";
 

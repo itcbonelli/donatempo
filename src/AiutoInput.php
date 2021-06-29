@@ -6,7 +6,8 @@ use DateTime;
 use DateTimeZone;
 
 /**
- * Fornisce metodi per la convalida e la sanificazione dei dati in input
+ * Fornisce metodi per semplificare la lettura, convalida e la sanificazione dei dati in input
+ * @author Federico Flecchia <federico.flecchia@itcbonelli.edu.it>
  */
 class AiutoInput
 {
@@ -46,21 +47,57 @@ class AiutoInput
         return $valore;
     }
 
+    /**
+     * Legge un valore in input e lo restituisce, oppure restituisce un valore predefinito
+     * @param string $nome
+     * @param mixed $default valore predefinito
+     * @param string $ordine ordine di lettura dei dati. 
+     *                  G=GET, P=POST, C=COOKIE.
+     *                  Il valore è una stringa che contiene la composizione dei flag.
+     * @return mixed il valore letto, oppure il valore di default.
+     */
     public static function leggiStringa(string $nome, string $default = '', string $ordine = 'GPC')
     {
         return strval(self::leggi($nome, $default, $ordine));
     }
 
+    /**
+     * Legge un valore in input e lo restituisce, oppure restituisce un valore predefinito
+     * @param string $nome
+     * @param mixed $default valore predefinito
+     * @param string $ordine ordine di lettura dei dati. 
+     *                  G=GET, P=POST, C=COOKIE.
+     *                  Il valore è una stringa che contiene la composizione dei flag.
+     * @return mixed il valore letto, oppure il valore di default.
+     */
     public static function leggiIntero(string $nome, int $default = null, string $ordine = 'GPC')
     {
         return intval(self::leggi($nome, $default, $ordine));
     }
 
+    /**
+     * Legge un valore in input e lo restituisce, oppure restituisce un valore predefinito
+     * @param string $nome
+     * @param mixed $default valore predefinito
+     * @param string $ordine ordine di lettura dei dati. 
+     *                  G=GET, P=POST, C=COOKIE.
+     *                  Il valore è una stringa che contiene la composizione dei flag.
+     * @return mixed il valore letto, oppure il valore di default.
+     */
     public static function leggiFloat(string $nome, float $default = null, string $ordine = 'GPC')
     {
         return floatval(self::leggi($nome, $default, $ordine));
     }
 
+    /**
+     * Legge un valore in input e lo restituisce, oppure restituisce un valore predefinito
+     * @param string $nome
+     * @param mixed $default valore predefinito
+     * @param string $ordine ordine di lettura dei dati. 
+     *                  G=GET, P=POST, C=COOKIE.
+     *                  Il valore è una stringa che contiene la composizione dei flag.
+     * @return mixed il valore letto, oppure il valore di default.
+     */
     public static function leggiBool(string $nome, bool $default = null, string $ordine = 'GPC')
     {
         return boolval(self::leggi($nome, $default, $ordine));

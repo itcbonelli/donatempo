@@ -230,7 +230,6 @@ class PartecipazioneAssociazione
     public function elimina()
     {
         global $dbconn;
-        throw new Exception("Non ancora implementato");
 
         $query = "DELETE FROM utente_partecipa_associazione WHERE id_partecipazione='{$this->id_partecipazione}'";
         $comando = $dbconn->prepare($query);

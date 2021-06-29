@@ -7,7 +7,7 @@ require_once __DIR__ . '/../include/main.php';
 $titolo_pagina = "Elenco associazioni - Gestione Donatempo";
 $link_attivo = 'associazioni';
 
-$associazioni = Associazione::elencoAssociazioni();
+$associazioni = Associazione::elencoAssociazioni(true);
 
 ob_start();
 ?>

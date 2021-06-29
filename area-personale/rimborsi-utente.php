@@ -3,7 +3,7 @@
 use itcbonelli\donatempo\AiutoDB;
 
 require_once __DIR__ . '/../include/main.php';
-define('PERCORSO_BASE', '../');
+define('PERCORSO_BASE', '..');
 
 $query = "SELECT rimborsi_spese.* FROM rimborsi_spese
 INNER JOIN richieste ON richieste.id_richiesta=rimborsi_spese.id_richiesta";

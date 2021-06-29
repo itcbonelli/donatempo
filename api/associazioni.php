@@ -25,6 +25,10 @@ function getAssociazione()
 
 function putAssociazione()
 {
+    $io = AiutoApi::autentica();
+    if(!$io->amministratore) {
+        AiutoApi::inviaJSON(['error' => 'Non abilitato'], AiutoApi::STATO_HTTP_NON_AUTORIZZATO);
+    }
     try {
         $assoc = new Associazione();
 
@@ -45,6 +49,10 @@ function putAssociazione()
 
 function deleteAssociazione()
 {
+    $io = AiutoApi::autentica();
+    if(!$io->amministratore) {
+        AiutoApi::inviaJSON(['error' => 'Non abilitato'], AiutoApi::STATO_HTTP_NON_AUTORIZZATO);
+    }
     $id_assoc = AiutoInput::leggiIntero('id', -1, 'P');
     $assoc = new Associazione();
     $assoc->carica($id_assoc);
