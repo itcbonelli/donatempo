@@ -24,10 +24,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo donatempo.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo-donatempo-48px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">DONATEMPO
-   &#160;<span id="projectnumber">2021.03</span>
+   &#160;<span id="projectnumber">2021.06</span>
    </div>
   </td>
  </tr>
@@ -92,13 +92,31 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>$amministratore
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a3401f0b94bbed9817fad326dfafc4d20">Utente</a>
 </li>
+<li>$anno
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_calendario.html#ae0d68f119e73a6fb587f229c7e896a4d">Calendario</a>
+</li>
+<li>$apikey
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#a7a2d9a490a34ebe56e4642b908f006e6">ApiKey</a>
+</li>
+<li>$apikey_old
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#ada3e903a3590227429840cb30a0ba0b1">ApiKey</a>
+</li>
+<li>$appuntamenti
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_calendario.html#a7db230a0b1aea502e3f052510051d43d">Calendario</a>
+</li>
 <li>$attivi
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_utenti.html#a51d64eb026c53145248e4f324d4fcd07">FiltroUtenti</a>
 </li>
 <li>$attivo
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a4e8f3342b8580500096f72f1a1fe53fb">Esercente</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#a4e8f3342b8580500096f72f1a1fe53fb">ApiKey</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#a98ab056b52fb9e69da50d743ba240ccb">Associazione</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_badge.html#a4e8f3342b8580500096f72f1a1fe53fb">Badge</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a4e8f3342b8580500096f72f1a1fe53fb">Esercente</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#a98ab056b52fb9e69da50d743ba240ccb">Servizio</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a4e8f3342b8580500096f72f1a1fe53fb">Utente</a>
+</li>
+<li>$azioneSuStessoNome
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_aiuto_upload.html#a1db00124c8b755891311cb43131cf328">AiutoUpload</a>
 </li>
 <li>$cap
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#ac2ff48b59916aa978b27ef80a208cc7a">Esercente</a>
@@ -114,7 +132,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_utenti.html#a328c7e44fce29c6621765071147adb25">FiltroUtenti</a>
 </li>
 <li>$cod_comune
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a9f3d80593bc37cd11779c3df9ff72483">Esercente</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a9f3d80593bc37cd11779c3df9ff72483">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#a9f3d80593bc37cd11779c3df9ff72483">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a9f3d80593bc37cd11779c3df9ff72483">Esercente</a>
 </li>
 <li>$cod_fis
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#a1491b1650fe1c9b0c472dc149615ca63">Profilo</a>
@@ -134,36 +154,56 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>$cognome
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#a600d90f1a17195713d76b84391b6cd1c">Profilo</a>
 </li>
+<li>$confermato
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#adcb0188882f882971c32c54b9496ddfd">PartecipazioneAssociazione</a>
+</li>
+<li>$contaRecord
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_paginazione.html#a50f1d08e33117aa65277e1ab546061f6">Paginazione</a>
+</li>
 <li>$contenuto
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a0b502dc48075e9350d0fb689a51c6622">Messaggio</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a8a1a186743c023719ba9bda72a811669">Messaggio</a>
 , <a class="el" href="class_messaggio_mail.html#a0b502dc48075e9350d0fb689a51c6622">MessaggioMail</a>
 </li>
+<li>$data
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_appuntamento.html#abf2c6116a278df748c7176ebfde6f1ed">Appuntamento</a>
+</li>
 <li>$data_creazione
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a7f93c1cba1f31417b5bded0e80538b34">Utente</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#a7f93c1cba1f31417b5bded0e80538b34">ApiKey</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a7f93c1cba1f31417b5bded0e80538b34">Utente</a>
 </li>
 <li>$data_disp
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a8adb15d573ab4cada4cd3873763a1468">Disponibilita</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a84841582076ee52b406b21d6fee85071">Disponibilita</a>
 </li>
 <li>$data_effettiva_fine
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#aaf28eb00c9d26efcf5fe9aecad0c6109">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#acbe1d1185dc592a56d89553206e7eeaf">Richiesta</a>
 </li>
 <li>$data_effettiva_inizio
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a2c50887584fcec1fcd42c0e8cf10573f">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#af69d402d97164d2c2b4a2563400dd129">Richiesta</a>
 </li>
 <li>$data_eliminazione
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#aada14cb89b11e2307bf43fb985f12d7e">Utente</a>
 </li>
 <li>$data_fine
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#ad6e4db3d2dd0737d864107f4663fbbd2">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#ac1b0bcf54a0002cffa5c6414beb0d9a5">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#ac1b0bcf54a0002cffa5c6414beb0d9a5">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#ac1b0bcf54a0002cffa5c6414beb0d9a5">Richiesta</a>
 </li>
 <li>$data_inizio
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a878765b5bc07e9a7bd50c2335533d306">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a2976750525e858df36a145824e264af5">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#a2976750525e858df36a145824e264af5">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a2976750525e858df36a145824e264af5">Richiesta</a>
 </li>
 <li>$data_inserimento
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a61490a6332af12666e5120da799f766a">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a880035b13972daebf76e73d231e71fb6">Richiesta</a>
 </li>
 <li>$data_invio
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#aacfd2f5e4c82161f985a9a9b57a04568">Messaggio</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a359f4bef176ffde8228137ef40e4bf44">Messaggio</a>
+</li>
+<li>$data_rinnovo
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#ac04af71b74325e0f24e1229c21691736">ApiKey</a>
+</li>
+<li>$data_scadenza
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#a0a466c4758b3a95f5213a93d7e4e91de">ApiKey</a>
 </li>
 <li>$dataora_fine
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html#a04b70d4330115ce8706276dc67dca00a">AllocazioneVolontario</a>
@@ -177,10 +217,16 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#a1c07b4599791645720ca8514ecd56c7e">Zona</a>
 </li>
 <li>$descrizione
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#a7458a4764a47e02a980aa6337165a133">Associazione</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_appuntamento.html#a8918cf3fa2b8d5841bd755f80ad71d23">Appuntamento</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_api_key.html#a8918cf3fa2b8d5841bd755f80ad71d23">ApiKey</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#a7458a4764a47e02a980aa6337165a133">Associazione</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_badge.html#a8918cf3fa2b8d5841bd755f80ad71d23">Badge</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a8918cf3fa2b8d5841bd755f80ad71d23">Esercente</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#a7458a4764a47e02a980aa6337165a133">Servizio</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_stato_avanzamento.html#a8918cf3fa2b8d5841bd755f80ad71d23">StatoAvanzamento</a>
+</li>
+<li>$destinazione
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_aiuto_upload.html#a93eae3b713ac8d0e76fd81682abdcb61">AiutoUpload</a>
 </li>
 <li>$durata
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#ad296d74c0291f4e59372086f5ff9589b">Servizio</a>
@@ -191,11 +237,17 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>$email
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#aa5809edde76526314aef4529d7d285e9">Utente</a>
 </li>
+<li>$estensioniAmmesse
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_aiuto_upload.html#a3938ff4e4c56da4129a5633ea8ce8636">AiutoUpload</a>
+</li>
 <li>$fotografia
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#a94aff4d79520c9cbfdb05dcace6a69d6">Profilo</a>
 </li>
+<li>$generaNomeCasuale
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_aiuto_upload.html#a4f8187ea4b7a17319f67df4e4e1956be">AiutoUpload</a>
+</li>
 <li>$id
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#ae97941710d863131c700f069b109991e">Messaggio</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a3587bd00e5602c1800515b6f9ffbebc5">Messaggio</a>
 </li>
 <li>$id_allocazione
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html#abe469099c5db1f87a6b527deda516b34">AllocazioneVolontario</a>
@@ -204,27 +256,34 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a4646a4adffe9765624c340851f62ca2e">Comune</a>
 </li>
 <li>$id_associazione
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#a4132f435464cbb7d0870b789148620da">Associazione</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a720ae3e32564655eb1bd6821885cd05f">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#a4132f435464cbb7d0870b789148620da">Associazione</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a4132f435464cbb7d0870b789148620da">PartecipazioneAssociazione</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a720ae3e32564655eb1bd6821885cd05f">Richiesta</a>
+</li>
+<li>$id_badge
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_badge.html#a19810cbe17f865eeb2feb933a6229b96">Badge</a>
 </li>
 <li>$id_comune
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#af4fb32c0893e6974ce924fab599d37b6">Comune</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#af4fb32c0893e6974ce924fab599d37b6">Profilo</a>
 </li>
 <li>$id_destinatario
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a4816eab743b5f35617b9dd26fe006e26">Messaggio</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a8638c29fcb7519bf2815d24aab9e0938">Messaggio</a>
 </li>
 <li>$id_disponibilita
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#aec588839cb8accc1f9580cbed98d3148">Disponibilita</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a9f21661f536eec744ff6e5a239588ef2">Disponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a9f21661f536eec744ff6e5a239588ef2">Richiesta</a>
 </li>
 <li>$id_esercente
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#afac864275084ba00a648d58a35a1fdc1">Esercente</a>
 </li>
 <li>$id_mittente
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a923dd2a6a5a2c4a7f18925ea4d822794">Messaggio</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#aa7ce719e116fec4e9a1882932e871d0a">Messaggio</a>
 </li>
 <li>$id_partecipazione
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html#a22e6d1ce25b48827147ac944d0f0321d">AllocazioneVolontario</a>
-, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a23026e9805723bf92db2dae3cea6e8ce">Disponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a22e6d1ce25b48827147ac944d0f0321d">Disponibilita</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a23026e9805723bf92db2dae3cea6e8ce">PartecipazioneAssociazione</a>
 </li>
 <li>$id_quartiere
@@ -232,28 +291,31 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>$id_richiesta
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_allocazione_volontario.html#a6bfd64fa5a60559bf1abb8ad9a34cfd9">AllocazioneVolontario</a>
-, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#acfe246d58a674957d94415aa5a6e2d75">Messaggio</a>
-, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#acfe246d58a674957d94415aa5a6e2d75">Richiesta</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a6bfd64fa5a60559bf1abb8ad9a34cfd9">Messaggio</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a6bfd64fa5a60559bf1abb8ad9a34cfd9">Richiesta</a>
 </li>
 <li>$id_servizio
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#ae2d0b38dea82f957d7a2bd3feb0d047b">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a9c2611563b80a46d2545e69305eaf6b2">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#a9c2611563b80a46d2545e69305eaf6b2">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#ae2d0b38dea82f957d7a2bd3feb0d047b">Richiesta</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#ae2d0b38dea82f957d7a2bd3feb0d047b">Servizio</a>
 </li>
 <li>$id_settore
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_settore.html#ad661b3b07fa11b24e937c0ec79c6c835">Settore</a>
 </li>
 <li>$id_utente
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#a8c4dce7ec38fa8e57578d92d0008d88f">Profilo</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a8c4dce7ec38fa8e57578d92d0008d88f">PartecipazioneAssociazione</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#a8c4dce7ec38fa8e57578d92d0008d88f">Profilo</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_statistiche.html#a2d2dba4658b3d943efb58f1dbc065d31">Statistiche</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a2d2dba4658b3d943efb58f1dbc065d31">Utente</a>
+</li>
+<li>$id_volontario
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#ab3ba31d56c4254793ef60477fb427810">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#ab3ba31d56c4254793ef60477fb427810">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#ab3ba31d56c4254793ef60477fb427810">Richiesta</a>
 </li>
 <li>$id_zona
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#a112aa772cfcb4df61babd164ee44ecd7">Zona</a>
-</li>
-<li>$idAssociazione
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a56c64b2e62f2d1ad00118d726fbc87ac">PartecipazioneAssociazione</a>
-</li>
-<li>$idUtente
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a339c6e8b578f3ae6f38b4335eef1f9ec">PartecipazioneAssociazione</a>
 </li>
 <li>$indirizzo
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a9f4de0ba3fc992fec8af7a4aba703829">Esercente</a>
@@ -265,6 +327,10 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>$limite
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_base.html#a9df28731ee0daad1281dc3c00b47c969">FiltroBase</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1_paginazione.html#a9df28731ee0daad1281dc3c00b47c969">Paginazione</a>
+</li>
+<li>$link
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_appuntamento.html#a24b2401fa4ae31fae08557d2ad8adc44">Appuntamento</a>
 </li>
 <li>$logo_url
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a9f8b02c5c05acd3ff0c0e94f4a813f73">Esercente</a>
@@ -273,32 +339,46 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a468d94ef4ed1698a13c621228359583d">Comune</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#a468d94ef4ed1698a13c621228359583d">Profilo</a>
 </li>
+<li>$maxDimensioneFile
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_aiuto_upload.html#a1a2c83ab6da2ec12f50a20c78a590b0a">AiutoUpload</a>
+</li>
+<li>$mese
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_calendario.html#ad27c4ae514310f095f2fc97926150844">Calendario</a>
+</li>
 <li>$nome
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#af26bfc38b52979ea031d09affea2b456">Esercente</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_badge.html#af26bfc38b52979ea031d09affea2b456">Badge</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#af26bfc38b52979ea031d09affea2b456">Esercente</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_profilo.html#ac8c9d9dd5d90fa5854f0cb8397084ebd">Profilo</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#ac8c9d9dd5d90fa5854f0cb8397084ebd">Servizio</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_settore.html#ac8c9d9dd5d90fa5854f0cb8397084ebd">Settore</a>
 </li>
 <li>$note
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a94fd1dcedc1bbef06b8a9fd0086526b3">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a1bb12e22c961df4f27f2e030bbdc4435">Richiesta</a>
 </li>
 <li>$numeroRecord
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_base.html#ae965f7474e8935085bcb8619ad2cd95d">FiltroBase</a>
 </li>
 <li>$offset
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_base.html#aba5de914c983b71a2cf79fc2ebd2bbe9">FiltroBase</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1_paginazione.html#aba5de914c983b71a2cf79fc2ebd2bbe9">Paginazione</a>
 </li>
 <li>$oggetto
 : <a class="el" href="class_messaggio_mail.html#a46ccb787e662f76adc2fc9ee925dbc57">MessaggioMail</a>
 </li>
 <li>$ora_fine
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a5fc93b3eb68c1ae60a30f0c1b46021c0">Disponibilita</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_appuntamento.html#ad1f8117866579e149556cff5d09cf507">Appuntamento</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#ad1f8117866579e149556cff5d09cf507">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#ad1f8117866579e149556cff5d09cf507">Disponibilita</a>
 </li>
 <li>$ora_inizio
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a23c0ff42e2b35ace68f9d0731af87998">Disponibilita</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1calendario_1_1_appuntamento.html#a85f6e97ea204bc34d4e04a98af2a101f">Appuntamento</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a85f6e97ea204bc34d4e04a98af2a101f">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a85f6e97ea204bc34d4e04a98af2a101f">Disponibilita</a>
 </li>
 <li>$orderby
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_utenti.html#a03f4a3d6fe73097a3dcb168c8e4945a9">FiltroUtenti</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a03f4a3d6fe73097a3dcb168c8e4945a9">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#a03f4a3d6fe73097a3dcb168c8e4945a9">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_utenti.html#a03f4a3d6fe73097a3dcb168c8e4945a9">FiltroUtenti</a>
 </li>
 <li>$ordine_vis
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_stato_avanzamento.html#a8f9d667ff237ed78ba981493ec69bfda">StatoAvanzamento</a>
@@ -310,7 +390,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_esercente.html#a8abf5bcafcbd66153ec57532f2b0cdbd">Esercente</a>
 </li>
 <li>$provincia
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a161f768c1de595d3ce8ee9b13f307a9a">Comune</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_disponibilita.html#a8f902e7dbda00db135733ffa5a4c07d0">FiltroDisponibilita</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#a8f902e7dbda00db135733ffa5a4c07d0">FiltroRichieste</a>
+, <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a161f768c1de595d3ce8ee9b13f307a9a">Comune</a>
 </li>
 <li>$ragsoc
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#acaedd2da9c65ca33f9aba5e176911cb6">Associazione</a>
@@ -320,7 +402,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_provincia.html#a108b79bf560fa7fe9dad07fe7cac35d8">Provincia</a>
 </li>
 <li>$richiedente
-: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#ae8a6ef5b95c0fcfe2b3b6cf6206f818f">Richiesta</a>
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_richiesta.html#a9822883f133c327a5be49df29e8139c8">Richiesta</a>
 </li>
 <li>$ruolo
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_partecipazione_associazione.html#a37b8a6cc93c5d335b8fb88105a4df495">PartecipazioneAssociazione</a>
@@ -330,6 +412,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </li>
 <li>$sigla
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_provincia.html#a07aad4faaaf03d33d48be25e797626fa">Provincia</a>
+</li>
+<li>$statoAvanzamento
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1filtri_1_1_filtro_richieste.html#ac01eb966ae524c56e6d0e0233a2339fa">FiltroRichieste</a>
 </li>
 <li>$telefono
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#aeb95fc9e61e1960b35680135e6acbd4d">Utente</a>
@@ -343,12 +428,18 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>$testo
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1_notifica.html#abcc9bfd8fffa42e76c50a54b719e04ee">Notifica</a>
 </li>
+<li>$tipiMimeAmmessi
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1_aiuto_upload.html#a0f91b87c6fa64e35473dfc8e9d1ce7d7">AiutoUpload</a>
+</li>
 <li>$tipo
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1_notifica.html#a0fb8df4b7ea9d18ea90d02464e0b80c6">Notifica</a>
 , <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#ac11f126d3206dd09c3b7db0a6d99543b">Servizio</a>
 </li>
 <li>$ultimo_accesso
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#acbc11a008df37ac2a184a134371107b7">Utente</a>
+</li>
+<li>$url_immagine
+: <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_badge.html#aa246b31d30911b7234dae539ffd57d08">Badge</a>
 </li>
 <li>$url_logo
 : <a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_associazione.html#adbb966e66811dd80956880e76bb05bdf">Associazione</a>

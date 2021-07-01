@@ -3,6 +3,7 @@ var classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio =
     [ "carica", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#aca97371b48097057bb9056ccacc4adb5", null ],
     [ "convalida", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#a94f3eb9df600be955d56d322d1ea780b", null ],
     [ "elimina", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#adf7a5acaeb1ded69457d0dcf90a4993e", null ],
+    [ "popolaCampi", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#a73ba88cb8b3df4c2610ff03626b69220", null ],
     [ "salva", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#ae47361fe0be4b8bd0f1a2f152ae37173", null ],
     [ "$attivo", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#a98ab056b52fb9e69da50d743ba240ccb", null ],
     [ "$descrizione", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_servizio.html#a7458a4764a47e02a980aa6337165a133", null ],

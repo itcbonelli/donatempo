@@ -24,10 +24,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo donatempo.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo-donatempo-48px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">DONATEMPO
-   &#160;<span id="projectnumber">2021.03</span>
+   &#160;<span id="projectnumber">2021.06</span>
    </div>
   </td>
  </tr>
@@ -104,11 +104,15 @@ Membri pubblici</h2></td></tr>
 <tr class="separator:ad268c0b8b31a97fe697c97856e7622e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d741f829f5576c308449f644318b1bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a0d741f829f5576c308449f644318b1bf">carica</a> ($id)</td></tr>
 <tr class="separator:a0d741f829f5576c308449f644318b1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c9991e2f9e47e308aafaf670f6bf32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a97c9991e2f9e47e308aafaf670f6bf32">getProvincia</a> ()</td></tr>
+<tr class="separator:a97c9991e2f9e47e308aafaf670f6bf32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Membri pubblici statici</h2></td></tr>
-<tr class="memitem:af0dd0575af5589bc7a165e26a996fd49"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#af0dd0575af5589bc7a165e26a996fd49">getElencoComuni</a> ($prov=null)</td></tr>
-<tr class="separator:af0dd0575af5589bc7a165e26a996fd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a953fbef6bb219203f26d57a8bbdde894"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#a953fbef6bb219203f26d57a8bbdde894">getElencoComuni</a> ($prov=null, $tutti=false)</td></tr>
+<tr class="separator:a953fbef6bb219203f26d57a8bbdde894"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa13588bd42980ff3557a186134a8448"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html#aaa13588bd42980ff3557a186134a8448">getProvinciaComune</a> ($cod)</td></tr>
+<tr class="separator:aaa13588bd42980ff3557a186134a8448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Campi</h2></td></tr>
@@ -201,8 +205,8 @@ Campi</h2></td></tr>
 
 </div>
 </div>
-<a id="af0dd0575af5589bc7a165e26a996fd49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0dd0575af5589bc7a165e26a996fd49">&#9670;&nbsp;</a></span>getElencoComuni()</h2>
+<a id="a953fbef6bb219203f26d57a8bbdde894"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a953fbef6bb219203f26d57a8bbdde894">&#9670;&nbsp;</a></span>getElencoComuni()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -214,8 +218,18 @@ Campi</h2></td></tr>
           <td class="memname">static getElencoComuni </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$prov</em> = <code>null</code></td><td>)</td>
+          <td class="paramname"><em>$prov</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$tutti</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -227,10 +241,54 @@ Campi</h2></td></tr>
 <p>Ottiene l'elenco dei comuni </p><dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$prov</td><td>filtro provincia. Se omesso, restituisce tutti i comuni italiani. </td></tr>
+    <tr><td class="paramtype">boolean</td><td class="paramname">$tutti</td><td>include i comuni disattivati </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Restituisce</dt><dd><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_comune.html">Comune</a>[] array di comuni </dd></dl>
+
+</div>
+</div>
+<a id="a97c9991e2f9e47e308aafaf670f6bf32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c9991e2f9e47e308aafaf670f6bf32">&#9670;&nbsp;</a></span>getProvincia()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getProvincia </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa13588bd42980ff3557a186134a8448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa13588bd42980ff3557a186134a8448">&#9670;&nbsp;</a></span>getProvinciaComune()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static getProvinciaComune </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$cod</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -341,7 +399,7 @@ Campi</h2></td></tr>
 </div>
 </div>
 <hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
-<li>E:/xampp/htdocs/scuola/as2020-21/5A_SIA/donatempo/src/tabelle/<a class="el" href="_comune_8php.html">Comune.php</a></li>
+<li>E:/inetpub/wwwroot/donatempo/src/tabelle/<a class="el" href="_comune_8php.html">Comune.php</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -154,11 +154,13 @@ class AiutoDB
 
         $sql = "INSERT INTO `$tabella` ($campi) VALUES ($valori)";
 
-        $this->eseguiComando($sql);
+        $nr = $this->eseguiComando($sql);
 
         if (!empty($cp)) {
             $record[$cp] = $this->dbconn->lastInsertId();
         }
+
+        return $nr;
     }
 
     /**
@@ -194,7 +196,7 @@ class AiutoDB
                     $query .= 'null';
                     break;
                 case 'string':
-                    if ( substr($v, 0, 4) == 'raw:') {
+                    if (substr($v, 0, 4) == 'raw:') {
                         $v = str_replace('raw:', '', $v);
                         $query .= $v;
                     } else {
@@ -223,7 +225,7 @@ class AiutoDB
         }
         $query .= "\nWHERE $where";
 
-        
+
 
         return $this->eseguiComando($query);
     }

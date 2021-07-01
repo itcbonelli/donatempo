@@ -1,5 +1,6 @@
 var classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente =
 [
+    [ "cambiaPassword", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a2f99ff4e604c227d802127f3027447e0", null ],
     [ "carica", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#ada0188d1fd2cce1941aa394f32b63400", null ],
     [ "convalida", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a94f3eb9df600be955d56d322d1ea780b", null ],
     [ "getProfilo", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a2ed7da0a4d5abb80fa7291dc4c3c93cb", null ],
@@ -7,6 +8,7 @@ var classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente =
     [ "reimpostaPassword", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#ae93d533aeeee6d4aa92dfe6c0d29879b", null ],
     [ "riempiCampi", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a5edc8469949e852319d338de545570ca", null ],
     [ "salva", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#ae47361fe0be4b8bd0f1a2f152ae37173", null ],
+    [ "verificaPassword", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#ae3cc1c375855fa22fd5acda2dda978a0", null ],
     [ "$amministratore", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a3401f0b94bbed9817fad326dfafc4d20", null ],
     [ "$attivo", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a4e8f3342b8580500096f72f1a1fe53fb", null ],
     [ "$codice_recupero", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html#a4d8b1ce7f9e9919a7085ba336d145d11", null ],

@@ -24,10 +24,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo donatempo.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo-donatempo-48px.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">DONATEMPO
-   &#160;<span id="projectnumber">2021.03</span>
+   &#160;<span id="projectnumber">2021.06</span>
    </div>
   </td>
  </tr>
@@ -94,6 +94,8 @@ $(document).ready(function(){initNavTree('classitcbonelli_1_1donatempo_1_1tabell
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Membri pubblici</h2></td></tr>
+<tr class="memitem:a1066b3c92b37cd0af6759993216f1814"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#a1066b3c92b37cd0af6759993216f1814">carica</a> (int $id_zona)</td></tr>
+<tr class="separator:a1066b3c92b37cd0af6759993216f1814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9c98ce228e6c5a8b504f6b6f7a36eca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#ad9c98ce228e6c5a8b504f6b6f7a36eca">getComuni</a> ()</td></tr>
 <tr class="separator:ad9c98ce228e6c5a8b504f6b6f7a36eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae69907800c49423c9f13a9c5acdf7b16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#ae69907800c49423c9f13a9c5acdf7b16">aggiungiComune</a> ($cod_comune)</td></tr>
@@ -113,7 +115,9 @@ Campi</h2></td></tr>
 <tr class="memitem:a1c07b4599791645720ca8514ecd56c7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html#a1c07b4599791645720ca8514ecd56c7e">$denominazione</a></td></tr>
 <tr class="separator:a1c07b4599791645720ca8514ecd56c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Documentazione delle funzioni membro</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Rappresenta una zona geografica </p>
+</div><h2 class="groupheader">Documentazione delle funzioni membro</h2>
 <a id="ae69907800c49423c9f13a9c5acdf7b16"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae69907800c49423c9f13a9c5acdf7b16">&#9670;&nbsp;</a></span>aggiungiComune()</h2>
 
@@ -129,6 +133,36 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Aggiunge un comune alla zona geografica </p><dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$cod_comune</td><td>codice catastale comune </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1066b3c92b37cd0af6759993216f1814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1066b3c92b37cd0af6759993216f1814">&#9670;&nbsp;</a></span>carica()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">carica </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>$id_zona</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Carica un record di zona </p><dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$id_zona</td><td>identificativo da caricare </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -172,6 +206,7 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Ottiene l'elenco dei comuni compresi nella zona considerata </p>
 
 </div>
 </div>
@@ -190,6 +225,12 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Rimuove un comune dalla zona geografica </p><dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$cod_comune</td><td>codice catastale comune </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -205,6 +246,7 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Denominazione zona geografica </p>
 
 </div>
 </div>
@@ -219,11 +261,12 @@ Campi</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Identificativo zona </p>
 
 </div>
 </div>
 <hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
-<li>E:/xampp/htdocs/scuola/as2020-21/5A_SIA/donatempo/src/tabelle/<a class="el" href="_zona_8php.html">Zona.php</a></li>
+<li>E:/inetpub/wwwroot/donatempo/src/tabelle/<a class="el" href="_zona_8php.html">Zona.php</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

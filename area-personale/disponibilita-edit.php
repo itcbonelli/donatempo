@@ -40,18 +40,21 @@ if ($azione == 'salva') {
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1><i class="fa fa-clock-o" aria-hidden="true"></i> Modifica disponibilità</h1>
                 <?php Notifica::MostraNotifiche(); ?>
+
+                <h1><i class="fa fa-clock-o" aria-hidden="true"></i> Modifica disponibilità</h1>
+                
+                <p><a href="mie-disponibilita.php">&larr; Torna alle disponibilità di tempo</a></p>
 
                 <form action="" method="post">
                     <?php AiutoHTML::campoInput('associazione', 'Associazione', $disp->getPartecipazione()->getAssociazione()->ragsoc, ['disabled' => true]); ?>
-                    
+
                     <div class="row">
-                        <div class="col"><?php AiutoHTML::campoInput('data_disp', 'Data disponibilità', $disp->data_disp, ['type' => 'date']); ?></div>
-                        <div class="col"><?php AiutoHTML::campoInput('ora_inizio', 'Ora inizio', $disp->ora_inizio, ['type' => 'time']); ?></div>
-                        <div class="col"><?php AiutoHTML::campoInput('ora_fine', 'Ora fine', $disp->ora_fine, ['type' => 'time']); ?></div>
+                        <div class="col"><?php AiutoHTML::campoInput('data_disp', 'Data disponibilità', $disp->data_disp->format('Y-m-d'), ['type' => 'date']); ?></div>
+                        <div class="col"><?php AiutoHTML::campoInput('ora_inizio', 'Ora inizio', $disp->ora_inizio->format('H:i'), ['type' => 'time']); ?></div>
+                        <div class="col"><?php AiutoHTML::campoInput('ora_fine', 'Ora fine', $disp->ora_fine->format('H:i'), ['type' => 'time']); ?></div>
                     </div>
-                    
+
                 </form>
 
                 <form action="" method="post">

@@ -84,18 +84,23 @@ class PartecipazioneAssociazione
      * Ottiene le partecipazioni ad associazioni di un dato utente
      * @author Ramonda Samuele
      * @param int $id_utente identificativo utente
+     * @param bool $tutte carica anche le partecipazioni non confermate
      * @return PartecipazioneAssociazione[] array di record Partecipazione
      */
-    public static function getPartecipazioniUtente($id_utente)
+    public static function getPartecipazioniUtente(int $id_utente, bool $tutte = false)
     {
         global $dbconn;
 
         $partecipazioneAssociazione = [];
 
-        $query = "SELECT * FROM utente_partecipa_associazione";
-        if ($id_utente != null) {
-            $query .= " WHERE utenti_id_utente= $id_utente";
+        $query = "SELECT * FROM utente_partecipa_associazione
+         WHERE utenti_id_utente= $id_utente ";
+
+        if (!$tutte) {
+            $query .= " AND confermato=1 ";
         }
+
+
         $query .= " ORDER BY associazioni_id_associazione";
 
         $comando = $dbconn->prepare($query);

@@ -29,9 +29,9 @@ class AiutoData
      * @param string $valore valore da convertire
      * @return DateTime 
      */
-    public static function daStringaDB(string $valore)
+    public static function daStringaDB(string $valore, string $formato = 'Y-m-d H:i:s')
     {
-        return new DateTime(date('Y-m-d H:i:s', $valore), new DateTimeZone(TIMEZONE));
+        return DateTime::createFromFormat($formato, $valore);
     }
 
 

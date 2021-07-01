@@ -29,19 +29,26 @@ $azione = AiutoInput::leggiStringa('azione', '', 'P');
 
 if ($azione == 'aggiungi') {
     $disp = new Disponibilita();
-
+    
     $disp->id_partecipazione = AiutoInput::leggiIntero('id_partecipazione', -1, 'P');
     $disp->data_disp = AiutoInput::leggiData('data_disp', null, 'P');
     $disp->ora_inizio = AiutoInput::leggiOrario('ora_inizio', null, 'P');
     $disp->ora_fine = AiutoInput::leggiOrario('ora_fine', null, 'P');
 
-    $disp->salva();
+    $salva = $disp->salva();
+    if ($salva) {
 
-    $serviziInclusi = $_POST['servizi'];
+        $serviziInclusi = $_POST['servizi'];
 
-    foreach ($serviziInclusi as $si) {
-        $adb = new AiutoDB($dbconn);
-        $adb->eseguiComando("INSERT INTO disponibilita_include_servizi (id_disponibilita, id_servizio) VALUES (:d, :s)", ['d' => $disp->id_disponibilita, 's' => $si]);
+        foreach ($serviziInclusi as $si) {
+            $adb = new AiutoDB($dbconn);
+            $q = "INSERT INTO disponibilita_include_servizi (id_disponibilita, id_servizio) VALUES (:d, :s)";
+            $p = ['d' => $disp->id_disponibilita, 's' => $si];
+           
+            $adb->eseguiComando($q, $p);
+        }
+    } else {
+        Notifica::accoda('Si è verificato un errore salvando la disponibilità', Notifica::TIPO_ERRORE); 
     }
 }
 
@@ -95,7 +102,7 @@ if ($azione == 'aggiungi') {
                                         }
                                         $assoc = $partecipazione->getAssociazione();
                                     ?>
-                                        <option value="<?= $assoc->id_associazione; ?>"><?= $assoc->ragsoc; ?></option>
+                                        <option value="<?= $partecipazione->id_partecipazione; ?>"><?= $assoc->ragsoc; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -118,10 +125,9 @@ if ($azione == 'aggiungi') {
                             <div class="col">
                                 <div class="form-group">
                                     <p><strong>Servizi offerti:</strong></p>
-                                    <label for="tutti_servizi" class="checkbox"><input type="checkbox" name="tutti_servizi" id="tutti_servizi"> Seleziona tutti</label><br />
                                     <?php
                                     foreach ($servizi as $servizio) {
-                                        echo "<label class='checkbox'><input type='checkbox' name='servizi[{$servizio->id_servizio}]' checked /> {$servizio->nome}</label><br />";
+                                        echo "<label class='checkbox'><input type='checkbox' name='servizi[]' value='{$servizio->id_servizio}' checked /> {$servizio->nome}</label><br />";
                                     }
                                     ?>
                                 </div>

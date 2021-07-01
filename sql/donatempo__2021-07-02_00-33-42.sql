@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 07, 2021 alle 23:58
+-- Creato il: Lug 02, 2021 alle 00:33
 -- Versione del server: 10.4.18-MariaDB
 -- Versione PHP: 8.0.3
 
@@ -61,6 +61,15 @@ CREATE TABLE `associazione_offre_servizio` (
   `id_servizio` int(11) NOT NULL COMMENT 'Identificativo servizio'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Collega le associazioni ai servizi offerti\r\n(relazione M:N tra associazioni e servizi)';
 
+--
+-- Dump dei dati per la tabella `associazione_offre_servizio`
+--
+
+INSERT INTO `associazione_offre_servizio` (`id_associazione`, `id_servizio`) VALUES
+(4, 3),
+(4, 4),
+(4, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -83,10 +92,11 @@ CREATE TABLE `associazioni` (
 --
 
 INSERT INTO `associazioni` (`id_associazione`, `ragsoc`, `codfis`, `url_logo`, `descrizione`, `inserito_da`, `data_inserimento`, `attivo`) VALUES
-(1, 'Croce Rossa Italiana', '', NULL, NULL, NULL, '2021-03-21 15:37:44', 1),
-(2, 'Auser', '', NULL, NULL, NULL, '2021-03-21 15:37:44', 1),
-(3, 'Banco Alimentare', '', NULL, NULL, NULL, '2021-04-11 15:52:10', 1),
-(4, 'Casa Do Menor', '', NULL, NULL, NULL, '2021-04-11 15:52:27', 1);
+(1, 'Croce Rossa Italiana', '02070520685', 'croce-rossa-italiana.png', '', NULL, '2021-03-21 15:37:44', 1),
+(2, 'Auser', '97321610582', 'auser.jpg', 'Associazione servizi anziani', NULL, '2021-03-21 15:37:44', 1),
+(3, 'Banco Alimentare', '97075370151', 'banco-alimentare.png', '', NULL, '2021-04-11 15:52:10', 1),
+(4, 'Casa Do Menor', '02512960044', 'casa-do-menor.png', 'In cosa crediamo:\r\n* Crediamo nell’uomo e nella sua capacità di cambiare; \r\n* Crediamo nel valore supremo della vita e nell’amore come strumento potente di trasformazione; \r\n* Crediamo nella pedagogia che fa della PRESENZA a lato dei bambini e ragazzi la nostra missione; \r\n* Crediamo nella solidarietà e nel dialogo con tutte le persone che, indipendentemente dalla loro religione o convinzione, hanno sogni e valori e sono aperti all’incontro e alla collaborazione con tutti, senza falsi dogmatismi, chiusure o intolleranze; \r\n* Crediamo in un mondo fraterno e unito con rispetto alle differenze che ci arricchiscono e abbiamo una visione di cattolicità universale, ecumenica, inter-religiosa e aperta ai valori di chi non crede, ma lotta per qualcosa di grande. ', NULL, '2021-04-11 15:52:27', 1),
+(8, 'Boh', '', '', '', NULL, '2021-06-28 08:30:08', 0);
 
 -- --------------------------------------------------------
 
@@ -110,10 +120,10 @@ CREATE TABLE `badge` (
 --
 
 INSERT INTO `badge` (`id_badge`, `nome`, `url_immagine`, `descrizione`, `attivo`, `min_persone`, `min_richieste`, `min_ore`) VALUES
-(1, 'Donatempo principiante', NULL, 'Dona almeno 10 ore del tuo tempo', 1, NULL, NULL, 10),
-(2, 'Esci dal guscio!', NULL, 'Servi almeno 10 persone diverse che hanno bisogno del tuo aiuto', 1, 10, NULL, NULL),
-(3, 'Donatempo veterano', NULL, 'Dona almeno 100 ore del tuo tempo', 1, NULL, NULL, 100),
-(4, 'Aiuto alla comunità', NULL, 'Servi almeno 30 persone diverse che hanno bisogno del tuo tempo', 1, 30, NULL, NULL);
+(1, 'Donatempo principiante', '60cb6ac70fcf35.20970067.png', 'Dona almeno 10 ore del tuo tempo', 1, NULL, NULL, 10),
+(2, 'Esci dal guscio!', '60cb6c4a055ec2.39805018.png', 'Servi almeno dieci persone diverse che hanno bisogno del tuo aiuto', 1, 10, NULL, NULL),
+(3, 'Donatempo veterano', '60cb6c1bbe6d55.39311410.png', 'Dona almeno 100 ore del tuo tempo', 1, NULL, NULL, 100),
+(4, 'Aiuto alla comunità', '60cb6c2032b873.34930754.png', 'Servi almeno 30 persone diverse che hanno bisogno del tuo tempo', 1, 30, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -8068,7 +8078,10 @@ CREATE TABLE `disponibilita` (
 
 INSERT INTO `disponibilita` (`id_disponibilita`, `id_partecipazione`, `data_disp`, `ora_inizio`, `ora_fine`) VALUES
 (1, 1, '2021-04-12', '16:00:00', '17:30:00'),
-(2, 1, '2021-04-13', '15:00:00', '16:00:00');
+(2, 1, '2021-04-13', '15:00:00', '16:00:00'),
+(19, 1, '2021-07-12', '08:00:00', '10:00:00'),
+(21, 12, '2021-07-12', '18:00:00', '19:00:00'),
+(29, 12, '2021-07-12', '09:00:00', '12:00:00');
 
 -- --------------------------------------------------------
 
@@ -8080,6 +8093,17 @@ CREATE TABLE `disponibilita_include_servizi` (
   `id_disponibilita` int(11) NOT NULL COMMENT 'Identificativo disponibilità',
   `id_servizio` int(11) NOT NULL COMMENT 'Identificativo servizio offerto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Collega le disponibilità di tempo offerte dai volontari ai servizi che intendono offrire.\r\nRelazione M:N tra disponibilità e servizi';
+
+--
+-- Dump dei dati per la tabella `disponibilita_include_servizi`
+--
+
+INSERT INTO `disponibilita_include_servizi` (`id_disponibilita`, `id_servizio`) VALUES
+(29, 2),
+(29, 3),
+(29, 4),
+(29, 5),
+(29, 8);
 
 -- --------------------------------------------------------
 
@@ -8137,6 +8161,20 @@ CREATE TABLE `messaggi` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `pagine`
+--
+
+CREATE TABLE `pagine` (
+  `id_pagina` int(11) NOT NULL,
+  `data_creazione` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data_modifica` timestamp NULL DEFAULT NULL,
+  `contenuto` text NOT NULL DEFAULT '',
+  `attivo` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Contiene le pagine web modificabili';
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `profili`
 --
 
@@ -8161,9 +8199,11 @@ CREATE TABLE `profili` (
 --
 
 INSERT INTO `profili` (`id_utente`, `cognome`, `nome`, `telefono1`, `telefono2`, `cod_fis`, `indirizzo`, `cap`, `id_comune`, `id_quartiere`, `fotografia`, `latitudine`, `longitudine`) VALUES
-(1, 'Flecchia', 'Federico', '123456789', NULL, 'FLCFRC91B20D205M', NULL, '12100', 'D205', NULL, NULL, 2.5, 1.6),
+(1, 'Flecchia', 'Federico', '123456789', '', 'FLCFRC91B20D205M', '', '12100', 'D205', 0, 'fp_1.jpg', 2.5, 1.6),
 (3, 'Della Prova', 'Provino', NULL, NULL, NULL, NULL, NULL, 'A016', NULL, NULL, NULL, NULL),
-(8, 'Carli', 'Mario', '323829238', '12893898', NULL, 'Via Del Gelso, 23', '12100', 'D205', 0, NULL, 0, 0);
+(6, 'Martini', 'Luigi', '123654987', '', '', '', '', NULL, 0, NULL, 0, 0),
+(8, 'Carli', 'Mario', '323829238', '12893898', NULL, 'Via Del Gelso, 23', '12100', 'D205', 0, NULL, 0, 0),
+(9, 'Di Prova', 'Utente', '0171123456', '333456789', NULL, 'Via Delle Viole, 15', '12100', 'D205', 0, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -8479,7 +8519,9 @@ CREATE TABLE `utente_partecipa_associazione` (
 
 INSERT INTO `utente_partecipa_associazione` (`id_partecipazione`, `utenti_id_utente`, `associazioni_id_associazione`, `ruolo`, `confermato`, `data_ins`) VALUES
 (1, 1, 2, 'volontario', 1, '2021-05-11 13:19:09'),
-(2, 3, 1, 'volontario', 1, '2021-05-11 13:19:09');
+(2, 3, 1, 'volontario', 1, '2021-05-11 13:19:09'),
+(11, 6, 2, 'volontario', 0, '2021-06-15 15:54:00'),
+(12, 1, 4, 'volontario', 1, '2021-06-17 15:02:59');
 
 -- --------------------------------------------------------
 
@@ -8521,11 +8563,12 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id_utente`, `username`, `password`, `data_creazione`, `ultimo_accesso`, `email`, `attivo`, `eliminato`, `data_eliminazione`, `telefono`, `volontario`, `amministratore`, `verificato`, `codice_recupero`) VALUES
-(1, 'federico.flecchia', 'a4a9371e87280199877061623242fc8ffa17e15e97370ceef7a8566a33d889fb', '2021-03-15 20:50:52', '2021-06-07 18:05:56', 'federico.flecchia@itcbonelli.edu.it', 1, 0, NULL, NULL, 1, 0, 1, NULL),
+(1, 'federico.flecchia', 'a4a9371e87280199877061623242fc8ffa17e15e97370ceef7a8566a33d889fb', '2021-03-15 20:50:52', '2021-07-01 16:05:32', 'federico.flecchia@itcbonelli.edu.it', 1, 0, NULL, NULL, 1, 1, 1, NULL),
 (3, 'studente.prova', '74f28a01f1c8ff2a6081a2f97ec889fd723a25ed4891d77d404d52b989c4c402', '0000-00-00 00:00:00', NULL, 'studente.prova@itcbonelli.edu.it', 1, 0, NULL, '829083210', 0, 0, 0, NULL),
 (6, 'volontario.test', '4011ba02e51104c678c31a76a444485b38f3865e504d89c3a0a80b439bb1a237', '0000-00-00 00:00:00', '2021-04-17 10:22:08', 'volontario.test@donatempo.it', 1, 0, NULL, '892892', 0, 0, 0, NULL),
 (7, 'utenteprova00', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '0000-00-00 00:00:00', NULL, 'utente.prova@test.it', 1, 0, NULL, '123456789', 0, 0, 0, NULL),
-(8, 'carli.mario', 'a4a9371e87280199877061623242fc8ffa17e15e97370ceef7a8566a33d889fb', '2021-06-02 20:39:09', '2021-06-02 22:29:38', 'mariocarli@nonloso.it', 1, 0, NULL, '123456789', 0, 0, 0, NULL);
+(8, 'carli.mario', 'a4a9371e87280199877061623242fc8ffa17e15e97370ceef7a8566a33d889fb', '2021-06-02 20:39:09', '2021-06-02 22:29:38', 'mariocarli@nonloso.it', 1, 0, NULL, '123456789', 0, 0, 0, NULL),
+(9, 'utente.prova', '6258a5e0eb772911d4f92be5b5db0e14511edbe01d1d0ddd1d5a2cb9db9a56ba', '0000-00-00 00:00:00', '2021-06-26 12:49:52', 'utente.prova@outlook.it', 1, 0, NULL, '123456789', 0, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -8712,6 +8755,12 @@ ALTER TABLE `messaggi`
   ADD KEY `fk_messaggi_richieste1` (`id_richiesta`);
 
 --
+-- Indici per le tabelle `pagine`
+--
+ALTER TABLE `pagine`
+  ADD PRIMARY KEY (`id_pagina`);
+
+--
 -- Indici per le tabelle `profili`
 --
 ALTER TABLE `profili`
@@ -8784,6 +8833,7 @@ ALTER TABLE `tipi_servizio`
 --
 ALTER TABLE `utente_partecipa_associazione`
   ADD PRIMARY KEY (`id_partecipazione`),
+  ADD UNIQUE KEY `utenti_id_utente` (`utenti_id_utente`,`associazioni_id_associazione`),
   ADD KEY `fk_utenti_has_associazioni_utenti1` (`utenti_id_utente`),
   ADD KEY `fk_utenti_has_associazioni_associazioni1` (`associazioni_id_associazione`);
 
@@ -8828,7 +8878,7 @@ ALTER TABLE `allocazione_volontario`
 -- AUTO_INCREMENT per la tabella `associazioni`
 --
 ALTER TABLE `associazioni`
-  MODIFY `id_associazione` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo associazione', AUTO_INCREMENT=5;
+  MODIFY `id_associazione` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo associazione', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `badge`
@@ -8840,7 +8890,7 @@ ALTER TABLE `badge`
 -- AUTO_INCREMENT per la tabella `disponibilita`
 --
 ALTER TABLE `disponibilita`
-  MODIFY `id_disponibilita` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo disponibilità volontario', AUTO_INCREMENT=3;
+  MODIFY `id_disponibilita` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo disponibilità volontario', AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT per la tabella `esercente_partecipa_associazione`
@@ -8859,6 +8909,12 @@ ALTER TABLE `esercenti`
 --
 ALTER TABLE `messaggi`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificativo messaggio';
+
+--
+-- AUTO_INCREMENT per la tabella `pagine`
+--
+ALTER TABLE `pagine`
+  MODIFY `id_pagina` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `richieste`
@@ -8888,13 +8944,13 @@ ALTER TABLE `settori`
 -- AUTO_INCREMENT per la tabella `utente_partecipa_associazione`
 --
 ALTER TABLE `utente_partecipa_associazione`
-  MODIFY `id_partecipazione` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo partecipazione (progressivo)', AUTO_INCREMENT=3;
+  MODIFY `id_partecipazione` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo partecipazione (progressivo)', AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id_utente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo utente (progressivo)', AUTO_INCREMENT=9;
+  MODIFY `id_utente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificativo utente (progressivo)', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT per la tabella `zone`

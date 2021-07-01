@@ -2,6 +2,7 @@
 
 namespace itcbonelli\donatempo\tabelle;
 
+use itcbonelli\donatempo\AiutoData;
 use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\filtri\FiltroDisponibilita;
 use itcbonelli\donatempo\Notifica;
@@ -15,30 +16,37 @@ class Disponibilita
     /**
      * Identificativo disponibilità
      */
-    public $id_disponibilita = -1;
+    public int $id_disponibilita = -1;
 
     /**
      * Identificativo partecipazione tra volontario e associazione
      */
-    public $id_partecipazione;
+    public int $id_partecipazione;
 
     /**
      * Data di disponibilità (giorno)
      * @var DateTime
      */
-    public $data_disp;
+    public DateTime $data_disp;
 
     /**
      * Ora inizio disponibilità
      * @var DateTime
      */
-    public $ora_inizio;
+    public DateTime $ora_inizio;
 
     /**
      * Ora fine disponibilità
      * @var DateTime
      */
-    public $ora_fine;
+    public DateTime $ora_fine;
+
+    public function __construct()
+    {
+        $this->data_disp = new DateTime();
+        $this->ora_inizio = new DateTime();
+        $this->ora_fine = new DateTime();
+    }
 
     /**
      * Convalida i dati inseriti
@@ -79,18 +87,26 @@ class Disponibilita
         $record = [
             'id_partecipazione' => $this->id_partecipazione,
             'data_disp' => $this->data_disp->format('Y-m-d'),
-            'ora_inizio' => $this->ora_inizio->format('h:i:s'),
-            'ora_fine' => $this->ora_fine->format('h:i:s'),
+            'ora_inizio' => $this->ora_inizio->format('H:i:s'),
+            'ora_fine' => $this->ora_fine->format('H:i:s'),
         ];
 
-        if ($this->id_disponibilita = -1) {
-            if ($adb->inserisci('disponibilita', $record, 'id_disponibilita')) {
+
+
+        if ($this->id_disponibilita == -1) {
+            $ins = $adb->inserisci('disponibilita', $record, 'id_disponibilita');
+            
+            if ($ins==1) {
+                
                 $this->id_disponibilita = $record['id_disponibilita'];
                 return true;
             } else {
-                $adb->aggiorna('disponibilita', $record, 'id_disponibilita=' . $record['id_disponibilita']);
-                return true;
+                Notifica::accoda('Errore salvataggio disponibilità', Notifica::TIPO_ERRORE);
+                return false;
             }
+        } else {
+            $adb->aggiorna('disponibilita', $record, 'id_disponibilita=' . $record['id_disponibilita']);
+            return true;
         }
     }
 
@@ -121,9 +137,9 @@ class Disponibilita
         if ($esegui == true && $riga = $comando->fetch(PDO::FETCH_ASSOC)) {
             $this->id_disponibilita = $riga['id_disponibilita'];
             $this->id_partecipazione = $riga['id_partecipazione'];
-            $this->data_disp = $riga['data_disp'];
-            $this->ora_inizio = $riga['ora_inizio'];
-            $this->ora_fine = $riga['ora_fine'];
+            $this->data_disp = AiutoData::daStringaDB($riga['data_disp'], 'Y-m-d');
+            $this->ora_inizio = AiutoData::daStringaDB($riga['ora_inizio'], 'H:i:s');
+            $this->ora_fine = AiutoData::daStringaDB($riga['ora_fine'], 'H:i:s');
 
             return true;
         } else {
@@ -153,7 +169,7 @@ class Disponibilita
 
 
     /**
-     * 
+     * Ottiene la partecipazione ad associazione collegata alla disponibilità di tempo corrente.
      * @return PartecipazioneAssociazione
      */
     public function getPartecipazione()

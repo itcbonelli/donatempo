@@ -133,7 +133,7 @@ class AiutoInput
     {
         $s = self::leggi($nome, $default, $ordine);
         
-        $d = DateTime::createFromFormat('h:i', $s, new DateTimeZone(TIMEZONE));
+        $d = DateTime::createFromFormat('H:i', $s, new DateTimeZone(TIMEZONE));
         if($d instanceof DateTime) {
             return $d;
         } else {

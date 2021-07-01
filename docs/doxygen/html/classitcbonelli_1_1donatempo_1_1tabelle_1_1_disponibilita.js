@@ -1,5 +1,6 @@
 var classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita =
 [
+    [ "__construct", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a095c5d389db211932136b53f25f39685", null ],
     [ "associaServizio", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#ae6734bdb6c2267ff67ba314650d4d3b1", null ],
     [ "carica", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a4bdd48c6cece1e89499b6d9804baaafc", null ],
     [ "convalida", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a94f3eb9df600be955d56d322d1ea780b", null ],
@@ -9,9 +10,9 @@ var classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita =
     [ "getUtente", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#aacb4498b2021680e8fdc60540b9343e6", null ],
     [ "getVolontario", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#ae5dc66ec572371da2634d5db65d9edc9", null ],
     [ "salva", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#ae47361fe0be4b8bd0f1a2f152ae37173", null ],
-    [ "$data_disp", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a8adb15d573ab4cada4cd3873763a1468", null ],
-    [ "$id_disponibilita", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#aec588839cb8accc1f9580cbed98d3148", null ],
-    [ "$id_partecipazione", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a23026e9805723bf92db2dae3cea6e8ce", null ],
-    [ "$ora_fine", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a5fc93b3eb68c1ae60a30f0c1b46021c0", null ],
-    [ "$ora_inizio", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a23c0ff42e2b35ace68f9d0731af87998", null ]
+    [ "$data_disp", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a84841582076ee52b406b21d6fee85071", null ],
+    [ "$id_disponibilita", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a9f21661f536eec744ff6e5a239588ef2", null ],
+    [ "$id_partecipazione", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a22e6d1ce25b48827147ac944d0f0321d", null ],
+    [ "$ora_fine", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#ad1f8117866579e149556cff5d09cf507", null ],
+    [ "$ora_inizio", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_disponibilita.html#a85f6e97ea204bc34d4e04a98af2a101f", null ]
 ];

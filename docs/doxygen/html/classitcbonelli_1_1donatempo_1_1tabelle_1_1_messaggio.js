@@ -5,11 +5,12 @@ var classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio =
     [ "elimina", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#adf7a5acaeb1ded69457d0dcf90a4993e", null ],
     [ "getDestinatario", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a948414ced8a3798eb921af1d7e926415", null ],
     [ "getMittente", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a58dee39be895b9bccfc1b75a74cf1abb", null ],
+    [ "popolaCampi", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#ab6d5345d5f263dd2e89c038ae36f55a8", null ],
     [ "salva", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#ae47361fe0be4b8bd0f1a2f152ae37173", null ],
-    [ "$contenuto", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a0b502dc48075e9350d0fb689a51c6622", null ],
-    [ "$data_invio", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#aacfd2f5e4c82161f985a9a9b57a04568", null ],
-    [ "$id", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#ae97941710d863131c700f069b109991e", null ],
-    [ "$id_destinatario", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a4816eab743b5f35617b9dd26fe006e26", null ],
-    [ "$id_mittente", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a923dd2a6a5a2c4a7f18925ea4d822794", null ],
-    [ "$id_richiesta", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#acfe246d58a674957d94415aa5a6e2d75", null ]
+    [ "$contenuto", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a8a1a186743c023719ba9bda72a811669", null ],
+    [ "$data_invio", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a359f4bef176ffde8228137ef40e4bf44", null ],
+    [ "$id", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a3587bd00e5602c1800515b6f9ffbebc5", null ],
+    [ "$id_destinatario", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a8638c29fcb7519bf2815d24aab9e0938", null ],
+    [ "$id_mittente", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#aa7ce719e116fec4e9a1882932e871d0a", null ],
+    [ "$id_richiesta", "classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a6bfd64fa5a60559bf1abb8ad9a34cfd9", null ]
 ];

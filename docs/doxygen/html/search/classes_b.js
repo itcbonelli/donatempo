@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zona_221',['Zona',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_zona.html',1,'itcbonelli::donatempo::tabelle']]]
+  ['utente_341',['Utente',['../classitcbonelli_1_1donatempo_1_1tabelle_1_1_utente.html',1,'itcbonelli::donatempo::tabelle']]]
 ];

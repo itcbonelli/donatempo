@@ -48,8 +48,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_aiuto_convalida_8php.html",
-"dir_facbde025159646384e8cb31658646ec.html"
+"",
+"classitcbonelli_1_1donatempo_1_1tabelle_1_1_messaggio.html#a94f3eb9df600be955d56d322d1ea780b"
 ];
 
 var SYNCONMSG = 'cliccare per disabilitare la sincronizzazione del pannello';
