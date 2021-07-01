@@ -77,7 +77,7 @@ class Disponibilita
         global $dbconn;
         $adb = new AiutoDB($dbconn);
         $record = [
-            'id_partecipazione' => $this->partecipazione,
+            'id_partecipazione' => $this->id_partecipazione,
             'data_disp' => $this->data_disp->format('Y-m-d'),
             'ora_inizio' => $this->ora_inizio->format('h:i:s'),
             'ora_fine' => $this->ora_fine->format('h:i:s'),
@@ -88,6 +88,8 @@ class Disponibilita
                 $this->id_disponibilita = $record['id_disponibilita'];
                 return true;
             } else {
+                $adb->aggiorna('disponibilita', $record, 'id_disponibilita=' . $record['id_disponibilita']);
+                return true;
             }
         }
     }
@@ -136,9 +138,10 @@ class Disponibilita
      * @param int $mese mese in cui ricercare
      * @return array Oggetti di tipo disponibilità
      */
-    public static function getDisponibilitaUtente(int $id_utente, int $anno, int $mese) {
+    public static function getDisponibilitaUtente(int $id_utente, int $anno, int $mese)
+    {
         global $dbconn;
-        $adb=new AiutoDB($dbconn);
+        $adb = new AiutoDB($dbconn);
         $dati = $adb->eseguiQuery("SELECT disponibilita.*, ass.ragsoc AS associazione
         FROM disponibilita 
         JOIN utente_partecipa_associazione part ON part.id_partecipazione = disponibilita.id_partecipazione

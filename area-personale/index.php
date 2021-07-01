@@ -16,19 +16,15 @@ $utente = Utente::getMioUtente();
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center font-weight-light">Area riservata</h1>
+                <h1 class="text-center font-weight-bold text-uppercase mb-4">Area riservata</h1>
             </div>
         </div>
-    </div>
-</div>
-<div class="section">
-    <div class="container">
         <div class="row">
             <?php
             function appy_icon($label, $icon, $link, $caption = '', $color = 'gray')
             {
             ?>
-                <div class="col text-center">
+                <div class="col text-center mb-4" style="min-width: 33%;">
                     <a href="<?= PERCORSO_BASE . '/' . $link ?>" class="appy-link">
                         <div>
                             <div class="appy-icon color-<?= $color ?>">
@@ -52,6 +48,7 @@ $utente = Utente::getMioUtente();
                 appy_icon('Richieste', 'ticket', 'area-personale/mie-richieste.php', 'Visualizza le richieste assegnate a te');
                 appy_icon('Disponibilità di tempo', 'calendar-check-o', 'area-personale/mie-disponibilita.php', 'Comunica le tue disponibilità di tempo per dare una mano');
                 appy_icon('Rimborsi', 'money', 'area-personale/rimborsi-volontario.php', 'Visualizza e inserisci le spese da rimborsare');
+                appy_icon('Le mie associazioni', 'building', 'area-personale/mie-associazioni.php', 'Gestisci le associazioni di volontariato a cui partecipi come volontario');
             } else {
                 appy_icon('Richieste', 'ticket', 'area-personale/mie-richieste.php', 'Visualizza le tue richieste di aiuto');
                 appy_icon('Rimborsi', 'money', 'area-personale/rimborsi-utente.php', 'Visualizza le spese da rimborsare ai volontari');

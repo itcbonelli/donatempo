@@ -26,6 +26,11 @@ $azione = AiutoInput::leggiStringa('azione', '', 'P');
 if ($azione == 'salva') {
 
     $disp->id_partecipazione = AiutoInput::leggiIntero('id_partecipazione', -1, 'P');
+} elseif ($azione == 'elimina') {
+    $disp->elimina();
+    Notifica::accoda('Disponibilità eliminata correttamente');
+    Notifica::salva();
+    header('location:mie-disponibilita.php');
 }
 
 ?>
@@ -39,9 +44,14 @@ if ($azione == 'salva') {
                 <?php Notifica::MostraNotifiche(); ?>
 
                 <form action="" method="post">
-                    <?php AiutoHTML::campoInput('data_disp', 'Data disponibilità', $disp->data_disp, ['type' => 'date']); ?>
-                    <?php AiutoHTML::campoInput('ora_inizio', 'Ora inizio', $disp->ora_inizio, ['type' => 'time']); ?>
-                    <?php AiutoHTML::campoInput('ora_fine', 'Ora fine', $disp->ora_fine, ['type' => 'time']); ?>
+                    <?php AiutoHTML::campoInput('associazione', 'Associazione', $disp->getPartecipazione()->getAssociazione()->ragsoc, ['disabled' => true]); ?>
+                    
+                    <div class="row">
+                        <div class="col"><?php AiutoHTML::campoInput('data_disp', 'Data disponibilità', $disp->data_disp, ['type' => 'date']); ?></div>
+                        <div class="col"><?php AiutoHTML::campoInput('ora_inizio', 'Ora inizio', $disp->ora_inizio, ['type' => 'time']); ?></div>
+                        <div class="col"><?php AiutoHTML::campoInput('ora_fine', 'Ora fine', $disp->ora_fine, ['type' => 'time']); ?></div>
+                    </div>
+                    
                 </form>
 
                 <form action="" method="post">

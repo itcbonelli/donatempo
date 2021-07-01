@@ -17,7 +17,7 @@ class AiutoInput
      * @param string $nome
      * @param mixed $default valore predefinito
      * @param string $ordine ordine di lettura dei dati. 
-     *                  G=GET, P=POST, C=COOKIE.
+     *                  G=GET, P=POST, C=COOKIE, S=SESSION.
      *                  Il valore è una stringa che contiene la composizione dei flag.
      * @return mixed il valore letto, oppure il valore di default.
      */
@@ -40,6 +40,10 @@ class AiutoInput
                 case 'C':
                     if (isset($_COOKIE[$nome])) {
                         $valore = $_COOKIE[$nome];
+                    }
+                case 'S':
+                    if(isset($_SESSION[$nome])) {
+                        $valore = $_SESSION[$nome];
                     }
                     break;
             }
@@ -123,13 +127,19 @@ class AiutoInput
     }
 
     /**
-     * Legge un valore di tipo orario
+     * Legge un valore di tipo orario (stringa in formato h:i:s)
      */
     public static function leggiOrario(string $nome, $default = null, string $ordine = 'GPC'): ?DateTime
     {
         $s = self::leggi($nome, $default, $ordine);
-        $d = DateTime::createFromFormat('h:i:s', $s, new DateTimeZone(TIMEZONE));
-        return $d;
+        
+        $d = DateTime::createFromFormat('h:i', $s, new DateTimeZone(TIMEZONE));
+        if($d instanceof DateTime) {
+            return $d;
+        } else {
+            return null;
+        }
+        
     }
 
     /**

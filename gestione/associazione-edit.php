@@ -118,7 +118,7 @@ switch ($azione) {
                     <?php
                     if (!empty($associazione->url_logo)) :
                     ?>
-                        <img src="../uploads/loghi-associazioni/<?= $associazione->url_logo; ?>" alt="Logo associazione" />
+                        <img src="../uploads/loghi-associazioni/<?= $associazione->url_logo; ?>" alt="Logo associazione" style="max-height: 128px" />
                 <div class="form-group">
                     <label for="rimuovi_logo" class="checkbox" title="Se questa casella viene spuntata, verrà rimosso il logo attualmente caricato anche se non è stato inserito un nuovo logo.">
                         <input type="checkbox" name="rimuovi_logo" id="rimuovi_logo" value="1" /> Rimuovi logo
@@ -186,7 +186,9 @@ switch ($azione) {
                                     <form action="" method="post">
                                         <input type="hidden" name="id_partecipazione" />
                                         <button type="submit" class="btn btn-danger btn-sm" title="Elimina partecipazione" name="azione" value="elimina_volontario"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <?php if (!$part->confermato) : ?>
                                         <button type="submit" class="btn btn-success btn-sm" title="Conferma partecipazione" name="azione" value="conferma_volontario"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <?php endif; ?>
                                     </form>
                                 </td>
                             </tr>
@@ -195,7 +197,7 @@ switch ($azione) {
                     else :
                         ?>
                         <tr>
-                            <td colspan="5" class="text-center">Non sono presenti partecipanti</td>
+                            <td colspan="6" class="text-center">Non sono presenti partecipanti</td>
                         </tr>
                     <?php
                     endif;

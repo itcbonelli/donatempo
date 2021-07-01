@@ -108,7 +108,7 @@ class PartecipazioneAssociazione
                 $partecipa->id_utente = $riga['utenti_id_utente'];
                 $partecipa->id_associazione = $riga['associazioni_id_associazione'];
                 $partecipa->ruolo = $riga['ruolo'];
-                $partecipa->confermato = $riga['confermato'];
+                $partecipa->confermato = boolval($riga['confermato']);
                 $partecipazioneAssociazione[] = $partecipa;
             }
         }
@@ -140,6 +140,7 @@ class PartecipazioneAssociazione
                 $part->id_associazione = $riga['associazioni_id_associazione'];
                 $part->id_utente = $riga['utenti_id_utente'];
                 $part->ruolo = $riga['ruolo'];
+                $part->confermato = boolval($riga['confermato']);
                 $partecipazioneAssociazione[] = $part;
             }
             return $partecipazioneAssociazione;

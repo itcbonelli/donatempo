@@ -28,6 +28,9 @@ if(!isset($voce_attiva)) {
             <li class="nav-item <?= $voce_attiva == 'associazioni' ? 'active' : ''; ?>">
                 <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/associazioni.php">Associazioni</a>
             </li>
+            <li class="nav-item <?= $voce_attiva == 'associazioni' ? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo PERCORSO_BASE ?>/area-personale/diventa-volontario.php">Partecipa</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <?php if ($utente instanceof Utente) : ?>

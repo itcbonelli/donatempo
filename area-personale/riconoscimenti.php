@@ -15,7 +15,7 @@ require_once __DIR__ . '/../include/main.php';
                 <h1>Le mie statistiche</h1>
             </div>
         </div>
-        <div class="row traguardi">
+        <div class="row ">
             <div class="card col m-2" style="min-width: 319px">
                 <div class="card-body">
                     <h1><i class="fa fa-clock-o" aria-hidden="true"></i> 123</h1>

@@ -2,6 +2,7 @@
 //carico il file principale
 
 use itcbonelli\donatempo\AiutoData;
+use itcbonelli\donatempo\AiutoDB;
 use itcbonelli\donatempo\AiutoInput;
 use itcbonelli\donatempo\calendario\Appuntamento;
 use itcbonelli\donatempo\calendario\Calendario;
@@ -30,6 +31,18 @@ if ($azione == 'aggiungi') {
     $disp = new Disponibilita();
 
     $disp->id_partecipazione = AiutoInput::leggiIntero('id_partecipazione', -1, 'P');
+    $disp->data_disp = AiutoInput::leggiData('data_disp', null, 'P');
+    $disp->ora_inizio = AiutoInput::leggiOrario('ora_inizio', null, 'P');
+    $disp->ora_fine = AiutoInput::leggiOrario('ora_fine', null, 'P');
+
+    $disp->salva();
+
+    $serviziInclusi = $_POST['servizi'];
+
+    foreach ($serviziInclusi as $si) {
+        $adb = new AiutoDB($dbconn);
+        $adb->eseguiComando("INSERT INTO disponibilita_include_servizi (id_disponibilita, id_servizio) VALUES (:d, :s)", ['d' => $disp->id_disponibilita, 's' => $si]);
+    }
 }
 
 ?>
@@ -76,7 +89,7 @@ if ($azione == 'aggiungi') {
                                 <select name="id_partecipazione" class="form-control" id="id_partecipazione" style="min-width: 320px;">
                                     <option value="" selected disabled>Selezionare</option>
                                     <?php foreach ($partecipazioni as $partecipazione) :
-                                    //se la partecipazione non è confermata salto all'iterazione successiva
+                                        //se la partecipazione non è confermata salto all'iterazione successiva
                                         if ($partecipazione->confermato == false) {
                                             continue;
                                         }
